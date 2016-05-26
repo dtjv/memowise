@@ -10,6 +10,7 @@ render(
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Splash} />
+      <Route path="/dashboard" component={Dashboard} />
     </Route>
   </Router>,
   document.getElementById('app')
