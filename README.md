@@ -20,7 +20,50 @@
 
 ## Usage
 
-> Some usage instructions
+The following commands are found in `package.json`.
+
+### Commands
+
+#### clean
+
+```sh
+$ npm run clean
+```
+Removes the folder `dev/`.
+
+> To remove `dist/`, use: `npm run clean -- --dist`
+
+#### watch
+
+```sh
+$ npm run watch
+```
+Watches all source files and rebuilds on a change event.
+
+#### build
+
+```sh
+$ npm run build
+```
+Builds the entire application to `dev/`.
+
+> Use `npm run build:dist` to build to `dist/`.
+
+#### start
+
+```sh
+$ npm start
+```
+Starts the Express server in `dev/` using `nodemon`.
+
+#### server
+
+```sh
+$ npm run server:dist
+```
+Starts the Express server.
+
+> Use `npm run build:dist` to build to `dist/`.
 
 ## Requirements
 
