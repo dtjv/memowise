@@ -1,0 +1,6 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "no-multi-spaces": [0]
+  }
+}
