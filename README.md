@@ -1,12 +1,12 @@
-# Project Name
+# Wonky Mongoose
 
 > Pithy project description
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Alex Wong
+  - __Scrum Master__: Matt Vargeson
+  - __Development Team Members__: Peter Chim, David Valles
 
 ## Table of Contents
 
