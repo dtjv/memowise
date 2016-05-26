@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title #{title}
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css", media="screen")
+    link(rel='stylesheet', type='text/css', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+    link(rel='stylesheet', type='text/css', href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100')
+    link(rel='stylesheet', type='text/css', href='/client/assets/styles/app.css')
+  body
+    header
+      .navbar-fixed
+        nav.green.lighten-2(role="navigation")
+          .nav-wrapper.container
+            a#logo-container.brand-logo(href="/"): i.fa.fa-home
+            ul.right.hide-on-med-and-down
+              li: a(href="/about") About
+            ul#nav-mobile.side-nav
+              li: a(href="/about") About
+            a.button-collapse(href="#", data-activates="nav-mobile")
+              i.material-icons menu
+    #app
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js")
+    script(src="/client/assets/libs/materialize.min.js")
+    script.
+      $(".button-collapse").sideNav();
+    script(type='text/javascript', src='/client/app.js')

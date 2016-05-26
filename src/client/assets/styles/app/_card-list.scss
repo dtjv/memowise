@@ -1,0 +1,40 @@
+.card-list {
+  padding-bottom: 60px;
+
+  @media #{$medium-and-up} {
+    .card-columns {
+      column-count: 3;
+      -webkit-column-count: 3;
+      column-gap: 1.25rem;
+      -webkit-column-gap: 1.25rem;
+
+      .card-item {
+        display: inline-block;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.card-item {
+  display: block;
+  position: relative;
+
+  .card {
+    &-content {
+      height: 10em;
+
+      .card-title {
+        right: 0;
+        font-size: 1.5rem;
+        line-height: 1;
+        font-weight: normal;
+        padding-bottom: 30px;
+      }
+
+      p {
+        margin-top: 10px;
+      }
+    }
+  }
+}
