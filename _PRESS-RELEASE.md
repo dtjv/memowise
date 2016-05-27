@@ -17,7 +17,6 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Mongoose Cards ##
-  Mongoose Cards -->
 
 ## Gamified reiterative flash cards of 2016 ##
 
