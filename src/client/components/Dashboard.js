@@ -1,16 +1,6 @@
 import React from 'react';
 import DeckItem from './DeckItem';
-// import _ from 'underscore';
 import $ from 'jquery';
-
-// stub some data
-// const items = _.range(10).map((num, idx) => {
-//   const deck = {
-//     id: idx,
-//     topic: `Topic-${num}`,
-//   };
-//   return (<DeckItem key={idx} deck={deck} />);
-// });
 
 class Dashboard extends React.Component {
   constructor(props) {
