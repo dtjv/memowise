@@ -8,7 +8,8 @@
     "build": "gulp",
     "build:dist": "gulp --dist",
     "start": "nodemon dev/server/server.js",
-    "server:dist": "node dist/server/server.js"
+    "server:dist": "node dist/server/server.js",
+    "import": "node deck-import.js"
   },
   "devDependencies": {
     "babel-core": "^6.8.0",
