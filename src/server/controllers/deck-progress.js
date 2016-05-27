@@ -8,44 +8,57 @@ const queryDb = (id, queryString) => {
 };
 
 // given a deck, retrieve a card
-const getCard = deck_id => {
-  // must make these asyncronous
-  const deck = queryDb(deck_id, 'getDeck');
-  // get the plays that belong to the deck
-  let plays = queryDb(deck_id, 'getPlays');
+// for testing: can pass in dummy deck and dummy plays or use the default ones
+const getCard = (inputDeck, inputPlays) => {
+  // get dummy deck
+  let deck;
+  let plays;
+
+  if (inputPlays)
+    plays = inputPlays;
+
+  if (typeof inputDeck === 'object') {
+    deck = inputDeck;
+  } else {
+    // if inputDeck is an id number
+    // must make these asyncronous
+    deck = queryDb(inputDeck, 'getDeck');
+    // get the plays that belong to the deck
+    plays = queryDb(inputDeck, 'getPlays'); 
+  }
+
+
   // default: get any random card's index (changed below)
-  let rand_card_index = Math.floor(Math.random() * deck.cards.length);
+  let randCardIndex = Math.floor(Math.random() * deck.cards.length);
 
   let tries = 0;
-  const max_tries = 10;
+  const maxTries = 10;
 
   // get a random card's index based on history of plays
   // can make this into an async function
-  while (tries < max_tries) {
+  while (tries < maxTries) {
     // get a random real number between 0 and 0.5
-    let rand_probability = Math.random() * 0.5;
+    let randProbability = Math.random() * 0.5;
     // get a random card's index from the deck
-    let rand_card_index = Math.floor(Math.random() * deck.cards.length);
+    let randCardIndex = Math.floor(Math.random() * deck.cards.length);
     
     // find all plays that match card id
-    let card_plays = plays.map(card => card.card_id === rand_card_index);
+    let cardPlays = plays.map(card => card.cardId === randCardIndex);
     // get card's total rating
-    let total_rating = card_plays.reduce((total, card) => total + card.rating, 0);
+    let totalRating = cardPlays.reduce((total, card) => total + card.rating, 0);
     // get a random real number based on card's total rating
-    let rand_card_probability = Math.random() * Math.pow(2, total_rating);
+    let randCardProbability = Math.random() * Math.pow(2, totalRating);
     
     // decide whether to show card based on the randomly generated numbers
-    if (rand_probability < rand_card_probability)
-      tries = max_tries;  // will break out of while loop
+    if (randProbability < randCardProbability)
+      tries = maxTries;  // will break out of while loop
 
     tries++;
   }
 
-  return deck.cards[rand_card_index];
+  return deck.cards[randCardIndex];
 }; 
 
-
-export default getCard;
 
 
 const dummyDecks = [
@@ -92,22 +105,23 @@ const dummyPlays = [
   { objId: 0,
     created_at: '5:01',
     rating: 1,
-    deck_id: 1,
-    card_id: 0 
+    deckId: 1,
+    cardId: 0 
   },
   { objId: 1,
     created_at: '5:02',
     rating: 1,
-    deck_id: 1,
-    card_id: 0 
+    deckId: 1,
+    cardId: 0 
   },
   { objId: 2,
     created_at: '5:03',
     rating: 1,
-    deck_id: 1,
-    card_id: 1 
+    deckId: 1,
+    cardId: 1 
   }];
 
+export default getCard;
 
 
 
