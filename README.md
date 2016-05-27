@@ -80,15 +80,14 @@ Starts the Express server.
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
 npm install
-bower install
 ```
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+[![Stories in Ready](https://badge.waffle.io/wonky-mongoose/wonky-mongoose.svg?label=ready&title=Ready)](http://waffle.io/wonky-mongoose/wonky-mongoose)
 
+View the project roadmap [here](https://waffle.io/wonky-mongoose/wonky-mongoose)
 
 ## Contributing
 
