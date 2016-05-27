@@ -1,6 +1,6 @@
 
 const dummyDecks = [
-  { objId: 1,
+  { objId: 0,
     created_at: '5:00',
     name: "JS",
     cards: [
@@ -19,7 +19,7 @@ const dummyDecks = [
         }
       }
   ]},
-  { objId: 2,
+  { objId: 1,
     created_at: '5:00',
     name: "Angular",
     cards: [
@@ -40,19 +40,19 @@ const dummyDecks = [
   }];
 
 const dummyPlays = [
-  { objId: 1,
+  { objId: 0,
     created_at: '5:01',
     rating: 1,
     deck_id: 1,
     card_id: 0 
   },
-  { objId: 2,
+  { objId: 1,
     created_at: '5:02',
     rating: 1,
     deck_id: 1,
     card_id: 0 
   },
-  { objId: 3,
+  { objId: 2,
     created_at: '5:03',
     rating: 1,
     deck_id: 1,
@@ -63,9 +63,10 @@ const dummyPlays = [
 // query the database
 const queryDb = (id, queryString) => {
   const queryAction = {
-    getDeck: () => dummyDecks[id];
-    getPlays: () => dummyPlays;  // get plays that match id
+    getDeck: () => dummyDecks[id],
+    getPlays: () => dummyPlays  // should get plays that match deck id (not implemented yet)
   }
+  return queryAction[queryString]();
 };
 
 // given a deck, retrieve a card
@@ -96,16 +97,16 @@ const getCard = deck_id => {
     let rand_card_probability = Math.random() * Math.pow(2, total_rating);
     
     // decide whether to show card based on the randomly generated numbers
-    if (rand_probability < random_card_probability)
+    if (rand_probability < rand_card_probability)
       tries = max_tries;  // will break out of while loop
 
     tries++;
   }
 
-  return deck[rand_card_index];
+  return deck.cards[rand_card_index];
 }; 
 
-
+console.log(getCard(1));
 
 
 
