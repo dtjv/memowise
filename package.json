@@ -35,6 +35,7 @@
     "express": "^4.13.4",
     "jade": "^1.11.0",
     "jquery": "^2.2.4",
+    "mongoose": "^4.4.19",
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
     "react-router": "^2.4.1",
