@@ -60,14 +60,3 @@ const getCard = (inputDeck, inputPlays) => {
 
 export default getCard;
 
-
-
-
-
-
-
-
-
-
-
-
