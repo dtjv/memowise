@@ -1,0 +1,41 @@
+{
+  "name": "Math",
+  "cards": [
+    {
+      "question": {
+        "text": "3 + 3"
+      },
+      "answer": {
+        "text": "6",
+        "explanation": "maths"
+      }
+    },
+    {
+      "question": {
+        "text": "3 - 3"
+      },
+      "answer": {
+        "text": "0",
+        "explanation": "maths again"
+      }
+    },
+    {
+      "question": {
+        "text": "3 * 3"
+      },
+      "answer": {
+        "text": "9",
+        "explanation": "maths once again"
+      }
+    },
+    {
+      "question": {
+        "text": "3 / 3"
+      },
+      "answer": {
+        "text": "1",
+        "explanation": "maths for the last time"
+      }
+    }
+  ]
+}
