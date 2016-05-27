@@ -21,10 +21,16 @@ router.route('/api/review')
         return deck.cards;
       });
 
+      // unefined _id indicates review deck
+      const deck = {
+        name: 'Review',
+        cards: shuffle(cards)
+      };
+
       res
         .status(200)
         .type('json')
-        .json(shuffle(cards));
+        .json(deck);
     });
   });
 
