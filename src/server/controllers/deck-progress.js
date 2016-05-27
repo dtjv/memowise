@@ -55,10 +55,8 @@ const getCard = (inputDeck, inputPlays) => {
 
     tries++;
   }
-
   return deck.cards[randCardIndex];
 }; 
-
 
 
 const dummyDecks = [
@@ -122,11 +120,6 @@ const dummyPlays = [
   }];
 
 export default getCard;
-
-
-
-
-
 
 
 
