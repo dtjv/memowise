@@ -17,38 +17,28 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Mongoose Cards ##
-  <!-- > Name the product in a way the reader (i.e. your target customers) will understand.
   Mongoose Cards -->
 
 ## Gamified reiterative flash cards of 2016 ##
-<!--   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
-  Gamified reiterative flash cards that empowers your understanding of a topic by focusing on what you may need work on through the Wonky Mongoose algorithm. -->
 
 ## Summary ##
-  <!-- > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good. -->
   Programming-related topics are categorized in different decks of cards. Each card is a different question, which you answer in your head or through user input. When you check the answer, you will be given the option to rate yourself with a thumbs up, thumbs middle, and thumbs down. If you feel like you are unsure of your understanding of the question, you can choose a thumbs middle or thumbs down. If you were correct and feel like you killed it honestly, you can do a thumbs up. Based on the rating you give yourself, the probability of the card appearing again will increase or decrease. This is great way to learn something through repetition.
 
 ## Problem ##
-  <!-- > Describe the problem your product solves. -->
   What if you want to review a concept you have difficulty understanding? The notes or slides on it are hidden in the stash of notes and folders you already have. With Wonky Mongoose Cards, you can review concepts reiteratively on the go!
 
 ## Solution ##
-  <!-- > Describe how your product elegantly solves the problem. -->
   Our rating system works with the Wonky Mongoose algorithm to provide cards that give you more practice on what you need more work on. It is gamified as well to give you a different fun aspect to playing the card game.
 
 
 ## Quote from You ##
-  <!-- > A quote from a spokesperson in your company. -->
   The 2016 way to review concepts through repetition in a gamified environment
 
 ## How to Get Started ##
-  <!-- > Describe how easy it is to get started. -->
   Visit WonkyMongoose.com and sign up and you're ready to play!
 
 ## Customer Quote ##
-  <!-- > Provide a quote from a hypothetical customer that describes how they experienced the benefit. -->
   I think my brain was able to retain learned concepts a lot better
 
 ## Closing and Call to Action ##
-  <!-- > Wrap it up and give pointers where the reader should go next. -->
   Go play the game already :D
