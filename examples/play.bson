@@ -5,6 +5,6 @@
 }
 
 // rating represents
-// 1  THUMBS_UP
+// -1  THUMBS_UP
 // 0  THUMBS_MIDDLE
-// -1 THUMBS_DOWN
+// 1 THUMBS_DOWN
