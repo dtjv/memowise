@@ -78,6 +78,12 @@ gulp.task('server', () =>
     .pipe(babel())
     .pipe(gulp.dest(`${targetPath}/server`)));
 
+gulp.task('specs', () =>
+  gulp
+    .src(`${sourcePath}/specs/**/*.js`)
+    .pipe(babel())
+    .pipe(gulp.dest(`${targetPath}/specs`)));
+
 gulp.task('build', (done) => {
   runSeq('clean', ['html', 'sass', 'server', 'webpack'], done);
 });
