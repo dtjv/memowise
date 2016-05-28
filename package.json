@@ -10,7 +10,7 @@
     "start": "nodemon dev/server/server.js",
     "server:dist": "node dist/server/server.js",
     "import": "node bin/deck-import.js",
-    "test": "./node_modules/.bin/mocha --compilers js:babel-register --bail --reporter nyan ./src/specs/**/*.js"
+    "test": "mocha --compilers js:babel-register --bail --reporter nyan ./src/specs/**/*.js"
   },
   "devDependencies": {
     "babel": "^6.5.2",
