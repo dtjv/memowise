@@ -14,6 +14,7 @@
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
+    1. [Load Sample Data](#load-sample-data)
     1. [Tasks](#tasks)
 1. [Team](#team)
 1. [Contributing](#contributing)
@@ -81,6 +82,14 @@ From within the root directory:
 
 ```sh
 npm install
+```
+
+### Load Sample Data
+
+From within the root directory:
+
+```sh
+npm run import examples/math.md
 ```
 
 ### Roadmap

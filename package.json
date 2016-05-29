@@ -8,7 +8,8 @@
     "build": "gulp",
     "build:dist": "gulp --dist",
     "start": "nodemon dev/server/server.js",
-    "server:dist": "node dist/server/server.js"
+    "server:dist": "node dist/server/server.js",
+    "import": "node bin/deck-import.js"
   },
   "devDependencies": {
     "babel-core": "^6.8.0",
@@ -26,6 +27,7 @@
     "gulp-babel": "^6.1.2",
     "gulp-sass": "^2.3.1",
     "meow": "^3.7.0",
+    "mongodb": "^2.1.20",
     "run-sequence": "^1.1.5",
     "webpack-stream": "^3.2.0"
   },
