@@ -77,9 +77,9 @@ gulp.task('webpack', () =>
     }))
     .pipe(gulp.dest(`${targetPath}/client`)));
 
-gulp.task('jade', () =>
+gulp.task('html', () =>
   gulp
-    .src(`${sourcePath}/server/views/**/*.jade`)
+    .src(`${sourcePath}/server/views/**/*.html`)
     .pipe(gulp.dest(`${targetPath}/server/views`)));
 
 gulp.task('server', () =>
@@ -89,14 +89,14 @@ gulp.task('server', () =>
     .pipe(gulp.dest(`${targetPath}/server`)));
 
 gulp.task('build', (done) => {
-  runSeq('clean', ['fonts', 'libs', 'jade', 'sass', 'server', 'webpack'], done);
+  runSeq('clean', ['fonts', 'libs', 'html', 'sass', 'server', 'webpack'], done);
 });
 
 gulp.task('watch', ['build'], () => {
   gulp.watch('./gulpfile.babel.js', ['build']);
   gulp.watch(`${sourcePath}/server/**/*.js`, ['server']);
   gulp.watch(`${sourcePath}/client/**/*.js`, ['webpack']);
-  gulp.watch(`${sourcePath}/server/views/**/*.jade`, ['jade']);
+  gulp.watch(`${sourcePath}/server/views/**/*.html`, ['html']);
   gulp.watch(`${sourcePath}/client/assets/styles/**/*.scss`, ['sass']);
 });
 
