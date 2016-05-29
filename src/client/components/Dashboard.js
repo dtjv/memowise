@@ -8,6 +8,7 @@ class Dashboard extends React.Component {
 
     this.state = {
       decks: [],
+      review: {}
     };
     this.getDecks = this.getDecks.bind(this);
   }
@@ -18,7 +19,11 @@ class Dashboard extends React.Component {
 
   getDecks() {
     $.getJSON('/api/decks').done((decks) => {
-      this.setState({ decks });
+      // TODO: should use promises instead
+      // add review deck to decks
+      $.getJSON('/api/review').done((review) => {
+        this.setState({ review, decks });
+      });
     });
   }
 
@@ -30,6 +35,7 @@ class Dashboard extends React.Component {
           <div className="card-list">
             <section>
               <div className="card-columns">
+                <DeckItem key={0} id={0} deck={this.state.review} />
                 {this.state.decks.map((deck, idx) => <DeckItem key={idx} id={idx} deck={deck} />)}
               </div>
             </section>
