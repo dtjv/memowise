@@ -1,12 +1,2 @@
-@import 'materialize/materialize';
-
-@import "app/grid";
-@import "app/section";
+@import "app/variables";
 @import "app/card-list";
-
-.icon-block {
-  padding: 0 15px;
-}
-.icon-block .material-icons {
-  font-size: inherit;
-}

@@ -36,15 +36,10 @@ const targetPath = meow().flags.dist ? './dist' : './dev';
 
 gulp.task('clean', () => del([targetPath]));
 
-gulp.task('fonts', () =>
+gulp.task('html', () =>
   gulp
-    .src(`${sourcePath}/client/assets/font/**/*`)
-    .pipe(gulp.dest(`${targetPath}/client/assets/font`)));
-
-gulp.task('libs', () =>
-  gulp
-    .src(`${sourcePath}/client/assets/libs/**/*`)
-    .pipe(gulp.dest(`${targetPath}/client/assets/libs`)));
+    .src(`${sourcePath}/server/views/**/*.html`)
+    .pipe(gulp.dest(`${targetPath}/server/views`)));
 
 gulp.task('sass', () =>
   gulp
@@ -77,11 +72,6 @@ gulp.task('webpack', () =>
     }))
     .pipe(gulp.dest(`${targetPath}/client`)));
 
-gulp.task('jade', () =>
-  gulp
-    .src(`${sourcePath}/server/views/**/*.jade`)
-    .pipe(gulp.dest(`${targetPath}/server/views`)));
-
 gulp.task('server', () =>
   gulp
     .src(`${sourcePath}/server/**/*.js`)
@@ -89,14 +79,14 @@ gulp.task('server', () =>
     .pipe(gulp.dest(`${targetPath}/server`)));
 
 gulp.task('build', (done) => {
-  runSeq('clean', ['fonts', 'libs', 'jade', 'sass', 'server', 'webpack'], done);
+  runSeq('clean', ['html', 'sass', 'server', 'webpack'], done);
 });
 
 gulp.task('watch', ['build'], () => {
   gulp.watch('./gulpfile.babel.js', ['build']);
   gulp.watch(`${sourcePath}/server/**/*.js`, ['server']);
   gulp.watch(`${sourcePath}/client/**/*.js`, ['webpack']);
-  gulp.watch(`${sourcePath}/server/views/**/*.jade`, ['jade']);
+  gulp.watch(`${sourcePath}/server/views/**/*.html`, ['html']);
   gulp.watch(`${sourcePath}/client/assets/styles/**/*.scss`, ['sass']);
 });
 

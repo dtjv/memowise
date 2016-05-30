@@ -1,4 +1,4 @@
-import { join, resolve } from 'path';
+import { resolve } from 'path';
 import express from 'express';
 import parser from 'body-parser';
 import cors from 'cors';
@@ -13,8 +13,6 @@ const port = process.env.PORT || 3000;
 db.connect();
 
 express()
-  .set('view engine', 'jade')
-  .set('views', './dev/server/views')
   .use(cors({
     origin: '*',
     methods: ['GET, POST, PUT, DELETE, OPTIONS'],
@@ -23,7 +21,7 @@ express()
   }))
   .use(parser.urlencoded({ extended: true }))
   .use(parser.json())
-  .use(express.static(join(resolve(__dirname, '../'))))
+  .use(express.static(resolve(__dirname, '../')))
   .use(homeRoute)
   .use(apiRoute)
   .use(errorRoute)

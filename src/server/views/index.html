@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/client/assets/styles/app.css">
+  </head>
+  <body>
+    <header>
+      <div class="navbar-fixed">
+        <nav role="navigation" class="green lighten-2">
+          <div class="nav-wrapper container">
+            <a id="logo-container" href="/" class="brand-logo"><i class="material-icons">home</i></a>
+            <ul class="right hide-on-med-and-down">
+              <li><a href="/about">About</a></li>
+            </ul>
+            <ul id="nav-mobile" class="side-nav">
+              <li><a href="/about">About</a></li>
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <div id="app"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    <script>
+      $(".button-collapse").sideNav();
+    </script>
+    <script type="text/javascript" src="/client/app.js"></script>
+  </body>
+</html>
