@@ -22,9 +22,9 @@ express()
   .use(parser.urlencoded({ extended: true }))
   .use(parser.json())
   .use(express.static(resolve(__dirname, '../')))
-  .use(homeRoute)
   .use(apiRoute)
-  .use(errorRoute)
+  .use(homeRoute)
+  // .use(errorRoute)
   .listen(port);
 
 process

@@ -3,7 +3,7 @@ import { join } from 'path';
 
 const router = new Router();
 
-router.get('/', (req, res) => {
+router.get('*', (req, res) => {
   res.sendFile(join(__dirname, '../views/index.html'));
 });
 
