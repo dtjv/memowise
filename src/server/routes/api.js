@@ -14,6 +14,17 @@ router.route('/api/decks')
     });
   });
 
+router.route('/api/decks/:deckId')
+  .get((req, res) => {
+    Decks.find({}).then((decks) => {
+      const deck = decks[req.params.deckId - 1];
+      res
+        .status(200)
+        .type('json')
+        .json(deck);
+    });
+  });
+
 router.route('/api/review')
   .get((req, res) => {
     Decks.find({}).then((decks) => {

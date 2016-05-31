@@ -2,13 +2,13 @@ import React from 'react';
 import DeckItem from './DeckItem';
 import $ from 'jquery';
 
-class Dashboard extends React.Component {
+class Decks extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       decks: [],
-      review: {}
+      review: {},
     };
     this.getDecks = this.getDecks.bind(this);
   }
@@ -30,20 +30,18 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div className="container">
-        <section id="cards">
-          <h4 className="center grey-text text-darken-4 " > Decks </h4>
-          <div className="card-list">
-            <section>
-              <div className="card-columns">
-                <DeckItem key={0} id={0} deck={this.state.review} />
-                {this.state.decks.map((deck, idx) => <DeckItem key={idx} id={idx} deck={deck} />)}
-              </div>
-            </section>
-          </div>
-        </section>
+        <h4 className="center grey-text text-darken-4 " > Decks </h4>
+        <div className="card-list">
+          <section>
+            <div className="card-columns">
+              <DeckItem key={0} id={0} deck={this.state.review} />
+              {this.state.decks.map((deck, idx) => <DeckItem key={idx + 1} id={idx + 1} deck={deck} />)}
+            </div>
+          </section>
+        </div>
       </div>
     );
   }
 }
 
-export default Dashboard;
+export default Decks;
