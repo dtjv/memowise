@@ -4,17 +4,17 @@ const dummyDecks = [
     name: "JS",
     cards: [
       {
-        question: 'Who?',
+        question: 'Class constructor using \'this\' keyword',
         answer: {
-          text: 'Something or other',
-          explanation: 'Another thing'
+          text: 'Pseudoclassical',
+          explanation: ' '
         }
       },
       {
-        question: 'What?',
+        question: 'Two diffreent ways to access object properties',
         answer: {
-          text: 'Someone or other',
-          explanation: 'Another one'
+          text: 'Dot notation and bracket notation',
+          explanation: ' '
         }
       }
   ]},
@@ -23,17 +23,17 @@ const dummyDecks = [
     name: "Angular",
     cards: [
       {
-        question: 'Who?',
+        question: 'MVW stands for?',
         answer: {
-          text: 'Something or other',
-          explanation: 'Another thing'
+          text: 'Model View Whatever',
+          explanation: 'A framework using models, views, and whatever fitr your needs'
         }
       },
       {
-        question: 'What?',
+        question: 'Latest version',
         answer: {
-          text: 'Someone or other',
-          explanation: 'Another one'
+          text: '2',
+          explanation: ' '
         }
       }]
   }];
