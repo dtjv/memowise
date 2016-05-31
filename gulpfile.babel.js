@@ -79,7 +79,7 @@ gulp.task('server', () =>
     .pipe(gulp.dest(`${targetPath}/server`)));
 
 gulp.task('build', (done) => {
-  runSeq('clean', ['fonts', 'libs', 'jade', 'sass', 'server', 'webpack'], done);
+  runSeq('clean', ['html', 'sass', 'server', 'webpack'], done);
 });
 
 gulp.task('watch', ['build'], () => {
