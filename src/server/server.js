@@ -4,7 +4,6 @@ import parser from 'body-parser';
 import cors from 'cors';
 import homeRoute from './routes/home';
 import apiRoute from './routes/api';
-import errorRoute from './routes/error';
 import db from './db';
 
 const host = process.env.HOST || 'localhost';
@@ -24,7 +23,6 @@ express()
   .use(express.static(resolve(__dirname, '../')))
   .use(apiRoute)
   .use(homeRoute)
-  // .use(errorRoute)
   .listen(port);
 
 process
