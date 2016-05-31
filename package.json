@@ -33,8 +33,6 @@
     "mocha": "^2.5.3",
     "mongodb": "^2.1.20",
     "run-sequence": "^1.1.5",
-    "sinon": "^1.17.4",
-    "sinon-chai": "^2.8.0",
     "webpack-stream": "^3.2.0"
   },
   "dependencies": {
