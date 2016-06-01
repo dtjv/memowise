@@ -10,6 +10,7 @@
     "start": "nodemon dev/server/server.js",
     "server:dist": "node dist/server/server.js",
     "import": "node bin/deck-import.js",
+    "lint": "eslint",
     "test": "mocha --compilers js:babel-register --bail --reporter nyan ./src/specs/**/*.js"
   },
   "devDependencies": {
@@ -39,11 +40,15 @@
   },
   "dependencies": {
     "body-parser": "^1.15.1",
+    "cookie-parser": "^1.4.3",
     "cors": "^2.7.1",
     "express": "^4.13.4",
+    "express-session": "^1.13.0",
     "jquery": "^2.2.4",
     "lodash": "^4.13.1",
     "mongoose": "^4.4.19",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
     "react-redux": "^4.4.5",

@@ -1,9 +1,17 @@
 import { Router } from 'express';
 import { flatMap, shuffle } from 'lodash';
+
 import Decks from '../models/decks';
+
+import User from '../models/user';
+import users from '../controllers/users';
 
 const router = new Router();
 
+
+/*
+ * Decks
+ */
 router.route('/api/decks')
   .get((req, res) => {
     Decks.find({}).then((decks) => {
@@ -28,14 +36,12 @@ router.route('/api/decks/:deckId')
 router.route('/api/review')
   .get((req, res) => {
     Decks.find({}).then((decks) => {
-      const cards = flatMap(decks, function(deck) {
-        return deck.cards;
-      });
+      const cards = flatMap(decks, deck => deck.cards);
 
       // unefined _id indicates review deck
       const deck = {
         name: 'Review',
-        cards: shuffle(cards)
+        cards: shuffle(cards),
       };
 
       res
@@ -45,5 +51,10 @@ router.route('/api/review')
     });
   });
 
+
+/*
+ * Auth
+ */
+router.route('/api/login').post(users.signIn);
 
 export default router;

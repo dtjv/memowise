@@ -61,3 +61,14 @@ const BAD = -1;
   "rating": OKAY
 }
 ```
+
+### `users` collection
+
+```js
+{
+  "_id": ObjectId("113lhq3t8hagg901"),
+  "name": "Bob Hope",
+  "email": "bob@hope.com",
+  "password": "flk3fqT(#U%!aw#351a"
+}
+```
