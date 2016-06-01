@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
+// @TODO: we're passing in a makeshift `id` that is not related to the
+// deck._id. I think we should use deck._id.
 const DeckItem = ({ id, deck }) => (
   <div className="card-item">
     <div className="card-panel hoverable">
@@ -9,7 +11,7 @@ const DeckItem = ({ id, deck }) => (
           <strong>{deck.name}</strong>
         </div>
         <div className="center">
-          <Link to={`/decks/${id}`} className="btn blue lighten-2"> Play </Link>
+          <Link to={`/decks/${id}/study`} className="btn blue lighten-2"> Study </Link>
         </div>
       </div>
     </div>
@@ -17,8 +19,10 @@ const DeckItem = ({ id, deck }) => (
 );
 
 DeckItem.propTypes = {
-  deck: React.PropTypes.object.isRequired,
-  id: React.PropTypes.number.isRequired,
+  deck: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }),
+  id: PropTypes.number.isRequired,
 };
 
 export default DeckItem;
