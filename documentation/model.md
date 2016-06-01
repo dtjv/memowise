@@ -52,7 +52,7 @@
 // rating constants
 const GREAT = -1;
 const OKAY = 0;
-const BAD = -1;
+const BAD = 1;
 // deck object
 {
   "_id": ObjectId("113lhq3t8hagg901"),
