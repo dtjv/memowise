@@ -1,3 +1,6 @@
+# Redux State Shape
+
+```js
 /*
 decks
 RECEIVE_DECKS
@@ -60,3 +63,4 @@ store.dispatch({
     result: -1,
   }
 })
+```

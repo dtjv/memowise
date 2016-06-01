@@ -89,7 +89,7 @@ npm install
 From within the root directory:
 
 ```sh
-npm run import examples/math.md
+npm run import documentation/decks/math.md
 ```
 
 ### Roadmap
