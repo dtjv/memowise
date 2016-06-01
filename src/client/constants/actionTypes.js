@@ -1,0 +1,4 @@
+export const RECEIVE_DECKS = 'RECEIVE_DECKS';
+export const SELECT_DECK = 'SELECT_DECK';
+export const RECEIVE_CARD = 'RECEIVE_CARD';
+export const ERR_FAILED_REQUEST = 'ERR_FAILED_REQUEST';
