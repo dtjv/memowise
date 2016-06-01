@@ -15,7 +15,7 @@ import * as reducers from './reducers';
 import App from './components/App';
 import Splash from './components/Splash';
 import Login from './components/Login';
-import Deck from './components/Deck';
+import StudyDeck from './components/StudyDeck';
 import { fetchData } from './actions';
 import Dashboard from './containers/Dashboard';
 
@@ -31,7 +31,7 @@ render(
         <IndexRoute component={Splash} />
         <Route path="/login" component={Login} />
         <Route path="/dashboard" component={Dashboard} />
-        <Route path="/decks/:deckId" component={Deck} />
+        <Route path="/decks/:deckId/study" component={StudyDeck} />
       </Route>
     </Router>
   </Provider>,

@@ -9,7 +9,7 @@ const DeckItem = ({ id, deck }) => (
           <strong>{deck.name}</strong>
         </div>
         <div className="center">
-          <Link to={`/decks/${id}`} className="btn blue lighten-2"> Play </Link>
+          <Link to={`/decks/${id}/study`} className="btn blue lighten-2"> Study </Link>
         </div>
       </div>
     </div>
