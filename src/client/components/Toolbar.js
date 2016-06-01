@@ -10,10 +10,12 @@ const Toolbar = () => (
             <i className="material-icons">home</i>
           </a>
           <ul className="right hide-on-med-and-down">
+            <li><a href="/signup">Sign Up</a></li>
             <li><a href="/login">Login</a></li>
             <li><a href="/about">About</a></li>
           </ul>
           <ul id="nav-mobile" className="side-nav">
+            <li><a href="/signup">Sign Up</a></li>
             <li><a href="/login">Login</a></li>
             <li><a href="/about">About</a></li>
           </ul>
