@@ -1,17 +1,22 @@
 import { Router } from 'express';
 import { flatMap, shuffle } from 'lodash';
-
 import Decks from '../models/decks';
-
 import User from '../models/user';
 import users from '../controllers/users';
 
 const router = new Router();
 
-
 /*
  * Decks
  */
+router.route('/api/user')
+  .post((req, res) => {
+    User.save(err, data) {
+      console.log('hi');
+    }
+  })
+
+
 router.route('/api/decks')
   .get((req, res) => {
     Decks.find({}).then((decks) => {
