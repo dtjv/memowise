@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { flatMap, shuffle } from 'lodash';
+import passport from 'passport';
 import Decks from '../models/decks';
 
 const router = new Router();
@@ -28,14 +29,12 @@ router.route('/api/decks/:deckId')
 router.route('/api/review')
   .get((req, res) => {
     Decks.find({}).then((decks) => {
-      const cards = flatMap(decks, function(deck) {
-        return deck.cards;
-      });
+      const cards = flatMap(decks, deck => deck.cards);
 
       // unefined _id indicates review deck
       const deck = {
         name: 'Review',
-        cards: shuffle(cards)
+        cards: shuffle(cards),
       };
 
       res
@@ -45,5 +44,12 @@ router.route('/api/review')
     });
   });
 
+router.route('/api/login')
+  .post(
+    passport.authenticate('local', {
+      successRedirect: '/',
+      failureRedirect: '/login',
+    })
+  );
 
 export default router;

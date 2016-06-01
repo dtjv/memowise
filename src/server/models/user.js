@@ -1,8 +1,9 @@
-// import mongoose from 'mongoose';
+import mongoose from 'mongoose';
 
-// const MessageSchema = new mongoose.Schema({
-//   username: String,
-//   password: String,
-// });
+const UserSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  password: String,
+});
 
-// export default mongoose.model('Message', MessageSchema);
+export default mongoose.model('User', UserSchema);
