@@ -2,5 +2,10 @@
   "extends": "airbnb",
   "rules": {
     "no-multi-spaces": [0]
+  },
+  "parserOptions":{
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
   }
 }
