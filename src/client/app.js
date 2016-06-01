@@ -15,8 +15,9 @@ import * as reducers from './reducers';
 import App from './components/App';
 import Splash from './components/Splash';
 import Login from './components/Login';
-import Decks from './components/Decks';
 import Deck from './components/Deck';
+import { fetchData } from './actions';
+import Dashboard from './containers/Dashboard';
 
 reducers.routing = routerReducer;
 
@@ -29,10 +30,12 @@ render(
       <Route path="/" component={App}>
         <IndexRoute component={Splash} />
         <Route path="/login" component={Login} />
-        <Route path="/decks" component={Decks} />
+        <Route path="/dashboard" component={Dashboard} />
         <Route path="/decks/:deckId" component={Deck} />
       </Route>
     </Router>
   </Provider>,
   document.getElementById('app')
 );
+
+store.dispatch(fetchData());

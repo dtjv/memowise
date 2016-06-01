@@ -7,7 +7,7 @@ const Splash = () => (
     <br />
     <h1 className="center"> WonkyFlash </h1>
     <div className="row center">
-      <Link to="/decks" className="btn-large blue lighten-2"> Go! </Link>
+      <Link to="/dashboard" className="btn-large blue lighten-2"> Go! </Link>
     </div>
   </div>
 );
