@@ -17,7 +17,7 @@ import Splash from './components/Splash';
 import SignUp from './components/SignUp';
 import Login from './containers/Login';
 import StudyDeck from './components/StudyDeck';
-import { verifyAuthentication, fetchData } from './actions';
+import { verifyAuthentication, fetchDecks } from './actions';
 import Dashboard from './containers/Dashboard';
 
 reducers.routing = routerReducer;
@@ -41,7 +41,7 @@ render(
 );
 
 store.dispatch(verifyAuthentication());
-store.dispatch(fetchData());
+store.dispatch(fetchDecks());
 
 // just for inspection
 window.store = store;

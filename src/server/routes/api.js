@@ -31,6 +31,23 @@ router.route('/api/decks/:deckId')
     });
   });
 
+router.route('/api/card')
+  .post((req, res) => {
+    console.log(req);
+
+    // getCard(req.body).then(card => {
+    //   const deck = decks[req.params.deckId - 1];
+    //   res
+    //     .status(200)
+    //     .type('json')
+    //     .json(deck);
+    // });
+    res
+      .status(200)
+      .type('json')
+      .json({ _id: '123', deckId: '333' });
+  });
+
 router.route('/api/review')
   .get((req, res) => {
     Decks.find({}).then((decks) => {
