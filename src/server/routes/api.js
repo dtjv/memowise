@@ -1,10 +1,17 @@
 import { Router } from 'express';
 import { flatMap, shuffle } from 'lodash';
-import passport from 'passport';
+
 import Decks from '../models/decks';
+
+import User from '../models/user';
+import users from '../controllers/users';
 
 const router = new Router();
 
+
+/*
+ * Decks
+ */
 router.route('/api/decks')
   .get((req, res) => {
     Decks.find({}).then((decks) => {
@@ -44,12 +51,10 @@ router.route('/api/review')
     });
   });
 
-router.route('/api/login')
-  .post(
-    passport.authenticate('local', {
-      successRedirect: '/',
-      failureRedirect: '/login',
-    })
-  );
+
+/*
+ * Auth
+ */
+router.route('/api/login').post(users.signIn);
 
 export default router;

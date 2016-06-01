@@ -43,6 +43,7 @@
     "cookie-parser": "^1.4.3",
     "cors": "^2.7.1",
     "express": "^4.13.4",
+    "express-session": "^1.13.0",
     "jquery": "^2.2.4",
     "lodash": "^4.13.1",
     "mongoose": "^4.4.19",
