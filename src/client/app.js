@@ -1,4 +1,4 @@
-/* global document */
+/* global WINDOW document */
 
 import React from 'react';
 import { render } from 'react-dom';
@@ -42,3 +42,6 @@ render(
 
 store.dispatch(verifyAuthentication());
 store.dispatch(fetchData());
+
+// just for inspection
+window.store = store;
