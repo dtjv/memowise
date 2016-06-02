@@ -36,12 +36,26 @@ class SignUp extends React.Component {
     // $.post('/api/signup', function(users) { 
     //   console.log(users);
     // });
-    var data = new FormData()
-    data.append('file', 'two')
-    http.post('/api/signup', {
-      method: 'post',
-      data: JSON.stringify({'two': 'three'})
+    // fetch('/api/signup', {
+    //   method: 'post',
+    //   body: new FormData(document.getElementById('comment-form'))
+    // });
+    // var data = new FormData()
+    // data.append('file', 'two')
+    // http('/api/signup', {
+    //   method: 'post',
+    //   data: JSON.stringify({'two': 'three'})
+    // })
+    var newUser = {
+      name: this.state.username,
+      email: this.state.email,
+      password: this.state.password
+      
+    }
+    $.post('/api/signup', newUser, (data, status) => {console.log(status);
+      console.log(data);
     })
+    .fail((err, status) => console.log('err', status))
   }
 
   render() {

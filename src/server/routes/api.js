@@ -11,8 +11,14 @@ const router = new Router();
  */
 router.route('/api/signup')
   .post((req, res) => {
-    console.log('da body', req);
-    
+    console.log('da body', req.body);
+    User.create({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password
+    }).then(function(user) {
+      console.log('the data', user)
+    })
   })
 
 
