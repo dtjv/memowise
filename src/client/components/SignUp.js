@@ -31,29 +31,13 @@ class SignUp extends React.Component {
 
   createAccount(event) {
     event.preventDefault();
-    
-    let context = this;
-    // $.post('/api/signup', function(users) { 
-    //   console.log(users);
-    // });
-    // fetch('/api/signup', {
-    //   method: 'post',
-    //   body: new FormData(document.getElementById('comment-form'))
-    // });
-    // var data = new FormData()
-    // data.append('file', 'two')
-    // http('/api/signup', {
-    //   method: 'post',
-    //   data: JSON.stringify({'two': 'three'})
-    // })
-    var newUser = {
+    const newUser = {
       name: this.state.username,
       email: this.state.email,
       password: this.state.password
       
     }
     $.post('/api/signup', newUser, (data, status) => {console.log(status);
-      console.log(data);
     })
     .fail((err, status) => console.log('err', status))
   }
@@ -96,12 +80,3 @@ class SignUp extends React.Component {
 }
 
 export default SignUp;
-
-
-
-// <div className="row">
-//   <div className="input-field col s4">
-//     <input ref="confirmPassword" type="password" className="validate" value={this.state.confirmPassword} onChange={this.handleConfirmPasswordInput.bind(this)}/>
-//     <label htmlFor="password"> Confirm Password </label>
-//   </div>
-// </div>
