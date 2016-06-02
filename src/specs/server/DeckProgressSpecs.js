@@ -1,8 +1,8 @@
 import getCard from '../../server/controllers/deck-progress.js';
 import getProgress from '../../server/controllers/progress-bar.js';
 import { expect } from 'chai';
-import Cards from '../../../dev/server/models/cards.js';
-import Plays from '../../../dev/server/models/plays.js';
+import Cards from '../../server/models/cards.js';
+import Plays from '../../server/models/plays.js';
 /* global describe, it, before, beforeEach, after, afterEach */
 /* eslint-disable func-names, prefer-arrow-callback */
 
