@@ -19,7 +19,7 @@ class ProgressBar extends React.Component {
   getProgress() {
     $.getJSON(`/api/progress/${this.deckId}`)
       .done( perc => {
-        this.setState({ perc: (perc*10 + '%') });
+        this.setState({ perc: (perc*100 + '%') });
       });
   }
 

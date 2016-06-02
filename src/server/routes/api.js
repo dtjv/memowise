@@ -84,9 +84,7 @@ router.route('/api/review')
  */
 router.route('/api/progress/:deckId')
   .get( (req, res) => {
-    console.log('Getting progress...');
     getProgress(req.params.deckId).then( percentage => {
-      console.log('currPerc: ', percentage);
       res
         .status(200)
         .type('json')
