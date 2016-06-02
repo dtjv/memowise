@@ -12,7 +12,7 @@ import {
 
 import {
   FRONT,
-  BACK
+  BACK,
 } from '../constants/play';
 
 export const decks = (state, action) => {
@@ -47,8 +47,8 @@ export const card = (state, action) => {
 
 export const play = (state, action) => {
   switch (action.type) {
-    case START_PLAY:
-      let newPlay = {
+    case START_PLAY: {
+      const newPlay = {
         deckId: action.data.deckId,
         cardId: action.data.cardId,
         side: FRONT,
@@ -56,14 +56,15 @@ export const play = (state, action) => {
       };
 
       return newPlay;
+    }
     case FLIP_CARD:
-      return {...state, side: BACK};
+      return { ...state, side: BACK };
     case FINISH_PLAY:
-      return {...state, rating: action.data};
+      return { ...state, rating: action.data };
     default:
       return state || {};
   }
-}
+};
 
 export const user = (state, action) => {
   switch (action.type) {

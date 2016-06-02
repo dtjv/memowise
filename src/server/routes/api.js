@@ -4,6 +4,7 @@ import Decks from '../models/decks';
 import User from '../models/user';
 
 import users from '../controllers/users';
+import getCard from '../controllers/deck-progress';
 
 const router = new Router();
 
@@ -31,6 +32,34 @@ router.route('/api/decks/:deckId')
     });
   });
 
+router.route('/api/card')
+  .post((req, res) => {
+    console.log(req.body);
+    getCard(req.body.deckId).then(card => {
+      console.log(card, '<--- card retrieved');
+      res
+        .status(200)
+        .type('json')
+        .json(card);
+    });
+
+    // // mocked card return
+    // res
+    //   .status(200)
+    //   .type('json')
+    //   .json({
+    //     _id: '123',
+    //     deckId: req.body.deckId,
+    //     question: {
+    //       text: 'What is 3 + 3?',
+    //     },
+    //     answer: {
+    //       text: 'The answer is 6!',
+    //       explanation: 'It is basic addition, bro.',
+    //     },
+    //   });
+  });
+
 router.route('/api/review')
   .get((req, res) => {
     Decks.find({}).then((decks) => {
@@ -41,7 +70,6 @@ router.route('/api/review')
         name: 'Review',
         cards: shuffle(cards),
       };
-
       res
         .status(200)
         .type('json')
