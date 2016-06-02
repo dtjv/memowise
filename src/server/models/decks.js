@@ -1,10 +1,8 @@
-import mongoose from 'mongoose';
+import mongoose from '../db';
 
 const DecksSchema = new mongoose.Schema({
   name: String,
-  cards: [
-    { question: { text: String }, answer: { text: String, explanation: String } },
-  ],
+  created_at: String
 });
 
 export default mongoose.model('Decks', DecksSchema);
