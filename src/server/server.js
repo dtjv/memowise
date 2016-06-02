@@ -8,12 +8,10 @@ import passport from 'passport';
 import auth from './auth';
 import homeRoute from './routes/home';
 import apiRoute from './routes/api';
-import db from './db';
 
 const host = process.env.HOST || 'localhost';
 const port = process.env.PORT || 3000;
 
-db.connect();
 auth();
 
 express()
