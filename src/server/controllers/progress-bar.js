@@ -1,3 +1,6 @@
+import Cards from '../../../dev/server/models/cards.js';
+import Plays from '../../../dev/server/models/plays.js';
+
 //import dbquery from './dbaccess.js';
 // query the database
 const queryDb = () => {
@@ -7,8 +10,8 @@ const queryDb = () => {
   };
 
   // given a deck id and user id, get the plays for that deck
-  const getDistinctCardsPlays = (deckId, userId) => {
-    return Plays.distinct('cardId', {deckId: deck_id}); //, userId: userId });
+  const getDistinctCardsPlayed = (deckId, userId) => {
+    return Plays.distinct('cardId', {deckId: deckId}); //, userId: userId });
   };
 
   const getCardPlays = (cardId, deckId, userId) => {
@@ -17,7 +20,7 @@ const queryDb = () => {
 
   return ({
     getDeck: getDeck,
-    getPlays: getPlays,
+    getDistinctCardsPlayed: getDistinctCardsPlayed,
     getCardPlays: getCardPlays
   });
 };
@@ -25,12 +28,10 @@ const queryDb = () => {
 const getProgress = (deckId) => {
   // input deck is either an id # or a deck object w/ an id property
   // const deck_id = inputDeck._id === undefined ? inputDeck : inputDeck._id;
-  return queryDb().getDistinctCardsPlays(deckId, '0')
+  return queryDb().getDistinctCardsPlayed(deckId, '0')
     .then( distinctCards => {
-      console.log('dist cards: ', distinctCards);
       return queryDb().getDeck(deckId).then( allCards => {
         const progress = distinctCards.length / allCards.length;
-        console.log(progress);
         return progress;
       });
     });
