@@ -12,14 +12,28 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 class StudyDeck extends React.Component {
+  constructor(props) {
+    super(props);
+    this.loadCard = this.loadCard.bind(this);
+    this.completePlay = this.completePlay.bind(this);
+  }
+
   componentWillMount() {
+    this.loadCard();
+  }
+
+  loadCard() {
     const props = this.props;
     props.getCard(props.deck._id)
       .then(({ data }) => props.startPlay(data._id, data.deckId));
   }
 
-  completePlay() {
-
+  // i have not persisted plays!!
+  completePlay(event) {
+    const el = event.target;
+    const rating = el.dataset.rating || 0;
+    this.props.finishPlay(rating)
+      .then(() => this.loadCard());
   }
 
   showFront() {
@@ -56,14 +70,14 @@ class StudyDeck extends React.Component {
         <br />
         <p>{(card.answer && card.answer.explanation) || null}</p>
         <div>
-          <button onClick={this.props.finishPlay} className="btn btn-large blue lighten-2">
-            <i className="material-icons">thumb_down</i>
+          <button onClick={this.completePlay} className="btn btn-large blue lighten-2">
+            <i ref="play-bad" data-rating="-1" className="material-icons">thumb_down</i>
           </button>
-          <button onClick={this.props.finishPlay} className="btn btn-large blue lighten-2">
-            <i className="material-icons">help</i>
+          <button onClick={this.completePlay} className="btn btn-large blue lighten-2">
+            <i ref="play-okay" data-rating="0" className="material-icons">help</i>
           </button>
-          <button onClick={this.props.finishPlay} className="btn btn-large blue lighten-2">
-            <i className="material-icons">thumb_up</i>
+          <button onClick={this.completePlay} className="btn btn-large blue lighten-2">
+            <i ref="play-good" data-rating="1" className="material-icons">thumb_up</i>
           </button>
         </div>
       </section>
