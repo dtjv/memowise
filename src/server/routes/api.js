@@ -5,6 +5,7 @@ import User from '../models/user';
 
 import users from '../controllers/users';
 import getCard from '../controllers/deck-progress';
+import getProgress from '../controllers/progress-bar.js';
 
 const router = new Router();
 
@@ -76,6 +77,22 @@ router.route('/api/review')
         .json(deck);
     });
   });
+
+
+/*
+ * Progress
+ */
+router.route('/api/progress/:deckId')
+  .get( (req, res) => {
+    console.log('Getting progress...');
+    getProgress(req.params.deckId).then( percentage => {
+      console.log('currPerc: ', percentage);
+      res
+        .status(200)
+        .type('json')
+        .json(percentage);
+    });
+  })
 
 
 /*

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { selectDeck } from '../actions';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
+import ProgressBar from './ProgressBar';
 
 const mapDispatchToState = (dispatch) => ({
   setDeckState: (deck) => dispatch(selectDeck(deck)),
@@ -21,6 +22,7 @@ class DeckItem extends Component {
   render() {
     return (
       <div className="card-item">
+        <ProgressBar id={this.props.deck._id} />
         <div className="card-panel hoverable">
           <div className="card-content">
             <div className="card-title grey-text text-darken-4 center">
