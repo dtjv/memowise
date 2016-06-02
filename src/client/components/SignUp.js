@@ -8,8 +8,7 @@ class SignUp extends React.Component {
     this.state = {
       username: '',
       email: '',
-      password: '',
-      confirmPassword: ''
+      password: ''
     }
   }
 
@@ -25,17 +24,12 @@ class SignUp extends React.Component {
     this.setState({password: event.target.value})
   }
 
-  handleConfirmPasswordInput() {
-    this.setState({confirmPassword: event.target.value})
-  }
-
   createAccount(event) {
     event.preventDefault();
     const newUser = {
       name: this.state.username,
       email: this.state.email,
-      password: this.state.password
-      
+      password: this.state.password  
     }
     $.post('/api/signup', newUser, (data, status) => {console.log(status);
     })
