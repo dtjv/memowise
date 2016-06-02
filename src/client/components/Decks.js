@@ -6,8 +6,8 @@ const Decks = ({ decks }) => (
     <h4 className="center grey-text text-darken-4"> Decks </h4>
     <div className="card-list">
       <div className="card-columns">
-        <DeckItem key={0} id={0} deck={{ name: 'Review' }} />
-        {decks.map((deck, idx) => <DeckItem key={idx} id={idx + 1} deck={deck} />)}
+        <DeckItem key={0} deck={{ _id: '0', name: 'Review' }} />
+        {decks.map((deck, idx) => <DeckItem key={idx} deck={deck} />)}
       </div>
     </div>
   </div>

@@ -4,7 +4,7 @@ import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 const mapDispatchToState = (dispatch) => ({
-  selectedDeck: (deck) => dispatch(selectDeck(deck)),
+  setDeckState: (deck) => dispatch(selectDeck(deck)),
 });
 
 class DeckItem extends Component {
@@ -14,8 +14,8 @@ class DeckItem extends Component {
   }
 
   chooseDeckToStudy() {
-    this.props.selectedDeck(this.props.deck);
-    browserHistory.push(`/decks/${this.props.id}/study`);
+    this.props.setDeckState(this.props.deck);
+    browserHistory.push(`/decks/${this.props.deck._id}/study`);
   }
 
   render() {
@@ -40,8 +40,7 @@ class DeckItem extends Component {
 
 DeckItem.propTypes = {
   deck: PropTypes.object.isRequired,
-  id: PropTypes.number.isRequired,
-  selectedDeck: PropTypes.func.isRequired,
+  setDeckState: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToState)(DeckItem);

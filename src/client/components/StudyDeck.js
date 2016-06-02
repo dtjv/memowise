@@ -6,9 +6,9 @@ const mapStateToProps = ({ deck, card, play }) => ({ deck, card, play });
 
 const mapDispatchToProps = (dispatch) => ({
   getCard: (deck) => dispatch(fetchCard(deck)),
-  startPlay: (cardId, deckId) => dispatch(startPlay(cardId, deckId)),
-  flipCard: () => dispatch(flipCard()),
-  finishPlay: (rating) => dispatch(finishPlay(rating)),
+  setPlayStart: (cardId, deckId) => dispatch(startPlay(cardId, deckId)),
+  setPlayFlipCard: () => dispatch(flipCard()),
+  setPlayFinish: (rating) => dispatch(finishPlay(rating)),
 });
 
 class StudyDeck extends React.Component {
@@ -25,18 +25,18 @@ class StudyDeck extends React.Component {
   loadCard() {
     const props = this.props;
     props.getCard(props.deck._id)
-      .then(({ data }) => props.startPlay(data._id, data.deckId));
+      .then(({ data }) => props.setPlayStart(data._id, data.deckId));
   }
 
   // i have not persisted plays!!
   completePlay(event) {
     const el = event.target;
     const rating = el.dataset.rating || 0;
-    this.props.finishPlay(rating)
+    this.props.setPlayFinish(rating)
       .then(() => this.loadCard());
   }
 
-  showFront() {
+  showCardFront() {
     const { card } = this.props;
     return (
       <section>
@@ -49,7 +49,7 @@ class StudyDeck extends React.Component {
         <br />
         <div>
           <button
-            onClick={this.props.flipCard}
+            onClick={this.props.setPlayFlipCard}
             className="btn btn-large blue lighten-2"
           > Flip </button>
         </div>
@@ -57,7 +57,7 @@ class StudyDeck extends React.Component {
     );
   }
 
-  showBack() {
+  showCardBack() {
     const { card } = this.props;
     return (
       <section>
@@ -90,7 +90,7 @@ class StudyDeck extends React.Component {
       <div className="container">
         <h2 className="center grey-text text-darken-4">{deck.name}</h2>
         <div className="card medium center">
-          {!play.side ? this.showFront() : this.showBack()}
+          {!play.side ? this.showCardFront() : this.showCardBack()}
         </div>
       </div>
     );
@@ -102,9 +102,9 @@ StudyDeck.propTypes = {
   card: PropTypes.object.isRequired,
   play: PropTypes.object.isRequired,
   getCard: PropTypes.func.isRequired,
-  startPlay: PropTypes.func.isRequired,
-  flipCard: PropTypes.func.isRequired,
-  finishPlay: PropTypes.func.isRequired,
+  setPlayStart: PropTypes.func.isRequired,
+  setPlayFlipCard: PropTypes.func.isRequired,
+  setPlayFinish: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudyDeck);
