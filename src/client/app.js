@@ -16,9 +16,9 @@ import Splash from './components/Splash';
 import SignUp from './components/SignUp';
 import SignIn from './containers/SignIn';
 import SignOut from './containers/SignOut';
-import StudyDeck from './components/StudyDeck';
-import { verifyAuthentication, fetchDecks } from './actions';
 import Dashboard from './containers/Dashboard';
+import StudyDeck from './containers/StudyDeck';
+import { verifyAuthentication, fetchDecks } from './actions';
 
 // application configuration
 import { DEBUG } from './config';

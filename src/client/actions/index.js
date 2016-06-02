@@ -7,8 +7,6 @@ export const receiveCard = card => ({ type: types.RECEIVE_CARD, data: card });
 
 export const startPlay = (cardId, deckId) => ({ type: types.START_PLAY, data: { cardId, deckId } });
 export const flipCard = () => ({ type: types.FLIP_CARD });
-
-// this needs to persist a play.
 export const finishPlay = rating => ({ type: types.FINISH_PLAY, data: rating });
 
 export const signIn = user => ({ type: types.SIGN_IN, data: user });
@@ -53,4 +51,8 @@ export const fetchCard = (deckId) => {
       .then(card => dispatch(receiveCard(card)))
       .catch(err => dispatch(failedRequest(err)))
     );
+};
+
+export const savePlay = (play) => {
+
 };
