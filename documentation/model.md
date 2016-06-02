@@ -33,7 +33,7 @@ An example of a `card` entry in the `cards` collection.
 ```js
 {
   "_id": ObjectId("1309uhag9q17g22g")
-  "deckId": ObjectId("10d9hw6g6e198h5a")
+  "deckId": "10d9hw6g6e198h5a",
   "question": {
     "text": "What is 3 + 3?"
   },
@@ -50,10 +50,10 @@ An example of a `play` entry in the `plays` collection.
 
 ```js
 {
-  "_id": ObjectId("113lhq3t8hagg901"),
-  "deckId": ObjectId("10d9hw6g6e198h5a"),
-  "cardId": ObjectId("1309uhag9q17g22g"),
-  "userId": ObjectId("143jhqfp9qwkasf8"),
+  "_id": ObjectId("143jhqfp9qwkasf8"),
+  "deckId": "10d9hw6g6e198h5a",
+  "cardId": "1309uhag9q17g22g",
+  "userId": "113lhq3t8hagg901",
   "side": "0",
   "rating": "-1" 
 }
