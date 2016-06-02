@@ -9,21 +9,6 @@ const router = new Router();
 /*
  * Decks
  */
-router.route('/api/signup')
-  .post((req, res) => {
-    User.create({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password
-    }).then(function(user) {
-      res
-        .status(200)
-        .type('json')
-        .json(user);
-    })
-  })
-
-
 router.route('/api/decks')
   .get((req, res) => {
     Decks.find({}).then((decks) => {
@@ -67,6 +52,21 @@ router.route('/api/review')
 /*
  * Auth
  */
+ router.route('/api/signup')
+   .post((req, res) => {
+     User.create({
+       name: req.body.name,
+       email: req.body.email,
+       password: req.body.password
+     }).then(function(user) {
+       res
+         .status(200)
+         .type('json')
+         .json(user);
+     });
+   });
+
+
 router.route('/api/login').post(users.signIn);
 
 export default router;
