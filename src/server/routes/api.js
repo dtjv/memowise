@@ -95,7 +95,8 @@ router.route('/api/signup')
    });
  });
 
-router.route('/api/auth/login').post(users.signIn);
+router.route('/api/auth/signin').post(users.signIn);
 router.route('/api/auth/verify').get(users.verify);
+router.route('/api/auth/signout').get(users.signOut);
 
 export default router;

@@ -28,4 +28,9 @@ const verify = (req, res) => {
   }
 };
 
-export default { signIn, verify };
+const signOut = (req, res) => {
+  req.logout();
+  res.redirect('/');
+};
+
+export default { signIn, verify, signOut };

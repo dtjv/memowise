@@ -15,6 +15,7 @@ import App from './components/App';
 import Splash from './components/Splash';
 import SignUp from './components/SignUp';
 import SignIn from './containers/SignIn';
+import SignOut from './containers/SignOut';
 import StudyDeck from './components/StudyDeck';
 import { verifyAuthentication, fetchDecks } from './actions';
 import Dashboard from './containers/Dashboard';
@@ -34,6 +35,7 @@ render(
         <IndexRoute component={Splash} />
         <Route path="/signup" component={SignUp} />
         <Route path="/signin" component={SignIn} />
+        <Route path="/signout" component={SignOut} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/decks/:deckId/study" component={StudyDeck} />
       </Route>
