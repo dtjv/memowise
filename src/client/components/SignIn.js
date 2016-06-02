@@ -1,7 +1,8 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
 import Auth from '../services/AuthService';
 
-class Login extends React.Component {
+class SignIn extends React.Component {
   constructor(props) {
     super(props);
 
@@ -9,6 +10,10 @@ class Login extends React.Component {
       email: '',
       password: '',
     };
+
+    this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.signIn = this.signIn.bind(this);
   }
 
   handleEmailChange(e) {
@@ -19,16 +24,14 @@ class Login extends React.Component {
     this.setState({ ...this.state, password: e.target.value });
   }
 
-  // This will be called when the user clicks on the login button
-  login(e) {
+  signIn(e) {
     e.preventDefault();
     // Here, we call an external AuthService. We’ll create it in the next step
-    Auth.login(this.state.email, this.state.password)
+    Auth.signIn(this.state.email, this.state.password)
       .then(user => {
-        this.props.onSignIn();
-      })
-      .catch(err => {
-        console.log('Error logging in', err);
+        // TODO: refactor to use push action creator
+        this.props.onSignIn(user);
+        browserHistory.push('/dashboard');
       });
   }
 
@@ -40,25 +43,39 @@ class Login extends React.Component {
           <form className="col s12">
             <div className="row">
               <div className="input-field col s12">
-                <input id="email" type="email" className="validate" onChange={this.handleEmailChange.bind(this)} />
+                <input
+                  id="email"
+                  type="email"
+                  className="validate"
+                  onChange={this.handleEmailChange}
+                />
                 <label htmlFor="email">Email Address</label>
               </div>
             </div>
             <div className="row">
               <div className="input-field col s12">
-                <input id="password" type="password" className="validate" onChange={this.handlePasswordChange.bind(this)} />
+                <input
+                  id="password"
+                  type="password"
+                  className="validate"
+                  onChange={this.handlePasswordChange}
+                />
                 <label htmlFor="password">Password</label>
               </div>
             </div>
           </form>
         </div>
         <div className="row center">
-          <button onClick={this.login.bind(this)} className="btn-large blue lighten-2">Sign In</button>
+          <button onClick={this.signIn} className="btn-large blue lighten-2">Sign In</button>
         </div>
       </div>
     );
   }
 }
 
-export default Login;
+SignIn.propTypes = {
+  onSignIn: React.PropTypes.function,
+};
+
+export default SignIn;
 

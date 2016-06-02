@@ -1,11 +1,10 @@
 import React from 'react';
 
-const AuthBar = (props) => {
-  const user = props.user.user;
+const AuthBar = ({ user }) => {
   const name = user ? user.name : '';
 
   return (
-    <span>{name || <a href="/login">Login</a>}</span>
+    <span>{name || <a href="/signin">Sign In</a>}</span>
   );
 };
 

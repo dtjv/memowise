@@ -69,15 +69,15 @@ export const play = (state, action) => {
 export const user = (state, action) => {
   switch (action.type) {
     case SIGN_IN: {
-      return { user: action.data };
+      return action.data || state;
     }
     case SIGN_OUT: {
-      return { user: null };
+      return {};
     }
     default:
       return state || {};
   }
-}
+};
 
 export const error = (state, action) => {
   switch (action.type) {
