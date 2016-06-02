@@ -9,11 +9,10 @@ const router = new Router();
 /*
  * Decks
  */
-router.route('/api/user')
+router.route('/api/signup')
   .post((req, res) => {
-    User.save(err, data) {
-      console.log('hi');
-    }
+    console.log('da body', req);
+    
   })
 
 
