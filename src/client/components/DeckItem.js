@@ -39,9 +39,7 @@ class DeckItem extends Component {
 }
 
 DeckItem.propTypes = {
-  deck: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-  }),
+  deck: PropTypes.object.isRequired,
   id: PropTypes.number.isRequired,
   selectedDeck: PropTypes.func.isRequired,
 };

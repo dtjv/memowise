@@ -29,17 +29,19 @@ export const fetchDecks = () => (
       .catch(err => dispatch(failedRequest(err)));
   });
 
-// yes, i know deckId is not used yet. data is still mocked right now.
-export const fetchCard = (deckId) => (
-  dispatch => (
+export const fetchCard = (deckId) => {
+  const payload = JSON.stringify({ deckId });
+
+  return dispatch => (
     fetch('/api/card', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
-        'Content-length': JSON.stringify({ deckId: '777' }).length,
+        'Content-length': payload.length,
       },
-      body: JSON.stringify({ deckId: '777' }) })
+      body: payload })
       .then(res => res.json())
       .then(card => dispatch(receiveCard(card)))
       .catch(err => dispatch(failedRequest(err)))
-    ));
+    );
+};

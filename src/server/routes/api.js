@@ -33,19 +33,29 @@ router.route('/api/decks/:deckId')
 
 router.route('/api/card')
   .post((req, res) => {
-    console.log(req);
-
-    // getCard(req.body).then(card => {
-    //   const deck = decks[req.params.deckId - 1];
+    console.log(req.body);
+    // getCard(req.body.deckId).then(card => {
     //   res
     //     .status(200)
     //     .type('json')
-    //     .json(deck);
+    //     .json(card);
     // });
+
+    // mocked card return
     res
       .status(200)
       .type('json')
-      .json({ _id: '123', deckId: '333' });
+      .json({
+        _id: '123',
+        deckId: req.body.deckId,
+        question: {
+          text: 'What is 3 + 3?',
+        },
+        answer: {
+          text: 'The answer is 6!',
+          explanation: 'It is basic addition, bro.',
+        },
+      });
   });
 
 router.route('/api/review')
@@ -58,7 +68,6 @@ router.route('/api/review')
         name: 'Review',
         cards: shuffle(cards),
       };
-
       res
         .status(200)
         .type('json')

@@ -14,10 +14,7 @@ const Decks = ({ decks }) => (
 );
 
 Decks.propTypes = {
-  decks: PropTypes.arrayOf(PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-  })),
+  decks: PropTypes.array.isRequired,
 };
 
 export default Decks;
