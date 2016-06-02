@@ -1,3 +1,5 @@
+// TODO: replace this with fetch using polyfill maybe
+// native fetch did NOT work to set cookies
 import $ from 'jquery';
 
 export default class AuthService {

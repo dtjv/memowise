@@ -14,8 +14,8 @@ import * as reducers from './reducers';
 // application components
 import App from './components/App';
 import Splash from './components/Splash';
-import SignUp from './components/SignUp'
-import Login from './components/Login';
+import SignUp from './components/SignUp';
+import Login from './containers/Login';
 import StudyDeck from './components/StudyDeck';
 import { verifyAuthentication, fetchData } from './actions';
 import Dashboard from './containers/Dashboard';

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import AuthBar from '../containers/AuthBar';
 
 const Toolbar = () => (
   <header>
@@ -11,13 +11,11 @@ const Toolbar = () => (
           </a>
           <ul className="right hide-on-med-and-down">
             <li><a href="/signup">Sign Up</a></li>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/about">About</a></li>
+            <li><AuthBar /></li>
           </ul>
           <ul id="nav-mobile" className="side-nav">
             <li><a href="/signup">Sign Up</a></li>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/about">About</a></li>
+            <li><AuthBar /></li>
           </ul>
           <a href="#" data-activates="nav-mobile" className="button-collapse">
             <i className="material-icons">menu</i>

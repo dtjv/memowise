@@ -21,8 +21,6 @@ const signIn = (req, res, next) => {
 };
 
 const verify = (req, res) => {
-  console.log(req.cookies, req.session);
-  console.log(req.isAuthenticated());
   if (req.user) {
     res.status(200).json(req.user);
   } else {

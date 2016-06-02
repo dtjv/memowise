@@ -24,7 +24,10 @@ class Login extends React.Component {
     e.preventDefault();
     // Here, we call an external AuthService. We’ll create it in the next step
     Auth.login(this.state.email, this.state.password)
-      .catch(function(err) {
+      .then(user => {
+        this.props.onSignIn();
+      })
+      .catch(err => {
         console.log('Error logging in', err);
       });
   }

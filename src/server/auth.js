@@ -10,11 +10,9 @@ export default () => {
 
   // Deserialize sessions
   passport.deserializeUser((id, done) => {
-    console.log(id);
     User.findOne({
       _id: id,
     }, '-password', (err, user) => {
-      console.log(err, user);
       done(err, user);
     });
   });
