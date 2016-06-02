@@ -76,6 +76,7 @@ describe('deck-progress', function () {
                 if (cardsMade++ === n - 1) {
                   done();
                 }
+                createPlays();
               });
             };
             createPlays();
