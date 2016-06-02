@@ -1,4 +1,5 @@
 import * as types from '../constants/actionTypes';
+import Auth from '../services/AuthService';
 
 export const receiveDecks = decks => ({ type: types.RECEIVE_DECKS, data: decks });
 export const selectDeck = deck => ({ type: types.SELECT_DECK, data: deck });
@@ -12,6 +13,13 @@ export const signIn = user => ({ type: types.SIGN_IN, data: user });
 export const signOut = () => ({ type: types.SIGN_OUT });
 
 export const failedRequest = error => ({ type: types.ERR_FAILED_REQUEST, data: error });
+
+export const verifyAuthentication = () => (
+  dispatch => {
+    Auth.verify()
+      .then(user => dispatch(signIn(user)))
+      .catch(err => dispatch(failedRequest(err)));
+  });
 
 export const fetchData = () => (
   dispatch => {

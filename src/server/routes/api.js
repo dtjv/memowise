@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { flatMap, shuffle } from 'lodash';
 import Decks from '../models/decks';
 import User from '../models/user';
+
 import users from '../controllers/users';
 
 const router = new Router();
