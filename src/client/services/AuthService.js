@@ -3,7 +3,7 @@
 import $ from 'jquery';
 
 export default class AuthService {
-  static login(email, password) {
+  static signIn(email, password) {
     return new Promise((resolve, reject) => {
       $.ajax({
         method: 'POST',
