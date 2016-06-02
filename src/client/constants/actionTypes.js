@@ -6,4 +6,7 @@ export const START_PLAY = 'START_PLAY';
 export const FLIP_CARD = 'FLIP_CARD';
 export const FINISH_PLAY = 'FINISH_PLAY';
 
+export const SIGN_IN = 'SIGN_IN';
+export const SIGN_OUT = 'SIGN_OUT';
+
 export const ERR_FAILED_REQUEST = 'ERR_FAILED_REQUEST';

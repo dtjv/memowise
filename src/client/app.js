@@ -14,10 +14,10 @@ import * as reducers from './reducers';
 // application components
 import App from './components/App';
 import Splash from './components/Splash';
-import SignUp from './components/SignUp'
-import Login from './components/Login';
+import SignUp from './components/SignUp';
+import Login from './containers/Login';
 import StudyDeck from './components/StudyDeck';
-import { fetchData } from './actions';
+import { verifyAuthentication, fetchData } from './actions';
 import Dashboard from './containers/Dashboard';
 
 reducers.routing = routerReducer;
@@ -40,4 +40,5 @@ render(
   document.getElementById('app')
 );
 
+store.dispatch(verifyAuthentication());
 store.dispatch(fetchData());

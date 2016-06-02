@@ -8,25 +8,27 @@ import passport from 'passport';
 import auth from './auth';
 import homeRoute from './routes/home';
 import apiRoute from './routes/api';
-
+import db from './db';
 
 const host = process.env.HOST || 'localhost';
 const port = process.env.PORT || 3000;
-auth();
 
+db.connect();
+auth();
 
 express()
   .use(cors({
     origin: '*',
     methods: ['GET, POST, OPTIONS'],
     allowHeaders: 'content-type, accept',
+    credentials: true,
     maxAge: 10,
   }))
   .use(bodyParser.urlencoded({ extended: true }))
   .use(bodyParser.json())
   .use(cookieParser())
   .use(express.static(resolve(__dirname, '../')))
-  .use(session({ secret: 'wonky' }))
+  .use(session({ secret: 'wonky', resave: false, saveUnitialized: false }))
   .use(passport.initialize())
   .use(passport.session())
   .use(apiRoute)
