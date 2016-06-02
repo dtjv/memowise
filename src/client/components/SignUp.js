@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
 import $ from 'jquery';
 
 class SignUp extends React.Component {
@@ -37,6 +37,7 @@ class SignUp extends React.Component {
     };
     $.post('/api/signup', newUser, (data, status) => status)
     .fail((err, status) => status);
+    browserHistory.push('/dashboard');
   }
 
   render() {
@@ -86,11 +87,10 @@ class SignUp extends React.Component {
           </form>
         </div>
         <div className="row center">
-          <Link
-            to="/dashboard"
+          <button
             onClick={this.createAccount}
             className="btn-large blue lighten-2"
-          > Create Account </Link>
+          > Create Account </button>
         </div>
       </div>
     );
