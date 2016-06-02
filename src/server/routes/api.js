@@ -35,9 +35,7 @@ router.route('/api/decks/:deckId')
 
 router.route('/api/card')
   .post((req, res) => {
-    console.log(req.body);
     getCard(req.body.deckId).then(card => {
-      console.log(card, '<--- card retrieved');
       res
         .status(200)
         .type('json')
@@ -83,14 +81,14 @@ router.route('/api/review')
  * Progress
  */
 router.route('/api/progress/:deckId')
-  .get( (req, res) => {
-    getProgress(req.params.deckId).then( percentage => {
+  .get((req, res) => {
+    getProgress(req.params.deckId).then(percentage => {
       res
         .status(200)
         .type('json')
         .json(percentage);
     });
-  })
+  });
 
 
 /*
