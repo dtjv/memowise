@@ -21,17 +21,15 @@ describe('', function() {
         .then( () => {
           Cards.find({ deckId: '0' })
           .then( cards => {
+            // play only some cards
             const n = Math.floor(3*cards.length / 4);
-            console.log('n:', n);
             for (let i = 0; i < n; i++) {
-              console.log('cid', cards[i]._id);
               Plays.create({
                 created_at: '5:01',
                 rating: '0',
                 deckId: '0',
                 cardId: cards[i]._id
               }).then( () => {
-                console.log('made: ', cardsMade);
                 cardsMade++ === n - 1 ? done() : null;
               });
             }
@@ -45,7 +43,6 @@ describe('', function() {
 
     it('should return a random card given a deck id', done => {
       getCard('0').then( function(card) {
-        console.log(card);
         expect(card.deckId).to.equal('0');
         expect(card.question).to.be.ok;
         done();

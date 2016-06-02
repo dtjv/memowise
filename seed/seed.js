@@ -9,13 +9,13 @@ Plays.remove({})
   .then( () => {
     Plays.create(dummyPlays)
       .then( data => {
-        console.log('Data Seeded Successfully', data);
+        console.log('Data Seeded Successfully');
       }).then( () => {
         Cards.remove({})
           .then( () => {
             Cards.create(dummyCards)
               .then( data => {
-                console.log('Cards Seeded Successfully', data);
+                console.log('Cards Seeded Successfully');
                 db.disconnect();
               })
           })
