@@ -5,10 +5,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import passport from 'passport';
-
-import db from './db';
 import auth from './auth';
-
 import homeRoute from './routes/home';
 import apiRoute from './routes/api';
 
@@ -18,6 +15,7 @@ const port = process.env.PORT || 3000;
 
 db.connect();
 auth();
+
 
 express()
   .use(cors({
