@@ -74,7 +74,7 @@ class SignIn extends React.Component {
 }
 
 SignIn.propTypes = {
-  onSignIn: React.PropTypes.function,
+  onSignIn: React.PropTypes.func,
 };
 
 export default SignIn;
