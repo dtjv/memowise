@@ -1,13 +1,10 @@
 import { Router } from 'express';
 import { flatMap, shuffle } from 'lodash';
-
 import Decks from '../models/decks';
-
 import User from '../models/user';
 import users from '../controllers/users';
 
 const router = new Router();
-
 
 /*
  * Decks
@@ -55,6 +52,21 @@ router.route('/api/review')
 /*
  * Auth
  */
+ router.route('/api/signup')
+   .post((req, res) => {
+     User.create({
+       name: req.body.name,
+       email: req.body.email,
+       password: req.body.password
+     }).then(function(user) {
+       res
+         .status(200)
+         .type('json')
+         .json(user);
+     });
+   });
+
+
 router.route('/api/login').post(users.signIn);
 
 export default router;

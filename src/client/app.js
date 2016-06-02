@@ -14,6 +14,7 @@ import * as reducers from './reducers';
 // application components
 import App from './components/App';
 import Splash from './components/Splash';
+import SignUp from './components/SignUp'
 import Login from './components/Login';
 import StudyDeck from './components/StudyDeck';
 import { fetchData } from './actions';
@@ -29,6 +30,7 @@ render(
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={Splash} />
+        <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/decks/:deckId/study" component={StudyDeck} />
