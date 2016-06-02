@@ -21,12 +21,30 @@ An example of a `deck` entry in the `decks` collection.
 
 ```js
 {
-  "_id": ObjectId("5747c2483af8eea20a739724"),
+  "_id": ObjectId("10d9hw6g6e198h5a"),
   "name": "Math"
 }
 ```
 
-### `plays` collection
+## `cards` Collection
+
+An example of a `card` entry in the `cards` collection.
+
+```js
+{
+  "_id": ObjectId("1309uhag9q17g22g")
+  "deckId": ObjectId("10d9hw6g6e198h5a")
+  "question": {
+    "text": "What is 3 + 3?"
+  },
+  "answer": {
+    "text": "6",
+    "explanation": "It is basic math, bro."
+  }
+}
+```
+
+## `plays` Collection
 
 An example of a `play` entry in the `plays` collection.
 

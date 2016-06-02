@@ -1,0 +1,13 @@
+[
+  {
+    "_id":"",
+    "deckId"
+    "question": {
+      "text": "What is 3 + 3?"
+    },
+    "answer": {
+      "text": "6",
+      "explanation": "It is basic math, bro."
+    }
+  }
+]
