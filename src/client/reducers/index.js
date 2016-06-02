@@ -5,6 +5,8 @@ import {
   START_PLAY,
   FLIP_CARD,
   FINISH_PLAY,
+  SIGN_IN,
+  SIGN_OUT,
   ERR_FAILED_REQUEST,
 } from '../constants/actionTypes';
 
@@ -58,6 +60,19 @@ export const play = (state, action) => {
       return {...state, side: BACK};
     case FINISH_PLAY:
       return {...state, rating: action.data};
+    default:
+      return state || {};
+  }
+}
+
+export const user = (state, action) => {
+  switch (action.type) {
+    case SIGN_IN: {
+      return { user: action.data };
+    }
+    case SIGN_OUT: {
+      return { user: null };
+    }
     default:
       return state || {};
   }

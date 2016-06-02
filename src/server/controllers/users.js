@@ -19,4 +19,16 @@ const signIn = (req, res, next) => {
   })(req, res, next);
 };
 
-export default { signIn };
+const verify = (req, res) => {
+  if (req.user) {
+    res.status(200).json({
+      isLoggedIn: true
+    });
+  } else {
+    res.status(403).json({
+      isLoggedIn: false
+    });
+  }
+}
+
+export default { signIn, verify };
