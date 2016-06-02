@@ -7,6 +7,7 @@
     "watch": "gulp watch",
     "build": "gulp",
     "build:dist": "gulp --dist",
+    "seed": "babel ./seed/seed.js | node",
     "start": "nodemon dev/server/server.js",
     "server:dist": "node dist/server/server.js",
     "import": "node bin/deck-import.js",
@@ -28,6 +29,7 @@
     "eslint-plugin-import": "^1.7.0",
     "eslint-plugin-jsx-a11y": "^1.2.0",
     "eslint-plugin-react": "^5.1.1",
+    "fs": "0.0.2",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-sass": "^2.3.1",
@@ -41,6 +43,7 @@
     "webpack-stream": "^3.2.0"
   },
   "dependencies": {
+    "babel-cli": "^6.9.0",
     "body-parser": "^1.15.1",
     "cookie-parser": "^1.4.3",
     "cors": "^2.7.1",
@@ -57,6 +60,7 @@
     "react-router": "^2.4.1",
     "react-router-redux": "^4.0.4",
     "redux": "^3.5.2",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "supertest": "^1.2.0"
   }
 }
