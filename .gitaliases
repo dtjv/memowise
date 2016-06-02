@@ -10,8 +10,10 @@
   sa = stash apply
   ss = stash save
 
+  # commit only added changes
+  cm = commit -m 
   # add all changes and commit
-  cm = !git add -A && git commit -m 
+  cma = !git add -A && git commit -m 
   ## commit work in progress without creating a commit message
   # commit all changes and untracked files
   save = !git add -A && git commit -m 'SAVEPOINT'
