@@ -6,39 +6,64 @@ import Plays from '../../server/models/plays.js';
 /* global describe, it, before, beforeEach, after, afterEach */
 /* eslint-disable func-names, prefer-arrow-callback */
 
+const createCards = () => {
+  const allCards = [];
+  for (let i = 0; i < 10; i++) {
+    const dummy = i.toString();
+    allCards.push({
+      question: { text: dummy },
+      answer: { text: dummy, explanation: ' ' },
+      deckId: '0',
+    });
+  }
+  return allCards;
+};
+
+const createPlays = (cards, n) => {
+  const allPlays = [];
+  for (let i = 0; i < n; i++) {
+    allPlays.push({
+      rating: '0',
+      deckId: '0',
+      cardId: cards[i]._id,
+      userId: '0',
+    });
+  }
+  return allPlays;
+};
+
+const calcPerc = (deck, n) => n / deck.length;
+let realPerc = 0;
+
 // seed data by running npm run seed before testing deck-progress
 describe('deck-progress', function () {
+  this.timeout(5000);
+
+  before(function (done) {
+    const allCards = createCards();
+    const n = 5;
+    let allPlays = [];
+    Cards.remove({})
+      .then(() => (
+        Cards.create(allCards)
+      ))
+      .then(cards => (
+        Plays.remove({})
+          .then(() => {
+            allPlays = createPlays(cards, n);
+            realPerc = calcPerc(cards, n);
+            return Plays.create(allPlays);
+          })
+          .then(() => {
+            done();
+          })
+      ));
+  });
+
   describe('deck-progress basics', function () {
-    this.timeout(5000);
-
-    // create new plays
-    beforeEach(function (done) {
-      let cardsMade = 0;
-      Plays.remove({})
-        .then(() => {
-          Cards.find({ deckId: '0' })
-          .then(cards => {
-            // play only some cards
-            const n = Math.floor(3 * cards.length / 4);
-            const createPlays = () => {
-              Plays.create({
-                created_at: '5:01',
-                rating: '0',
-                deckId: '0',
-                cardId: cards[cardsMade]._id,
-                userId: '0',
-              }).then(() => {
-                const action = cardsMade++ === n - 1 ? done : createPlays;
-                action();
-              });
-            };
-            createPlays();
-          });
-        });
-    });
-
-    it('should correctly have an function named `getCard`', () => {
+    it('should correctly have an function named `getCard`', done => {
       expect(getCard).to.be.a('function');
+      done();
     });
 
     it('should return a random card given a deck id', done => {
@@ -52,45 +77,14 @@ describe('deck-progress', function () {
 
   describe('progress-bar basics', function () {
     // create new plays with only some cards
-    let calcPerc = 0;
-    beforeEach(function (done) {
-      this.timeout(5000);
-      let cardsMade = 0;
-      Plays.remove({})
-        .then(() => {
-          Cards.find({ deckId: '0' })
-          .then(cards => {
-            const n = Math.floor(3 * cards.length / 4);
-            const numSeenCards = 4;
-            let j = 0;
-            const createPlays = () => {
-              Plays.create({
-                created_at: '5:01',
-                rating: '0',
-                deckId: '0',
-                cardId: cards[j]._id,
-                userId: '0',
-              }).then(() => {
-                j = Math.floor(cardsMade % numSeenCards);
-                calcPerc = numSeenCards / cards.length;
-                if (cardsMade++ === n - 1) {
-                  done();
-                }
-                createPlays();
-              });
-            };
-            createPlays();
-          });
-        });
-    });
-
-    it('should correctly have an function named `getProgress`', () => {
+    it('should correctly have an function named `getProgress`', done => {
       expect(getProgress).to.be.a('function');
+      done();
     });
 
     it('should return the percentage of distinct cards seen', done => {
       getProgress('0').then(function (perc) {
-        expect(perc).to.equal(calcPerc);
+        expect(perc).to.equal(realPerc);
         done();
       });
     });
