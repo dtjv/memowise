@@ -23,6 +23,13 @@ export const verifyAuthentication = () => (
       .catch(err => dispatch(failedRequest(err)));
   });
 
+export const cancelAuthentication = () => (
+  dispatch => {
+    Auth.signOut()
+      .then(() => dispatch(signOut()))
+      .catch(err => dispatch(failedRequest(err)));
+  });
+
 export const fetchDecks = () => (
   dispatch => {
     fetch('/api/decks')

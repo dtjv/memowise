@@ -7,7 +7,7 @@ export default class AuthService {
     return new Promise((resolve, reject) => {
       $.ajax({
         method: 'POST',
-        url: '/api/auth/login',
+        url: '/api/auth/signin',
         data: { email, password },
         dataType: 'json',
       }).then(
@@ -20,6 +20,15 @@ export default class AuthService {
   static verify() {
     return new Promise((resolve, reject) => {
       $.get('/api/auth/verify').then(
+        res => resolve(res),
+        err => reject(err)
+      );
+    });
+  }
+
+  static signOut() {
+    return new Promise((resolve, reject) => {
+      $.get('/api/auth/signout').then(
         res => resolve(res),
         err => reject(err)
       );
