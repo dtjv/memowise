@@ -31,14 +31,8 @@ UserSchema.pre('save', function hashPassword(next) {
 /**
  * Create instance method for authenticating user
  */
-// UserSchema.methods.authenticate = function authenticate(password) {
-//   return this.password === password;
-// };
-
 UserSchema.methods.authenticate = function authenticate(password) {
-  const comparePassword = Promise.promisify(bcrypt.compare);
-  return comparePassword(password, this.password)
-    .then(hash => hash);
+  return bcrypt.compareSync(password, this.password);
 };
 
 export default mongoose.model('User', UserSchema);

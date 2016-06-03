@@ -44,6 +44,8 @@
   },
   "dependencies": {
     "babel-cli": "^6.9.0",
+    "bcrypt": "^0.8.6",
+    "bluebird": "^3.4.0",
     "body-parser": "^1.15.1",
     "connect-mongo": "^1.2.0",
     "cookie-parser": "^1.4.3",
