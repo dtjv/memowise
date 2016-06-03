@@ -5,9 +5,12 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import passport from 'passport';
+const MongoStore = require('connect-mongo')(session);
+import mongoose from './db';
 import auth from './auth';
 import homeRoute from './routes/home';
 import apiRoute from './routes/api';
+
 
 const host = process.env.HOST || 'localhost';
 const port = process.env.PORT || 3000;
@@ -26,7 +29,12 @@ express()
   .use(bodyParser.json())
   .use(cookieParser())
   .use(express.static(resolve(__dirname, '../')))
-  .use(session({ secret: 'wonky', resave: false, saveUnitialized: false }))
+  .use(session({
+    secret: 'wonky',
+    resave: false,
+    saveUnitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  }))
   .use(passport.initialize())
   .use(passport.session())
   .use(apiRoute)

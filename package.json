@@ -45,6 +45,7 @@
   "dependencies": {
     "babel-cli": "^6.9.0",
     "body-parser": "^1.15.1",
+    "connect-mongo": "^1.2.0",
     "cookie-parser": "^1.4.3",
     "cors": "^2.7.1",
     "express": "^4.13.4",
