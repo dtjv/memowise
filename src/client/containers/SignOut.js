@@ -5,7 +5,7 @@ import { browserHistory } from 'react-router';
 
 class LogoutView extends React.Component {
   componentWillMount() {
-    this.props.dispatch(cancelAuthentication);
+    this.props.dispatch(cancelAuthentication());
   }
 
   componentDidMount() {
