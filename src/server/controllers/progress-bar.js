@@ -1,10 +1,10 @@
 import queryDb from './query-db.js';
 
-const getProgress = deckId => (
-  queryDb().getDistinctCardsPlayed(deckId, '0')
+const getProgress = (deckId, userId) => (
+  queryDb().getDistinctCardsPlayed(deckId, userId)
     .then(distinctCards => (
       queryDb().getDeck(deckId).then(allCards => (
-        distinctCards.length / allCards.length
+        `${(100 * Number(distinctCards.length)) / Number(allCards.length)}%`
       ))
     ))
 );

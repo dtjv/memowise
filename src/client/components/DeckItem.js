@@ -22,7 +22,7 @@ class DeckItem extends Component {
   render() {
     return (
       <div className="card-item">
-        <ProgressBar id={this.props.deck._id} />
+        <ProgressBar deck={this.props.deck} />
         <div className="card-panel hoverable">
           <div className="card-content">
             <div className="card-title grey-text text-darken-4 center">

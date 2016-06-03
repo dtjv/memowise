@@ -16,7 +16,7 @@ const getRandom = {
 };
 
 // given a deck id, retrieve a card
-const getCard = deckId => (
+const getCard = (deckId, userId) => (
   // get the deck
   queryDb().getDeck(deckId).then(deck => {
     // intitialize random card index and tries
@@ -31,11 +31,12 @@ const getCard = deckId => (
 
     const findCard = () => (
       // find all plays that match card id
-      queryDb().getCardPlays(cardId, deckId, 0).then(plays => {
+      queryDb().getCardPlays(cardId, deckId, userId).then(plays => {
         // get total rating for that card
         let totalRating = 0;
         if (plays.length) {
-          totalRating = plays.reduce((sum, play) => sum + Number(play.rating), 0);
+          // we want lower total rating for thumbs up
+          totalRating = plays.reduce((sum, play) => sum - Number(play.rating), 0);
         } else {
           return deck[cardIndex];
         }
