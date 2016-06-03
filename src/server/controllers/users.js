@@ -1,4 +1,18 @@
 import passport from 'passport';
+import User from '../models/user';
+
+const createAccount = (req, res) => {
+  User.create({
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password,
+  }).then(user => {
+    res
+      .status(200)
+      .type('json')
+      .json(user);
+  });
+};
 
 const attemptSignIn = (req, res, user) => {
   req.login(user, err => {
@@ -33,4 +47,4 @@ const signOut = (req, res) => {
   res.redirect('/');
 };
 
-export default { signIn, verify, signOut };
+export default { createAccount, signIn, verify, signOut };

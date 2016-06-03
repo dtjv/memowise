@@ -2,22 +2,24 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import $ from 'jquery';
 
-class SignUp extends React.Component {
+class CreateAccount extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      username: '',
+      name: '',
       email: '',
       password: '',
     };
-    this.handleUserNameInput = this.handleUserNameInput.bind(this);
+
+    this.handleNameInput = this.handleNameInput.bind(this);
     this.handleEmailInput = this.handleEmailInput.bind(this);
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
     this.createAccount = this.createAccount.bind(this);
   }
 
-  handleUserNameInput(event) {
-    this.setState({ username: event.target.value });
+  handleNameInput(event) {
+    this.setState({ name: event.target.value });
   }
 
   handleEmailInput(event) {
@@ -31,11 +33,11 @@ class SignUp extends React.Component {
   createAccount(event) {
     event.preventDefault();
     const newUser = {
-      name: this.state.username,
+      name: this.state.name,
       email: this.state.email,
       password: this.state.password,
     };
-    $.post('/api/signup', newUser, (data, status) => status)
+    $.post('/api/auth/create-account', newUser, (data, status) => status)
     .fail((err, status) => status);
     browserHistory.push('/dashboard');
   }
@@ -45,23 +47,23 @@ class SignUp extends React.Component {
       <div className="container">
         <br />
         <br />
-        <h1 className="center"> Create Account </h1>
+        <h1 className="center">Create Account</h1>
         <div className="row">
-          <form className="col s12" id="signupform">
+          <form className="col s8 offset-s2" onSubmit={this.createAccount}>
             <div className="row">
-              <div className="input-field col s4">
+              <div className="input-field col s12">
                 <input
-                  ref="username"
+                  ref="name"
                   type="text"
                   className="validate"
-                  value={this.state.username}
-                  onChange={this.handleUserNameInput}
+                  value={this.state.name}
+                  onChange={this.handleNameInput}
                 />
-                <label htmlFor="username"> Username </label>
+                <label htmlFor="name">Name</label>
               </div>
             </div>
             <div className="row">
-              <div className="input-field col s4">
+              <div className="input-field col s12">
                 <input
                   ref="email"
                   type="email"
@@ -69,11 +71,11 @@ class SignUp extends React.Component {
                   value={this.state.email}
                   onChange={this.handleEmailInput}
                 />
-                <label htmlFor="email"> Email </label>
+                <label htmlFor="email">Email</label>
               </div>
             </div>
             <div className="row">
-              <div className="input-field col s4">
+              <div className="input-field col s12">
                 <input
                   ref="password"
                   type="password"
@@ -81,20 +83,21 @@ class SignUp extends React.Component {
                   value={this.state.password}
                   onChange={this.handlePasswordInput}
                 />
-                <label htmlFor="password"> Password </label>
+                <label htmlFor="password">Password</label>
+              </div>
+            </div>
+            <div className="row center">
+              <div className="col s12">
+                <button type="submit" className="btn-large blue lighten-2">
+                  Create Account
+                </button>
               </div>
             </div>
           </form>
-        </div>
-        <div className="row center">
-          <button
-            onClick={this.createAccount}
-            className="btn-large blue lighten-2"
-          > Create Account </button>
         </div>
       </div>
     );
   }
 }
 
-export default SignUp;
+export default CreateAccount;

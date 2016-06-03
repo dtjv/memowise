@@ -12,14 +12,14 @@ const AuthBar = ({ user, mobile }) => {
           {
             name ?
               <Link to="/profile">{name}</Link> :
-              <Link to="/signin">Sign In</Link>
+              <Link to="/sign-in">Sign In</Link>
           }
         </li>
         <li>
           {
             name ?
-              <Link to="/signout">Sign Out</Link> :
-              <Link to="/signup">Create Account</Link>
+              <Link to="/sign-out">Sign Out</Link> :
+              <Link to="/create-account">Create Account</Link>
           }
         </li>
       </ul>
@@ -32,14 +32,14 @@ const AuthBar = ({ user, mobile }) => {
         {
           name ?
             <Link to="/profile">{name}</Link> :
-            <Link to="/signin">Sign In</Link>
+            <Link to="/sign-in">Sign In</Link>
         }
       </li>
       <li>
         {
           name ?
-            <Link to="/signout">Sign Out</Link> :
-            <Link to="/signup">Create Account</Link>
+            <Link to="/sign-out">Sign Out</Link> :
+            <Link to="/create-account">Create Account</Link>
         }
       </li>
     </ul>

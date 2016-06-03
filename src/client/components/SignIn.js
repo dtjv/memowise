@@ -40,7 +40,7 @@ class SignIn extends React.Component {
       <div className="container">
         <h1 className="center">Sign In</h1>
         <div className="row">
-          <form className="col s12">
+          <form className="col s8 offset-s2" onSubmit={this.signIn}>
             <div className="row">
               <div className="input-field col s12">
                 <input
@@ -63,10 +63,14 @@ class SignIn extends React.Component {
                 <label htmlFor="password">Password</label>
               </div>
             </div>
+            <div className="row center">
+              <div className="col s12">
+                <button type="submit" className="btn-large blue lighten-2">
+                  Sign In
+                </button>
+              </div>
+            </div>
           </form>
-        </div>
-        <div className="row center">
-          <button onClick={this.signIn} className="btn-large blue lighten-2">Sign In</button>
         </div>
       </div>
     );

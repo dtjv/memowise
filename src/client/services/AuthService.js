@@ -7,7 +7,7 @@ export default class AuthService {
     return new Promise((resolve, reject) => {
       $.ajax({
         method: 'POST',
-        url: '/api/auth/signin',
+        url: '/api/auth/sign-in',
         data: { email, password },
         dataType: 'json',
       }).then(
@@ -28,7 +28,7 @@ export default class AuthService {
 
   static signOut() {
     return new Promise((resolve, reject) => {
-      $.get('/api/auth/signout').then(
+      $.get('/api/auth/sign-out').then(
         res => resolve(res),
         err => reject(err)
       );
