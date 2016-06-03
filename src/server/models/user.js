@@ -16,7 +16,7 @@ const UserSchema = new mongoose.Schema({
       'Please make your password longer',
     ],
   },
-});
+}, { timestamps: true });
 
 /**
  * Create instance method for authenticating user

@@ -5,6 +5,6 @@ const CardsSchema = new mongoose.Schema({
   answer: { text: String, explanation: String },
   deckId: String,
   userId: String,
-}, { timstamps: true });
+}, { timestamps: true });
 
 export default mongoose.model('Cards', CardsSchema);
