@@ -60,7 +60,6 @@ export const play = (state, action) => {
     case FLIP_CARD:
       return { ...state, side: BACK };
     case FINISH_PLAY:
-      console.log(action.data, '<-- in reducer');
       return { ...state, rating: action.data };
     default:
       return state || {};
