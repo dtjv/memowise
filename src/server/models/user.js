@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
+import Promise from 'bluebird';
 
 const UserSchema = new mongoose.Schema({
   name: String,
@@ -18,11 +20,25 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
+UserSchema.pre('save', function hashPassword(next) {
+  const cipher = Promise.promisify(bcrypt.hash);
+  return cipher(this.password, 5).bind(this)
+    .then(hash => {
+      this.password = hash;
+      next();
+    });
+});
 /**
  * Create instance method for authenticating user
  */
+// UserSchema.methods.authenticate = function authenticate(password) {
+//   return this.password === password;
+// };
+
 UserSchema.methods.authenticate = function authenticate(password) {
-  return this.password === password;
+  const comparePassword = Promise.promisify(bcrypt.compare);
+  return comparePassword(password, this.password)
+    .then(hash => hash);
 };
 
 export default mongoose.model('User', UserSchema);
