@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import { GREAT, OKAY, BAD } from '../constants/play';
 import { fetchCard, startPlay, flipCard, savePlay } from '../actions';
 
@@ -37,9 +38,9 @@ class StudyDeck extends React.Component {
     const { card: { question } } = this.props;
     return (
       <section>
-        <br />
-        <br />
-        <br />
+        <div className="button-close">
+          <i className="material-icons" onClick={() => browserHistory.push('/dashboard')}>close</i>
+        </div>
         <h4>
           {(question && question.text) || null}
         </h4>
@@ -60,14 +61,15 @@ class StudyDeck extends React.Component {
     const { card: { answer }, play } = this.props;
     return (
       <section>
-        <br />
-        <br />
-        <br />
+        <div className="button-close">
+          <i className="material-icons" onClick={() => browserHistory.push('/dashboard')}>close</i>
+        </div>
         <h4>{answer.text || null}</h4>
         <br />
-        <br />
-        <br />
+        <p><strong>Explanation:</strong></p>
         <p>{answer.explanation || null}</p>
+        <br />
+        <p>How well did you do?</p>
         <div>
           <button
             onClick={() => this.handlePlay(play, BAD)}
