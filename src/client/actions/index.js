@@ -22,10 +22,12 @@ export const receiveDecks = decks => ({ type: types.RECEIVE_DECKS, data: decks }
 export const selectDeck = deck => ({ type: types.SELECT_DECK, data: deck });
 export const fetchDecks = () => (
   dispatch => {
-    fetch('/api/decks')
-      .then(res => res.json())
-      .then(decks => dispatch(receiveDecks(decks)))
-      .catch(err => dispatch(failedRequest(err)));
+    fetch('/api/decks', {
+      credentials: 'same-origin',
+    })
+    .then(res => res.json())
+    .then(decks => dispatch(receiveDecks(decks)))
+    .catch(err => dispatch(failedRequest(err)));
   });
 
 export const receiveCard = card => ({ type: types.RECEIVE_CARD, data: card });
@@ -39,6 +41,7 @@ export const fetchCard = (deckId) => {
         'Content-type': 'application/json',
         'Content-length': payload.length,
       },
+      credentials: 'same-origin',
       body: payload,
     })
     .then(res => res.json())
@@ -59,6 +62,7 @@ export const savePlay = (play, rating) => {
         'Content-type': 'application/json',
         'Content-length': payload.length,
       },
+      credentials: 'same-origin',
       body: payload,
     })
     .then(() => dispatch({ type: types.FINISH_PLAY, data: rating }))

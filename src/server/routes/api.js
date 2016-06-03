@@ -50,6 +50,7 @@ router.route('/api/play')
       side: req.body.side,
       deckId: req.body.deckId,
       cardId: req.body.cardId,
+      userId: req.user._id,
       rating: req.body.rating,
     })
     .then(play => {
@@ -82,7 +83,6 @@ router.route('/api/review')
         .json(deck);
     });
   });
-
 
 /*
  * Progress
