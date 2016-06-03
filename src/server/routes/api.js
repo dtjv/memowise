@@ -1,9 +1,12 @@
 import { Router } from 'express';
 import { flatMap, shuffle } from 'lodash';
+
+// models
+// TODO: interaction should only be with controllers
 import Decks from '../models/decks';
-import User from '../models/user';
 import Play from '../models/plays';
 
+// controllers
 import users from '../controllers/users';
 import getCard from '../controllers/deck-progress';
 import getProgress from '../controllers/progress-bar.js';
@@ -101,22 +104,9 @@ router.route('/api/progress/:deckId')
 /*
  * Auth
  */
-router.route('/api/signup')
- .post((req, res) => {
-   User.create({
-     name: req.body.name,
-     email: req.body.email,
-     password: req.body.password,
-   }).then(user => {
-     res
-       .status(200)
-       .type('json')
-       .json(user);
-   });
- });
-
-router.route('/api/auth/signin').post(users.signIn);
+router.route('/api/auth/create-account').post(users.createAccount);
+router.route('/api/auth/sign-in').post(users.signIn);
 router.route('/api/auth/verify').get(users.verify);
-router.route('/api/auth/signout').get(users.signOut);
+router.route('/api/auth/sign-out').get(users.signOut);
 
 export default router;

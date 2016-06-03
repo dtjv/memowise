@@ -13,7 +13,7 @@ import * as reducers from './reducers';
 // application components
 import App from './components/App';
 import Splash from './components/Splash';
-import SignUp from './components/SignUp';
+import CreateAccount from './components/CreateAccount';
 import SignIn from './containers/SignIn';
 import SignOut from './containers/SignOut';
 import Profile from './containers/Profile';
@@ -34,9 +34,9 @@ render(
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={Splash} />
-        <Route path="/signup" component={SignUp} />
-        <Route path="/signin" component={SignIn} />
-        <Route path="/signout" component={SignOut} />
+        <Route path="/create-account" component={CreateAccount} />
+        <Route path="/sign-in" component={SignIn} />
+        <Route path="/sign-out" component={SignOut} />
         <Route path="/profile" component={Profile} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/decks/:deckId/study" component={StudyDeck} />
