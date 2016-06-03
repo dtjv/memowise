@@ -1,10 +1,10 @@
 import mongoose from '../db';
 
 const CardsSchema = new mongoose.Schema({
-  question: { text: String }, 
+  question: { text: String },
   answer: { text: String, explanation: String },
   deckId: String,
-  created_at: String
-});
+  userId: String,
+}, { timstamps: true });
 
 export default mongoose.model('Cards', CardsSchema);
