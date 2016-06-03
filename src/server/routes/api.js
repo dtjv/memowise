@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { flatMap, shuffle } from 'lodash';
 import Decks from '../models/decks';
 import User from '../models/user';
+import Play from '../models/plays';
 
 import users from '../controllers/users';
 import getCard from '../controllers/deck-progress';
@@ -41,22 +42,28 @@ router.route('/api/card')
         .type('json')
         .json(card);
     });
+  });
 
-    // // mocked card return
-    // res
-    //   .status(200)
-    //   .type('json')
-    //   .json({
-    //     _id: '123',
-    //     deckId: req.body.deckId,
-    //     question: {
-    //       text: 'What is 3 + 3?',
-    //     },
-    //     answer: {
-    //       text: 'The answer is 6!',
-    //       explanation: 'It is basic addition, bro.',
-    //     },
-    //   });
+router.route('/api/play')
+  .post((req, res) => {
+    Play.create({
+      side: req.body.side,
+      deckId: req.body.deckId,
+      cardId: req.body.cardId,
+      rating: req.body.rating,
+    })
+    .then(play => {
+      res
+        .status(201)
+        .type('json')
+        .json(play);
+    })
+    .catch(error => {
+      res
+        .status(500)
+        .type('json')
+        .json({ error });
+    });
   });
 
 router.route('/api/review')
@@ -64,7 +71,7 @@ router.route('/api/review')
     Decks.find({}).then((decks) => {
       const cards = flatMap(decks, deck => deck.cards);
 
-      // unefined _id indicates review deck
+      // undefined _id indicates review deck
       const deck = {
         name: 'Review',
         cards: shuffle(cards),
