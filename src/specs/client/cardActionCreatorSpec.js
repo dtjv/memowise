@@ -1,14 +1,14 @@
-/* global describe, it, before, beforeEach, after, afterEach */
+/* global describe, xdescribe, it, before, beforeEach, after, afterEach */
+
+import 'isomorphic-fetch';
 import { expect } from 'chai';
+import nock from 'nock';
+import thunk from 'redux-thunk';
+import cfgMockStore from 'redux-mock-store';
 import { receiveCard, fetchCard } from '../../client/actions';
 import * as types from '../../client/constants/actionTypes';
 
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
-import nock from 'nock';
-
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
+const mockStore = cfgMockStore([thunk]);
 
 describe('Card Action Creators', () => {
   describe('receiveCard', () => {
@@ -39,14 +39,12 @@ describe('Card Action Creators', () => {
       const expectedActions = [{ type: types.RECEIVE_CARD, data: card }];
 
       nock('http://localhost:3000')
-        .post('/api/card', {
-          body: { deckId: '123' },
-        })
+        .post('/api/card')
         .reply(200, card);
 
       const store = mockStore({});
 
-      return store.dispatch(fetchCard())
+      return store.dispatch(fetchCard(card.deckId))
         .then(() => {
           expect(store.getActions()).to.deep.equal(expectedActions);
         });

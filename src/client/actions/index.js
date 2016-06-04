@@ -35,7 +35,7 @@ export const fetchCard = (deckId) => {
   const payload = JSON.stringify({ deckId });
 
   return dispatch => (
-    fetch('/api/card', {
+    fetch('http://localhost:3000/api/card', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',

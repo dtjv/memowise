@@ -12,7 +12,7 @@
     "server:dist": "node dist/server/server.js",
     "import": "node bin/deck-import.js",
     "lint": "eslint src --color",
-    "test": "eslint src && mocha --compilers js:babel-register --bail --reporter nyan ./specs/**/*.js"
+    "test": "eslint src && mocha --compilers js:babel-register --bail ./specs/**/*.js"
   },
   "devDependencies": {
     "babel": "^6.5.2",
@@ -33,6 +33,7 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-sass": "^2.3.1",
+    "isomorphic-fetch": "^2.2.1",
     "meow": "^3.7.0",
     "mocha": "^2.4.5",
     "mongodb": "^2.1.20",
@@ -58,7 +59,6 @@
     "lodash": "^4.13.1",
     "moment": "^2.13.0",
     "mongoose": "^4.4.19",
-    "node-fetch": "^1.5.3",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "react": "^15.0.2",

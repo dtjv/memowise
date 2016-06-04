@@ -1,4 +1,4 @@
-/* global describe, it, before, beforeEach, after, afterEach */
+/* global describe, xdescribe, it, before, beforeEach, after, afterEach */
 import { expect } from 'chai';
 import { startPlay, flipCard } from '../../client/actions';
 import * as types from '../../client/constants/actionTypes';
