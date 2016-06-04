@@ -1,7 +1,14 @@
 /* global describe, xdescribe, it, before, beforeEach, after, afterEach */
+
+import 'isomorphic-fetch';
 import { expect } from 'chai';
+import nock from 'nock';
+import thunk from 'redux-thunk';
+import cfgMockStore from 'redux-mock-store';
 import { receiveDecks, selectDeck, fetchDecks } from '../../../client/actions';
 import * as types from '../../../client/constants/actionTypes';
+
+const mockStore = cfgMockStore([thunk]);
 
 describe('Deck Action Creators', () => {
   describe('receiveDecks', () => {
@@ -33,8 +40,28 @@ describe('Deck Action Creators', () => {
   });
 
   describe('fetchDecks', () => {
+    afterEach(() => {
+      nock.cleanAll();
+    });
+
     it('should be a function', () => {
       expect(fetchDecks).to.be.a('function');
+    });
+
+    it('should create RECEIVE_DECKS when fetching decks is done', () => {
+      const decks = [{ _id: '0', deckId: '012' }, { _id: '1', deckId: '123' }];
+      const expectedActions = [{ type: types.RECEIVE_DECKS, data: decks }];
+
+      nock('http://localhost:3000')
+        .get('/api/decks')
+        .reply(200, decks);
+
+      const store = mockStore({});
+
+      return store.dispatch(fetchDecks())
+        .then(() => {
+          expect(store.getActions()).to.deep.equal(expectedActions);
+        });
     });
   });
 });

@@ -1,7 +1,14 @@
 /* global describe, xdescribe, it, before, beforeEach, after, afterEach */
+import 'isomorphic-fetch';
 import { expect } from 'chai';
+import nock from 'nock';
+import thunk from 'redux-thunk';
+import cfgMockStore from 'redux-mock-store';
 import { startPlay, flipCard, savePlay } from '../../../client/actions';
 import * as types from '../../../client/constants/actionTypes';
+import { GREAT } from '../../../client/constants/play';
+
+const mockStore = cfgMockStore([thunk]);
 
 describe('Play Action Creators', () => {
   describe('startPlay', () => {
@@ -33,8 +40,27 @@ describe('Play Action Creators', () => {
   });
 
   describe('savePlay', () => {
+    afterEach(() => {
+      nock.cleanAll();
+    });
+
     it('should be a function', () => {
       expect(savePlay).to.be.a('function');
+    });
+
+    it('should create FINISH_PLAY when fetching decks is done', () => {
+      const expectedActions = [{ type: types.FINISH_PLAY, data: GREAT }];
+
+      nock('http://localhost:3000')
+        .post('/api/play')
+        .reply(200, {});
+
+      const store = mockStore({});
+
+      return store.dispatch(savePlay({}, GREAT))
+        .then(() => {
+          expect(store.getActions()).to.deep.equal(expectedActions);
+        });
     });
   });
 });
