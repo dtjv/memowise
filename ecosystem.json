@@ -22,8 +22,8 @@
     production : {
       user : "root",
       host : "104.131.159.249",
-      ref  : "origin/feat/dist-server-run-bg",
-      repo : "git@github.com:mvargeson/wonky-mongoose.git",
+      ref  : "origin/master",
+      repo : "git@github.com:wonky-mongoose/wonky-mongoose.git",
       path : "/var/www/production",
       "post-deploy" : "npm install && npm run build:dist && pm2 startOrRestart ecosystem.json --env production",
     }
