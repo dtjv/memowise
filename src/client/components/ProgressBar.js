@@ -1,33 +1,40 @@
-import React from 'react';
-import $ from 'jquery';
+import React, { PropTypes } from 'react';
 
-// goes into DeckItem
 class ProgressBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      perc: '0%',
+      progress: '0%',
     };
-    this.getProgress = this.getProgress.bind(this);
-    this.deckId = this.props.id;
+    this.deckId = this.props.deck._id;
+    this.loadProgress = this.loadProgress.bind(this);
   }
 
   componentDidMount() {
-    this.getProgress();
+    this.loadProgress(this.deckId);
   }
 
-  getProgress() {
-    $.getJSON(`/api/progress/${this.deckId}`)
-      .done(perc => {
-        this.setState({ perc: (`${perc * 100} + `) });
-      });
+  loadProgress(deckId) {
+    const payload = JSON.stringify({ deckId });
+    fetch('api/progress', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        'Content-length': payload.length,
+      },
+      credentials: 'same-origin',
+      body: payload,
+    })
+    .then(res => res.json())
+    .then(progress => this.setState({ progress }))
+    .catch(err => console.log('ERR', err));
   }
 
   render() {
     return (
       <div className="progress-bar">
         <div className="progress">
-          <div className="determinate" style={{ width: this.state.perc }}>
+          <div className="determinate" style={{ width: this.state.progress }}>
           </div>
         </div>
       </div>
@@ -36,7 +43,8 @@ class ProgressBar extends React.Component {
 }
 
 ProgressBar.propTypes = {
-  id: React.PropTypes.string.isRequired,
+  deck: PropTypes.object.isRequired,
 };
 
 export default ProgressBar;
+

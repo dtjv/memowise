@@ -39,7 +39,7 @@ router.route('/api/decks/:deckId')
 
 router.route('/api/card')
   .post((req, res) => {
-    getCard(req.body.deckId).then(card => {
+    getCard(req.body.deckId, req.user._id).then(card => {
       res
         .status(200)
         .type('json')
@@ -90,9 +90,9 @@ router.route('/api/review')
 /*
  * Progress
  */
-router.route('/api/progress/:deckId')
-  .get((req, res) => {
-    getProgress(req.params.deckId).then(percentage => {
+router.route('/api/progress')
+  .post((req, res) => {
+    getProgress(req.body.deckId, req.user._id).then(percentage => {
       res
         .status(200)
         .type('json')
