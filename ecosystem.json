@@ -7,7 +7,7 @@
       "PORT": 80
     }
   }],
-    "deploy": {
+  "deploy": {
     "production": {
       "user": "root",
       "host": "104.131.159.249",
