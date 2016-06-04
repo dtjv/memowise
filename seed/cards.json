@@ -1,0 +1,72 @@
+[
+  {
+    "deckId": "57505f4f8f59a3914e9678fd",
+    "question": {
+      "text": "What is another name for O(n)?"
+    },
+    "answer": {
+      "text": "linear",
+      "explanation": "Every item in the collection will be processed."
+    }
+  },
+  {
+    "deckId": "57505f4f8f59a3914e9678fe",
+    "question": {
+      "text": "What is the difference between `var` and `const`?"
+    },
+    "answer": {
+      "text": "A variable declared using `const` must be assigned a value at declaration and cannot be changed.",
+      "explanation": "`const` is an ES6 feature"
+    }
+  },
+  {
+    "deckId": "57505f4f8f59a3914e9678ff",
+    "question": {
+      "text": "How do you select a word?"
+    },
+    "answer": {
+      "text": "cmd + d",
+      "explanation": "Read the [docs](https://www.sublimetext.com/docs/3/)"
+    }
+  },
+  {
+    "deckId": "57505f4f8f59a3914e967900",
+    "question": {
+      "text": "What is 3 + 3?"
+    },
+    "answer": {
+      "text": "6",
+      "explanation": "This is basic addition, bro!"
+    }
+  },
+  {
+    "deckId": "57505f4f8f59a3914e967900",
+    "question": {
+      "text": "What is 3 - 3?"
+    },
+    "answer": {
+      "text": "0",
+      "explanation": "Subtraction"
+    }
+  },
+  {
+    "deckId": "57505f4f8f59a3914e967900",
+    "question": {
+      "text": "What is 3 / 3?"
+    },
+    "answer": {
+      "text": "1",
+      "explanation": "Division"
+    }
+  },
+  {
+    "deckId": "57505f4f8f59a3914e967900",
+    "question": {
+      "text": "What is 3 * 3?"
+    },
+    "answer": {
+      "text": "1",
+      "explanation": "Multiplication"
+    }
+  }
+]

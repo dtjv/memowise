@@ -1,0 +1,11 @@
+.button {
+  &-close {
+    text-align: right;
+    padding-right: 30px;
+    padding-top: 30px;
+
+    i {
+      cursor: pointer;
+    }
+  }
+}

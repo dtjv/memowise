@@ -14,13 +14,57 @@
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
+    1. [Load Sample Data](#load-sample-data)
     1. [Tasks](#tasks)
 1. [Team](#team)
 1. [Contributing](#contributing)
 
 ## Usage
 
-> Some usage instructions
+The following commands are found in `package.json`.
+
+### Commands
+
+#### clean
+
+```sh
+$ npm run clean
+```
+Removes the folder `dev/`.
+
+> To remove `dist/`, use: `npm run clean -- --dist`
+
+#### watch
+
+```sh
+$ npm run watch
+```
+Watches all source files and rebuilds on a change event.
+
+#### build
+
+```sh
+$ npm run build
+```
+Builds the entire application to `dev/`.
+
+> Use `npm run build:dist` to build to `dist/`.
+
+#### start
+
+```sh
+$ npm start
+```
+Starts the Express server in `dev/` using `nodemon`.
+
+#### server
+
+```sh
+$ npm run server:dist
+```
+Starts the Express server.
+
+> Use `npm run build:dist` to build to `dist/`.
 
 ## Requirements
 
@@ -37,15 +81,22 @@
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
 npm install
-bower install
+```
+
+### Load Sample Data
+
+From within the root directory:
+
+```sh
+npm run import documentation/decks/math.md
 ```
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+[![Stories in Ready](https://badge.waffle.io/wonky-mongoose/wonky-mongoose.svg?label=ready&title=Ready)](http://waffle.io/wonky-mongoose/wonky-mongoose)
 
+View the project roadmap [here](https://waffle.io/wonky-mongoose/wonky-mongoose)
 
 ## Contributing
 

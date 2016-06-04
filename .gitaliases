@@ -1,0 +1,36 @@
+[alias]
+  # list all aliases
+  la = "!git config -l | grep alias | cut -c 7-"
+  # edit aliases
+  eda = "!git | subl .gitaliases"
+  wb = branch -v
+
+  # stash aliases
+  sl = stash list
+  sa = stash apply
+  ss = stash save
+
+  # commit only added changes
+  cm = commit -m 
+  # add all changes and commit
+  cma = !git add -A && git commit -m 
+  ## commit work in progress without creating a commit message
+  # commit all changes and untracked files
+  save = !git add -A && git commit -m 'SAVEPOINT'
+  # commit only tracked changes
+  wip = commit -am "WIP" 
+
+  # reset previous commit, but keep the changes
+  undo = reset HEAD~1 --mixed
+  # modify previous commit message after a few changes
+  amend = !git add -A && git commit --amend -m
+
+
+  # checkout an existing branch 
+  co = checkout
+  # checkout a new branch
+  cob = checkout -b
+  # pull from dev branch
+  rb = pull --rebase upstream develop
+  # push to current branch
+  po = push origin HEAD 

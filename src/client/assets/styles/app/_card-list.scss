@@ -1,0 +1,21 @@
+.card-list {
+  padding-bottom: 60px;
+
+  @media #{$medium-and-up} {
+    .card-columns {
+      column-count: 3;
+      -webkit-column-count: 3;
+      column-gap: 1.25rem;
+      -webkit-column-gap: 1.25rem;
+
+      .card-item {
+        display: inline-block;
+        width: 100%;
+
+        .card-title {
+          padding-bottom: 30px;
+        }
+      }
+    }
+  }
+}
