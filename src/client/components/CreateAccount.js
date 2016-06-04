@@ -1,6 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
+import { signIn } from '../actions';
 import $ from 'jquery';
+import Auth from '../services/AuthService';
+
+const mapStateToProps = props => (props);
+const mapDispatchToProps = (dispatch) => ({
+  onSignIn: user => {
+    dispatch(signIn(user));
+  },
+});
 
 class CreateAccount extends React.Component {
   constructor(props) {
@@ -37,9 +47,14 @@ class CreateAccount extends React.Component {
       email: this.state.email,
       password: this.state.password,
     };
-    $.post('/api/auth/create-account', newUser, (data, status) => status)
+    $.post('/api/auth/create-account', newUser, () => {
+      Auth.signIn(this.state.email, this.state.password)
+        .then(user => {
+          this.props.onSignIn(user);
+          browserHistory.push('/dashboard');
+        });
+    })
     .fail((err, status) => status);
-    browserHistory.push('/dashboard');
   }
 
   render() {
@@ -100,4 +115,8 @@ class CreateAccount extends React.Component {
   }
 }
 
-export default CreateAccount;
+CreateAccount.propTypes = {
+  onSignIn: React.PropTypes.func,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateAccount);
