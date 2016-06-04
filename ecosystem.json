@@ -1,31 +1,22 @@
 {
-  /**
-   * Application configuration section
-   * http://pm2.keymetrics.io/docs/usage/application-declaration/
-   */
-  apps : [
-    {
-      name      : "server",
-      script    : "./dist/server/server.js",
-      env_production : {
-        NODE_ENV: "production",
-        PORT: 80,
-      }
-    },
-  ],
-
-  /**
-   * Deployment section
-   * http://pm2.keymetrics.io/docs/usage/deployment/
-   */
-  deploy : {
-    production : {
-      user : "root",
-      host : "104.131.159.249",
-      ref  : "origin/master",
-      repo : "git@github.com:wonky-mongoose/wonky-mongoose.git",
-      path : "/var/www/production",
-      "post-deploy" : "npm install && npm run build:dist && pm2 startOrRestart ecosystem.json --env production",
-    }
-  }
+  "apps": [
+    {
+      "name": "server",
+      "script": "./dist/server/server.js",
+      "env_production": {
+        "NODE_ENV": "production",
+        "PORT": 80
+      }
+    }
+  ],
+  "deploy": {
+    "production": {
+      "user": "root",
+      "host": "104.131.159.249",
+      "ref": "origin/master",
+      "repo": "git@github.com:wonky-mongoose/wonky-mongoose.git",
+      "path": "/var/www/production",
+      "post-deploy": "npm install && npm run build:dist && pm2 startOrRestart ecosystem.json --env production"
+    }
+  }
 }
