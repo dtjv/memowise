@@ -1,6 +1,6 @@
 {
-  "name": "wonky",
-  "version": "0.0.1",
+  "name": "memowise",
+  "version": "0.3.0",
   "description": "",
   "scripts": {
     "clean": "gulp clean",
@@ -9,7 +9,8 @@
     "build:dist": "gulp --dist",
     "seed": "babel ./seed/seed.js | node",
     "start": "nodemon dev/server/server.js",
-    "server:dist": "node dist/server/server.js",
+    "serve": "forever start forever/development.json",
+    "serve:prod": "forever start forever/production.json",
     "import": "node bin/deck-import.js",
     "lint": "eslint src --color",
     "test": "eslint src && mocha --compilers js:babel-register --bail --reporter nyan ./specs/**/*.js"
