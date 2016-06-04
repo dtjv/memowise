@@ -7,7 +7,7 @@ import Decks from '../models/decks';
 import Play from '../models/plays';
 
 // controllers
-import users from '../controllers/users';
+import auth from '../controllers/auth';
 import getCard from '../controllers/deck-progress';
 import getProgress from '../controllers/progress-bar.js';
 
@@ -104,9 +104,9 @@ router.route('/api/progress')
 /*
  * Auth
  */
-router.route('/api/auth/create-account').post(users.createAccount);
-router.route('/api/auth/sign-in').post(users.signIn);
-router.route('/api/auth/verify').get(users.verify);
-router.route('/api/auth/sign-out').get(users.signOut);
+router.route('/api/auth/create-account').post(auth.createAccount);
+router.route('/api/auth/sign-in').post(auth.signIn);
+router.route('/api/auth/verify').get(auth.verify);
+router.route('/api/auth/sign-out').get(auth.signOut);
 
 export default router;

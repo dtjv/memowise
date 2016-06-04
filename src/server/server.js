@@ -7,7 +7,7 @@ import session from 'express-session';
 import passport from 'passport';
 const MongoStore = require('connect-mongo')(session);
 import mongoose from './db';
-import auth from './auth';
+import setupPassport from './setupPassport';
 import homeRoute from './routes/home';
 import apiRoute from './routes/api';
 
@@ -15,7 +15,7 @@ import apiRoute from './routes/api';
 const host = process.env.HOST || 'localhost';
 const port = process.env.PORT || 3000;
 
-auth();
+setupPassport();
 
 express()
   .use(cors({

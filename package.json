@@ -12,7 +12,7 @@
     "server:dist": "node dist/server/server.js",
     "import": "node bin/deck-import.js",
     "lint": "eslint src --color",
-    "test": "eslint src && mocha --compilers js:babel-register --bail --reporter nyan ./src/specs/**/*.js"
+    "test": "eslint src && mocha --compilers js:babel-register --bail --reporter nyan ./specs/**/*.js"
   },
   "devDependencies": {
     "babel": "^6.5.2",
