@@ -9,8 +9,7 @@
     "build:dist": "gulp --dist",
     "seed": "babel ./seed/seed.js | node",
     "start": "nodemon dev/server/server.js",
-    "serve": "forever start forever/development.json",
-    "serve:prod": "forever start forever/production.json",
+    "deploy:prod": "pm2 deploy ecosystem.json production",
     "import": "node bin/deck-import.js",
     "lint": "eslint src --color",
     "test": "eslint src && mocha --compilers js:babel-register --bail --reporter nyan ./specs/**/*.js"
