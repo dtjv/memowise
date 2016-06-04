@@ -1,7 +1,7 @@
 /* global describe, it, before, beforeEach, after, afterEach */
 import { expect } from 'chai';
-import { deck } from '../../../client/reducers';
-import { SELECT_DECK } from '../../../client/constants/actionTypes';
+import { deck } from '../../../src/client/reducers';
+import { SELECT_DECK } from '../../../src/client/constants/actionTypes';
 
 describe('Deck Reducer', () => {
   describe('SELECT_DECK', () => {

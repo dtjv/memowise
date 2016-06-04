@@ -5,8 +5,8 @@ import { expect } from 'chai';
 import nock from 'nock';
 import thunk from 'redux-thunk';
 import cfgMockStore from 'redux-mock-store';
-import { receiveDecks, selectDeck, fetchDecks } from '../../../client/actions';
-import * as types from '../../../client/constants/actionTypes';
+import { receiveDecks, selectDeck, fetchDecks } from '../../../src/client/actions';
+import * as types from '../../../src/client/constants/actionTypes';
 
 const mockStore = cfgMockStore([thunk]);
 

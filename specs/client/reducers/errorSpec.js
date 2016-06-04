@@ -1,7 +1,7 @@
 /* global describe, xdescribe, it, before, beforeEach, after, afterEach */
 import { expect } from 'chai';
-import { error } from '../../../client/reducers';
-import { ERR_FAILED_REQUEST } from '../../../client/constants/actionTypes';
+import { error } from '../../../src/client/reducers';
+import { ERR_FAILED_REQUEST } from '../../../src/client/constants/actionTypes';
 
 describe('Error Reducer', () => {
   describe('ERR_FAILED_REQUEST', () => {

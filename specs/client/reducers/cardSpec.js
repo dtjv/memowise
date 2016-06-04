@@ -1,7 +1,7 @@
 /* global describe, xdescribe, it, before, beforeEach, after, afterEach */
 import { expect } from 'chai';
-import { card } from '../../../client/reducers';
-import { RECEIVE_CARD } from '../../../client/constants/actionTypes';
+import { card } from '../../../src/client/reducers';
+import { RECEIVE_CARD } from '../../../src/client/constants/actionTypes';
 
 describe('Card Reducer', () => {
   describe('RECEIVE_CARD', () => {

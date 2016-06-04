@@ -1,7 +1,7 @@
 /* global describe, xdescribe, it, before, beforeEach, after, afterEach */
 import { expect } from 'chai';
-import { user } from '../../../client/reducers';
-import { SIGN_IN, SIGN_OUT } from '../../../client/constants/actionTypes';
+import { user } from '../../../src/client/reducers';
+import { SIGN_IN, SIGN_OUT } from '../../../src/client/constants/actionTypes';
 
 describe('User Reducer', () => {
   it('should be a function', () => {

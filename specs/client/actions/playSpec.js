@@ -4,9 +4,9 @@ import { expect } from 'chai';
 import nock from 'nock';
 import thunk from 'redux-thunk';
 import cfgMockStore from 'redux-mock-store';
-import { startPlay, flipCard, savePlay } from '../../../client/actions';
-import * as types from '../../../client/constants/actionTypes';
-import { GREAT } from '../../../client/constants/play';
+import { startPlay, flipCard, savePlay } from '../../../src/client/actions';
+import * as types from '../../../src/client/constants/actionTypes';
+import { GREAT } from '../../../src/client/constants/play';
 
 const mockStore = cfgMockStore([thunk]);
 
