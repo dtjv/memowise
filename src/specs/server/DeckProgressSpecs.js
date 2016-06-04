@@ -13,7 +13,7 @@ const createCards = () => {
     allCards.push({
       question: { text: dummy },
       answer: { text: dummy, explanation: ' ' },
-      deckId: '0',
+      deckId: '-1',
     });
   }
   return allCards;
@@ -24,7 +24,7 @@ const createPlays = (cards, n) => {
   for (let i = 0; i < n; i++) {
     allPlays.push({
       rating: '0',
-      deckId: '0',
+      deckId: '-1',
       cardId: cards[i]._id,
       userId: '0',
     });
@@ -32,23 +32,23 @@ const createPlays = (cards, n) => {
   return allPlays;
 };
 
-const calcPerc = (deck, n) => n / deck.length;
+const calcPerc = (deck, n) => `${(100 * n) / deck.length}%`;
 let realPerc = 0;
 
 // seed data by running npm run seed before testing deck-progress
-xdescribe('deck-progress', function () {
-  this.timeout(5000);
+describe('deck-progress', function () {
+  // this.timeout(5000);
 
   before(function (done) {
     const allCards = createCards();
     const n = 5;
     let allPlays = [];
-    Cards.remove({})
+    Cards.remove({ deckId: '-1' })
       .then(() => (
         Cards.create(allCards)
       ))
       .then(cards => (
-        Plays.remove({})
+        Plays.remove({ deckId: '-1' })
           .then(() => {
             allPlays = createPlays(cards, n);
             realPerc = calcPerc(cards, n);
@@ -67,8 +67,8 @@ xdescribe('deck-progress', function () {
     });
 
     it('should return a random card given a deck id', done => {
-      getCard('0', '0').then(function (card) {
-        expect(card.deckId).to.equal('0');
+      getCard('-1', '0').then(function (card) {
+        expect(card.deckId).to.equal('-1');
         expect(card.question).to.not.equal(undefined);
         done();
       });
@@ -83,7 +83,7 @@ xdescribe('deck-progress', function () {
     });
 
     it('should return the percentage of distinct cards seen', done => {
-      getProgress('0', '0').then(function (perc) {
+      getProgress('-1', '0').then(function (perc) {
         expect(perc).to.equal(realPerc);
         done();
       });
