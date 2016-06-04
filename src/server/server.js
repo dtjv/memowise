@@ -32,7 +32,7 @@ express()
   .use(session({
     secret: 'wonky',
     resave: false,
-    saveUnitialized: false,
+    saveUninitialized: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   }))
   .use(passport.initialize())

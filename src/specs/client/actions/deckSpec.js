@@ -1,7 +1,7 @@
 /* global describe, xdescribe, it, before, beforeEach, after, afterEach */
 import { expect } from 'chai';
-import { receiveDecks, selectDeck } from '../../client/actions';
-import * as types from '../../client/constants/actionTypes';
+import { receiveDecks, selectDeck, fetchDecks } from '../../../client/actions';
+import * as types from '../../../client/constants/actionTypes';
 
 describe('Deck Action Creators', () => {
   describe('receiveDecks', () => {
@@ -29,6 +29,12 @@ describe('Deck Action Creators', () => {
       const expected = { type: types.SELECT_DECK, data: deck };
 
       expect(result).to.deep.equal(expected);
+    });
+  });
+
+  describe('fetchDecks', () => {
+    it('should be a function', () => {
+      expect(fetchDecks).to.be.a('function');
     });
   });
 });

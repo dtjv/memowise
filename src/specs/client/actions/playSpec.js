@@ -1,9 +1,9 @@
 /* global describe, xdescribe, it, before, beforeEach, after, afterEach */
 import { expect } from 'chai';
-import { startPlay, flipCard } from '../../client/actions';
-import * as types from '../../client/constants/actionTypes';
+import { startPlay, flipCard, savePlay } from '../../../client/actions';
+import * as types from '../../../client/constants/actionTypes';
 
-describe('Deck Action Creators', () => {
+describe('Play Action Creators', () => {
   describe('startPlay', () => {
     it('should be a function', () => {
       expect(startPlay).to.be.a('function');
@@ -29,6 +29,12 @@ describe('Deck Action Creators', () => {
       const expected = { type: types.FLIP_CARD };
 
       expect(result).to.deep.equal(expected);
+    });
+  });
+
+  describe('savePlay', () => {
+    it('should be a function', () => {
+      expect(savePlay).to.be.a('function');
     });
   });
 });

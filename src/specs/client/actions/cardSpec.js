@@ -5,8 +5,8 @@ import { expect } from 'chai';
 import nock from 'nock';
 import thunk from 'redux-thunk';
 import cfgMockStore from 'redux-mock-store';
-import { receiveCard, fetchCard } from '../../client/actions';
-import * as types from '../../client/constants/actionTypes';
+import { receiveCard, fetchCard } from '../../../client/actions';
+import * as types from '../../../client/constants/actionTypes';
 
 const mockStore = cfgMockStore([thunk]);
 
@@ -44,7 +44,7 @@ describe('Card Action Creators', () => {
 
       const store = mockStore({});
 
-      return store.dispatch(fetchCard(card.deckId))
+      return store.dispatch(fetchCard())
         .then(() => {
           expect(store.getActions()).to.deep.equal(expectedActions);
         });
