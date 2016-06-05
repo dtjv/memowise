@@ -24,22 +24,25 @@ export default () => {
   (email, password, done) => {
     User.findOne({
       email,
-    }, (err, user) => {
-      if (err) {
-        return done(err);
-      }
-      if (!user) {
-        return done(null, false, {
-          message: 'unknown user',
+    })
+    .then(function(user) {
+      if (user) {
+        user.authenticate(password, function(err, isMatch) {
+          if ( err || !isMatch) {
+            return done(null, false, {
+              message: 'invalid password',
+            })
+          } else {
+            return done(null, { _id: user[oid], name: user.name, email: user.email });
+          }
         });
-      }
-      if (!user.authenticate(password)) {
-        return done(null, false, {
-          message: 'invalid password',
-        });
-      }
-
-      return done(null, { _id: user[oid], name: user.name, email: user.email });
-    });
-  }));
+    } else {
+      return done(null, false, { message: 'unknown user' });
+    }
+  }).catch(function(err) {
+      return done(err);
+  }); 
+  })
+  );
 };
+
