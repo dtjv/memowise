@@ -1,6 +1,6 @@
 [
   {
-    "deckId": "57505f4f8f59a3914e9678fd",
+    "deckId": "575320619f4c74929101655f",
     "question": {
       "text": "What is another name for O(n)?"
     },
@@ -10,7 +10,7 @@
     }
   },
   {
-    "deckId": "57505f4f8f59a3914e9678fe",
+    "deckId": "575320619f4c749291016561",
     "question": {
       "text": "What is the difference between `var` and `const`?"
     },
@@ -20,7 +20,7 @@
     }
   },
   {
-    "deckId": "57505f4f8f59a3914e9678ff",
+    "deckId": "575320619f4c749291016562",
     "question": {
       "text": "How do you select a word?"
     },
@@ -30,7 +30,7 @@
     }
   },
   {
-    "deckId": "57505f4f8f59a3914e967900",
+    "deckId": "575320619f4c749291016560",
     "question": {
       "text": "What is 3 + 3?"
     },
@@ -40,7 +40,7 @@
     }
   },
   {
-    "deckId": "57505f4f8f59a3914e967900",
+    "deckId": "575320619f4c749291016560",
     "question": {
       "text": "What is 3 - 3?"
     },
@@ -50,7 +50,7 @@
     }
   },
   {
-    "deckId": "57505f4f8f59a3914e967900",
+    "deckId": "575320619f4c749291016560",
     "question": {
       "text": "What is 3 / 3?"
     },
@@ -60,7 +60,7 @@
     }
   },
   {
-    "deckId": "57505f4f8f59a3914e967900",
+    "deckId": "575320619f4c749291016560",
     "question": {
       "text": "What is 3 * 3?"
     },
