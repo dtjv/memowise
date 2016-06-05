@@ -29,15 +29,17 @@ We're using [Redux](http://redux.js.org/) to store our application state. Below 
   // the current user logged in
   "user": {
     "_id": "777",
-    "name": "Joe"
+    "name": "Joe",
+    "email": "joe@example.com",
+    "password": "hashed$password"
   },
   // the stats associated with studying a card 
   "play": {
-    "side": "0",    // "0" - show question, "1" - show answer
+    "side": 0,    // 0 - show question, 1 - show answer
     "deckId":"123",
     "cardId": "987",
     "userId": "777",
-    "rating": "-1"  // "1" - user did poorly, "0" user did ok, "-1" user did great
+    "rating": 1  // -1 - user did poorly, 0 user did ok, 1 user did great
   }
 }
 ```
