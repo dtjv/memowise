@@ -13,7 +13,7 @@
     "deploy:prod": "pm2 deploy ecosystem.json production",
     "import": "node bin/deck-import.js",
     "lint": "eslint src --color",
-    "mocha": "mocha --compilers js:babel-register --bail --recursive ./specs",
+    "mocha": "mocha --compilers js:babel-register --bail --recursive ./specs/client ./specs/server",
     "test": "npm run lint && nyc --require babel-core/register npm run mocha",
     "coverage": "nyc report --reporter=html && open ./coverage/index.html"
   },
