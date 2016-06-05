@@ -30,7 +30,7 @@ import webpack from 'webpack-stream';
  *   gulp --dist Builds code to `./dist`.
  *   gulp watch  Builds code to `./dev`. Watch and recompiles source on change.
  */
-const debug = process.env.NODE_ENV !== "production";
+const debug = process.env.NODE_ENV !== 'production';
 const sourcePath = './src';
 const targetPath = meow().flags.dist ? './dist' : './dev';
 
@@ -51,7 +51,7 @@ gulp.task('webpack', () =>
   gulp
     .src(`${sourcePath}/client/app.js`)
     .pipe(webpack({
-      devtool: debug ? "inline-sourcemap" : null,
+      devtool: debug ? 'inline-sourcemap' : null,
       entry: join(__dirname, `${sourcePath}/client/app.js`),
       output: {
         path: join(__dirname, `${targetPath}/client`),
@@ -61,14 +61,18 @@ gulp.task('webpack', () =>
         loaders: [{
           test: /\.js$/,
           exclude: /(node_modules|bower_components)/,
-          loader: 'babel'
+          loader: 'babel',
+        },
+        {
+          test: /\.json$/,
+          loader: 'json',
         }],
       },
       plugins: debug ? [] : [
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
-      ]
+      ],
     }))
     .pipe(gulp.dest(`${targetPath}/client`)));
 

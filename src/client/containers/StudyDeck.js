@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
+import ReactMarkdown from 'react-markdown';
 import { GREAT, OKAY, BAD } from '../constants/play';
 import { fetchCard, startPlay, flipCard, savePlay } from '../actions';
 
@@ -41,9 +42,7 @@ class StudyDeck extends React.Component {
         <div className="button-close">
           <i className="material-icons" onClick={() => browserHistory.push('/dashboard')}>close</i>
         </div>
-        <h4>
-          {(question && question.text) || null}
-        </h4>
+        <ReactMarkdown source={(question && question.text) || ''} />
         <br />
         <br />
         <br />
@@ -65,9 +64,10 @@ class StudyDeck extends React.Component {
           <i className="material-icons" onClick={() => browserHistory.push('/dashboard')}>close</i>
         </div>
         <h4>{answer.text || null}</h4>
+        <ReactMarkdown source={(answer && answer.text) || ''} />
         <br />
         <p><strong>Explanation:</strong></p>
-        <p>{answer.explanation || null}</p>
+        <ReactMarkdown source={(answer && answer.explanation) || ''} />
         <br />
         <p>How well did you do?</p>
         <div>
