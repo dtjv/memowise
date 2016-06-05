@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { flatMap, shuffle } from 'lodash';
 
 // models
 // TODO: interaction should only be with controllers
@@ -67,23 +66,6 @@ router.route('/api/play')
         .status(500)
         .type('json')
         .json({ error });
-    });
-  });
-
-router.route('/api/review')
-  .get((req, res) => {
-    Decks.find({}).then((decks) => {
-      const cards = flatMap(decks, deck => deck.cards);
-
-      // undefined _id indicates review deck
-      const deck = {
-        name: 'Review',
-        cards: shuffle(cards),
-      };
-      res
-        .status(200)
-        .type('json')
-        .json(deck);
     });
   });
 
