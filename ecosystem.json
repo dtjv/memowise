@@ -1,0 +1,20 @@
+{
+  "apps": [{
+    "name": "server",
+    "script": "./dist/server/server.js",
+    "env_production": {
+      "NODE_ENV": "production",
+      "PORT": 80
+    }
+  }],
+  "deploy": {
+    "production": {
+      "user": "root",
+      "host": "104.131.159.249",
+      "ref": "origin/master",
+      "repo": "git@github.com:wonky-mongoose/wonky-mongoose.git",
+      "path": "/var/www/production",
+      "post-deploy": "npm install && npm run build:dist && pm2 startOrRestart ecosystem.json --env production"
+    }
+  }
+}
