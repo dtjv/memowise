@@ -1,16 +1,71 @@
-// setup up fixtures for test (seed db with fake data)
-// allows us to tear down db each time during testing
-// for atomic integration tests testing
+const mongoose = require('mongoose');
 
-// import db from '../src/server/db';
-import Deck  from '../src/server/models/decks';
-import Card from '../src/server/models/cards';
-// import Play from '../src/server/models/plays';
-// import User from '../src/server/models/user';
+const cfg = {
+  db: {
+    host: 'localhost',
+    port: 27017,
+    dbName: 'wonky',
+  },
+};
+
+mongoose.connect(`mongodb://${cfg.db.host}:${cfg.db.port}/${cfg.db.dbName}`);
+
+const GREAT = 1;
+const OKAY = 0;
+const BAD = -1;
+
+const DeckSchema = new mongoose.Schema(
+  { name: String },
+  { timestamps: true }
+);
+
+const UserSchema = new mongoose.Schema(
+  {
+    name: String,
+    email: String,
+    password: String,
+  },
+  { timestamps: true }
+);
+
+const CardSchema = new mongoose.Schema(
+  {
+    question: {
+      text: String,
+    },
+    answer: {
+      text: String,
+      explanation: String,
+    },
+    deckId: String,
+    userId: String,
+  },
+  { timestamps: true }
+);
+
+const PlaySchema = new mongoose.Schema(
+  {
+    rating: String,
+    cardId: String,
+    deckId: String,
+    userId: String,
+  },
+  { timestamps: true }
+);
+
+const Deck = mongoose.model('Deck', DeckSchema);
+const User = mongoose.model('User', UserSchema);
+const Card = mongoose.model('Card', CardSchema);
+const Play = mongoose.model('Play', PlaySchema);
 
 const decksFixture = [
   { name: 'Deck 1' },
   { name: 'Deck 2' },
+];
+
+const usersFixture = [
+  { name: 'Test User 1', email: 'testuser1@test.com', password: 'password' },
+  { name: 'Test User 2', email: 'testuser2@test.com', password: 'password' },
 ];
 
 const cardsFixture = [
@@ -36,50 +91,66 @@ const cardsFixture = [
   },
 ];
 
-// const usersFixture = [
-//   { name: 'Tester 1', email: 'tester1@example.com', password: 'password' },
-//   { name: 'Tester 2', email: 'tester2@example.com', password: 'password' },
-// ];
+const playsFixture = [
+  { userId: '', deckId: '', cardId: '', rating: GREAT },
+  { userId: '', deckId: '', cardId: '', rating: OKAY },
+  { userId: '', deckId: '', cardId: '', rating: BAD },
+];
 
-// const playsFixture = [
-//   { side: 0, deckId: '', cardId: '', userId: '', rating: null },
-//   { side: 0, deckId: '', cardId: '', userId: '', rating: null },
-//   { side: 0, deckId: '', cardId: '', userId: '', rating: null },
-// ];
-
-export const setDeckFK = (deckId) => (
-  cardsFixture.map(cardFixture => (
-    { ...cardFixture, deckId }
+const linkCardsToDeck = (deckId) => (
+  cardsFixture.map(card => (
+    { ...card, deckId }
   ))
 );
 
-export const loadDecks = () => (
-  Deck.remove({})
-    .then(() => (
-      Deck.create(decksFixture)
-    ))
+const insertCards = (decks) => (
+  Card.insertMany(decks.reduce((memo, deck) => (
+    [...memo, ...linkCardsToDeck(deck._id)]
+  ), []))
 );
 
-export const loadCards = () => (
-  Card.remove({})
-    .then(() => (
-      Deck.find({})
-        .then(decks => {
-          let cards = [];
-          decks.forEach(deck => {
-            cards = [...cards, ...setDeckFK(deck._id)];
-          });
-          console.log(cards);
-          return Card.create(cards);
-        })
-    ))
+const linkPlaysToAll = (user, card) => (
+  playsFixture.map(play => (
+    { ...play, userId: user._id, deckId: card.deckId, cardId: card._id }
+  ))
 );
 
-// loads decks!
-// export const load = () => (
-//   Deck.remove({})
-//     .then(() => (
-//       Deck.create(decksFixture)
-//     ))
-// );
+const linkPlays = (users, card) => (
+  users.reduce((memo, user) => (
+    [...memo, ...linkPlaysToAll(user, card)]
+  ), [])
+);
 
+const insertPlays = (users, cards) => (
+  Play.insertMany(cards.reduce((memo, card) => (
+    [...memo, ...linkPlays(users, card)]
+  ), []))
+);
+
+const load = () => (
+  Promise
+    .all([
+      User.remove(),
+      Deck.remove(),
+      Card.remove(),
+      Play.remove(),
+    ])
+    .then(() => (
+      Promise.all([
+        User.insertMany(usersFixture),
+        Deck.insertMany(decksFixture),
+      ])
+      .then(data => {
+        const [users, decks] = data;
+        return insertCards(decks)
+          .then(cards => insertPlays(users, cards));
+      })
+      .catch(error => error)
+    ))
+    .catch(error => error)
+);
+
+load().then(() => {
+  mongoose.disconnect();
+  return;
+});

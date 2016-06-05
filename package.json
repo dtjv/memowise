@@ -8,7 +8,7 @@
     "build": "gulp",
     "build:dist": "gulp --dist",
     "seed": "babel ./seed/seed.js | node",
-    "mini": "mocha --compilers js:babel-register --bail ./specs/mini.js",
+    "loadFixtures": "babel ./specs/fixtures.js | node",
     "start": "nodemon dev/server/server.js",
     "deploy:prod": "pm2 deploy ecosystem.json production",
     "import": "node bin/deck-import.js",
