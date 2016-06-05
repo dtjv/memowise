@@ -27,59 +27,59 @@ class StudyDeck extends React.Component {
   showCardFront() {
     const { card: { question } } = this.props;
     return (
-      <section>
-        <div className="button-close">
+      <div className="flashcard flashcard-front">
+        <div className="flashcard-close">
           <i className="material-icons" onClick={() => browserHistory.push('/dashboard')}>close</i>
         </div>
-        <ReactMarkdown source={(question && question.text) || ''} />
-        <br />
-        <br />
-        <br />
-        <div>
+        <div className="flashcard-title">
+          <ReactMarkdown source={(question && question.text) || ''} />
+        </div>
+        <div className="flashcard-buttons">
           <button
             onClick={this.props.flipCard}
             className="btn btn-large blue lighten-2"
-          > Flip </button>
+          > Flip Card </button>
         </div>
-      </section>
+      </div>
     );
   }
 
   showCardBack() {
     const { card: { answer }, play } = this.props;
     return (
-      <section>
-        <div className="button-close">
+      <div className="flashcard flashcard-back">
+        <div className="flashcard-close">
           <i className="material-icons" onClick={() => browserHistory.push('/dashboard')}>close</i>
         </div>
-        <h4>{answer.text || null}</h4>
-        <ReactMarkdown source={(answer && answer.text) || ''} />
-        <br />
+        <div className="flashcard-title">
+          <ReactMarkdown source={(answer && answer.text) || ''} />
+        </div>
         <p><strong>Explanation:</strong></p>
         <ReactMarkdown source={(answer && answer.explanation) || ''} />
-        <br />
-        <p>How well did you do?</p>
-        <div>
-          <button
-            onClick={() => this.handlePlay(play, BAD)}
-            className="btn btn-large blue lighten-2"
-          >
-            <i className="material-icons">thumb_down</i>
-          </button>
-          <button
-            onClick={() => this.handlePlay(play, OKAY)}
-            className="btn btn-large blue lighten-2"
-          >
-            <i className="material-icons">help</i>
-          </button>
-          <button
-            onClick={() => this.handlePlay(play, GREAT)}
-            className="btn btn-large blue lighten-2"
-          >
-            <i className="material-icons">thumb_up</i>
-          </button>
+        <div className="flashcard-buttons">
+          <p>How well did you do?</p>
+          <div>
+            <button
+              onClick={() => this.handlePlay(play, BAD)}
+              className="btn btn-large blue lighten-2"
+            >
+              <i className="material-icons">thumb_down</i>
+            </button>
+            <button
+              onClick={() => this.handlePlay(play, OKAY)}
+              className="btn btn-large blue lighten-2"
+            >
+              <i className="material-icons">help</i>
+            </button>
+            <button
+              onClick={() => this.handlePlay(play, GREAT)}
+              className="btn btn-large blue lighten-2"
+            >
+              <i className="material-icons">thumb_up</i>
+            </button>
+          </div>
         </div>
-      </section>
+      </div>
     );
   }
 
@@ -88,7 +88,7 @@ class StudyDeck extends React.Component {
     return (
       <div className="container">
         <h2 className="center grey-text text-darken-4">{deck.name}</h2>
-        <div className="card medium center">
+        <div className="medium center">
           {!side ? this.showCardFront() : this.showCardBack()}
         </div>
       </div>

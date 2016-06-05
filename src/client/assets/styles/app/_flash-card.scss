@@ -1,0 +1,37 @@
+.flashcard {
+  padding-bottom: 30px;
+
+  &-close {
+    text-align: right;
+    padding-right: 30px;
+    padding-top: 30px;
+
+    i {
+      cursor: pointer;
+    }
+  }
+
+  &-front {
+    background-color: #e1f5fe;
+  }
+
+  &-back {
+    background-color: #e8f5e9;
+  }
+
+  &-title {
+    font-size: 30px;
+  }
+
+  &-buttons {
+    padding: 10px 0 0 0;
+
+    p {
+      font-style: italic;
+    }
+
+    button {
+      margin: 0 10px;
+    }
+  }
+}
