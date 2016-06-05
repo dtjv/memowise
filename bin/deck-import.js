@@ -1,20 +1,18 @@
 const path = require('path');
 const fs = require('fs');
 const MongoClient = require('mongodb').MongoClient;
-
 // TODO: use configuration file
-const dbHost = 'localhost';
-const dbPort = '27017';
-const dbName = 'wonky';
-const dbUrl = `mongodb://${dbHost}:${dbPort}/${dbName}`;
+const cfg = require('../dev/server/config').default;
+const dbUrl = `mongodb://${cfg.db.host}:${cfg.db.port}/${cfg.db.dbName}`;
 const collectionName = 'decks';
 
 // deck shape (mostly for reference)
 const deck = {
   name: '',
-  cards: [
-  ],
 };
+
+const cards = [];
+let deckId = '';
 
 let startedAt;
 const cardSections = [];
@@ -27,7 +25,7 @@ const parseDeckFile = (line, no, file) => {
   }
 
   // card section started
-  if (line.match(/^## Card (\w+)/)) {
+  if (line.match(/^## Card(\w*)/)) {
     if (startedAt) {
       throw Error('File could not be parsed.');
     }
@@ -45,7 +43,7 @@ const parseDeckFile = (line, no, file) => {
 };
 
 const parseCardSection = cardSection => {
-  const card = {};
+  const card = { deckId };
   cardSection.forEach((line, no, section) => {
     // card property found
     const propStart = line.match(/^### (Question|Answer|Explanation+)/);
@@ -68,26 +66,39 @@ const parseCardSection = cardSection => {
       }
     }
   });
-  deck.cards.push(card);
+  cards.push(card);
 };
 
-// insert a deck into the mongo collection
-const insertDeck = db => {
-  db.collection(collectionName).insert(deck, err => {
+const insertCards = db => {
+  db.collection('cards').insert(cards, err => {
     db.close();
     if (err) throw err;
     process
       .stdout
-      .write(`"${deck.name}" deck has been added to the ${collectionName} collection in the ${dbName} database.\n`);
+      .write(`cards have been added to the ${collectionName} ` +
+        `collection in the ${cfg.db.dbName} database.\n`);
+  });
+};
+
+// insert a deck into the mongo collection
+const insertDeck = db => {
+  db.collection('decks').insert(deck, err => {
+    deckId = deck._id.toString();
+    // go through each identified card section
+    cardSections.forEach(parseCardSection);
+    if (err) throw err;
+    process
+      .stdout
+      .write(`"${deck.name}" deck has been added to the ${collectionName} ` +
+        `collection in the ${cfg.db.dbName} database.\n`);
+    insertCards(db);
   });
 };
 
 // TODO: absolute paths not supported (maybe meow can do this better)
-const filePath = path.join(__dirname, '../', process.argv[2]);
+const filePath = path.join(__dirname, '../', process.argv[2], process.argv[3]);
 fs.readFileSync(filePath, 'utf8').split('\n').forEach(parseDeckFile);
 
-// go through each identified card section
-cardSections.forEach(parseCardSection);
 
 // Use connect method to connect to the server
 MongoClient.connect(dbUrl, (err, db) => {
