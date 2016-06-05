@@ -10,6 +10,12 @@ const createAccount = (req, res) => {
     const created = user.toObject();
     delete created.password;
     res.status(201).json(created);
+  })
+  .catch(error => {
+    res
+      .status(500)
+      .type('json')
+      .json({ error });
   });
 };
 

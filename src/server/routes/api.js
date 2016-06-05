@@ -3,10 +3,10 @@ import { Router } from 'express';
 // models
 // TODO: interaction should only be with controllers
 import Decks from '../models/decks';
-import Play from '../models/plays';
 
 // controllers
 import auth from '../controllers/auth';
+import plays from '../controllers/plays';
 import getCard from '../controllers/deck-progress';
 import getProgress from '../controllers/progress-bar.js';
 
@@ -15,19 +15,6 @@ const router = new Router();
 /*
  * Decks
  */
-router.route('/api/last-play/deck/:deckId')
-  .get((req, res) => {
-    Play
-      .findOne({ deckId: req.params.deckId })
-      .sort('-createdAt')
-      .then(play => {
-        res
-          .status(200)
-          .type('json')
-          .json(play);
-      });
-  });
-
 router.route('/api/decks')
   .get((req, res) => {
     Decks.find({}).then((decks) => {
@@ -48,28 +35,11 @@ router.route('/api/card')
     });
   });
 
-router.route('/api/play')
-  .post((req, res) => {
-    Play.create({
-      side: req.body.side,
-      deckId: req.body.deckId,
-      cardId: req.body.cardId,
-      userId: req.user._id,
-      rating: req.body.rating,
-    })
-    .then(play => {
-      res
-        .status(201)
-        .type('json')
-        .json(play);
-    })
-    .catch(error => {
-      res
-        .status(500)
-        .type('json')
-        .json({ error });
-    });
-  });
+/*
+ * Plays
+ */
+router.route('/api/play').post(plays.create);
+router.route('/api/last-play/deck/:deckId').get(plays.findLatest);
 
 /*
  * Progress
