@@ -15,6 +15,19 @@ const router = new Router();
 /*
  * Decks
  */
+router.route('/api/last-play/deck/:deckId')
+  .get((req, res) => {
+    Play
+      .findOne({ deckId: req.params.deckId })
+      .sort('-createdAt')
+      .then(play => {
+        res
+          .status(200)
+          .type('json')
+          .json(play);
+      });
+  });
+
 router.route('/api/decks')
   .get((req, res) => {
     Decks.find({}).then((decks) => {

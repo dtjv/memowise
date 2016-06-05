@@ -3,6 +3,7 @@ import { selectDeck } from '../actions';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import ProgressBar from './ProgressBar';
+import DeckLastPlayed from './DeckLastPlayed';
 
 const mapDispatchToState = (dispatch) => ({
   setDeckState: (deck) => dispatch(selectDeck(deck)),
@@ -12,6 +13,20 @@ class DeckItem extends Component {
   constructor(props) {
     super(props);
     this.chooseDeckToStudy = this.chooseDeckToStudy.bind(this);
+    this.state = {
+      lastPlayedAt: '',
+    };
+  }
+
+  componentWillMount() {
+    fetch(`/api/last-play/deck/${this.props.deck._id}`)
+      .then(response => response.json())
+      .then(play => {
+        console.log(play);
+        this.setState({
+          lastPlayedAt: play.createdAt,
+        });
+      });
   }
 
   chooseDeckToStudy() {
@@ -22,12 +37,13 @@ class DeckItem extends Component {
   render() {
     return (
       <div className="card-item">
-        <ProgressBar deck={this.props.deck} />
         <div className="card-panel hoverable">
           <div className="card-content">
             <div className="card-title grey-text text-darken-4 center">
               <strong>{this.props.deck.name}</strong>
             </div>
+            <DeckLastPlayed date={this.state.lastPlayedAt} />
+            <ProgressBar deck={this.props.deck} />
             <div className="center">
               <button onClick={this.chooseDeckToStudy} className="btn blue lighten-2">
                 Study
