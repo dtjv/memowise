@@ -4,7 +4,7 @@ import AuthBar from '../containers/AuthBar';
 const Toolbar = () => (
   <header>
     <div className="navbar-fixed">
-      <nav role="navigation" className="green lighten-2">
+      <nav role="navigation" className="cyan lighten-3">
         <div className="nav-wrapper container">
           <a id="logo-container" href="/" className="brand-logo">
             <i className="material-icons">home</i>

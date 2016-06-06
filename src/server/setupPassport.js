@@ -21,25 +21,27 @@ export default () => {
     usernameField: 'email',
     passwordField: 'password',
   },
-  (email, password, done) => {
-    User.findOne({
-      email,
-    }, (err, user) => {
-      if (err) {
-        return done(err);
-      }
-      if (!user) {
-        return done(null, false, {
-          message: 'unknown user',
+    (email, password, done) => {
+      User.findOne({
+        email,
+      },
+      (err, user) => {
+        if (err) {
+          return done(err);
+        }
+        if (!user) {
+          return done(null, false, {
+            message: 'unknown user',
+          });
+        }
+        return user.authenticate(password, (error, isMatch) => {
+          if (!isMatch) {
+            return done(null, false, {
+              message: 'invalid password',
+            });
+          }
+          return done(null, { _id: user[oid], name: user.name, email: user.email });
         });
-      }
-      if (!user.authenticate(password)) {
-        return done(null, false, {
-          message: 'invalid password',
-        });
-      }
-
-      return done(null, { _id: user[oid], name: user.name, email: user.email });
-    });
-  }));
+      });
+    }));
 };
