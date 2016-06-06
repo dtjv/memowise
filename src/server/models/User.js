@@ -32,13 +32,13 @@ UserSchema.pre('save', function hashPassword(next) {
  * Create instance method for authenticating user
  */
 UserSchema.methods.authenticate = function authenticate(password, callback) {
-  let hash = this.password
-    bcrypt.compare(password, hash, function(err, isMatch) {
-        if (err) {
-          return callback(err);
-        } 
-        callback(null, isMatch);
-    });
+  const hash = this.password;
+  bcrypt.compare(password, hash, (err, isMatch) => {
+    if (err) {
+      return callback(err);
+    }
+    return callback(null, isMatch);
+  });
 };
 
 export default mongoose.model('User', UserSchema);

@@ -18,13 +18,14 @@ export default () => {
   });
 
   passport.use(new Strategy({
-      usernameField: 'email',
-      passwordField: 'password',
-    },
+    usernameField: 'email',
+    passwordField: 'password',
+  },
     (email, password, done) => {
       User.findOne({
         email,
-      }, (err, user) => {
+      },
+      (err, user) => {
         if (err) {
           return done(err);
         }
@@ -33,15 +34,14 @@ export default () => {
             message: 'unknown user',
           });
         }
-        user.authenticate(password, function (err, isMatch) {
+        return user.authenticate(password, (error, isMatch) => {
           if (!isMatch) {
-            done(null, false, {
+            return done(null, false, {
               message: 'invalid password',
             });
-          } else {
-            return done(null, { _id: user[oid], name: user.name, email: user.email });
           }
-        })
+          return done(null, { _id: user[oid], name: user.name, email: user.email });
+        });
       });
     }));
-  };
+};
