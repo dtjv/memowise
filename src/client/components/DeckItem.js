@@ -19,10 +19,9 @@ class DeckItem extends Component {
   }
 
   componentWillMount() {
-    fetch(`/api/last-play/deck/${this.props.deck._id}`)
+    fetch(`/api/last-play/deck/${this.props.deck._id}`, { credentials: 'same-origin' })
       .then(response => response.json())
       .then(play => {
-        console.log(play);
         this.setState({
           lastPlayedAt: play.createdAt,
         });

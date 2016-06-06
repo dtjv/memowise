@@ -1,4 +1,4 @@
-import queryDb from './query-db.js';
+import queryDb from './QueryDb.js';
 
 // helper function to get random numbers
 const getRandom = {

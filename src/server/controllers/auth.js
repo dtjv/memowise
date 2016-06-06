@@ -1,5 +1,5 @@
 import passport from 'passport';
-import User from '../models/user';
+import User from '../models/User';
 
 const createAccount = (req, res) => {
   User.create({

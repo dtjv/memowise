@@ -1,59 +1,24 @@
 import { Router } from 'express';
 
-// models
-// TODO: interaction should only be with controllers
-import Decks from '../models/decks';
-
 // controllers
-import auth from '../controllers/auth';
-import plays from '../controllers/plays';
-import getCard from '../controllers/deck-progress';
-import getProgress from '../controllers/progress-bar.js';
+import decks from '../controllers/Decks';
+import plays from '../controllers/Plays';
+import auth from '../controllers/Auth';
 
 const router = new Router();
 
 /*
  * Decks
  */
-router.route('/api/decks')
-  .get((req, res) => {
-    Decks.find({}).then((decks) => {
-      res
-        .status(200)
-        .type('json')
-        .json(decks);
-    });
-  });
-
-router.route('/api/card')
-  .post((req, res) => {
-    getCard(req.body.deckId, req.user._id).then(card => {
-      res
-        .status(200)
-        .type('json')
-        .json(card);
-    });
-  });
+router.route('/api/decks').get(decks.findAll);
+router.route('/api/card').post(decks.findNextCard);
+router.route('/api/progress').post(decks.progress);
 
 /*
  * Plays
  */
 router.route('/api/play').post(plays.create);
 router.route('/api/last-play/deck/:deckId').get(plays.findLatest);
-
-/*
- * Progress
- */
-router.route('/api/progress')
-  .post((req, res) => {
-    getProgress(req.body.deckId, req.user._id).then(percentage => {
-      res
-        .status(200)
-        .type('json')
-        .json(percentage);
-    });
-  });
-
 
 /*
  * Auth

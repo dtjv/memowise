@@ -1,8 +1,8 @@
-import Play from '../models/plays';
+import Play from '../models/Play';
 
 const findLatest = (req, res) => {
   Play
-    .findOne({ deckId: req.params.deckId })
+    .findOne({ deckId: req.params.deckId, userId: req.user._id })
     .sort('-createdAt')
     .then(play => {
       res
