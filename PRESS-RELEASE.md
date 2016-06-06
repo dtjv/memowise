@@ -1,4 +1,4 @@
-# Project Mongoose Cards #
+# MEMOWISE #
 
 <!-- 
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
@@ -15,29 +15,25 @@ Oh, and I also like to write press-releases in what I call "Oprah-speak" for mai
 
 Once the project moves into development, the press release can be used as a touchstone; a guiding light. The product team can ask themselves, "Are we building what is in the press release?" If they find they're spending time building things that aren't in the press release (overbuilding), they need to ask themselves why. This keeps product development focused on achieving the customer benefits and not building extraneous stuff that takes longer to build, takes resources to maintain, and doesn't provide real customer benefit (at least not enough to warrant inclusion in the press release).
  -->
- 
-## Mongoose Cards ##
-
-## Gamified reiterative flash cards of 2016 ##
+## Reiterative flash cards of 2016 ##
 
 ## Summary ##
-  Programming-related topics are categorized in different decks of cards. Each card is a different question, which you answer in your head or through user input. When you check the answer, you will be given the option to rate yourself with a thumbs up, thumbs middle, and thumbs down. If you feel like you are unsure of your understanding of the question, you can choose a thumbs middle or thumbs down. If you were correct and feel like you killed it honestly, you can do a thumbs up. Based on the rating you give yourself, the probability of the card appearing again will increase or decrease. This is great way to learn something through repetition.
+  The concepts you want to study are categorized in different decks of cards. Each card is a different question, which you answer in your head. When you check the answer, you will be given the option to rate yourself with a thumbs up, thumbs middle, and thumbs down. If you feel like you are unsure of your understanding of the question, you can choose a thumbs middle or thumbs down. If you were correct and feel like you killed it honestly, you can do a thumbs up. Based on the rating you give yourself, the probability of the card appearing again will increase or decrease. This is a simple but honest way to learn something.
 
 ## Problem ##
-  What if you want to review a concept you have difficulty understanding? The notes or slides on it are hidden in the stash of notes and folders you already have. With Wonky Mongoose Cards, you can review concepts reiteratively on the go!
+  What if you want to review a concept you have difficulty understanding? You may review notes and give yourself a false impression that you understand something. With Memowise, it becomes easy to test yourself on the material you learned.
 
 ## Solution ##
-  Our rating system works with the Wonky Mongoose algorithm to provide cards that give you more practice on what you need more work on. It is gamified as well to give you a different fun aspect to playing the card game.
-
+  Our rating system works with a Wonky Mongoose algorithm to provide cards that give you more practice on what you need to work on more.
 
 ## Quote from You ##
-  The 2016 way to review concepts through repetition in a gamified environment
+  The 2016 way to review concepts through repetition.
 
 ## How to Get Started ##
-  Visit WonkyMongoose.com and sign up and you're ready to play!
+  Visit memowise.com and sign up and you're ready to play!
 
 ## Customer Quote ##
-  I think my brain was able to retain learned concepts a lot better
+  I think my brain was able to retain learned concepts a lot better than just reading through my notes.
 
 ## Closing and Call to Action ##
   Go play the game already :D

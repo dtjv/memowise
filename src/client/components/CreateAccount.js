@@ -22,6 +22,7 @@ class CreateAccount extends React.Component {
       password: '',
     };
 
+    this.handleError = this.handleError.bind(this);
     this.handleNameInput = this.handleNameInput.bind(this);
     this.handleEmailInput = this.handleEmailInput.bind(this);
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
@@ -40,6 +41,10 @@ class CreateAccount extends React.Component {
     this.setState({ password: event.target.value });
   }
 
+  handleError(err) {
+    Materialize.toast(`Failed to create account: ${err.responseJSON.message}`, 4000);
+  }
+
   createAccount(event) {
     event.preventDefault();
     const newUser = {
@@ -52,9 +57,10 @@ class CreateAccount extends React.Component {
         .then(user => {
           this.props.onSignIn(user);
           browserHistory.push('/dashboard');
-        });
+        })
+        .catch(this.handleError);
     })
-    .fail((err, status) => status);
+    .fail(err => this.handleError(err));
   }
 
   render() {
@@ -68,10 +74,13 @@ class CreateAccount extends React.Component {
             <div className="row">
               <div className="input-field col s12">
                 <input
+                  required
                   ref="name"
                   type="text"
                   className="validate"
                   value={this.state.name}
+                  pattern="^[a-zA-Z\s]+$"
+                  title="please enter your full name"
                   onChange={this.handleNameInput}
                 />
                 <label htmlFor="name">Name</label>
@@ -80,6 +89,7 @@ class CreateAccount extends React.Component {
             <div className="row">
               <div className="input-field col s12">
                 <input
+                  required
                   ref="email"
                   type="email"
                   className="validate"
@@ -92,10 +102,13 @@ class CreateAccount extends React.Component {
             <div className="row">
               <div className="input-field col s12">
                 <input
+                  required
                   ref="password"
                   type="password"
                   className="validate"
                   value={this.state.password}
+                  pattern=".{7,}"
+                  title="must be more than 6 characters long"
                   onChange={this.handlePasswordInput}
                 />
                 <label htmlFor="password">Password</label>
@@ -103,7 +116,7 @@ class CreateAccount extends React.Component {
             </div>
             <div className="row center">
               <div className="col s12">
-                <button type="submit" className="btn-large blue lighten-2">
+                <button type="submit" className="btn-large cyan lighten-3">
                   Create Account
                 </button>
               </div>

@@ -2,3 +2,9 @@
 @import "app/card-list";
 @import "app/progress-bar";
 @import "app/flash-card";
+@import "app/splash";
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+html {
+    font-family: Montserrat, Avenir, sans-serif;
+  }
