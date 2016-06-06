@@ -1,6 +1,6 @@
 import mongoose from '../db';
 
-const PlaysSchema = new mongoose.Schema({
+const PlaySchema = new mongoose.Schema({
   rating: String,
   cardId: String,
   deckId: String,
@@ -8,4 +8,4 @@ const PlaysSchema = new mongoose.Schema({
 }, { timestamps: true }
 );
 
-export default mongoose.model('Plays', PlaysSchema);
+export default mongoose.model('Play', PlaySchema);
