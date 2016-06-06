@@ -47,9 +47,17 @@ const verify = (req, res) => {
   }
 };
 
+const checkAuthorized = (req, res) => {
+  if (req.user) {
+    res.status(200).json({ loggedIn: true });
+  } else {
+    res.status(401).json({ loggedIn: false });
+  }
+};
+
 const signOut = (req, res) => {
   req.logout();
   res.redirect('/');
 };
 
-export default { createAccount, signIn, verify, signOut };
+export default { createAccount, signIn, verify, checkAuthorized, signOut };
