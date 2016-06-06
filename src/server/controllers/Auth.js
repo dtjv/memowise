@@ -64,9 +64,17 @@ const checkAuthorized = (req, res) => {
   }
 };
 
+const checkAuthServer = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    res.status(401).json({ message: 'not logged in' });
+  }
+};
+
 const signOut = (req, res) => {
   req.logout();
   res.redirect('/');
 };
 
-export default { createAccount, signIn, verify, checkAuthorized, signOut };
+export default { createAccount, signIn, verify, checkAuthorized, checkAuthServer, signOut };
