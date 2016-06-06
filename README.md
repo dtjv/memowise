@@ -89,8 +89,17 @@ npm install
 From within the root directory:
 
 ```sh
-npm run import documentation/decks/math.md
+npm run import math.md
 ```
+
+Deck file (math.md) MUST be within documentation/decks/ directory
+
+```sh
+npm run import:all
+```
+
+Import all decks in document/decks/ directory, be careful, it still imports if deck already exists in database.
+
 
 ### Roadmap
 

@@ -4,7 +4,7 @@ import request from 'supertest';
 import mongoose from '../../src/server/db';
 
 // should be replaced by just loading fixtures before each test
-import User from '../../src/server/models/user';
+import User from '../../src/server/models/User';
 
 const expect = chai.expect;
 

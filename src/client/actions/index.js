@@ -21,21 +21,21 @@ export const cancelAuthentication = () => (
 export const receiveDecks = decks => ({ type: types.RECEIVE_DECKS, data: decks });
 export const selectDeck = deck => ({ type: types.SELECT_DECK, data: deck });
 export const fetchDecks = () => (
-  dispatch => {
-    fetch('/api/decks', {
+  dispatch => (
+    fetch('http://localhost:3000/api/decks', {
       credentials: 'same-origin',
     })
     .then(res => res.json())
     .then(decks => dispatch(receiveDecks(decks)))
-    .catch(err => dispatch(failedRequest(err)));
-  });
+    .catch(err => dispatch(failedRequest(err)))
+  ));
 
 export const receiveCard = card => ({ type: types.RECEIVE_CARD, data: card });
 export const fetchCard = (deckId) => {
   const payload = JSON.stringify({ deckId });
 
   return dispatch => (
-    fetch('/api/card', {
+    fetch('http://localhost:3000/api/card', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -56,7 +56,7 @@ export const savePlay = (play, rating) => {
   const payload = JSON.stringify({ ...play, rating });
 
   return dispatch => (
-    fetch('/api/play', {
+    fetch('http://localhost:3000/api/play', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',

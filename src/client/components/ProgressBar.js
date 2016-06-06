@@ -26,8 +26,7 @@ class ProgressBar extends React.Component {
       body: payload,
     })
     .then(res => res.json())
-    .then(progress => this.setState({ progress }))
-    .catch(err => console.log('ERR', err));
+    .then(progress => this.setState({ progress }));
   }
 
   render() {

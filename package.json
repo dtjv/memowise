@@ -1,6 +1,6 @@
 {
-  "name": "wonky",
-  "version": "0.0.1",
+  "name": "memowise",
+  "version": "0.3.0",
   "description": "",
   "scripts": {
     "clean": "gulp clean",
@@ -8,11 +8,15 @@
     "build": "gulp",
     "build:dist": "gulp --dist",
     "seed": "babel ./seed/seed.js | node",
+    "loadFixtures": "babel ./specs/fixtures.js | node",
     "start": "nodemon dev/server/server.js",
-    "server:dist": "node dist/server/server.js",
-    "import": "node bin/deck-import.js",
+    "deploy:prod": "pm2 deploy ecosystem.json production",
+    "import": "node bin/deck-import.js documentation/decks/",
+    "import:all": "for deck in documentation/decks/*.md; do node bin/deck-import.js $deck ''; done",
     "lint": "eslint src --color",
-    "test": "eslint src && mocha --compilers js:babel-register --bail --reporter nyan ./specs/**/*.js"
+    "mocha": "mocha --compilers js:babel-register --bail --recursive ./specs/client ./specs/server",
+    "test": "npm run lint && nyc --require babel-core/register npm run mocha",
+    "coverage": "nyc report --reporter=html && open ./coverage/index.html"
   },
   "devDependencies": {
     "babel": "^6.5.2",
@@ -33,10 +37,15 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-sass": "^2.3.1",
+    "isomorphic-fetch": "^2.2.1",
+    "json-loader": "^0.5.4",
     "meow": "^3.7.0",
     "mocha": "^2.4.5",
     "mongodb": "^2.1.20",
+    "nock": "^8.0.0",
     "nodemon": "^1.9.2",
+    "nyc": "^6.4.4",
+    "redux-mock-store": "^1.0.4",
     "run-sequence": "^1.1.5",
     "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0",
@@ -60,11 +69,17 @@
     "passport-local": "^1.0.0",
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
+    "react-markdown": "^2.2.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.4.1",
     "react-router-redux": "^4.0.4",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
     "supertest": "^1.2.0"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.js"
+    ]
   }
 }

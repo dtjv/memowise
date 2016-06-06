@@ -48,6 +48,12 @@ export const card = (state, action) => {
 export const play = (state, action) => {
   switch (action.type) {
     case START_PLAY: {
+      if (!action.data ||
+          !action.data.deckId ||
+          !action.data.cardId) {
+        return state;
+      }
+
       const newPlay = {
         deckId: action.data.deckId,
         cardId: action.data.cardId,
@@ -60,6 +66,9 @@ export const play = (state, action) => {
     case FLIP_CARD:
       return { ...state, side: BACK };
     case FINISH_PLAY:
+      if (action.data === undefined) {
+        return state;
+      }
       return { ...state, rating: action.data };
     default:
       return state || {};
