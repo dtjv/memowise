@@ -21,6 +21,9 @@ import Dashboard from './containers/Dashboard';
 import StudyDeck from './containers/StudyDeck';
 import { verifyAuthentication, fetchDecks } from './actions';
 
+// services
+import Auth from './services/AuthService';
+
 // application configuration
 import { DEBUG } from './config';
 
@@ -28,6 +31,18 @@ reducers.routing = routerReducer;
 
 const store = createStore(combineReducers(reducers), applyMiddleware(thunk));
 const history = syncHistoryWithStore(browserHistory, store);
+
+const isAuthorized = (nextState, replace, next) => {
+  Auth.checkAuthorized()
+    .then(check => {
+      if (check.loggedIn) {
+        next();
+      } else {
+        replace('/sign-in');
+        next();
+      }
+    });
+};
 
 render(
   <Provider store={store}>
@@ -37,9 +52,9 @@ render(
         <Route path="/create-account" component={CreateAccount} />
         <Route path="/sign-in" component={SignIn} />
         <Route path="/sign-out" component={SignOut} />
-        <Route path="/profile" component={Profile} />
-        <Route path="/dashboard" component={Dashboard} />
-        <Route path="/decks/:deckId/study" component={StudyDeck} />
+        <Route path="/profile" component={Profile} onEnter={isAuthorized} />
+        <Route path="/dashboard" component={Dashboard} onEnter={isAuthorized} />
+        <Route path="/decks/:deckId/study" component={StudyDeck} onEnter={isAuthorized} />
       </Route>
     </Router>
   </Provider>,

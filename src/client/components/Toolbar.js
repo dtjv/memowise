@@ -1,14 +1,15 @@
 import React from 'react';
 import AuthBar from '../containers/AuthBar';
+import { Link } from 'react-router';
 
 const Toolbar = () => (
   <header>
     <div className="navbar-fixed">
       <nav role="navigation" className="cyan lighten-3">
         <div className="nav-wrapper container">
-          <a id="logo-container" href="/" className="brand-logo">
+          <Link to="/" id="logo-container" className="brand-logo">
             <i className="material-icons">home</i>
-          </a>
+          </Link>
           <AuthBar />
           <AuthBar mobile />
           <a href="#" data-activates="nav-mobile" className="button-collapse">

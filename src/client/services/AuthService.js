@@ -26,6 +26,11 @@ export default class AuthService {
     });
   }
 
+  static checkAuthorized() {
+    return fetch('/api/auth/check-authorized', { credentials: 'same-origin' })
+      .then(response => response.json());
+  }
+
   static signOut() {
     return new Promise((resolve, reject) => {
       $.get('/api/auth/sign-out').then(
