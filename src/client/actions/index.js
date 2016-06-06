@@ -1,5 +1,8 @@
 import * as types from '../constants/actionTypes';
 import Auth from '../services/AuthService';
+import { config } from '../config';
+
+const url = `${config.api.protocol}://${config.api.host}:${config.api.port}`;
 
 export const failedRequest = error => ({ type: types.ERR_FAILED_REQUEST, data: error });
 
@@ -22,7 +25,7 @@ export const receiveDecks = decks => ({ type: types.RECEIVE_DECKS, data: decks }
 export const selectDeck = deck => ({ type: types.SELECT_DECK, data: deck });
 export const fetchDecks = () => (
   dispatch => (
-    fetch('http://localhost:3000/api/decks', {
+    fetch(`${url}/api/decks`, {
       credentials: 'same-origin',
     })
     .then(res => res.json())
@@ -35,7 +38,7 @@ export const fetchCard = (deckId) => {
   const payload = JSON.stringify({ deckId });
 
   return dispatch => (
-    fetch('http://localhost:3000/api/card', {
+    fetch(`${url}/api/card`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -56,7 +59,7 @@ export const savePlay = (play, rating) => {
   const payload = JSON.stringify({ ...play, rating });
 
   return dispatch => (
-    fetch('http://localhost:3000/api/play', {
+    fetch(`${url}/api/play`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
