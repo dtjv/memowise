@@ -65,7 +65,7 @@ class SignIn extends React.Component {
             </div>
             <div className="row center">
               <div className="col s12">
-                <button type="submit" className="btn-large blue lighten-2">
+                <button type="submit" className="btn-large cyan lighten-3">
                   Sign In
                 </button>
               </div>

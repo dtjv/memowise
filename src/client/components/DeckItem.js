@@ -44,7 +44,7 @@ class DeckItem extends Component {
             <DeckLastPlayed date={this.state.lastPlayedAt} />
             <ProgressBar deck={this.props.deck} />
             <div className="center">
-              <button onClick={this.chooseDeckToStudy} className="btn blue lighten-2">
+              <button onClick={this.chooseDeckToStudy} className="btn cyan lighten-3">
                 Study
               </button>
             </div>
