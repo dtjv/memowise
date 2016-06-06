@@ -31,13 +31,13 @@ export default () => {
         }
         if (!user) {
           return done(null, false, {
-            message: 'unknown user',
+            message: 'User not found',
           });
         }
         return user.authenticate(password, (error, isMatch) => {
           if (!isMatch) {
             return done(null, false, {
-              message: 'invalid password',
+              message: 'Incorrect password',
             });
           }
           return done(null, { _id: user[oid], name: user.name, email: user.email });

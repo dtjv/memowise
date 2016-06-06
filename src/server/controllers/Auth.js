@@ -2,20 +2,29 @@ import passport from 'passport';
 import User from '../models/User';
 
 const createAccount = (req, res) => {
-  User.create({
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
-  }).then(user => {
-    const created = user.toObject();
-    delete created.password;
-    res.status(201).json(created);
-  })
-  .catch(error => {
-    res
-      .status(500)
-      .type('json')
-      .json({ error });
+  User.findOne({ email: req.body.email }).then(exists => {
+    if (exists) {
+      return res
+        .status(400)
+        .type('json')
+        .json({ message: 'User with same email already exists' });
+    }
+
+    return User.create({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+    }).then(user => {
+      const created = user.toObject();
+      delete created.password;
+      res.status(201).json(created);
+    })
+    .catch(error => {
+      res
+        .status(500)
+        .type('json')
+        .json({ error });
+    });
   });
 };
 
