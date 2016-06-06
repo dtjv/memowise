@@ -23,7 +23,7 @@ class DeckItem extends Component {
       .then(response => response.json())
       .then(play => {
         this.setState({
-          lastPlayedAt: play.createdAt,
+          lastPlayedAt: (play && play.createdAt) || '',
         });
       });
   }

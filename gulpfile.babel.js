@@ -5,7 +5,8 @@ import meow from 'meow';
 import sass from 'gulp-sass';
 import babel from 'gulp-babel';
 import runSeq from 'run-sequence';
-import webpack from 'webpack-stream';
+import webpack from 'webpack';
+import webpackStream from 'webpack-stream';
 
 /*
  * NOTE: Ensure you have `gulp-cli` installed globally.
@@ -50,7 +51,7 @@ gulp.task('sass', () =>
 gulp.task('webpack', () =>
   gulp
     .src(`${sourcePath}/client/app.js`)
-    .pipe(webpack({
+    .pipe(webpackStream({
       devtool: debug ? 'inline-sourcemap' : null,
       entry: join(__dirname, `${sourcePath}/client/app.js`),
       output: {
@@ -69,6 +70,7 @@ gulp.task('webpack', () =>
         }],
       },
       plugins: debug ? [] : [
+        new webpack.EnvironmentPlugin(['NODE_ENV', 'PROTOCOL', 'HOST', 'PORT']),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
