@@ -1,10 +1,10 @@
-const debug = process.env.NODE_ENV !== 'production';
+const isDev = process.env.NODE_ENV !== 'production';
 const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
   context: path.join(__dirname, 'src'),
-  devtool: debug ? 'inline-sourcemap' : null,
+  devtool: isDev ? 'inline-sourcemap' : null,
   entry: './client/app.js',
   module: {
     loaders: [
@@ -24,13 +24,19 @@ module.exports = {
     ],
   },
   output: {
-    path: path.join(__dirname, '/dev/client/'),
+    path: path.join(__dirname, `/${isDev ? 'dev' : 'dist'}/client/`),
     filename: 'app.js',
   },
-  plugins: debug ? [] : [
+  plugins: isDev ? [] : [
     new webpack.EnvironmentPlugin(['NODE_ENV', 'PROTOCOL', 'HOST', 'PORT']),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+      },
+      mangle: false,
+      sourcemap: false,
+    }),
   ],
 };
