@@ -18,7 +18,7 @@ Once the project moves into development, the press release can be used as a touc
 ## Reiterative flash cards of 2016 ##
 
 ## Summary ##
-  Programming-related topics are categorized in different decks of cards. Each card is a different question, which you answer in your head. When you check the answer, you will be given the option to rate yourself with a thumbs up, thumbs middle, and thumbs down. If you feel like you are unsure of your understanding of the question, you can choose a thumbs middle or thumbs down. If you were correct and feel like you killed it honestly, you can do a thumbs up. Based on the rating you give yourself, the probability of the card appearing again will increase or decrease. This is a simple but honest way to learn something.
+  The concepts you want to study are categorized in different decks of cards. Each card is a different question, which you answer in your head. When you check the answer, you will be given the option to rate yourself with a thumbs up, thumbs middle, and thumbs down. If you feel like you are unsure of your understanding of the question, you can choose a thumbs middle or thumbs down. If you were correct and feel like you killed it honestly, you can do a thumbs up. Based on the rating you give yourself, the probability of the card appearing again will increase or decrease. This is a simple but honest way to learn something.
 
 ## Problem ##
   What if you want to review a concept you have difficulty understanding? You may review notes and give yourself a false impression that you understand something. With Memowise, it becomes easy to test yourself on the material you learned.
