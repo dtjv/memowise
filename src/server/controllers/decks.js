@@ -1,6 +1,5 @@
 import Deck from '../models/Deck';
 
-// TODO: should be moved to services
 import getCard from '../services/DeckProgress';
 import getProgress from '../services/ProgressBar.js';
 
