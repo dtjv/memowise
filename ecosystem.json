@@ -4,17 +4,18 @@
     "script": "./dist/server/server.js",
     "env_production": {
       "NODE_ENV": "production",
+      "HOST": "memowise.xyz",
       "PORT": 80
     }
   }],
   "deploy": {
     "production": {
       "user": "root",
-      "host": "104.131.159.249",
+      "host": "memowise.xyz",
       "ref": "origin/master",
       "repo": "git@github.com:wonky-mongoose/wonky-mongoose.git",
       "path": "/var/www/production",
-      "post-deploy": "npm install && npm run build:dist && pm2 startOrRestart ecosystem.json --env production"
+      "post-deploy": "npm install && HOST=memowise.xyz PORT=80 PROTOCOL=http NODE_ENV=production npm run build:dist && pm2 startOrRestart ecosystem.json --env production"
     }
   }
 }
