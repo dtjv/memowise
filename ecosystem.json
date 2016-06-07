@@ -15,7 +15,7 @@
       "ref": "origin/master",
       "repo": "git@github.com:wonky-mongoose/wonky-mongoose.git",
       "path": "/var/www/production",
-      "post-deploy": "npm install && HOST=memowise.xyz PORT=80 PROTOCOL=http NODE_ENV=production npm run build && pm2 startOrRestart ecosystem.json --env production"
+      "post-deploy": "npm install && npm run build-server-prod && HOST=memowise.xyz PORT=80 PROTOCOL=http NODE_ENV=production webpack --progress && pm2 startOrRestart ecosystem.json --env production"
     }
   }
 }
