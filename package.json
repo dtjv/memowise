@@ -1,6 +1,6 @@
 {
   "name": "memowise",
-  "version": "0.3.0",
+  "version": "0.5.2",
   "description": "",
   "scripts": {
     "clean": "rm -rf dev dist",
