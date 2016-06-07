@@ -2,7 +2,7 @@
 
 ## Card 
 ### Question
-Create a new  local repository
+Create a new local repository
 ### Answer
 `git init`
 ### Explanation
