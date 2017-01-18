@@ -5,7 +5,7 @@ const isDev = process.env.NODE_ENV !== 'production';
 
 export default {
   devtool: isDev ? 'inline-sourcemap' : null,
-  entry: './src/client/app.jsx',
+  entry: './src/client/app.js',
   output: {
     path: join(__dirname, `/${isDev ? 'dev' : 'dist'}/client/`),
     filename: 'app.js',

@@ -3,3 +3,4 @@ coverage
 .nyc_output
 dev/
 dist/
+NOTES.md
