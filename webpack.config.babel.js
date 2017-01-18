@@ -1,16 +1,20 @@
-const isDev = process.env.NODE_ENV !== 'production';
-const webpack = require('webpack');
-const path = require('path');
+import webpack from 'webpack';
+import { join } from 'path;'
 
-module.exports = {
-  context: path.join(__dirname, 'src'),
+const isDev = process.env.NODE_ENV !== 'production';
+
+export default {
   devtool: isDev ? 'inline-sourcemap' : null,
-  entry: './client/app.js',
+  entry: './src/client/app.js',
+  output: {
+    path: join(__dirname, `/${isDev ? 'dev' : 'dist'}/client/`),
+    filename: 'app.js',
+  },
   module: {
     loaders: [
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /(node_modules)/,
         loader: 'babel',
       },
       {
@@ -22,10 +26,6 @@ module.exports = {
         loader: 'json',
       },
     ],
-  },
-  output: {
-    path: path.join(__dirname, `/${isDev ? 'dev' : 'dist'}/client/`),
-    filename: 'app.js',
   },
   plugins: isDev ? [] : [
     new webpack.EnvironmentPlugin(['NODE_ENV', 'PROTOCOL', 'HOST', 'PORT']),
