@@ -23,7 +23,7 @@ const UserSchema = new mongoose.Schema({
 UserSchema.pre('save', function hashPassword(next) {
   const cipher = Promise.promisify(bcrypt.hash);
   return cipher(this.password, 5).bind(this)
-    .then(hash => {
+    .then((hash) => {
       this.password = hash;
       next();
     });

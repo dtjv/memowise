@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import { cancelAuthentication } from '../actions';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
+import { cancelAuthentication } from '../actions';
 
 class LogoutView extends React.Component {
   componentWillMount() {

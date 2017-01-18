@@ -1,8 +1,8 @@
 const path = require('path');
 const fs = require('fs');
 const MongoClient = require('mongodb').MongoClient;
-// TODO: use configuration file
-const cfg = require('../dev/server/config').default;
+const cfg = require('../src/server/config').default;
+
 const dbUrl = `mongodb://${cfg.db.host}:${cfg.db.port}/${cfg.db.dbName}`;
 const collectionName = 'decks';
 
@@ -42,7 +42,7 @@ const parseDeckFile = (line, no, file) => {
   }
 };
 
-const parseCardSection = cardSection => {
+const parseCardSection = (cardSection) => {
   const card = { deckId };
   cardSection.forEach((line, no, section) => {
     // card property found
@@ -69,8 +69,8 @@ const parseCardSection = cardSection => {
   cards.push(card);
 };
 
-const insertCards = db => {
-  db.collection('cards').insert(cards, err => {
+const insertCards = (db) => {
+  db.collection('cards').insert(cards, (err) => {
     db.close();
     if (err) throw err;
     process
@@ -81,8 +81,8 @@ const insertCards = db => {
 };
 
 // insert a deck into the mongo collection
-const insertDeck = db => {
-  db.collection('decks').insert(deck, err => {
+const insertDeck = (db) => {
+  db.collection('decks').insert(deck, (err) => {
     deckId = deck._id.toString();
     // go through each identified card section
     cardSections.forEach(parseCardSection);

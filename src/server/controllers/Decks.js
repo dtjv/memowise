@@ -1,7 +1,7 @@
 import Deck from '../models/Deck';
 
 import getCard from '../services/DeckProgress';
-import getProgress from '../services/ProgressBar.js';
+import getProgress from '../services/ProgressBar';
 
 const findAll = (req, res) => {
   Deck.find({}).then((decks) => {
@@ -13,7 +13,7 @@ const findAll = (req, res) => {
 };
 
 const findNextCard = (req, res) => {
-  getCard(req.body.deckId, req.user._id).then(card => {
+  getCard(req.body.deckId, req.user._id).then((card) => {
     res
       .status(200)
       .type('json')
@@ -22,7 +22,7 @@ const findNextCard = (req, res) => {
 };
 
 const progress = (req, res) => {
-  getProgress(req.body.deckId, req.user._id).then(percentage => {
+  getProgress(req.body.deckId, req.user._id).then((percentage) => {
     res
       .status(200)
       .type('json')

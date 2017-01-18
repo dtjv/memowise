@@ -1,5 +1,5 @@
 import webpack from 'webpack';
-import { join } from 'path;'
+import { join } from 'path';
 
 const isDev = process.env.NODE_ENV !== 'production';
 

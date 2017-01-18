@@ -16,16 +16,16 @@ describe('Routing', () => {
     password: 'testing',
   };
 
-  beforeEach(done => {
+  beforeEach((done) => {
     mongoose.connection.db.dropDatabase(err => err || done());
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     mongoose.connection.db.dropDatabase(err => err || done());
   });
 
   describe('Account', () => {
-    it('should return error trying to save duplicate username', done => {
+    it('should return error trying to save duplicate username', (done) => {
       request(url)
         .post('/api/auth/create-account')
         .send(user)
@@ -43,14 +43,14 @@ describe('Routing', () => {
   });
 
   describe('Authentication', () => {
-    it('should fail to sign in with bad credentials', done => {
+    it('should fail to sign in with bad credentials', (done) => {
       User.create(user)
       .then(() => {
         request(url)
           .post('/api/auth/sign-in')
           .send({ email: user.email, password: 'incorrect' })
           .expect(401)
-          .end(err => {
+          .end((err) => {
             if (err) {
               throw err;
             }
@@ -59,7 +59,7 @@ describe('Routing', () => {
       });
     });
 
-    it('should return the user profile on successful sign in', done => {
+    it('should return the user profile on successful sign in', (done) => {
       User.create(user)
       .then(() => {
         request(url)
@@ -77,11 +77,11 @@ describe('Routing', () => {
       });
     });
 
-    it('should fail to verify athentication when not signed in', done => {
+    it('should fail to verify athentication when not signed in', (done) => {
       request(url)
         .get('/api/auth/verify')
         .expect(401)
-        .end(err => {
+        .end((err) => {
           if (err) {
             throw err;
           }
@@ -89,7 +89,7 @@ describe('Routing', () => {
         });
     });
 
-    it('should verify athentication when signed in', done => {
+    it('should verify athentication when signed in', (done) => {
       let session;
 
       // used to verify after setup

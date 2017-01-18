@@ -1,5 +1,5 @@
-import Cards from '../models/Card.js';
-import Plays from '../models/Play.js';
+import Cards from '../models/Card';
+import Plays from '../models/Play';
 
 const queryDb = () => {
   // given a deck id, get all the cards in that deck

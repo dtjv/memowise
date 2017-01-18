@@ -16,7 +16,7 @@ const BAD = -1;
 
 const DeckSchema = new mongoose.Schema(
   { name: String },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const UserSchema = new mongoose.Schema(
@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema(
     email: String,
     password: String,
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const CardSchema = new mongoose.Schema(
@@ -40,7 +40,7 @@ const CardSchema = new mongoose.Schema(
     deckId: String,
     userId: String,
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const PlaySchema = new mongoose.Schema(
@@ -50,7 +50,7 @@ const PlaySchema = new mongoose.Schema(
     deckId: String,
     userId: String,
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const Deck = mongoose.model('Deck', DeckSchema);
@@ -97,13 +97,13 @@ const playsFixture = [
   { userId: '', deckId: '', cardId: '', rating: BAD },
 ];
 
-const linkCardsToDeck = (deckId) => (
+const linkCardsToDeck = deckId => (
   cardsFixture.map(card => (
     { ...card, deckId }
   ))
 );
 
-const insertCards = (decks) => (
+const insertCards = decks => (
   Card.insertMany(decks.reduce((memo, deck) => (
     [...memo, ...linkCardsToDeck(deck._id)]
   ), []))
@@ -140,7 +140,7 @@ const load = () => (
         User.insertMany(usersFixture),
         Deck.insertMany(decksFixture),
       ])
-      .then(data => {
+      .then((data) => {
         const [users, decks] = data;
         return insertCards(decks)
           .then(cards => insertPlays(users, cards));
@@ -152,5 +152,4 @@ const load = () => (
 
 load().then(() => {
   mongoose.disconnect();
-  return;
 });

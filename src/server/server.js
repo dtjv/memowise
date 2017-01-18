@@ -5,11 +5,12 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import passport from 'passport';
-const MongoStore = require('connect-mongo')(session);
 import mongoose from './db';
 import setupPassport from './setupPassport';
 import homeRoute from './routes/home';
 import apiRoute from './routes/api';
+
+const MongoStore = require('connect-mongo')(session);
 
 const host = process.env.HOST || 'localhost';
 const port = process.env.PORT || 3000;

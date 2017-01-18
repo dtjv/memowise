@@ -1,3 +1,4 @@
+import fetch from 'isomorphic-fetch';
 import * as types from '../constants/actionTypes';
 import Auth from '../services/AuthService';
 import { config } from '../config';
@@ -9,13 +10,13 @@ export const failedRequest = error => ({ type: types.ERR_FAILED_REQUEST, data: e
 export const signIn = user => ({ type: types.SIGN_IN, data: user });
 export const signOut = () => ({ type: types.SIGN_OUT });
 export const verifyAuthentication = () => (
-  dispatch => {
+  (dispatch) => {
     Auth.verify()
       .then(user => dispatch(signIn(user)))
       .catch(err => dispatch(failedRequest(err)));
   });
 export const cancelAuthentication = () => (
-  dispatch => {
+  (dispatch) => {
     Auth.signOut()
       .then(() => dispatch(signOut()))
       .catch(err => dispatch(failedRequest(err)));

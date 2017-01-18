@@ -3,8 +3,8 @@ import { signIn } from '../actions';
 import SignIn from '../components/SignIn';
 
 const mapStateToProps = props => (props);
-const mapDispatchToProps = (dispatch) => ({
-  onSignIn: user => {
+const mapDispatchToProps = dispatch => ({
+  onSignIn: (user) => {
     dispatch(signIn(user));
   },
 });

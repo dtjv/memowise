@@ -2,7 +2,7 @@ import passport from 'passport';
 import User from '../models/User';
 
 const createAccount = (req, res) => {
-  User.findOne({ email: req.body.email }).then(exists => {
+  User.findOne({ email: req.body.email }).then((exists) => {
     if (exists) {
       return res
         .status(400)
@@ -14,12 +14,12 @@ const createAccount = (req, res) => {
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
-    }).then(user => {
+    }).then((user) => {
       const created = user.toObject();
       delete created.password;
       res.status(201).json(created);
     })
-    .catch(error => {
+    .catch((error) => {
       res
         .status(500)
         .type('json')
@@ -29,7 +29,7 @@ const createAccount = (req, res) => {
 };
 
 const attemptSignIn = (req, res, user) => {
-  req.login(user, err => {
+  req.login(user, (err) => {
     if (err) {
       res.status(401).send(err);
     } else {

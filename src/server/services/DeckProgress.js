@@ -1,4 +1,4 @@
-import queryDb from './QueryDb.js';
+import queryDb from './QueryDb';
 
 // helper function to get random numbers
 const getRandom = {
@@ -18,7 +18,7 @@ const getRandom = {
 // given a deck id, retrieve a card
 const getCard = (deckId, userId) => (
   // get the deck
-  queryDb().getDeck(deckId).then(deck => {
+  queryDb().getDeck(deckId).then((deck) => {
     // intitialize random card index and tries
     let tries = 0;
     const maxTries = 10;
@@ -31,7 +31,7 @@ const getCard = (deckId, userId) => (
 
     const findCard = () => (
       // find all plays that match card id
-      queryDb().getCardPlays(cardId, deckId, userId).then(plays => {
+      queryDb().getCardPlays(cardId, deckId, userId).then((plays) => {
         // get total rating for that card
         let totalRating = 0;
         if (plays.length) {
@@ -41,12 +41,12 @@ const getCard = (deckId, userId) => (
           return deck[cardIndex];
         }
         // get a random real number based on card's total rating
-        const randCardProbability = Math.random() * Math.pow(2, totalRating);
+        const randCardProbability = Math.random() * (totalRating ** 2);
 
         // decide whether to show card based on the randomly generated numbers
         if (p > randCardProbability && tries < maxTries) {
           ({ p, cardIndex, cardId } = getRandom.trio(deck));
-          tries++;
+          tries += 1;
           return findCard();
         }
         return deck[cardIndex];

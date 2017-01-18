@@ -1,4 +1,4 @@
-import queryDb from './QueryDb.js';
+import queryDb from './QueryDb';
 
 const getProgress = (deckId, userId) => (
   queryDb().getDistinctCardsPlayed(deckId, userId)

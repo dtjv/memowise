@@ -1,6 +1,5 @@
-// TODO: replace this with fetch using polyfill maybe
-// native fetch did NOT work to set cookies
 import $ from 'jquery';
+import fetch from 'isomorphic-fetch';
 
 export default class AuthService {
   static signIn(email, password) {
@@ -12,7 +11,7 @@ export default class AuthService {
         dataType: 'json',
       }).then(
         res => resolve(res),
-        err => reject(err)
+        err => reject(err),
       );
     });
   }
@@ -21,7 +20,7 @@ export default class AuthService {
     return new Promise((resolve, reject) => {
       $.get('/api/auth/verify').then(
         res => resolve(res),
-        err => reject(err)
+        err => reject(err),
       );
     });
   }
@@ -35,7 +34,7 @@ export default class AuthService {
     return new Promise((resolve, reject) => {
       $.get('/api/auth/sign-out').then(
         res => resolve(res),
-        err => reject(err)
+        err => reject(err),
       );
     });
   }

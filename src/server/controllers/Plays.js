@@ -4,13 +4,13 @@ const findLatest = (req, res) => {
   Play
     .findOne({ deckId: req.params.deckId, userId: req.user._id })
     .sort('-createdAt')
-    .then(play => {
+    .then((play) => {
       res
         .status(200)
         .type('json')
         .json(play);
     })
-    .catch(error => {
+    .catch((error) => {
       res
         .status(500)
         .type('json')
@@ -26,13 +26,13 @@ const create = (req, res) => {
     userId: req.user._id,
     rating: req.body.rating,
   })
-  .then(play => {
+  .then((play) => {
     res
       .status(201)
       .type('json')
       .json(play);
   })
-  .catch(error => {
+  .catch((error) => {
     res
       .status(500)
       .type('json')
