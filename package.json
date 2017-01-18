@@ -12,8 +12,8 @@
     "server-dev": "nodemon dev/server/server.js",
     "server-prod": "HOST=127.0.0.1 PORT=3333 PROTOCOL=http NODE_ENV=production node dist/server/server.js",
     "deploy:prod": "pm2 deploy ecosystem.json production",
-    "import": "node bin/deck-import.js documentation/decks/",
-    "import:all": "for deck in documentation/decks/*.md; do node bin/deck-import.js $deck ''; done",
+    "import": "node bin/deck-import.js docs/decks/",
+    "import:all": "for deck in docs/decks/*.md; do node bin/deck-import.js $deck ''; done",
     "lint": "eslint . --color",
     "test": "npm run lint && nyc mocha --compilers js:babel-register --bail --recursive tests",
     "coverage": "nyc report --reporter=html && open ./coverage/index.html"
