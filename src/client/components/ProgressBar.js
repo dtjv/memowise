@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import fetch from 'isomorphic-fetch';
 
 class ProgressBar extends React.Component {
   constructor(props) {
@@ -33,8 +34,7 @@ class ProgressBar extends React.Component {
     return (
       <div className="progress-bar">
         <div className="progress">
-          <div className="determinate" style={{ width: this.state.progress }}>
-          </div>
+          <div className="determinate" style={{ width: this.state.progress }} />
         </div>
       </div>
     );
@@ -42,7 +42,10 @@ class ProgressBar extends React.Component {
 }
 
 ProgressBar.propTypes = {
-  deck: PropTypes.object.isRequired,
+  deck: PropTypes.shape({
+    _id: PropTypes.number,
+    name: PropTypes.string,
+  }).isRequired,
 };
 
 export default ProgressBar;

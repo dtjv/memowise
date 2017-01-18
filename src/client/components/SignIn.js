@@ -1,6 +1,12 @@
+/* global Materialize */
+
 import React from 'react';
 import { browserHistory } from 'react-router';
 import Auth from '../services/AuthService';
+
+const error = (err) => {
+  Materialize.toast(err.responseJSON.message, 5000);
+};
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -13,7 +19,6 @@ class SignIn extends React.Component {
 
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.handleError = this.handleError.bind(this);
     this.signIn = this.signIn.bind(this);
   }
 
@@ -25,21 +30,16 @@ class SignIn extends React.Component {
     this.setState({ ...this.state, password: e.target.value });
   }
 
-  handleError(err) {
-    // TODO: don't use global
-    Materialize.toast(err.responseJSON.message, 5000);
-  }
-
   signIn(e) {
     e.preventDefault();
     // Here, we call an external AuthService. We’ll create it in the next step
     Auth.signIn(this.state.email, this.state.password)
-      .then(user => {
+      .then((user) => {
         // TODO: refactor to use push action creator
         this.props.onSignIn(user);
         browserHistory.push('/dashboard');
       })
-      .catch(this.handleError);
+      .catch(error);
   }
 
   render() {
@@ -92,7 +92,7 @@ class SignIn extends React.Component {
 }
 
 SignIn.propTypes = {
-  onSignIn: React.PropTypes.func,
+  onSignIn: React.PropTypes.func.isRequired,
 };
 
 export default SignIn;

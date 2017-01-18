@@ -15,7 +15,12 @@ const Profile = ({ user }) => {
 };
 
 Profile.propTypes = {
-  user: PropTypes.object,
+  user: PropTypes.shape({
+    _id: PropTypes.string, // correct?
+    name: PropTypes.string,
+    email: PropTypes.string,
+    createdAt: PropTypes.string, // correct?
+  }).isRequired,
 };
 
 export default Profile;

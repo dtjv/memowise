@@ -1,16 +1,25 @@
+/* global Materialize */
+
+import $ from 'jquery';
 import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { signIn } from '../actions';
-import $ from 'jquery';
 import Auth from '../services/AuthService';
 
 const mapStateToProps = props => (props);
-const mapDispatchToProps = (dispatch) => ({
-  onSignIn: user => {
+const mapDispatchToProps = dispatch => ({
+  onSignIn: (user) => {
     dispatch(signIn(user));
   },
 });
+
+const error = (err) => {
+  Materialize.toast(
+    `Failed to create account: ${err.responseJSON.message}`,
+    4000,
+  );
+};
 
 class CreateAccount extends React.Component {
   constructor(props) {
@@ -22,7 +31,6 @@ class CreateAccount extends React.Component {
       password: '',
     };
 
-    this.handleError = this.handleError.bind(this);
     this.handleNameInput = this.handleNameInput.bind(this);
     this.handleEmailInput = this.handleEmailInput.bind(this);
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
@@ -41,9 +49,6 @@ class CreateAccount extends React.Component {
     this.setState({ password: event.target.value });
   }
 
-  handleError(err) {
-    Materialize.toast(`Failed to create account: ${err.responseJSON.message}`, 4000);
-  }
 
   createAccount(event) {
     event.preventDefault();
@@ -54,13 +59,13 @@ class CreateAccount extends React.Component {
     };
     $.post('/api/auth/create-account', newUser, () => {
       Auth.signIn(this.state.email, this.state.password)
-        .then(user => {
+        .then((user) => {
           this.props.onSignIn(user);
           browserHistory.push('/dashboard');
         })
         .catch(this.handleError);
     })
-    .fail(err => this.handleError(err));
+    .fail(err => error(err));
   }
 
   render() {
@@ -75,7 +80,6 @@ class CreateAccount extends React.Component {
               <div className="input-field col s12">
                 <input
                   required
-                  ref="name"
                   type="text"
                   className="validate"
                   value={this.state.name}
@@ -90,7 +94,6 @@ class CreateAccount extends React.Component {
               <div className="input-field col s12">
                 <input
                   required
-                  ref="email"
                   type="email"
                   className="validate"
                   value={this.state.email}
@@ -103,7 +106,6 @@ class CreateAccount extends React.Component {
               <div className="input-field col s12">
                 <input
                   required
-                  ref="password"
                   type="password"
                   className="validate"
                   value={this.state.password}
@@ -129,7 +131,7 @@ class CreateAccount extends React.Component {
 }
 
 CreateAccount.propTypes = {
-  onSignIn: React.PropTypes.func,
+  onSignIn: React.PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateAccount);

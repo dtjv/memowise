@@ -1,27 +1,31 @@
 import React, { Component, PropTypes } from 'react';
-import { selectDeck } from '../actions';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
+import fetch from 'isomorphic-fetch';
+import { selectDeck } from '../actions';
 import ProgressBar from './ProgressBar';
 import DeckLastPlayed from './DeckLastPlayed';
 
-const mapDispatchToState = (dispatch) => ({
-  setDeckState: (deck) => dispatch(selectDeck(deck)),
+const mapDispatchToState = dispatch => ({
+  setDeckState: deck => dispatch(selectDeck(deck)),
 });
 
 class DeckItem extends Component {
   constructor(props) {
     super(props);
-    this.chooseDeckToStudy = this.chooseDeckToStudy.bind(this);
+
     this.state = {
       lastPlayedAt: '',
     };
+    this.chooseDeckToStudy = this.chooseDeckToStudy.bind(this);
   }
 
   componentWillMount() {
-    fetch(`/api/last-play/deck/${this.props.deck._id}`, { credentials: 'same-origin' })
+    const url = `/api/last-play/deck/${this.props.deck._id}`;
+
+    fetch(url, { credentials: 'same-origin' })
       .then(response => response.json())
-      .then(play => {
+      .then((play) => {
         this.setState({
           lastPlayedAt: (play && play.createdAt) || '',
         });
@@ -44,7 +48,10 @@ class DeckItem extends Component {
             <DeckLastPlayed date={this.state.lastPlayedAt} />
             <ProgressBar deck={this.props.deck} />
             <div className="center">
-              <button onClick={this.chooseDeckToStudy} className="btn cyan lighten-3">
+              <button
+                onClick={this.chooseDeckToStudy}
+                className="btn cyan lighten-3"
+              >
                 Study
               </button>
             </div>
@@ -56,7 +63,10 @@ class DeckItem extends Component {
 }
 
 DeckItem.propTypes = {
-  deck: PropTypes.object.isRequired,
+  deck: PropTypes.shape({
+    _id: PropTypes.number,
+    name: PropTypes.string,
+  }).isRequired,
   setDeckState: PropTypes.func.isRequired,
 };
 

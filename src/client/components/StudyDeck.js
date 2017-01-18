@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+
 import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import ReactMarkdown from 'react-markdown';
@@ -29,7 +31,10 @@ class StudyDeck extends React.Component {
     return (
       <div className="flashcard flashcard-front">
         <div className="flashcard-close">
-          <i className="material-icons" onClick={() => browserHistory.push('/dashboard')}>close</i>
+          <i
+            className="material-icons"
+            onClick={() => browserHistory.push('/dashboard')}
+          > close </i>
         </div>
         <div className="flashcard-title">
           <ReactMarkdown source={(question && question.text) || ''} />
@@ -49,7 +54,10 @@ class StudyDeck extends React.Component {
     return (
       <div className="flashcard flashcard-back">
         <div className="flashcard-close">
-          <i className="material-icons" onClick={() => browserHistory.push('/dashboard')}>close</i>
+          <i
+            className="material-icons"
+            onClick={() => browserHistory.push('/dashboard')}
+          > close </i>
         </div>
         <div className="flashcard-title">
           <ReactMarkdown source={(answer && answer.text) || ''} />
@@ -97,9 +105,22 @@ class StudyDeck extends React.Component {
 }
 
 StudyDeck.propTypes = {
-  deck: PropTypes.object.isRequired,
-  card: PropTypes.object.isRequired,
-  play: PropTypes.object.isRequired,
+  deck: PropTypes.shape({
+    _id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+  card: PropTypes.shape({
+    question: PropTypes.shape({
+      text: PropTypes.string.isRequired,
+    }).isRequired,
+    answer: PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      explanation: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+  play: PropTypes.shape({
+    side: PropTypes.bool.isRequired,
+  }).isRequired,
   fetchCard: PropTypes.func.isRequired,
   flipCard: PropTypes.func.isRequired,
   startPlay: PropTypes.func.isRequired,

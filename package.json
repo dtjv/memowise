@@ -14,7 +14,7 @@
     "deploy:prod": "pm2 deploy ecosystem.json production",
     "import": "node bin/deck-import.js docs/decks/",
     "import:all": "for deck in docs/decks/*.md; do node bin/deck-import.js $deck ''; done",
-    "lint": "eslint . --color",
+    "lint": "eslint *.js src tests --color",
     "test": "npm run lint && nyc mocha --compilers js:babel-register --bail --recursive tests",
     "coverage": "nyc report --reporter=html && open ./coverage/index.html"
   },

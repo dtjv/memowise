@@ -5,7 +5,7 @@ const Splash = () => (
   <div className="container">
     <br />
     <h1 className="center splashtitle"> MEMOWISE </h1>
-    <div className="row"></div>
+    <div className="row" />
     <div className="row center">
       <div className="col s4">
         <h6 className="splashsubtitle"> select a deck </h6>

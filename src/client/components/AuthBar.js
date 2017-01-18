@@ -47,8 +47,14 @@ const AuthBar = ({ user, mobile }) => {
 };
 
 AuthBar.propTypes = {
-  user: React.PropTypes.object,
+  user: React.PropTypes.shape({
+    name: React.PropTypes.string,
+  }).isRequired,
   mobile: React.PropTypes.bool,
+};
+
+AuthBar.defaultProps = {
+  mobile: false,
 };
 
 export default AuthBar;

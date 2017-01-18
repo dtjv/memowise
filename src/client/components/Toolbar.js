@@ -1,6 +1,6 @@
 import React from 'react';
-import AuthBar from '../containers/AuthBar';
 import { Link } from 'react-router';
+import AuthBar from '../containers/AuthBar';
 
 const Toolbar = () => (
   <header>
@@ -12,9 +12,9 @@ const Toolbar = () => (
           </Link>
           <AuthBar />
           <AuthBar mobile />
-          <a href="#" data-activates="nav-mobile" className="button-collapse">
+          <button data-activates="nav-mobile" className="button-collapse">
             <i className="material-icons">menu</i>
-          </a>
+          </button>
         </div>
       </nav>
     </div>
