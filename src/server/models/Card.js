@@ -1,4 +1,4 @@
-import mongoose from '../db';
+const mongoose = require('../db');
 
 const CardSchema = new mongoose.Schema({
   question: { text: String },
@@ -7,4 +7,4 @@ const CardSchema = new mongoose.Schema({
   userId: String,
 }, { timestamps: true });
 
-export default mongoose.model('Card', CardSchema);
+module.exports = mongoose.model('Card', CardSchema);

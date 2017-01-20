@@ -1,9 +1,9 @@
-import { Router } from 'express';
+const { Router } = require('express');
 
 // controllers
-import decks from '../controllers/Decks';
-import plays from '../controllers/Plays';
-import auth from '../controllers/Auth';
+const decks = require('../controllers/Decks');
+const plays = require('../controllers/Plays');
+const auth = require('../controllers/Auth');
 
 const router = new Router();
 
@@ -29,4 +29,4 @@ router.route('/api/auth/verify').get(auth.verify);
 router.route('/api/auth/sign-out').get(auth.signOut);
 router.route('/api/auth/check-authorized').get(auth.checkAuthorized);
 
-export default router;
+module.exports = router;

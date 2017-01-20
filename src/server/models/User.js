@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
-import Promise from 'bluebird';
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const Promise = require('bluebird');
 
 const UserSchema = new mongoose.Schema({
   name: String,
@@ -41,4 +41,4 @@ UserSchema.methods.authenticate = function authenticate(password, callback) {
   });
 };
 
-export default mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

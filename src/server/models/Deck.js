@@ -1,7 +1,7 @@
-import mongoose from '../db';
+const mongoose = require('../db');
 
 const DeckSchema = new mongoose.Schema({
   name: String,
 }, { timestamps: true });
 
-export default mongoose.model('Deck', DeckSchema);
+module.exports = mongoose.model('Deck', DeckSchema);

@@ -1,15 +1,14 @@
-import { resolve } from 'path';
-import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
-import session from 'express-session';
-import passport from 'passport';
-import mongoose from './db';
-import setupPassport from './setupPassport';
-import homeRoute from './routes/home';
-import apiRoute from './routes/api';
-
+const { resolve } = require('path');
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const passport = require('passport');
+const mongoose = require('./db');
+const setupPassport = require('./setupPassport');
+const homeRoute = require('./routes/home');
+const apiRoute = require('./routes/api');
 const MongoStore = require('connect-mongo')(session);
 
 const host = process.env.HOST || 'localhost';
@@ -28,7 +27,7 @@ express()
   .use(bodyParser.urlencoded({ extended: true }))
   .use(bodyParser.json())
   .use(cookieParser())
-  .use(express.static(resolve(__dirname, '../')))
+  .use(express.static(resolve(__dirname, '../../dev'))) // TODO: don't hardcode dev
   .use(session({
     secret: 'wonky',
     resave: false,

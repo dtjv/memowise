@@ -1,4 +1,4 @@
-import queryDb from './QueryDb';
+const queryDb = require('./QueryDb');
 
 const getProgress = (deckId, userId) => (
   queryDb().getDistinctCardsPlayed(deckId, userId)
@@ -9,4 +9,4 @@ const getProgress = (deckId, userId) => (
     ))
 );
 
-export default getProgress;
+module.exports = getProgress;

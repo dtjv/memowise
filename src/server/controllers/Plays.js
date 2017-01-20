@@ -1,6 +1,6 @@
-import Play from '../models/Play';
+const Play = require('../models/Play');
 
-const findLatest = (req, res) => {
+exports.findLatest = (req, res) => {
   Play
     .findOne({ deckId: req.params.deckId, userId: req.user._id })
     .sort('-createdAt')
@@ -18,7 +18,7 @@ const findLatest = (req, res) => {
     });
 };
 
-const create = (req, res) => {
+exports.create = (req, res) => {
   Play.create({
     side: req.body.side,
     deckId: req.body.deckId,
@@ -39,5 +39,3 @@ const create = (req, res) => {
       .json({ error });
   });
 };
-
-export default { findLatest, create };

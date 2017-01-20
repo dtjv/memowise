@@ -1,4 +1,4 @@
-export default `
+module.exports = `
   <!DOCTYPE html>
   <html>
     <head>
@@ -13,7 +13,7 @@ export default `
       <script>
         $('.button-collapse').sideNav();
       </script>
-      <script type="text/javascript" src="/client/app.js"></script>
+      <script type="text/javascript" src="bundle.js"></script>
     </body>
   </html>
 `;

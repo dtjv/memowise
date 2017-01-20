@@ -1,4 +1,4 @@
-import queryDb from './QueryDb';
+const queryDb = require('./QueryDb');
 
 // helper function to get random numbers
 const getRandom = {
@@ -57,6 +57,4 @@ const getCard = (deckId, userId) => (
   })
 );
 
-
-export default getCard;
-
+module.exports = getCard;

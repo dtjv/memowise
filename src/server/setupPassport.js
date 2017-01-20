@@ -1,10 +1,10 @@
-import passport from 'passport';
-import { Strategy } from 'passport-local';
-import User from './models/User';
+const passport = require('passport');
+const { Strategy } = require('passport-local');
+const User = require('./models/User');
 
 const oid = '_id';
 
-export default () => {
+module.exports = () => {
   // Serialize sessions
   passport.serializeUser((user, done) => done(null, user[oid]));
 

@@ -1,9 +1,8 @@
-import Deck from '../models/Deck';
+const Deck = require('../models/Deck');
+const getCard = require('../services/DeckProgress');
+const getProgress = require('../services/ProgressBar');
 
-import getCard from '../services/DeckProgress';
-import getProgress from '../services/ProgressBar';
-
-const findAll = (req, res) => {
+exports.findAll = (req, res) => {
   Deck.find({}).then((decks) => {
     res
       .status(200)
@@ -12,7 +11,7 @@ const findAll = (req, res) => {
   });
 };
 
-const findNextCard = (req, res) => {
+exports.findNextCard = (req, res) => {
   getCard(req.body.deckId, req.user._id).then((card) => {
     res
       .status(200)
@@ -21,7 +20,7 @@ const findNextCard = (req, res) => {
   });
 };
 
-const progress = (req, res) => {
+exports.progress = (req, res) => {
   getProgress(req.body.deckId, req.user._id).then((percentage) => {
     res
       .status(200)
@@ -29,5 +28,3 @@ const progress = (req, res) => {
       .json(percentage);
   });
 };
-
-export default { findAll, findNextCard, progress };

@@ -4,14 +4,13 @@
   "description": "A flashcard app in React",
   "scripts": {
     "clean": "rimraf dev dist",
-    "dev:build": "npm run clean && babel src/server -d dev/server && webpack --progress --colors",
-    "dev:server": "nodemon dev/server/server.js",
-    "lint": "eslint *.js src tests --color",
+    "dev:build": "npm run clean && webpack --progress --colors",
+    "dev:server": "nodemon src/server/server.js",
+    "lint": "eslint *.js bin src tests --color",
     "test": "npm run lint && nyc mocha --compilers js:babel-register --bail --recursive tests",
     "coverage": "nyc report --reporter=html && open ./coverage/index.html"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
     "babel-preset-latest": "6.16.0",

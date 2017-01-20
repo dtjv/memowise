@@ -7,8 +7,8 @@ export default {
   devtool: isDev ? 'inline-sourcemap' : null,
   entry: './src/client/app.js',
   output: {
-    path: join(__dirname, `/${isDev ? 'dev' : 'dist'}/client/`),
-    filename: 'app.js',
+    path: join(__dirname, `/${isDev ? 'dev' : 'dist'}/`),
+    filename: 'bundle.js',
   },
   module: {
     loaders: [

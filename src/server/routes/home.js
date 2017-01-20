@@ -1,12 +1,10 @@
-import { Router } from 'express';
-// import { join } from 'path';
-import indexView from '../views';
+const { Router } = require('express');
+const indexView = require('../views');
 
 const router = new Router();
 
 router.get('*', (req, res) => {
-  // res.sendFile(join(__dirname, '../views/index.html'));
   res.send(indexView);
 });
 
-export default router;
+module.exports = router;

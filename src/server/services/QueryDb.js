@@ -1,5 +1,5 @@
-import Cards from '../models/Card';
-import Plays from '../models/Play';
+const Cards = require('../models/Card');
+const Plays = require('../models/Play');
 
 const queryDb = () => {
   // given a deck id, get all the cards in that deck
@@ -22,4 +22,4 @@ const queryDb = () => {
   });
 };
 
-export default queryDb;
+module.exports = queryDb;
