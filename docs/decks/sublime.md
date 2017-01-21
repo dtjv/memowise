@@ -7,7 +7,9 @@
 "Cmd + Z",
 ### Explanation
 " "
+
 ---
+
 ## Card 
 ### Question
 "Redo Action"
@@ -15,7 +17,9 @@
 "Cmd + Shift + Z",
 ### Explanation
 " "
+
 ---
+
 ## Card 
 ### Question
 "Copy Current Line/Selection"
@@ -23,7 +27,9 @@
 "Cmd + C",
 ### Explanation
 " "
+
 ---
+
 ## Card 
 ### Question
 "Cut Current Line/Selection"
@@ -31,7 +37,9 @@
 "Cmd + X",
 ### Explanation
 " "
+
 ---
+
 ## Card 
 ### Question
 "Paste"
@@ -39,7 +47,9 @@
 "Cmd + V",
 ### Explanation
 " "
+
 ---
+
 ## Card 
 ### Question
 "Paste and Smart Indent"
@@ -47,7 +57,9 @@
 "Cmd + Shift + V",
 ### Explanation
 " "
+
 ---
+
 ## Card 
 ### Question
 "Indent Current Line/Selection"
@@ -55,7 +67,9 @@
 "Cmd + ]",
 ### Explanation
 " "
+
 ---
+
 ## Card 
 ### Question
 "Unindent Current Line/Selection"
@@ -63,7 +77,9 @@
 "Cmd + [",
 ### Explanation
 " "
+
 ---
+
 ## Card 
 ### Question
 "Split Screen in Two"
@@ -71,4 +87,5 @@
 "Cmd + Option + 2",
 ### Explanation
 " "
+
 ---

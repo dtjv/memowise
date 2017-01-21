@@ -9,6 +9,7 @@ Create a new local repository
 Create an empty Git repository or reinitialize an existing one
 
 ---
+
 ## Card
 ### Question
 Check changed files in your working directory
@@ -18,6 +19,7 @@ Check changed files in your working directory
 Show the working tree status
 
 ---
+
 ## Card 
 ### Question
 Delete a local branch
@@ -27,6 +29,7 @@ Delete a local branch
 With a -d or -D option, `<branchname>` will be deleted. You may specify more than one branch for deletion. If the branch currently has a reflog then the reflog will also be deleted.
 
 ---
+
 ## Card 
 ### Question
 Show all commits, starting with the newest
@@ -36,6 +39,7 @@ Show all commits, starting with the newest
 Show commit logs
 
 ---
+
 ## Card 
 ### Question
 Add all current changes to the next commit
@@ -45,6 +49,7 @@ Add all current changes to the next commit
 Add file contents to the index
 
 ---
+
 ## Card 
 ### Question
 List all currently configured remotes
