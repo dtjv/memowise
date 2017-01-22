@@ -102,36 +102,21 @@ const parseMarkdownFile = (file) => {
   return deck;
 };
 
-// TODO: drop collection first
-const insertCardIntoDB = (db, card) => {
-  db.collection('cards')
-    .insert(card, (err) => {
-      if (err) {
-        throw err;
-      }
-    });
-};
-
-// TODO: drop collection first
 const insertDeckIntoDB = (db, { name, cards }) => {
-  let deckId;
   const deck = { name };
 
-  db.collection('decks')
-    .insert(deck, (err) => {
-      if (err) {
-        throw err;
-      }
-
-      deckId = deck._id.toString();
-      cards
-        .map(card => Object.assign({}, card, { deckId }))
-        .map(card => insertCardIntoDB(db, card));
-
-      db.close();
-      console.log(`Added '${deck.name}' to '${cfg.db.dbName}.decks'`);
+  return db.collection('decks').insert(deck)
+    .then(() => {
+      // the insert modifies our object, `deck`, by adding an `_id`!!
+      const deckId = deck._id.toString();
+      return db
+        .collection('cards')
+        .insert(cards.map(card => Object.assign({}, card, { deckId })));
     });
 };
+
+const insertDecksIntoDB = (db, decks) =>
+  Promise.all(decks.map(deck => insertDeckIntoDB(db, deck)));
 
 const main = () => {
   const cli = meow({ help });
@@ -141,13 +126,22 @@ const main = () => {
     .map(fn => fs.readFileSync(fn, 'utf8'))
     .map(parseMarkdownFile);
 
-  MongoClient.connect(cfg.db.url, (err, db) => {
-    if (err) {
-      throw err;
-    }
+  MongoClient.connect(cfg.db.url).then((db) => {
+    db.collections().then((collections) => {
+      collections.forEach((collection) => {
+        if (collection.collectionName !== 'system.indexes') {
+          collection.drop();
+        }
+      });
 
-    decks.forEach(deck => insertDeckIntoDB(db, deck));
-  });
+      insertDecksIntoDB(db, decks).then((result) => {
+        decks.forEach(({ name }, idx) =>
+          console.log(`Added ${name} + ${result[idx].insertedCount} cards`));
+        db.close();
+      });
+    });
+  })
+  .catch(err => console.error(err));
 };
 
 main();
