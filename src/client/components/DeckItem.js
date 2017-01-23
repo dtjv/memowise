@@ -21,15 +21,23 @@ class DeckItem extends Component {
   }
 
   componentWillMount() {
-    const url = `/api/last-play/deck/${this.props.deck._id}`;
+    const payload = JSON.stringify({ deckId: this.props.deck._id });
 
-    fetch(url, { credentials: 'same-origin' })
-      .then(response => response.json())
-      .then((play) => {
-        this.setState({
-          lastPlayedAt: (play && play.createdAt) || '',
-        });
+    fetch('/api/play/last', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        'Content-length': payload.length,
+      },
+      credentials: 'same-origin',
+      body: payload,
+    })
+    .then(res => res.json())
+    .then((play) => {
+      this.setState({
+        lastPlayedAt: (play && play.createdAt) || '',
       });
+    });
   }
 
   chooseDeckToStudy() {

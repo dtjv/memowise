@@ -16,18 +16,11 @@ class ProgressBar extends React.Component {
   }
 
   loadProgress(deckId) {
-    const payload = JSON.stringify({ deckId });
-    fetch('api/progress', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-        'Content-length': payload.length,
-      },
+    fetch(`/api/deck/:${deckId}/percent-complete`, {
       credentials: 'same-origin',
-      body: payload,
     })
     .then(res => res.json())
-    .then(progress => this.setState({ progress }));
+    .then(percentage => this.setState({ progress: percentage }));
   }
 
   render() {

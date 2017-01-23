@@ -104,7 +104,7 @@ export const savePlay = (play, rating) => {
   const payload = JSON.stringify({ ...play, rating });
 
   return dispatch => (
-    fetch(`${url}/api/play`, {
+    fetch(`${url}/api/play/create`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',

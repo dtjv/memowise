@@ -24,7 +24,7 @@ exports.create = (req, res) => {
 
 exports.getLast = (req, res) => {
   Play.findOne({
-    deckId: req.params.deckId,
+    deckId: req.body.deckId,
     userId: req.user._id,
   })
   .sort('-createdAt')
