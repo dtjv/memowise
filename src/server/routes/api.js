@@ -1,32 +1,46 @@
 const { Router } = require('express');
 
-// controllers
-const decks = require('../controllers/Decks');
-const plays = require('../controllers/Plays');
-const auth = require('../controllers/Auth');
+const deck = require('../controllers/deck');
+const card = require('../controllers/card');
+const play = require('../controllers/play');
+const auth = require('../controllers/auth');
 
 const router = new Router();
 
 /*
- * Decks
+ * Deck
  */
-router.route('/api/decks').get(auth.checkAuthServer, decks.findAll);
-router.route('/api/card').post(auth.checkAuthServer, decks.findNextCard);
-router.route('/api/progress').post(auth.checkAuthServer, decks.progress);
+router.route('/api/deck')
+  .get(auth.checkAuthServer, deck.getAll);
+router.route('/api/deck/:deckId/percent-complete')
+  .get(auth.checkAuthServer, deck.getPercentComplete);
 
 /*
- * Plays
+ * Card
  */
-router.route('/api/play').post(auth.checkAuthServer, plays.create);
-router.route('/api/last-play/deck/:deckId').get(auth.checkAuthServer, plays.findLatest);
+router.route('/api/card')
+  .post(auth.checkAuthServer, card.getNext);
+
+/*
+ * Play
+ */
+router.route('/api/play/create')
+  .post(auth.checkAuthServer, play.create);
+router.route('/api/play/last')
+  .post(auth.checkAuthServer, play.getLast);
 
 /*
  * Auth
  */
-router.route('/api/auth/create-account').post(auth.createAccount);
-router.route('/api/auth/sign-in').post(auth.signIn);
-router.route('/api/auth/verify').get(auth.verify);
-router.route('/api/auth/sign-out').get(auth.signOut);
-router.route('/api/auth/check-authorized').get(auth.checkAuthorized);
+router.route('/api/auth/create-account')
+  .post(auth.createAccount);
+router.route('/api/auth/sign-in')
+  .post(auth.signIn);
+router.route('/api/auth/verify')
+  .get(auth.verify);
+router.route('/api/auth/sign-out')
+  .get(auth.signOut);
+router.route('/api/auth/check-authorized')
+  .get(auth.checkAuthorized);
 
 module.exports = router;

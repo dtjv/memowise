@@ -2,30 +2,32 @@ const passport = require('passport');
 const User = require('../models/User');
 
 exports.createAccount = (req, res) => {
-  User.findOne({ email: req.body.email }).then((exists) => {
-    if (exists) {
-      return res
-        .status(400)
-        .type('json')
-        .json({ message: 'User with same email already exists' });
-    }
+  User.findOne({ email: req.body.email })
+    .then((exists) => {
+      if (exists) {
+        res
+          .status(400)
+          .type('json')
+          .json({ message: 'User with same email already exists' });
+      }
 
-    return User.create({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-    }).then((user) => {
-      const created = user.toObject();
-      delete created.password;
-      res.status(201).json(created);
-    })
-    .catch((error) => {
-      res
-        .status(500)
-        .type('json')
-        .json({ error });
+      return User.create({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+      })
+      .then((user) => {
+        const created = user.toObject();
+        delete created.password;
+        res.status(201).json(created);
+      })
+      .catch((error) => {
+        res
+          .status(500)
+          .type('json')
+          .json({ error });
+      });
     });
-  });
 };
 
 exports.attemptSignIn = (req, res, user) => {

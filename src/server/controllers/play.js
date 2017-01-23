@@ -1,23 +1,5 @@
 const Play = require('../models/Play');
 
-exports.findLatest = (req, res) => {
-  Play
-    .findOne({ deckId: req.params.deckId, userId: req.user._id })
-    .sort('-createdAt')
-    .then((play) => {
-      res
-        .status(200)
-        .type('json')
-        .json(play);
-    })
-    .catch((error) => {
-      res
-        .status(500)
-        .type('json')
-        .json({ error });
-    });
-};
-
 exports.create = (req, res) => {
   Play.create({
     side: req.body.side,
@@ -29,6 +11,26 @@ exports.create = (req, res) => {
   .then((play) => {
     res
       .status(201)
+      .type('json')
+      .json(play);
+  })
+  .catch((error) => {
+    res
+      .status(500)
+      .type('json')
+      .json({ error });
+  });
+};
+
+exports.getLast = (req, res) => {
+  Play.findOne({
+    deckId: req.params.deckId,
+    userId: req.user._id,
+  })
+  .sort('-createdAt')
+  .then((play) => {
+    res
+      .status(200)
       .type('json')
       .json(play);
   })
