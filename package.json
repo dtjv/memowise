@@ -8,7 +8,8 @@
     "dev:server": "nodemon src/server/server.js",
     "lint": "eslint *.js bin src tests --color",
     "test": "npm run lint && nyc mocha --compilers js:babel-register --bail --recursive tests",
-    "coverage": "nyc report --reporter=html && open ./coverage/index.html"
+    "coverage": "nyc report --reporter=html && open ./coverage/index.html",
+    "import": "./bin/deck-import.js -a"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",
@@ -65,7 +66,8 @@
     "react-router": "^3.0.1",
     "react-router-redux": "^4.0.7",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "unique-random-array": "1.0.0"
   },
   "babel": {
     "presets": [

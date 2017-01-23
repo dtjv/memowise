@@ -11,7 +11,7 @@ const cfg = require('../src/server/config');
 cfg.db.url = `mongodb://${cfg.db.host}:${cfg.db.port}/${cfg.db.dbName}`;
 
 const help = `
-  Usage:')}
+  Usage:
     deck-import [<options>]
 
   Options:
@@ -119,7 +119,7 @@ const insertDecksIntoDB = (db, decks) =>
   Promise.all(decks.map(deck => insertDeckIntoDB(db, deck)));
 
 const main = () => {
-  const cli = meow({ help });
+  const cli = meow({ help, description: 'Flashcard Import Tool' });
   const markdownFiles = makeFileList(cli.flags);
 
   const decks = markdownFiles
