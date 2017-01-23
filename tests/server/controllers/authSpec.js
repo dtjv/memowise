@@ -1,10 +1,11 @@
 /* global describe, it, before, beforeEach, after, afterEach */
+
 import chai from 'chai';
 import request from 'supertest';
-import mongoose from '../../src/server/db';
+import mongoose from '../../../src/server/db';
 
 // should be replaced by just loading fixtures before each test
-import User from '../../src/server/models/User';
+import User from '../../../src/server/models/User';
 
 const expect = chai.expect;
 

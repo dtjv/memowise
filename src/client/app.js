@@ -29,9 +29,11 @@ import Auth from './services/AuthService';
 
 reducers.routing = routerReducer;
 
+// put store and all it's dependencies in own directory: 'store/'
 const store = createStore(combineReducers(reducers), applyMiddleware(thunk));
 const history = syncHistoryWithStore(browserHistory, store);
 
+// Auth is imported above, yet we write another authorization function here?!
 const isAuthorized = (nextState, replace, next) => {
   Auth.checkAuthorized()
     .then((check) => {

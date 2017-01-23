@@ -1,3 +1,4 @@
+// TODO: move to .env
 module.exports = {
   db: {
     host: 'localhost',

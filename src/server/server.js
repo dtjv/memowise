@@ -1,3 +1,5 @@
+require('dotenv').config({ silent: true });
+
 const { resolve } = require('path');
 const express = require('express');
 const cors = require('cors');
@@ -7,9 +9,14 @@ const session = require('express-session');
 const passport = require('passport');
 const mongoose = require('./db');
 const setupPassport = require('./setupPassport');
-const homeRoute = require('./routes/home');
-const apiRoute = require('./routes/api');
 const MongoStore = require('connect-mongo')(session);
+
+// routes
+const homeRoute = require('./routes/home');
+const authRoute = require('./routes/auth');
+const deckRoute = require('./routes/deck');
+const cardRoute = require('./routes/card');
+const playRoute = require('./routes/play');
 
 const host = process.env.HOST || 'localhost';
 const port = process.env.PORT || 3000;
@@ -36,7 +43,10 @@ express()
   }))
   .use(passport.initialize())
   .use(passport.session())
-  .use(apiRoute)
+  .use(deckRoute)
+  .use(cardRoute)
+  .use(playRoute)
+  .use(authRoute)
   .use(homeRoute)
   .listen(port);
 
