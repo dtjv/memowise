@@ -1,8 +1,7 @@
 {
   "extends": "airbnb",
   "rules": {
-    "no-underscore-dangle": [0],
-    "react/jsx-filename-extension": [0]
+    "no-underscore-dangle": [0]
   },
   "parserOptions":{
     "ecmaFeatures": {
