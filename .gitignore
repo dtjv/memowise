@@ -1,7 +1,6 @@
-node_modules/
+node_modules
 coverage
 .nyc_output
 .env
-dev/
-dist/
+build
 NOTES.md

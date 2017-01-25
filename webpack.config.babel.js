@@ -1,13 +1,10 @@
 import webpack from 'webpack';
 import { join } from 'path';
 
-const isDev = process.env.NODE_ENV !== 'production';
-
 export default {
-  devtool: isDev ? 'inline-sourcemap' : null,
   entry: './src/client/app.js',
   output: {
-    path: join(__dirname, `/${isDev ? 'dev' : 'dist'}/`),
+    path: join(__dirname, '/build'),
     filename: 'bundle.js',
   },
   module: {
@@ -27,10 +24,10 @@ export default {
       },
     ],
   },
-  plugins: isDev ? [] : [
+  plugins: [
     new webpack.EnvironmentPlugin(['NODE_ENV', 'PROTOCOL', 'HOST', 'PORT']),
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(true),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
