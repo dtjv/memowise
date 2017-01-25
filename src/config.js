@@ -1,4 +1,8 @@
+require('dotenv').config({ silent: true });
+
 module.exports = {
+  SESSION_SECRET: process.env.SESSION_SECRET || 'memowise',
+
   HOST: process.env.HOST || 'localhost',
   PORT: process.env.PORT || '3000',
   PROTOCOL: process.env.PROTOCOL || 'http',

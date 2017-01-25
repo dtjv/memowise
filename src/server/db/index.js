@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const cfg = require('../config');
+const { DB_NAME, DB_HOST, DB_PORT } = require('../../config');
 
 if (!mongoose.connection.readyState) {
-  mongoose.connect(`mongodb://${cfg.db.host}:${cfg.db.port}/${cfg.db.dbName}`);
+  mongoose.connect(`mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}`);
 }
 
 module.exports = mongoose;

@@ -1,9 +1,9 @@
 import fetch from 'isomorphic-fetch';
 import * as types from '../constants/actionTypes';
 import Auth from '../services/AuthService';
-import { config } from '../config';
+import { HOST, PORT, PROTOCOL } from '../../config';
 
-const url = `${config.api.protocol}://${config.api.host}:${config.api.port}`;
+const baseUrl = `${PROTOCOL}://${HOST}:${PORT}`;
 
 export const failedRequest = error =>
   ({
@@ -50,7 +50,7 @@ export const selectDeck = deck =>
 
 export const fetchDecks = () => (
   dispatch => (
-    fetch(`${url}/api/decks`, {
+    fetch(`${baseUrl}/api/decks`, {
       credentials: 'same-origin',
     })
     .then(res => res.json())
@@ -68,7 +68,7 @@ export const fetchCard = (deckId) => {
   const payload = JSON.stringify({ deckId });
 
   return dispatch => (
-    fetch(`${url}/api/card`, {
+    fetch(`${baseUrl}/api/card`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -104,7 +104,7 @@ export const savePlay = (play, rating) => {
   const payload = JSON.stringify({ ...play, rating });
 
   return dispatch => (
-    fetch(`${url}/api/play/create`, {
+    fetch(`${baseUrl}/api/play/create`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
