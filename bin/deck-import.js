@@ -2,13 +2,17 @@
 
 /* eslint-disable no-console */
 
+require('dotenv').config({ silent: true });
+
+const DB_NAME = process.env.DB_NAME;
+const DB_HOST = process.env.DB_HOST;
+const DB_PORT = process.env.DB_PORT;
+const DB_URL = `mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}`;
+
 const meow = require('meow');
 const fs = require('fs');
 const { join, resolve } = require('path');
 const MongoClient = require('mongodb').MongoClient;
-const cfg = require('../src/server/config');
-
-cfg.db.url = `mongodb://${cfg.db.host}:${cfg.db.port}/${cfg.db.dbName}`;
 
 const help = `
   Usage:
@@ -85,7 +89,7 @@ const parseMarkdownFile = (file) => {
     const e = c.indexOf('### Explanation');
 
     if (q === -1 || q === -1 || e === -1) {
-      throw new Error('Missing required card sections!');
+      throw new Error('Missing required card section(s)!');
     }
 
     return {
@@ -118,6 +122,9 @@ const insertDeckIntoDB = (db, { name, cards }) => {
 const insertDecksIntoDB = (db, decks) =>
   Promise.all(decks.map(deck => insertDeckIntoDB(db, deck)));
 
+/*
+ * main
+ */
 const main = () => {
   const cli = meow({ help, description: 'Flashcard Import Tool' });
   const markdownFiles = makeFileList(cli.flags);
@@ -126,7 +133,7 @@ const main = () => {
     .map(fn => fs.readFileSync(fn, 'utf8'))
     .map(parseMarkdownFile);
 
-  MongoClient.connect(cfg.db.url).then((db) => {
+  MongoClient.connect(DB_URL).then((db) => {
     db.collections().then((collections) => {
       collections.forEach((collection) => {
         if (collection.collectionName !== 'system.indexes') {
@@ -144,4 +151,7 @@ const main = () => {
   .catch(err => console.error(err));
 };
 
+/*
+ * start here!
+ */
 main();
