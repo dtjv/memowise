@@ -18,6 +18,6 @@ before_install:
   - npm install -g node-gyp
 before_script:
   - sleep 15
-  - npm start
+  - npm start &
 after_success:
   - npm run codecov
