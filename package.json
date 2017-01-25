@@ -1,6 +1,6 @@
 {
   "name": "memowise",
-  "version": "0.5.2",
+  "version": "1.0.0",
   "description": "A flashcard app using React + Redux",
   "scripts": {
     "clean": "rimraf build",
