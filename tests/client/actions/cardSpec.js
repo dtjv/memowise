@@ -1,14 +1,15 @@
 /* global describe, xdescribe, it, before, beforeEach, after, afterEach */
 
-import 'isomorphic-fetch';
 import { expect } from 'chai';
 import nock from 'nock';
 import thunk from 'redux-thunk';
-import cfgMockStore from 'redux-mock-store';
+import configStore from 'redux-mock-store';
 import { receiveCard, fetchCard } from '../../../src/client/actions';
-import * as types from '../../../src/client/constants/actionTypes';
+import { RECEIVE_CARD } from '../../../src/client/constants/actionTypes';
+import { HOST, PORT, PROTOCOL } from '../../../src/config';
 
-const mockStore = cfgMockStore([thunk]);
+const baseUrl = `${PROTOCOL}://${HOST}:${PORT}`;
+const mockStore = configStore([thunk]);
 
 describe('Card Action Creators', () => {
   describe('receiveCard', () => {
@@ -19,7 +20,7 @@ describe('Card Action Creators', () => {
     it('should return object with `type` and `data` properties set', () => {
       const card = { _id: '0' };
       const result = receiveCard(card);
-      const expected = { type: types.RECEIVE_CARD, data: card };
+      const expected = { type: RECEIVE_CARD, data: card };
 
       expect(result).to.deep.equal(expected);
     });
@@ -36,9 +37,11 @@ describe('Card Action Creators', () => {
 
     it('should create RECEIVE_CARD when fetching a card is done', () => {
       const card = { _id: '1', deckId: '123' };
-      const expectedActions = [{ type: types.RECEIVE_CARD, data: card }];
+      const expectedActions = [
+        { type: RECEIVE_CARD, data: card },
+      ];
 
-      nock('http://localhost:3000')
+      nock(baseUrl)
         .post('/api/card')
         .reply(200, card);
 

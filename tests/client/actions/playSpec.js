@@ -5,9 +5,15 @@ import nock from 'nock';
 import thunk from 'redux-thunk';
 import cfgMockStore from 'redux-mock-store';
 import { startPlay, flipCard, savePlay } from '../../../src/client/actions';
-import * as types from '../../../src/client/constants/actionTypes';
+import {
+  START_PLAY,
+  FLIP_CARD,
+  FINISH_PLAY,
+} from '../../../src/client/constants/actionTypes';
 import { GREAT } from '../../../src/client/constants/play';
+import { HOST, PORT, PROTOCOL } from '../../../src/config';
 
+const baseUrl = `${PROTOCOL}://${HOST}:${PORT}`;
 const mockStore = cfgMockStore([thunk]);
 
 describe('Play Action Creators', () => {
@@ -20,7 +26,7 @@ describe('Play Action Creators', () => {
       const cardId = '0';
       const deckId = '1';
       const result = startPlay(cardId, deckId);
-      const expected = { type: types.START_PLAY, data: { cardId, deckId } };
+      const expected = { type: START_PLAY, data: { cardId, deckId } };
 
       expect(result).to.deep.equal(expected);
     });
@@ -33,7 +39,7 @@ describe('Play Action Creators', () => {
 
     it('should return object with `type` property set', () => {
       const result = flipCard();
-      const expected = { type: types.FLIP_CARD };
+      const expected = { type: FLIP_CARD };
 
       expect(result).to.deep.equal(expected);
     });
@@ -49,10 +55,12 @@ describe('Play Action Creators', () => {
     });
 
     it('should create FINISH_PLAY when fetching decks is done', () => {
-      const expectedActions = [{ type: types.FINISH_PLAY, data: GREAT }];
+      const expectedActions = [
+        { type: FINISH_PLAY, data: GREAT },
+      ];
 
-      nock('http://localhost:3000')
-        .post('/api/play')
+      nock(baseUrl)
+        .post('/api/play/create')
         .reply(200, {});
 
       const store = mockStore({});
