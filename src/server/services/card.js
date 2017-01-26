@@ -1,6 +1,6 @@
 const uniqueRandomArray = require('unique-random-array');
 const Card = require('../models/Card');
-const { getPlaysByCard } = require('./play');
+const Play = require('../models/Play');
 
 exports.getNextCardToPlay = (deckId, userId) =>
   Card.find({ deckId })
@@ -14,7 +14,7 @@ exports.getNextCardToPlay = (deckId, userId) =>
       let probability = getProbability();
 
       const getNextCard = () =>
-        getPlaysByCard(randomCard._id, deckId, userId)
+        Play.find({ deckId, userId, cardId: randomCard._id })
           .then((plays) => {
             let totalRating = 0;
 

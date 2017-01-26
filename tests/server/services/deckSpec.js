@@ -1,94 +1,89 @@
-/* global describe, it, before, beforeEach, after, afterEach, xdescribe */
-/* eslint-disable func-names, prefer-arrow-callback */
+/* global describe, xdescribe, it, xit, before, beforeEach, after, afterEach */
 
-// import { expect } from 'chai';
-// import getCard from '../../src/server/services/DeckProgress';
-// import getProgress from '../../src/server/services/ProgressBar';
-// import Cards from '../../../src/server/models/Card';
-// import Plays from '../../../src/server/models/Play';
+import { expect } from 'chai';
+import range from 'lodash.range';
+import {
+  getPercentComplete,
+} from '../../../src/server/services/deck';
+import Deck from '../../../src/server/models/Deck';
+import Card from '../../../src/server/models/Card';
+import Play from '../../../src/server/models/Play';
+import { OKAY } from '../../../src/client/constants/play';
 
-// const createCards = () => {
-//   const allCards = [];
-//   for (let i = 0; i < 10; i += 1) {
-//     const dummy = i.toString();
-//     allCards.push({
-//       question: { text: dummy },
-//       answer: { text: dummy, explanation: ' ' },
-//       deckId: '-1',
-//     });
-//   }
-//   return allCards;
-// };
+const resetDB = () =>
+  Deck.remove({})
+    .then(() => Card.remove({}))
+    .then(() => Play.remove({}));
 
-// const createPlays = (cards, n) => {
-//   const allPlays = [];
-//   for (let i = 0; i < n; i += 1) {
-//     allPlays.push({
-//       rating: '0',
-//       deckId: '-1',
-//       cardId: cards[i]._id,
-//       userId: '0',
-//     });
-//   }
-//   return allPlays;
-// };
+const createDecks = numDecks =>
+  range(numDecks).map(num =>
+    ({
+      name: `Deck ${num}`,
+    }));
 
-// const calcPerc = (deck, n) => `${(100 * n) / deck.length}%`;
-// let realPerc = 0;
+const createCards = (deck, numCards) =>
+  range(numCards).map(num =>
+    ({
+      deckId: deck._id.toString(),
+      question: {
+        text: `${num}`,
+      },
+      answer: {
+        text: `${num}`,
+        explanation: `${num}`,
+      },
+    }));
 
-// // seed data by running npm run seed before testing deck-progress
-// describe('deck-progress', function () {
-//   // this.timeout(5000);
+const createPlays = (card, numPlays) =>
+  range(numPlays).map(() =>
+    ({
+      deckId: card.deckId,
+      cardId: card._id.toString(),
+      userId: '0',
+      rating: OKAY,
+    }));
 
-//   before(function (done) {
-//     const allCards = createCards();
-//     const n = 5;
-//     let allPlays = [];
-//     Cards.remove({ deckId: '-1' })
-//       .then(() => (
-//         Cards.create(allCards)
-//       ))
-//       .then(cards => (
-//         Plays.remove({ deckId: '-1' })
-//           .then(() => {
-//             allPlays = createPlays(cards, n);
-//             realPerc = calcPerc(cards, n);
-//             return Plays.create(allPlays);
-//           })
-//           .then(() => {
-//             done();
-//           })
-//       ));
-//   });
+const importIntoDB = () =>
+  resetDB()
+    .then(() => {
+      const decks = createDecks(1);
+      return Deck.create(decks)
+        .then((savedDecks) => {
+          const cards = savedDecks.reduce((memo, deck) =>
+            ([...memo, ...createCards(deck, 4)]), []);
+          return Card.create(cards)
+            .then((savedCards) => {
+              const plays = savedCards.slice(2).reduce((memo, card) =>
+                ([...memo, ...createPlays(card, 4)]), []);
+              return Play.create(plays)
+                .then(savedPlays => ({ savedDecks, savedCards, savedPlays }));
+            });
+        });
+    });
 
-//   describe('deck-progress basics', function () {
-//     it('should correctly have an function named `getCard`', (done) => {
-//       expect(getCard).to.be.a('function');
-//       done();
-//     });
 
-//     it('should return a random card given a deck id', (done) => {
-//       getCard('-1', '0').then(function (card) {
-//         expect(card.deckId).to.equal('-1');
-//         expect(card.question).to.not.equal(undefined);
-//         done();
-//       });
-//     });
-//   });
+describe('Deck Services', () => {
+  describe('getPercentComplete', () => {
+    it('should be a function', () => {
+      expect(getPercentComplete).to.be.a('function');
+    });
 
-//   describe('progress-bar basics', function () {
-//     // create new plays with only some cards
-//     it('should correctly have an function named `getProgress`', (done) => {
-//       expect(getProgress).to.be.a('function');
-//       done();
-//     });
+    it('should return percent of cards studied in deck', (done) => {
+      importIntoDB()
+        .then((result) => {
+          const { savedDecks } = result;
+          const deckId = savedDecks[0]._id.toString();
+          const userId = '0';
+          const expected = '50%';
 
-//     it('should return the percentage of distinct cards seen', (done) => {
-//       getProgress('-1', '0').then(function (perc) {
-//         expect(perc).to.equal(realPerc);
-//         done();
-//       });
-//     });
-//   });
-// });
-
+          getPercentComplete(deckId, userId)
+            .then((percentage) => {
+              expect(percentage).to.equal(expected);
+              done();
+            })
+            .catch(err => done(err));
+        })
+        .catch(error => done(error));
+    });
+  });
+});

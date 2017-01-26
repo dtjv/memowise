@@ -1,9 +1,9 @@
-const { getCardsInDeck } = require('./card');
-const { getDistinctCardsPlayed } = require('./play');
+const Play = require('../models/Play');
+const Card = require('../models/Card');
 
 exports.getPercentComplete = (deckId, userId) =>
-  getDistinctCardsPlayed(deckId, userId)
+  Play.distinct('cardId', { deckId, userId })
     .then(distinctCards =>
-      getCardsInDeck(deckId)
-        .then(cards =>
-          `${(100 * Number(distinctCards.length)) / Number(cards.length)}%`));
+      Card.find({ deckId })
+        .then(allCards =>
+          `${(100 * Number(distinctCards.length)) / Number(allCards.length)}%`));

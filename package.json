@@ -26,6 +26,7 @@
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.9.0",
     "json-loader": "^0.5.4",
+    "lodash.range": "3.2.0",
     "mocha": "^3.2.0",
     "nock": "^9.0.2",
     "node-sass": "^4.3.0",
