@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const Promise = require('bluebird');
 
 const UserSchema = new mongoose.Schema({
   name: String,
@@ -21,24 +20,18 @@ const UserSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 UserSchema.pre('save', function hashPassword(next) {
-  const cipher = Promise.promisify(bcrypt.hash);
-  return cipher(this.password, 5).bind(this)
-    .then((hash) => {
-      this.password = hash;
-      next();
+  bcrypt.genSalt()
+    .then((salt) => {
+      bcrypt.hash(this.password, salt)
+        .then((hash) => {
+          this.password = hash;
+          next();
+        });
     });
 });
-/**
- * Create instance method for authenticating user
- */
-UserSchema.methods.authenticate = function authenticate(password, callback) {
-  const hash = this.password;
-  bcrypt.compare(password, hash, (err, isMatch) => {
-    if (err) {
-      return callback(err);
-    }
-    return callback(null, isMatch);
-  });
+
+UserSchema.methods.validatePassword = function validatePassword(password) {
+  return bcrypt.compare(password, this.password);
 };
 
 module.exports = mongoose.model('User', UserSchema);
