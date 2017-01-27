@@ -3,19 +3,16 @@ const auth = require('../controllers/auth');
 
 const router = new Router();
 
-router.route('/api/auth/create-account')
-  .post(auth.createAccount);
+router.route('/api/auth/sign-up')
+  .post(auth.local.signUp);
 
 router.route('/api/auth/sign-in')
-  .post(auth.signIn);
-
-router.route('/api/auth/verify')
-  .get(auth.verify);
+  .post(auth.local.signIn);
 
 router.route('/api/auth/sign-out')
-  .get(auth.signOut);
-
-router.route('/api/auth/check-authorized')
-  .get(auth.checkAuthorized);
+  .get((req, res) => {
+    req.logout();
+    res.redirect('/');
+  });
 
 module.exports = router;

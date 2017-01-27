@@ -4,3 +4,4 @@ coverage
 .env
 build
 NOTES.md
+npm-debug.log

@@ -5,10 +5,10 @@ const auth = require('../controllers/auth');
 const router = new Router();
 
 router.route('/api/deck')
-  .get(auth.checkAuthServer, deck.getAll);
+  .get(auth.isLoggedIn, deck.getAll);
 
 router.route('/api/deck/:deckId/percent-complete')
-  .get(auth.checkAuthServer, deck.getPercentComplete);
+  .get(auth.isLoggedIn, deck.getPercentComplete);
 
 
 module.exports = router;

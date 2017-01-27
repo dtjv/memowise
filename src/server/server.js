@@ -10,18 +10,9 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 const mongoose = require('./db');
-const setupPassport = require('./setupPassport');
 const MongoStore = require('connect-mongo')(session);
 
-const homeRoute = require('./routes/home');
-const authRoute = require('./routes/auth');
-const deckRoute = require('./routes/deck');
-const cardRoute = require('./routes/card');
-const playRoute = require('./routes/play');
-
 const baseUrl = `${PROTOCOL}://${HOST}:${PORT}`;
-
-setupPassport();
 
 express()
   .use(cors({
@@ -43,11 +34,11 @@ express()
   }))
   .use(passport.initialize())
   .use(passport.session())
-  .use(deckRoute)
-  .use(cardRoute)
-  .use(playRoute)
-  .use(authRoute)
-  .use(homeRoute)
+  .use(require('./routes/deck'))
+  .use(require('./routes/card'))
+  .use(require('./routes/play'))
+  .use(require('./routes/auth'))
+  .use(require('./routes/home'))
   .listen(PORT);
 
 

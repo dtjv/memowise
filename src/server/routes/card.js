@@ -5,6 +5,6 @@ const auth = require('../controllers/auth');
 const router = new Router();
 
 router.route('/api/card')
-  .post(auth.checkAuthServer, card.getNext);
+  .post(auth.isLoggedIn, card.getNext);
 
 module.exports = router;
