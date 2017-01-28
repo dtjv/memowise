@@ -9,7 +9,7 @@
     "lint": "eslint *.js bin src tests --color",
     "test": "npm run lint && nyc mocha --compilers js:babel-register --bail --recursive tests",
     "coverage": "nyc report --reporter=html && open ./coverage/index.html",
-    "import": "./bin/deck-import.js -a"
+    "import": "./bin/deck-import-cli.js -a"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",
