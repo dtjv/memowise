@@ -5,13 +5,11 @@ exports.getNext = (req, res) => {
     .then((card) => {
       res
         .status(200)
-        .type('json')
         .json(card);
     })
     .catch((error) => {
       res
         .status(500)
-        .type('json')
         .json({ error });
     });
 };

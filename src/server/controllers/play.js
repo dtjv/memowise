@@ -11,13 +11,11 @@ exports.create = (req, res) => {
   .then((play) => {
     res
       .status(201)
-      .type('json')
       .json(play);
   })
   .catch((error) => {
     res
       .status(500)
-      .type('json')
       .json({ error });
   });
 };
@@ -31,13 +29,11 @@ exports.getLast = (req, res) => {
   .then((play) => {
     res
       .status(200)
-      .type('json')
       .json(play);
   })
   .catch((error) => {
     res
       .status(500)
-      .type('json')
       .json({ error });
   });
 };

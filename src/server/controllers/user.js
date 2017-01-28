@@ -18,7 +18,11 @@ exports.signUp = (req, res) => {
       .then((user) => {
         res
           .status(201)
-          .json({ _id: user._id, name: user.name, email: user.email });
+          .json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+          });
       })
       .catch((error) => {
         res

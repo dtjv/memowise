@@ -6,13 +6,11 @@ exports.getAll = (req, res) => {
     .then((decks) => {
       res
         .status(200)
-        .type('json')
         .json(decks);
     })
     .catch((error) => {
       res
         .status(500)
-        .type('json')
         .json({ error });
     });
 };
@@ -22,13 +20,11 @@ exports.getPercentComplete = (req, res) => {
     .then((percentage) => {
       res
         .status(200)
-        .type('json')
         .json(percentage);
     })
     .catch((error) => {
       res
         .status(500)
-        .type('json')
         .json({ error });
     });
 };
