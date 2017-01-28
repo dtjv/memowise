@@ -1,14 +1,14 @@
 const { Router } = require('express');
-const deck = require('../controllers/deck');
-const auth = require('../controllers/auth');
+const controller = require('../controllers/deck');
+const { isLoggedIn } = require('../services/auth');
 
 const router = new Router();
 
 router.route('/api/deck')
-  .get(auth.isLoggedIn, deck.getAll);
+  .get(isLoggedIn, controller.getAll);
 
 router.route('/api/deck/:deckId/percent-complete')
-  .get(auth.isLoggedIn, deck.getPercentComplete);
+  .get(isLoggedIn, controller.getPercentComplete);
 
 
 module.exports = router;

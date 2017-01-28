@@ -1,13 +1,13 @@
 const { Router } = require('express');
-const play = require('../controllers/play');
-const auth = require('../controllers/auth');
+const controller = require('../controllers/play');
+const { isLoggedIn } = require('../services/auth');
 
 const router = new Router();
 
 router.route('/api/play/create')
-  .post(auth.isLoggedIn, play.create);
+  .post(isLoggedIn, controller.create);
 
 router.route('/api/play/last')
-  .post(auth.isLoggedIn, play.getLast);
+  .post(isLoggedIn, controller.getLast);
 
 module.exports = router;

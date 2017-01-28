@@ -1,10 +1,10 @@
 const { Router } = require('express');
-const card = require('../controllers/card');
-const auth = require('../controllers/auth');
+const controller = require('../controllers/card');
+const { isLoggedIn } = require('../services/auth');
 
 const router = new Router();
 
 router.route('/api/card')
-  .post(auth.isLoggedIn, card.getNext);
+  .post(isLoggedIn, controller.getNext);
 
 module.exports = router;

@@ -10,8 +10,11 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('./db');
+const { registerAuthService } = require('./services/auth');
 
 const baseUrl = `${PROTOCOL}://${HOST}:${PORT}`;
+
+registerAuthService();
 
 express()
   .use(cors({
@@ -36,7 +39,7 @@ express()
   .use(require('./routes/deck'))
   .use(require('./routes/card'))
   .use(require('./routes/play'))
-  .use(require('./routes/auth'))
+  .use(require('./routes/user'))
   .use(require('./routes/home'))
   .listen(PORT);
 

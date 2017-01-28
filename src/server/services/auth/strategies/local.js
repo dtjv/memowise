@@ -6,24 +6,6 @@ const config = {
   passReqToCallback: true,
 };
 
-const signUp = (req, email, password, done) => {
-  User.findOne({ email })
-    .then((existingUser) => {
-      if (existingUser) {
-        return done(null, false, { message: 'That email already exists' });
-      }
-
-      return User.create({
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-      })
-      .then(user =>
-        done(null, { _id: user._id, name: user.name, email: user.email }));
-    })
-    .catch(error => done(error));
-};
-
 const signIn = (req, email, password, done) => {
   User.findOne({ email })
     .then((user) => {
@@ -47,6 +29,5 @@ const signIn = (req, email, password, done) => {
 };
 
 module.exports = {
-  signUpStrategy: new Strategy(config, signUp),
   signInStrategy: new Strategy(config, signIn),
 };
