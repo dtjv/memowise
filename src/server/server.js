@@ -1,16 +1,15 @@
 /* eslint-disable no-console */
-
 const { SESSION_SECRET, HOST, PORT, PROTOCOL } = require('../config');
 
+const cors = require('cors');
 const { resolve } = require('path');
 const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
 const passport = require('passport');
-const mongoose = require('./db');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const MongoStore = require('connect-mongo')(session);
+const mongoose = require('./db');
 
 const baseUrl = `${PROTOCOL}://${HOST}:${PORT}`;
 
@@ -40,6 +39,5 @@ express()
   .use(require('./routes/auth'))
   .use(require('./routes/home'))
   .listen(PORT);
-
 
 console.log(`Server listening on ${baseUrl}. Use <ctrl-c> to stop server.\n`);

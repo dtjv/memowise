@@ -4,10 +4,14 @@ const auth = require('../controllers/auth');
 const router = new Router();
 
 router.route('/api/auth/sign-up')
-  .post(auth.local.signUp);
+  .post(auth.local.signUp, (req, res) => {
+    res.json({ user: req.user });
+  });
 
 router.route('/api/auth/sign-in')
-  .post(auth.local.signIn);
+  .post(auth.local.signIn, (req, res) => {
+    res.json({ user: req.user });
+  });
 
 router.route('/api/auth/sign-out')
   .get((req, res) => {
