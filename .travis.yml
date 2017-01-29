@@ -4,6 +4,13 @@ node_js:
   - "7"
 env:
   - CXX=g++-5
+  - PROTOCOL=http
+  - HOST=localhost
+  - PORT=3000
+  - DB_NAME=wonky
+  - DB_HOST=localhost
+  - DB_PORT=27017
+  - SESSION_SECRET=memowise
 sudo:
   - required
 services:
