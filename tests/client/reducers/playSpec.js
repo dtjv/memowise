@@ -1,7 +1,11 @@
 /* global describe, it, before, beforeEach, after, afterEach */
 import { expect } from 'chai';
 import { play } from '../../../src/client/reducers';
-import { START_PLAY, FLIP_CARD, FINISH_PLAY } from '../../../src/client/constants/actionTypes';
+import {
+  START_PLAY,
+  FLIP_CARD,
+  FINISH_PLAY,
+} from '../../../src/client/constants/actionTypes';
 import { FRONT, BACK, GREAT, BAD } from '../../../src/client/constants/play';
 
 describe('Play Reducer', () => {

@@ -1,9 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import * as types from '../constants/actionTypes';
 import Auth from '../services/AuthService';
-import { HOST, PORT, PROTOCOL } from '../../config';
-
-const baseUrl = `${PROTOCOL}://${HOST}:${PORT}`;
 
 export const failedRequest = error =>
   ({
@@ -48,7 +45,7 @@ export const selectDeck = deck =>
     data: deck,
   });
 
-export const fetchDecks = () => (
+export const fetchDecks = (baseUrl = '') => (
   dispatch => (
     fetch(`${baseUrl}/api/decks`, {
       credentials: 'same-origin',
@@ -64,7 +61,7 @@ export const receiveCard = card =>
     data: card,
   });
 
-export const fetchCard = (deckId) => {
+export const fetchCard = (baseUrl = '', deckId) => {
   const payload = JSON.stringify({ deckId });
 
   return dispatch => (
@@ -100,7 +97,7 @@ export const flipCard = () =>
     type: types.FLIP_CARD,
   });
 
-export const savePlay = (play, rating) => {
+export const savePlay = (baseUrl = '', play, rating) => {
   const payload = JSON.stringify({ ...play, rating });
 
   return dispatch => (

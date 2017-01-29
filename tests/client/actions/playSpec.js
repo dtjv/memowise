@@ -11,8 +11,10 @@ import {
   FINISH_PLAY,
 } from '../../../src/client/constants/actionTypes';
 import { GREAT } from '../../../src/client/constants/play';
-import { HOST, PORT, PROTOCOL } from '../../../src/config';
 
+require('dotenv-safe').load();
+
+const { HOST, PORT, PROTOCOL } = process.env;
 const baseUrl = `${PROTOCOL}://${HOST}:${PORT}`;
 const mockStore = cfgMockStore([thunk]);
 
@@ -65,7 +67,7 @@ describe('Play Action Creators', () => {
 
       const store = mockStore({});
 
-      return store.dispatch(savePlay({}, GREAT))
+      return store.dispatch(savePlay(baseUrl, {}, GREAT))
         .then(() => {
           expect(store.getActions()).to.deep.equal(expectedActions);
         });

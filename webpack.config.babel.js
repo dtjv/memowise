@@ -1,6 +1,8 @@
 import webpack from 'webpack';
 import { join } from 'path';
 
+require('dotenv-safe').load();
+
 export default {
   entry: './src/client/app.js',
   output: {
@@ -25,7 +27,12 @@ export default {
     ],
   },
   plugins: [
-    new webpack.EnvironmentPlugin(['NODE_ENV', 'PROTOCOL', 'HOST', 'PORT']),
+    new webpack.EnvironmentPlugin([
+      'NODE_ENV',
+      'PROTOCOL',
+      'HOST',
+      'PORT',
+    ]),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(true),
     new webpack.optimize.UglifyJsPlugin({

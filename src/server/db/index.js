@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const { DB_NAME, DB_HOST, DB_PORT } = require('../../config');
+
+const { DB_NAME, DB_HOST, DB_PORT } = process.env;
 
 mongoose.Promise = global.Promise;
 

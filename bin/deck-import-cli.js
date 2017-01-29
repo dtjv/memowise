@@ -2,7 +2,7 @@
 
 /* eslint-disable no-console */
 
-require('dotenv').config({ silent: true });
+require('dotenv-safe').load();
 
 const DB_NAME = process.env.DB_NAME;
 const DB_HOST = process.env.DB_HOST;

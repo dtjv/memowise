@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const { SESSION_SECRET, HOST, PORT, PROTOCOL } = require('../config');
+require('dotenv-safe').load();
 
 const cors = require('cors');
 const { resolve } = require('path');
@@ -12,6 +12,7 @@ const MongoStore = require('connect-mongo')(session);
 const mongoose = require('./db');
 const { registerAuthService } = require('./services/auth');
 
+const { SESSION_SECRET, HOST, PORT, PROTOCOL } = process.env;
 const baseUrl = `${PROTOCOL}://${HOST}:${PORT}`;
 
 registerAuthService();

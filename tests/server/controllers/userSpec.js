@@ -1,14 +1,16 @@
-/* global describe, xdescribe, it, before, beforeEach, after, afterEach */
+/* global describe, xdescribe, it, xit, before, beforeEach, after, afterEach */
 
 import { expect } from 'chai';
 import request from 'supertest';
 import mongoose from '../../../src/server/db';
 import User from '../../../src/server/models/User';
-import { HOST, PORT, PROTOCOL } from '../../../src/config';
 
+require('dotenv-safe').load();
+
+const { HOST, PORT, PROTOCOL } = process.env;
 const baseUrl = `${PROTOCOL}://${HOST}:${PORT}`;
 
-xdescribe('User Controller', () => {
+describe('User Controller', () => {
   const user = {
     name: 'Tester Name',
     email: 'name@tester.com',
@@ -26,7 +28,7 @@ xdescribe('User Controller', () => {
   describe('Account', () => {
     it('should return error trying to save duplicate username', (done) => {
       request(baseUrl)
-        .post('/api/auth/create-account')
+        .post('/api/user/sign-up')
         .send(user)
         .expect(201)
         .end((err, res) => {
@@ -46,7 +48,7 @@ xdescribe('User Controller', () => {
       User.create(user)
         .then(() => {
           request(baseUrl)
-            .post('/api/auth/sign-in')
+            .post('/api/user/sign-in')
             .send({ email: user.email, password: 'incorrect' })
             .expect(401)
             .end(err => (err ? done(err) : done()));
@@ -57,7 +59,7 @@ xdescribe('User Controller', () => {
       User.create(user)
         .then(() => {
           request(baseUrl)
-            .post('/api/auth/sign-in')
+            .post('/api/user/sign-in')
             .send({ email: user.email, password: user.password })
             .expect(200)
             .end((err, res) => {
@@ -71,14 +73,14 @@ xdescribe('User Controller', () => {
         });
     });
 
-    it('should fail to verify athentication when not signed in', (done) => {
+    xit('should fail to verify athentication when not signed in', (done) => {
       request(baseUrl)
         .get('/api/auth/verify')
         .expect(401)
         .end(err => (err ? done(err) : done()));
     });
 
-    it('should verify athentication when signed in', (done) => {
+    xit('should verify athentication when signed in', (done) => {
       let session;
 
       // used to verify after setup
@@ -101,7 +103,7 @@ xdescribe('User Controller', () => {
       User.create(user)
         .then(() => {
           request(baseUrl)
-            .post('/api/auth/sign-in')
+            .post('/api/user/sign-in')
             .send({ email: user.email, password: user.password })
             .expect(200)
             .end((err, res) => {

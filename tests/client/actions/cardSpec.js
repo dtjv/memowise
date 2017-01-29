@@ -6,8 +6,10 @@ import thunk from 'redux-thunk';
 import configStore from 'redux-mock-store';
 import { receiveCard, fetchCard } from '../../../src/client/actions';
 import { RECEIVE_CARD } from '../../../src/client/constants/actionTypes';
-import { HOST, PORT, PROTOCOL } from '../../../src/config';
 
+require('dotenv-safe').load();
+
+const { HOST, PORT, PROTOCOL } = process.env;
 const baseUrl = `${PROTOCOL}://${HOST}:${PORT}`;
 const mockStore = configStore([thunk]);
 
@@ -47,7 +49,7 @@ describe('Card Action Creators', () => {
 
       const store = mockStore({});
 
-      return store.dispatch(fetchCard())
+      return store.dispatch(fetchCard(baseUrl))
         .then(() => {
           expect(store.getActions()).to.deep.equal(expectedActions);
         });

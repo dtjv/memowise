@@ -14,8 +14,10 @@ import {
   RECEIVE_DECKS,
   SELECT_DECK,
 } from '../../../src/client/constants/actionTypes';
-import { HOST, PORT, PROTOCOL } from '../../../src/config';
 
+require('dotenv-safe').load();
+
+const { HOST, PORT, PROTOCOL } = process.env;
 const baseUrl = `${PROTOCOL}://${HOST}:${PORT}`;
 const mockStore = cfgMockStore([thunk]);
 
@@ -72,7 +74,7 @@ describe('Deck Action Creators', () => {
 
       const store = mockStore({});
 
-      return store.dispatch(fetchDecks())
+      return store.dispatch(fetchDecks(baseUrl))
         .then(() => {
           expect(store.getActions()).to.deep.equal(expectedActions);
         });
