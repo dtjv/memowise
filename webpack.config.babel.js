@@ -3,6 +3,34 @@ import { join } from 'path';
 
 require('dotenv-safe').load();
 
+let plugins = [
+  new webpack.EnvironmentPlugin([
+    'PROTOCOL',
+    'HOST',
+    'PORT',
+  ]),
+];
+
+if (process.env.NODE_ENV === 'production') {
+  plugins = [
+    ...plugins,
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+      },
+      mangle: false,
+      sourcemap: false,
+    }),
+    new webpack.optimize.OccurenceOrderPlugin(true),
+  ];
+}
+
 export default {
   entry: './src/client/app.js',
   output: {
@@ -26,21 +54,5 @@ export default {
       },
     ],
   },
-  plugins: [
-    new webpack.EnvironmentPlugin([
-      'NODE_ENV',
-      'PROTOCOL',
-      'HOST',
-      'PORT',
-    ]),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(true),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-      },
-      mangle: false,
-      sourcemap: false,
-    }),
-  ],
+  plugins,
 };
