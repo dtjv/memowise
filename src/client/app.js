@@ -1,19 +1,13 @@
 /* global document */
-
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-
-// redux modules
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
-import * as reducers from './reducers';
+import { Router, Route, IndexRoute } from 'react-router';
 
 import './assets/styles/app.scss';
 
-// components
+import { store, history } from './store';
+
 import App from './components/App';
 import Splash from './components/Splash';
 import CreateAccount from './components/CreateAccount';
@@ -24,16 +18,8 @@ import Dashboard from './containers/Dashboard';
 import StudyDeck from './containers/StudyDeck';
 import { verifyAuthentication, fetchDecks } from './actions';
 
-// services
 import Auth from './services/AuthService';
 
-reducers.routing = routerReducer;
-
-// put store and all it's dependencies in own directory: 'store/'
-const store = createStore(combineReducers(reducers), applyMiddleware(thunk));
-const history = syncHistoryWithStore(browserHistory, store);
-
-// Auth is imported above, yet we write another authorization function here?!
 const isAuthorized = (nextState, replace, next) => {
   Auth.checkAuthorized()
     .then((check) => {
