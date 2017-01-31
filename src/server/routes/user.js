@@ -3,6 +3,10 @@ const controller = require('../controllers/user');
 
 const router = new Router();
 
+// may not need
+router.route('/api/user')
+  .get(controller.fetchUser);
+
 router.route('/api/user/sign-up')
   .post(controller.signUp);
 

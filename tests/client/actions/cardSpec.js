@@ -49,7 +49,7 @@ describe('Card Action Creators', () => {
 
       const store = mockStore({});
 
-      return store.dispatch(fetchCard(baseUrl))
+      return store.dispatch(fetchCard(card.deckId, baseUrl))
         .then(() => {
           expect(store.getActions()).to.deep.equal(expectedActions);
         });

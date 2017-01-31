@@ -19,7 +19,8 @@ exports.registerAuthService = () => {
 exports.isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
     next();
+  } else {
+    // is this going to work?
+    res.redirect('/api/user/sign-in');
   }
-  // is this going to work?
-  res.redirect('/api/user/sign-in');
 };

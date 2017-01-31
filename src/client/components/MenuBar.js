@@ -1,10 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React, { PropTypes } from 'react';
+import { Link, browserHistory } from 'react-router';
 
-const AuthBar = ({ user, mobile }) => {
+const MenuBar = ({ user, mobile, signOut }) => {
   const name = user ? user.name : '';
 
-  // TODO: factor these out
+  const handleSignOut = (e) => {
+    e.preventDefault();
+    signOut().then(() => browserHistory.push('/'));
+  };
+
   if (mobile) {
     return (
       <ul id="nav-mobile" className="side-nav">
@@ -18,8 +22,8 @@ const AuthBar = ({ user, mobile }) => {
         <li>
           {
             name ?
-              <Link to="/sign-out">Sign Out</Link> :
-              <Link to="/create-account">Create Account</Link>
+              <Link to="" onClick={handleSignOut}>Sign Out</Link> :
+              <Link to="/sign-up">Create Account</Link>
           }
         </li>
       </ul>
@@ -38,23 +42,24 @@ const AuthBar = ({ user, mobile }) => {
       <li>
         {
           name ?
-            <Link to="/sign-out">Sign Out</Link> :
-            <Link to="/create-account">Create Account</Link>
+            <Link to="" onClick={handleSignOut}>Sign Out</Link> :
+            <Link to="/sign-up">Create Account</Link>
         }
       </li>
     </ul>
   );
 };
 
-AuthBar.propTypes = {
-  user: React.PropTypes.shape({
-    name: React.PropTypes.string,
+MenuBar.propTypes = {
+  user: PropTypes.shape({
+    name: PropTypes.string,
   }).isRequired,
-  mobile: React.PropTypes.bool,
+  mobile: PropTypes.bool,
+  signOut: PropTypes.func.isRequired,
 };
 
-AuthBar.defaultProps = {
+MenuBar.defaultProps = {
   mobile: false,
 };
 
-export default AuthBar;
+export default MenuBar;

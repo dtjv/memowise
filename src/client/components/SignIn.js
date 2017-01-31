@@ -1,11 +1,10 @@
 /* global Materialize */
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
-import Auth from '../services/AuthService';
 
-const error = (err) => {
-  Materialize.toast(err.responseJSON.message, 5000);
+const handleError = (err = {}) => {
+  Materialize.toast(err.message, 5000);
 };
 
 class SignIn extends React.Component {
@@ -19,7 +18,7 @@ class SignIn extends React.Component {
 
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.signIn = this.signIn.bind(this);
+    this.handleSignIn = this.handleSignIn.bind(this);
   }
 
   handleEmailChange(e) {
@@ -30,16 +29,11 @@ class SignIn extends React.Component {
     this.setState({ ...this.state, password: e.target.value });
   }
 
-  signIn(e) {
+  handleSignIn(e) {
     e.preventDefault();
-    // Here, we call an external AuthService. We’ll create it in the next step
-    Auth.signIn(this.state.email, this.state.password)
-      .then((user) => {
-        // TODO: refactor to use push action creator
-        this.props.onSignIn(user);
-        browserHistory.push('/dashboard');
-      })
-      .catch(error);
+    this.props.signIn(this.state.email, this.state.password)
+      .then(() => browserHistory.push('/dashboard'))
+      .catch(handleError);
   }
 
   render() {
@@ -50,7 +44,7 @@ class SignIn extends React.Component {
           <div clasName="col s12 white-text">{this.state.error.message}</div>
         </div> : null}
         <div className="row">
-          <form className="col s8 offset-s2" onSubmit={this.signIn}>
+          <form className="col s8 offset-s2" onSubmit={this.handleSignIn}>
             <div className="row">
               <div className="input-field col s12">
                 <input
@@ -92,7 +86,7 @@ class SignIn extends React.Component {
 }
 
 SignIn.propTypes = {
-  onSignIn: React.PropTypes.func.isRequired,
+  signIn: PropTypes.func.isRequired,
 };
 
 export default SignIn;

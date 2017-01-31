@@ -9,14 +9,10 @@ exports.create = (req, res) => {
     rating: req.body.rating,
   })
   .then((play) => {
-    res
-      .status(201)
-      .json(play);
+    res.status(201).json(play);
   })
   .catch((error) => {
-    res
-      .status(500)
-      .json({ error });
+    res.status(500).json({ error });
   });
 };
 
@@ -27,13 +23,9 @@ exports.getLast = (req, res) => {
   })
   .sort('-createdAt')
   .then((play) => {
-    res
-      .status(200)
-      .json(play);
+    res.status(200).json(play);
   })
   .catch((error) => {
-    res
-      .status(500)
-      .json({ error });
+    res.status(500).json({ error });
   });
 };

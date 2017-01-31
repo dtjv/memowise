@@ -1,6 +1,8 @@
 import fetch from 'isomorphic-fetch';
 import * as types from '../constants/actionTypes';
-import Auth from '../services/AuthService';
+
+const isUser = obj =>
+  obj && obj._id && obj.name && obj.email;
 
 export const failedRequest = error =>
   ({
@@ -8,30 +10,60 @@ export const failedRequest = error =>
     data: error,
   });
 
-export const signIn = user =>
-  ({
-    type: types.SIGN_IN,
-    data: user,
-  });
+// hmm... an action creator that does not return an action
+export const signUp = (user, baseUrl = '') => {
+  const payload = JSON.stringify(user);
 
-export const signOut = () =>
-  ({
-    type: types.SIGN_OUT,
-  });
+  return () => (
+    fetch(`${baseUrl}/api/user/sign-up`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        'Content-length': payload.length,
+      },
+      credentials: 'same-origin',
+      body: payload,
+    })
+    .then(res => res.json())
+    .then(res => (isUser(res) ? res : Promise.reject(res)))
+  );
+};
 
-export const verifyAuthentication = () => (
-  (dispatch) => {
-    Auth.verify()
-      .then(user => dispatch(signIn(user)))
-      .catch(err => dispatch(failedRequest(err)));
-  });
+export const signIn = (email, password, baseUrl = '') => {
+  const payload = JSON.stringify({ email, password });
 
-export const cancelAuthentication = () => (
-  (dispatch) => {
-    Auth.signOut()
-      .then(() => dispatch(signOut()))
-      .catch(err => dispatch(failedRequest(err)));
-  });
+  return dispatch => (
+    fetch(`${baseUrl}/api/user/sign-in`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        'Content-length': payload.length,
+      },
+      credentials: 'same-origin',
+      body: payload,
+    })
+    .then(res => res.json())
+    .then(res => (isUser(res) ? res : Promise.reject(res)))
+    .then(user => dispatch({ type: types.SIGN_IN, data: user }))
+  );
+};
+
+export const signOut = (baseUrl = '') => (
+  dispatch => (
+    fetch(`${baseUrl}/api/user/sign-out`, {
+      credentials: 'same-origin',
+    })
+    .then(() => dispatch({ type: types.SIGN_OUT }))
+  ));
+
+export const fetchUser = (baseUrl = '') => (
+  () => (
+    fetch(`${baseUrl}/api/user`, {
+      credentials: 'same-origin',
+    })
+    .then(res => res.json())
+    .then(res => (isUser(res) ? res : Promise.reject(res)))
+  ));
 
 export const receiveDecks = decks =>
   ({
@@ -61,7 +93,7 @@ export const receiveCard = card =>
     data: card,
   });
 
-export const fetchCard = (baseUrl = '', deckId) => {
+export const fetchCard = (deckId, baseUrl = '') => {
   const payload = JSON.stringify({ deckId });
 
   return dispatch => (
@@ -97,7 +129,7 @@ export const flipCard = () =>
     type: types.FLIP_CARD,
   });
 
-export const savePlay = (baseUrl = '', play, rating) => {
+export const savePlay = (play, rating, baseUrl = '') => {
   const payload = JSON.stringify({ ...play, rating });
 
   return dispatch => (

@@ -67,7 +67,7 @@ describe('Play Action Creators', () => {
 
       const store = mockStore({});
 
-      return store.dispatch(savePlay(baseUrl, {}, GREAT))
+      return store.dispatch(savePlay({}, GREAT, baseUrl))
         .then(() => {
           expect(store.getActions()).to.deep.equal(expectedActions);
         });

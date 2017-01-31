@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import Decks from '../components/Decks';
+import Dashboard from '../components/Dashboard';
 
 const mapStateToProps = ({ decks }) => ({ decks });
 
-export default connect(mapStateToProps)(Decks);
+export default connect(mapStateToProps)(Dashboard);

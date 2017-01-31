@@ -36,7 +36,7 @@ class ProgressBar extends React.Component {
 
 ProgressBar.propTypes = {
   deck: PropTypes.shape({
-    _id: PropTypes.number,
+    _id: PropTypes.string,
     name: PropTypes.string,
   }).isRequired,
 };

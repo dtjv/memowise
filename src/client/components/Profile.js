@@ -16,10 +16,10 @@ const Profile = ({ user }) => {
 
 Profile.propTypes = {
   user: PropTypes.shape({
-    _id: PropTypes.string, // correct?
+    _id: PropTypes.string,
     name: PropTypes.string,
     email: PropTypes.string,
-    createdAt: PropTypes.string, // correct?
+    createdAt: PropTypes.string,
   }).isRequired,
 };
 

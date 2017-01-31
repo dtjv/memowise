@@ -1,16 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { browserHistory } from 'react-router';
-import { connect } from 'react-redux';
 import fetch from 'isomorphic-fetch';
-import { selectDeck } from '../actions';
 import ProgressBar from './ProgressBar';
 import DeckLastPlayed from './DeckLastPlayed';
 
-const mapDispatchToState = dispatch => ({
-  setDeckState: deck => dispatch(selectDeck(deck)),
-});
-
-class DeckItem extends Component {
+class Deck extends Component {
   constructor(props) {
     super(props);
 
@@ -41,7 +35,7 @@ class DeckItem extends Component {
   }
 
   chooseDeckToStudy() {
-    this.props.setDeckState(this.props.deck);
+    this.props.selectDeck(this.props.deck);
     browserHistory.push(`/decks/${this.props.deck._id}/study`);
   }
 
@@ -70,12 +64,12 @@ class DeckItem extends Component {
   }
 }
 
-DeckItem.propTypes = {
+Deck.propTypes = {
   deck: PropTypes.shape({
-    _id: PropTypes.number,
+    _id: PropTypes.string,
     name: PropTypes.string,
   }).isRequired,
-  setDeckState: PropTypes.func.isRequired,
+  selectDeck: PropTypes.func.isRequired,
 };
 
-export default connect(null, mapDispatchToState)(DeckItem);
+export default Deck;
