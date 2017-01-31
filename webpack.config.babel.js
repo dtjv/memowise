@@ -1,56 +1,53 @@
+import { resolve } from 'path';
 import webpack from 'webpack';
-import { join } from 'path';
+import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 
 require('dotenv-safe').load();
 
 let plugins = [
-  new webpack.EnvironmentPlugin([
-    'PROTOCOL',
-    'HOST',
-    'PORT',
-  ]),
+  new webpack.EnvironmentPlugin(['PROTOCOL', 'HOST', 'PORT', 'NODE_ENV']),
 ];
 
 if (process.env.NODE_ENV === 'production') {
   plugins = [
     ...plugins,
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      },
-    }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
+    new UglifyJSPlugin({
       compress: {
         warnings: false,
       },
       mangle: false,
       sourcemap: false,
     }),
-    new webpack.optimize.OccurenceOrderPlugin(true),
   ];
 }
 
 export default {
   entry: './src/client/app.js',
   output: {
-    path: join(__dirname, '/build'),
+    path: resolve(__dirname, 'build'),
     filename: 'bundle.js',
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        exclude: /(node_modules)/,
-        loader: 'babel',
+        include: [
+          resolve(__dirname, 'src/client'),
+        ],
+        use: [
+          'babel-loader',
+        ],
       },
       {
         test: /\.scss$/,
-        loaders: ['style', 'css', 'sass'],
-      },
-      {
-        test: /\.json$/,
-        loader: 'json',
+        include: [
+          resolve(__dirname, 'src/client/assets'),
+        ],
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader',
+        ],
       },
     ],
   },
