@@ -74,7 +74,7 @@ describe('Deck Services', () => {
           const { savedDecks } = result;
           const deckId = savedDecks[0]._id.toString();
           const userId = '0';
-          const expected = '50%';
+          const expected = '50.00%';
 
           getPercentComplete(deckId, userId)
             .then((percentage) => {
