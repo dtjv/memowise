@@ -1,14 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import * as types from '../constants/actionTypes';
-
-const isUser = obj =>
-  obj && obj._id && obj.name && obj.email;
-
-export const failedRequest = error =>
-  ({
-    type: types.ERR_FAILED_REQUEST,
-    data: error,
-  });
+import Error from '../services/Error';
 
 // hmm... an action creator that does not return an action
 export const signUp = (user, baseUrl = '') => {
@@ -25,7 +17,7 @@ export const signUp = (user, baseUrl = '') => {
       body: payload,
     })
     .then(res => res.json())
-    .then(res => (isUser(res) ? res : Promise.reject(res)))
+    .then(res => (Error.isError(res) ? Promise.reject(res) : res))
   );
 };
 
@@ -43,7 +35,7 @@ export const signIn = (email, password, baseUrl = '') => {
       body: payload,
     })
     .then(res => res.json())
-    .then(res => (isUser(res) ? res : Promise.reject(res)))
+    .then(res => (Error.isError(res) ? Promise.reject(res) : res))
     .then(user => dispatch({ type: types.SIGN_IN, data: user }))
   );
 };
@@ -57,12 +49,12 @@ export const signOut = (baseUrl = '') => (
   ));
 
 export const fetchUser = (baseUrl = '') => (
-  () => (
+  dispatch => (
     fetch(`${baseUrl}/api/user`, {
       credentials: 'same-origin',
     })
     .then(res => res.json())
-    .then(res => (isUser(res) ? res : Promise.reject(res)))
+    .then(user => dispatch({ type: types.SIGN_IN, data: user }))
   ));
 
 export const receiveDecks = decks =>
@@ -83,8 +75,8 @@ export const fetchDecks = (baseUrl = '') => (
       credentials: 'same-origin',
     })
     .then(res => res.json())
-    .then(decks => dispatch(receiveDecks(decks)))
-    .catch(err => dispatch(failedRequest(err)))
+    .then(res =>
+      (Error.isError(res) ? Promise.reject(res) : dispatch(receiveDecks(res))))
   ));
 
 export const receiveCard = card =>
@@ -107,8 +99,8 @@ export const fetchCard = (deckId, baseUrl = '') => {
       body: payload,
     })
     .then(res => res.json())
-    .then(card => dispatch(receiveCard(card)))
-    .catch(err => dispatch(failedRequest(err)))
+    .then(res =>
+      (Error.isError(res) ? Promise.reject(res) : dispatch(receiveCard(res))))
   );
 };
 
@@ -142,7 +134,8 @@ export const savePlay = (play, rating, baseUrl = '') => {
       credentials: 'same-origin',
       body: payload,
     })
-    .then(() => dispatch(finishPlay(rating)))
-    .catch(err => dispatch(failedRequest(err)))
+    .then(res => res.json())
+    .then(res =>
+      (Error.isError(res) ? Promise.reject(res) : dispatch(finishPlay(rating))))
   );
 };

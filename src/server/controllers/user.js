@@ -5,7 +5,7 @@ exports.signUp = (req, res) => {
   User.findOne({ email: req.body.email })
     .then((existingUser) => {
       if (existingUser) {
-        res.status(400).json({ message: 'Email already exists.' });
+        res.status(400).json({ error: { message: 'Email already exists.' } });
       }
 
       return User.create({
@@ -14,11 +14,13 @@ exports.signUp = (req, res) => {
         password: req.body.password,
       })
       .then((user) => {
-        res.status(201).json({
-          _id: user._id,
-          name: user.name,
-          email: user.email,
-        });
+        res
+          .status(201)
+          .json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+          });
       })
       .catch((error) => {
         res.status(500).json({ error });
@@ -29,13 +31,13 @@ exports.signUp = (req, res) => {
 exports.signIn = (req, res) => {
   passport.authenticate('signIn', (error, user, info) => {
     if (error) {
-      res.status(500).send(error);
+      res.status(500).json({ error });
     } else if (!user) {
-      res.status(401).send(info);
+      res.status(401).json({ error: info });
     } else {
       req.logIn(user, (err) => {
         if (err) {
-          res.status(401).send(err);
+          res.status(401).json({ error: err });
         } else {
           res.status(200).json(user);
         }
@@ -49,11 +51,10 @@ exports.signOut = (req, res) => {
   res.status(200).end();
 };
 
-// may not need
 exports.fetchUser = (req, res) => {
   if (req.user) {
     res.status(200).json(req.user);
   } else {
-    res.status(404).send(undefined);
+    res.status(404).json({});
   }
 };

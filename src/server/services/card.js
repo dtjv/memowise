@@ -5,6 +5,11 @@ const Play = require('../models/Play');
 exports.getNextCardToPlay = (deckId, userId) =>
   Card.find({ deckId })
     .then((cards) => {
+      // no cards? should never happen! empty decks shouldn't be in ui.
+      if (!cards.length) {
+        return Promise.reject({ message: 'No cards found!' });
+      }
+
       const MAX_TRIES = 10;
       const getRandomCard = uniqueRandomArray(cards);
       const getProbability = () => Math.random() * 0.5;

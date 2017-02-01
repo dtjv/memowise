@@ -7,7 +7,6 @@ import {
   FINISH_PLAY,
   SIGN_IN,
   SIGN_OUT,
-  ERR_FAILED_REQUEST,
 } from '../constants/actionTypes';
 
 import {
@@ -75,15 +74,6 @@ export const user = (state = {}, action) => {
       return action.data || state;
     case SIGN_OUT:
       return {};
-    default:
-      return state;
-  }
-};
-
-export const error = (state = {}, action) => {
-  switch (action.type) {
-    case ERR_FAILED_REQUEST:
-      return action.data || state;
     default:
       return state;
   }

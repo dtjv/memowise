@@ -4,6 +4,7 @@ import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import ReactMarkdown from 'react-markdown';
 import { GREAT, OKAY, BAD } from '../constants/play';
+import Error from '../services/Error';
 
 class StudyDeck extends React.Component {
   constructor(props) {
@@ -18,7 +19,8 @@ class StudyDeck extends React.Component {
 
   loadCard() {
     this.props.fetchCard(this.props.deck._id)
-      .then(({ data }) => this.props.startPlay(data._id, data.deckId));
+      .then(({ data }) => this.props.startPlay(data._id, data.deckId))
+      .catch(Error.handleError);
   }
 
   handlePlay(play, rank) {
@@ -106,25 +108,30 @@ class StudyDeck extends React.Component {
 
 StudyDeck.propTypes = {
   deck: PropTypes.shape({
-    _id: PropTypes.number.isRequired,
+    _id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
   card: PropTypes.shape({
     question: PropTypes.shape({
-      text: PropTypes.string.isRequired,
-    }).isRequired,
+      text: PropTypes.string,
+    }),
     answer: PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      explanation: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
+      text: PropTypes.string,
+      explanation: PropTypes.string,
+    }),
+  }),
   play: PropTypes.shape({
-    side: PropTypes.bool.isRequired,
-  }).isRequired,
+    side: PropTypes.number,
+  }),
   fetchCard: PropTypes.func.isRequired,
   flipCard: PropTypes.func.isRequired,
   startPlay: PropTypes.func.isRequired,
   savePlay: PropTypes.func.isRequired,
+};
+
+StudyDeck.defaultProps = {
+  card: {},
+  play: {},
 };
 
 export default StudyDeck;
