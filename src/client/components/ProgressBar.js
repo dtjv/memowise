@@ -21,10 +21,6 @@ class ProgressBar extends React.Component {
     })
     .then(res => res.json())
     .then(percentage => this.setState({ progress: percentage }));
-    // .then((percentage) => {
-    //   console.log(percentage, '<-- percentage');
-    //   this.setState({ progress: percentage });
-    // });
   }
 
   render() {

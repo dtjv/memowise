@@ -2,7 +2,7 @@ import fetch from 'isomorphic-fetch';
 import * as types from '../constants/actionTypes';
 import Error from '../services/Error';
 
-// hmm... an action creator that does not return an action
+// TODO: Make this a service. Does not return an action.
 export const signUp = (user, baseUrl = '') => {
   const payload = JSON.stringify(user);
 
