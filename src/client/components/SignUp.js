@@ -2,13 +2,7 @@
 
 import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
-
-const handleError = (err) => {
-  Materialize.toast(
-    `Failed to create account: ${err.responseJSON.message}`,
-    4000,
-  );
-};
+import Error from '../services/Error';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -50,7 +44,7 @@ class SignUp extends React.Component {
     this.props.signUp(newUser)
       .then(() => this.props.signIn(newUser.email, newUser.password))
       .then(() => browserHistory.push('/dashboard'))
-      .catch(handleError);
+      .catch(Error.handleError);
   }
 
   render() {
