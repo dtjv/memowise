@@ -2,7 +2,6 @@ const mongoose = require('../db');
 
 const CardSchema = new mongoose.Schema({
   deckId: String,
-  userId: String,
   question: {
     text: String,
   },
