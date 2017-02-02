@@ -50,31 +50,33 @@ exports.importDecks = (decks, dbUrl) =>
  *   ]
  * }
  */
-exports.parseMarkdownFile = (file) => {
+exports.parseMarkdownFile = ({ fn, content }) => {
   const deck = {};
   const cards = [];
 
-  // parse the file for deck name
-  const title = file.match(/^# (.+)/);
+  // parse the file contents for deck name
+  const title = content.match(/^# (.+)/);
 
   if (title) {
     deck.name = title[1];
   } else {
-    throw new Error('No deck title!');
+    console.log(`No deck title in ${fn}!`);
+    return undefined;
   }
 
   // parse the file for cards
-  let s = file.indexOf('## Card');
-  let f = file.indexOf('---');
+  let s = content.indexOf('## Card');
+  let f = content.indexOf('---');
 
   while (s !== -1 && f !== -1) {
-    cards.push(file.slice(s, f));
-    s = file.indexOf('## Card', s + 1);
-    f = file.indexOf('---', f + 1);
+    cards.push(content.slice(s, f));
+    s = content.indexOf('## Card', s + 1);
+    f = content.indexOf('---', f + 1);
   }
 
   if (!cards.length) {
-    throw new Error('No cards for deck!');
+    console.log(`No cards in ${fn}!`);
+    return undefined;
   }
 
   // parse each card for question, answer and explanation
@@ -85,7 +87,8 @@ exports.parseMarkdownFile = (file) => {
     const e = c.indexOf('### Explanation');
 
     if (q === -1 || q === -1 || e === -1) {
-      throw new Error('Missing required card section(s)!');
+      console.log(`Missing required card section(s) in ${fn}!`);
+      return undefined;
     }
 
     return {

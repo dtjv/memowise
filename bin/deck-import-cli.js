@@ -11,7 +11,7 @@ const DB_URL = `mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}`;
 
 const meow = require('meow');
 const fs = require('fs');
-const { join, resolve } = require('path');
+const { join, resolve, basename } = require('path');
 const { importDecks, parseMarkdownFile } = require('./lib/deck-import');
 
 const help = `
@@ -41,8 +41,13 @@ const main = () => {
   const markdownFiles = makeFileList(cli.flags);
 
   const decks = markdownFiles
-    .map(fn => fs.readFileSync(fn, 'utf8'))
-    .map(parseMarkdownFile);
+    .map(fn =>
+      ({
+        fn: basename(fn),
+        content: fs.readFileSync(fn, 'utf8'),
+      }))
+    .map(parseMarkdownFile)
+    .filter(parsedFile => parsedFile);
 
   importDecks(decks, DB_URL)
     .then((result) => {
