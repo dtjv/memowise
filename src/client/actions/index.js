@@ -1,25 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import * as types from '../constants/actionTypes';
-import Error from '../services/Error';
-
-// TODO: Make this a service. Does not return an action.
-export const signUp = (user, baseUrl = '') => {
-  const payload = JSON.stringify(user);
-
-  return () => (
-    fetch(`${baseUrl}/api/user/sign-up`, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-        'Content-length': payload.length,
-      },
-      credentials: 'same-origin',
-      body: payload,
-    })
-    .then(res => res.json())
-    .then(res => (Error.isError(res) ? Promise.reject(res) : res))
-  );
-};
+import { isError } from '../services/ErrorService';
 
 export const signIn = (email, password, baseUrl = '') => {
   const payload = JSON.stringify({ email, password });
@@ -35,7 +16,7 @@ export const signIn = (email, password, baseUrl = '') => {
       body: payload,
     })
     .then(res => res.json())
-    .then(res => (Error.isError(res) ? Promise.reject(res) : res))
+    .then(res => (isError(res) ? Promise.reject(res) : res))
     .then(user => dispatch({ type: types.SIGN_IN, data: user }))
   );
 };
@@ -73,7 +54,7 @@ export const fetchDecks = (baseUrl = '') => (
     })
     .then(res => res.json())
     .then(res =>
-      (Error.isError(res) ? Promise.reject(res) : dispatch(receiveDecks(res))))
+      (isError(res) ? Promise.reject(res) : dispatch(receiveDecks(res))))
   ));
 
 export const receiveCard = card =>
@@ -97,7 +78,7 @@ export const fetchCard = (deckId, baseUrl = '') => {
     })
     .then(res => res.json())
     .then(res =>
-      (Error.isError(res) ? Promise.reject(res) : dispatch(receiveCard(res))))
+      (isError(res) ? Promise.reject(res) : dispatch(receiveCard(res))))
   );
 };
 
@@ -133,6 +114,6 @@ export const savePlay = (play, rating, baseUrl = '') => {
     })
     .then(res => res.json())
     .then(res =>
-      (Error.isError(res) ? Promise.reject(res) : dispatch(finishPlay(rating))))
+      (isError(res) ? Promise.reject(res) : dispatch(finishPlay(rating))))
   );
 };

@@ -2,7 +2,7 @@
 
 import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
-import Error from '../services/Error';
+import { handleError } from '../services/ErrorService';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -44,7 +44,7 @@ class SignUp extends React.Component {
     this.props.signUp(newUser)
       .then(() => this.props.signIn(newUser.email, newUser.password))
       .then(() => browserHistory.push('/dashboard'))
-      .catch(Error.handleError);
+      .catch(handleError);
   }
 
   render() {

@@ -2,7 +2,7 @@
 
 import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
-import Error from '../services/Error';
+import { handleError } from '../services/ErrorService';
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class SignIn extends React.Component {
     e.preventDefault();
     this.props.signIn(this.state.email, this.state.password)
       .then(() => browserHistory.push('/dashboard'))
-      .catch(Error.handleError);
+      .catch(handleError);
   }
 
   render() {

@@ -4,7 +4,7 @@ import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import ReactMarkdown from 'react-markdown';
 import { GREAT, OKAY, BAD } from '../constants/play';
-import Error from '../services/Error';
+import { handleError } from '../services/ErrorService';
 
 class StudyDeck extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class StudyDeck extends React.Component {
   loadCard() {
     this.props.fetchCard(this.props.deck._id)
       .then(({ data }) => this.props.startPlay(data._id, data.deckId))
-      .catch(Error.handleError);
+      .catch(handleError);
   }
 
   handlePlay(play, rank) {

@@ -3,8 +3,6 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute } from 'react-router';
-import isEmpty from 'is-empty-object';
-import fetch from 'isomorphic-fetch';
 
 import './assets/styles/app.scss';
 
@@ -17,31 +15,9 @@ import SignIn from './containers/SignIn';
 import Profile from './containers/Profile';
 import Dashboard from './containers/Dashboard';
 import StudyDeck from './containers/StudyDeck';
-import { signOut, setUser } from './actions';
+import { authorizeUser, rehydrateUser } from './services/UserService';
 
-const fetchUser = () =>
-  fetch('/api/user', {
-    credentials: 'same-origin',
-  })
-  .then(res => res.json());
-
-const isLoggedIn = (nextState, replace, callback) => {
-  fetchUser()
-  .then((user) => {
-    if (isEmpty(user)) {
-      store.dispatch(signOut());
-      replace('/sign-in');
-    }
-    callback();
-  });
-};
-
-fetchUser().then((user) => {
-  if (!isEmpty(user)) {
-    store.dispatch(setUser(user));
-    history.push('/dashboard');
-  }
-});
+rehydrateUser(store, history);
 
 render(
   <Provider store={store}>
@@ -50,12 +26,20 @@ render(
         <IndexRoute component={Splash} />
         <Route path="/sign-up" component={SignUp} />
         <Route path="/sign-in" component={SignIn} />
-        <Route path="/profile" component={Profile} onEnter={isLoggedIn} />
-        <Route path="/dashboard" component={Dashboard} onEnter={isLoggedIn} />
+        <Route
+          path="/profile"
+          component={Profile}
+          onEnter={authorizeUser(store)}
+        />
+        <Route
+          path="/dashboard"
+          component={Dashboard}
+          onEnter={authorizeUser(store)}
+        />
         <Route
           path="/decks/:deckId/study"
           component={StudyDeck}
-          onEnter={isLoggedIn}
+          onEnter={authorizeUser(store)}
         />
       </Route>
     </Router>
