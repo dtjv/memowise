@@ -4,6 +4,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute } from 'react-router';
 import isEmpty from 'is-empty-object';
+import fetch from 'isomorphic-fetch';
 
 import './assets/styles/app.scss';
 
@@ -16,16 +17,31 @@ import SignIn from './containers/SignIn';
 import Profile from './containers/Profile';
 import Dashboard from './containers/Dashboard';
 import StudyDeck from './containers/StudyDeck';
-import { fetchUser, fetchDecks } from './actions';
+import { signOut, setUser } from './actions';
 
-store.dispatch(fetchUser());
-store.dispatch(fetchDecks());
+const fetchUser = () =>
+  fetch('/api/user', {
+    credentials: 'same-origin',
+  })
+  .then(res => res.json());
 
-const isLoggedIn = (nextState, replace) => {
-  if (isEmpty(store.getState().user)) {
-    replace('/sign-in');
-  }
+const isLoggedIn = (nextState, replace, callback) => {
+  fetchUser()
+  .then((user) => {
+    if (isEmpty(user)) {
+      store.dispatch(signOut());
+      replace('/sign-in');
+    }
+    callback();
+  });
 };
+
+fetchUser().then((user) => {
+  if (!isEmpty(user)) {
+    store.dispatch(setUser(user));
+    history.push('/dashboard');
+  }
+});
 
 render(
   <Provider store={store}>

@@ -7,6 +7,7 @@ import {
   FINISH_PLAY,
   SIGN_IN,
   SIGN_OUT,
+  SET_USER,
 } from '../constants/actionTypes';
 
 import {
@@ -71,6 +72,7 @@ export const play = (state = {}, action) => {
 export const user = (state = {}, action) => {
   switch (action.type) {
     case SIGN_IN:
+    case SET_USER:
       return action.data || state;
     case SIGN_OUT:
       return {};

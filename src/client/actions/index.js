@@ -48,14 +48,11 @@ export const signOut = (baseUrl = '') => (
     .then(() => dispatch({ type: types.SIGN_OUT }))
   ));
 
-export const fetchUser = (baseUrl = '') => (
-  dispatch => (
-    fetch(`${baseUrl}/api/user`, {
-      credentials: 'same-origin',
-    })
-    .then(res => res.json())
-    .then(user => dispatch({ type: types.SIGN_IN, data: user }))
-  ));
+export const setUser = user =>
+  ({
+    type: types.SET_USER,
+    data: user,
+  });
 
 export const receiveDecks = decks =>
   ({

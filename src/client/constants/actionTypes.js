@@ -8,5 +8,4 @@ export const FINISH_PLAY = 'FINISH_PLAY';
 
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
-
-export const ERR_FAILED_REQUEST = 'ERR_FAILED_REQUEST';
+export const SET_USER = 'SET_USER';
