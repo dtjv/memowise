@@ -27,7 +27,7 @@ express()
   }))
   .use(bodyParser.urlencoded({ extended: true }))
   .use(bodyParser.json())
-  .use(cookieParser())
+  .use(cookieParser(SESSION_SECRET))
   .use(express.static(resolve(__dirname, '../../build')))
   .use(session({
     secret: SESSION_SECRET,
