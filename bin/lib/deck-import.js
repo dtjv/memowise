@@ -16,12 +16,12 @@ const insertDeckIntoDB = (db, { name, cards }) => {
 const insertDecksIntoDB = (db, decks) =>
   Promise.all(decks.map(deck => insertDeckIntoDB(db, deck)));
 
-
 exports.importDecks = (decks, dbUrl) =>
   MongoClient.connect(dbUrl).then(db =>
       db.collections().then((collections) => {
         collections.forEach((collection) => {
-          if (collection.collectionName !== 'system.indexes') {
+          if (collection.collectionName === 'decks' ||
+              collection.collectionName === 'cards') {
             collection.drop();
           }
         });
