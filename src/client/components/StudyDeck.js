@@ -44,7 +44,7 @@ class StudyDeck extends React.Component {
         <div className="flashcard-buttons">
           <button
             onClick={this.props.flipCard}
-            className="btn btn-large cyan lighten-3"
+            className="btn btn-large blue"
           > Flip Card </button>
         </div>
       </div>
@@ -66,10 +66,7 @@ class StudyDeck extends React.Component {
         </div>
         {
           (answer && answer.explanation)
-          ? <div>
-            <p><strong>Explanation:</strong></p>
-            <ReactMarkdown source={answer.explanation} />
-          </div>
+          ? <ReactMarkdown source={answer.explanation} />
           : null
         }
         <div className="flashcard-buttons">
@@ -77,19 +74,19 @@ class StudyDeck extends React.Component {
           <div>
             <button
               onClick={() => this.handlePlay(play, BAD)}
-              className="btn btn-large cyan lighten-3"
+              className="btn btn-large blue"
             >
               <i className="material-icons">thumb_down</i>
             </button>
             <button
               onClick={() => this.handlePlay(play, OKAY)}
-              className="btn btn-large cyan lighten-3"
+              className="btn btn-large blue"
             >
               <i className="material-icons">help</i>
             </button>
             <button
               onClick={() => this.handlePlay(play, GREAT)}
-              className="btn btn-large cyan lighten-3"
+              className="btn btn-large blue"
             >
               <i className="material-icons">thumb_up</i>
             </button>

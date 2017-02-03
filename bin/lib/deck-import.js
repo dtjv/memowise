@@ -21,7 +21,8 @@ exports.importDecks = (decks, dbUrl) =>
       db.collections().then((collections) => {
         collections.forEach((collection) => {
           if (collection.collectionName === 'decks' ||
-              collection.collectionName === 'cards') {
+              collection.collectionName === 'cards' ||
+              collection.collectionName === 'plays') {
             collection.drop();
           }
         });
