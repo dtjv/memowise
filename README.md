@@ -16,6 +16,33 @@ Each deck studied displays a progress bar to indicate percent of cards studied.
 
 Write your own flash card in [markdown](https://daringfireball.net/projects/markdown/syntax) and import them into MongoDB via a command line utility.
 
+## Deck Import
+
+### Writing Flash Cards
+
+A deck of flashcards are written in one markdown file. The structure complies to the following format. Text inside `[` and `]` are placeholders for values that you add. All other text are keywords. It's best to view the sample decks in `docs/decks/`.
+
+```
+  # [ Title ]
+
+  ## Card
+  ### Question
+  [ write question ]
+  ### Answer
+  [ write answer ]
+  ### Explanation
+  [ write an explanation of the answer ]
+  ---
+  ## Card
+  ### Question
+  [ write question ]
+  ### Answer
+  [ write answer ]
+  ### Explanation
+  [ write an explanation of the answer ]
+  ---
+```
+
 ## Development
 
 ### Tech Stack
@@ -58,7 +85,13 @@ DB_PORT=27017
 SESSION_SECRET=memowise
 ```
 
-#### Step 4: Start Mongo Server
+#### Step 4: Build 
+
+```
+$ npm run build 
+```
+
+#### Step 5: Start Mongo Server
 
 Open terminal and type:
 
@@ -66,7 +99,7 @@ Open terminal and type:
 $ mongod
 ```
 
-#### Step 5: Start Application 
+#### Step 6: Start Application 
 
 Open another terminal and type: 
 
@@ -74,10 +107,31 @@ Open another terminal and type:
 $ npm start
 ```
 
-#### Step 6: Study!
+#### Step 7: Study!
 
 Navigate to configured url. Using the example in Step 3, go to **http://localhost:3000**.
 
+### Other Commands
+
+#### Lint
+
+```
+$ npm run lint
+```
+
+#### Test
+
+```
+$ npm test
+```
+
+#### Coverage
+
+To see detailed coverage report in HTML.
+
+```
+$ npm run coverage
+```
 
 ## Credit 
 
