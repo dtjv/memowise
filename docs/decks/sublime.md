@@ -2,90 +2,90 @@
 
 ## Card 
 ### Question
-"Undo Action"
+Undo Action
 ### Answer
-"Cmd + Z",
+Cmd + Z
 ### Explanation
-" "
+
 
 ---
 
 ## Card 
 ### Question
-"Redo Action"
+Redo Action
 ### Answer
-"Cmd + Shift + Z",
+Cmd + Shift + Z
 ### Explanation
-" "
+ 
 
 ---
 
 ## Card 
 ### Question
-"Copy Current Line/Selection"
+Copy Current Line/Selection
 ### Answer
-"Cmd + C",
+Cmd + C
 ### Explanation
-" "
+ 
 
 ---
 
 ## Card 
 ### Question
-"Cut Current Line/Selection"
+Cut Current Line/Selection
 ### Answer
-"Cmd + X",
+Cmd + X
 ### Explanation
-" "
+ 
 
 ---
 
 ## Card 
 ### Question
-"Paste"
+Paste
 ### Answer
-"Cmd + V",
+Cmd + V
 ### Explanation
-" "
+ 
 
 ---
 
 ## Card 
 ### Question
-"Paste and Smart Indent"
+Paste and Smart Indent
 ### Answer
-"Cmd + Shift + V",
+Cmd + Shift + V
 ### Explanation
-" "
+ 
 
 ---
 
 ## Card 
 ### Question
-"Indent Current Line/Selection"
+Indent Current Line/Selection
 ### Answer
-"Cmd + ]",
+Cmd + ]
 ### Explanation
-" "
+ 
 
 ---
 
 ## Card 
 ### Question
-"Unindent Current Line/Selection"
+Unindent Current Line/Selection
 ### Answer
-"Cmd + [",
+Cmd + [
 ### Explanation
-" "
+ 
 
 ---
 
 ## Card 
 ### Question
-"Split Screen in Two"
+Split Screen in Two
 ### Answer
-"Cmd + Option + 2",
+Cmd + Option + 2
 ### Explanation
-" "
+ 
 
 ---

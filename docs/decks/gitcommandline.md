@@ -2,27 +2,27 @@
 
 ## Card 
 ### Question
-Create a new local repository
+How do you create a local repo?
 ### Answer
 `git init`
 ### Explanation
-Create an empty Git repository or reinitialize an existing one
+Creates an empty Git repository or reinitialize an existing one
 
 ---
 
 ## Card
 ### Question
-Check changed files in your working directory
+How do you check changed files in your working directory?
 ### Answer
 `git status`
 ### Explanation
-Show the working tree status
+Shows the working tree status
 
 ---
 
 ## Card 
 ### Question
-Delete a local branch
+How do you delete a local branch?
 ### Answer
 `git branch -d <branchname>`
 ### Explanation
@@ -32,30 +32,30 @@ With a -d or -D option, `<branchname>` will be deleted. You may specify more tha
 
 ## Card 
 ### Question
-Show all commits, starting with the newest
+How do you show all commits, starting with the newest
 ### Answer
 `git log`
 ### Explanation
-Show commit logs
+Shows commit logs
 
 ---
 
 ## Card 
 ### Question
-Add all current changes to the next commit
+How do you add all current changes to the next commit
 ### Answer
 `git add .`
 ### Explanation
-Add file contents to the index
+Stages all changed files for commit
 
 ---
 
 ## Card 
 ### Question
-List all currently configured remotes
+How do you list all currently configured remotes?
 ### Answer
 `git remote -v`
 ### Explanation
-Shows a list of existing remotes. Be a little more verbose and show remote url after name. NOTE: This must be placed between remote and subcommand. 
+Shows a list of existing remotes. Be a little more verbose and show remote url after name. **NOTE**: This must be placed between remote and subcommand.
 
 ---

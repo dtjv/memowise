@@ -10,35 +10,32 @@
 6
 ```
 ### Explanation
-maths
 
 ---
 
 ## Card 2
 ### Question
 ```
-3 - 3
+4 - 2 
 ```
 ### Answer
 ```
-0
+2
 ```
 ### Explanation
-maths again
 
 ---
 
 ## Card 3
 ### Question
 ```
-3 * 3
+5 * 3
 ```
 ### Answer
 ```
-9
+15
 ```
 ### Explanation
-maths once again
 
 ---
 
@@ -46,13 +43,12 @@ maths once again
 
 ### Question
 ```
-3 / 3
+12 / 4 
 ```
 ### Answer
 ```
-1
+3
 ```
 ### Explanation
-for the last time, maths
 
 ---
