@@ -33,17 +33,15 @@ export const rehydrateUser = (store, history) =>
 export const signUp = (user, baseUrl = '') => {
   const payload = JSON.stringify(user);
 
-  return () => (
-    fetch(`${baseUrl}/api/user/sign-up`, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-        'Content-length': payload.length,
-      },
-      credentials: 'same-origin',
-      body: payload,
-    })
-    .then(res => res.json())
-    .then(res => (isError(res) ? Promise.reject(res) : res))
-  );
+  return fetch(`${baseUrl}/api/user/sign-up`, {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+      'Content-length': payload.length,
+    },
+    credentials: 'same-origin',
+    body: payload,
+  })
+  .then(res => res.json())
+  .then(res => (isError(res) ? Promise.reject(res) : Promise.resolve(res)));
 };

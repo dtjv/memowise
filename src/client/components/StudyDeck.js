@@ -64,8 +64,14 @@ class StudyDeck extends React.Component {
         <div className="flashcard-title">
           <ReactMarkdown source={(answer && answer.text) || ''} />
         </div>
-        <p><strong>Explanation:</strong></p>
-        <ReactMarkdown source={(answer && answer.explanation) || ''} />
+        {
+          (answer && answer.explanation)
+          ? <div>
+            <p><strong>Explanation:</strong></p>
+            <ReactMarkdown source={answer.explanation} />
+          </div>
+          : null
+        }
         <div className="flashcard-buttons">
           <p>How well did you do?</p>
           <div>

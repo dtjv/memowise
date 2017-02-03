@@ -3,6 +3,7 @@
 import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import { handleError } from '../services/ErrorService';
+import { signUp } from '../services/UserService';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class SignUp extends React.Component {
       password: this.state.password,
     };
 
-    this.props.signUp(newUser)
+    signUp(newUser)
       .then(() => this.props.signIn(newUser.email, newUser.password))
       .then(() => browserHistory.push('/dashboard'))
       .catch(handleError);
@@ -97,7 +98,7 @@ class SignUp extends React.Component {
             </div>
             <div className="row center">
               <div className="col s12">
-                <button type="submit" className="btn-large cyan lighten-3">
+                <button type="submit" className="btn-large blue">
                   Create Account
                 </button>
               </div>
@@ -110,7 +111,6 @@ class SignUp extends React.Component {
 }
 
 SignUp.propTypes = {
-  signUp: PropTypes.func.isRequired,
   signIn: PropTypes.func.isRequired,
 };
 

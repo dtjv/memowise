@@ -45,14 +45,14 @@ class Deck extends Component {
         <div className="card-panel hoverable">
           <div className="card-content">
             <div className="card-title grey-text text-darken-4 center">
-              <strong>{this.props.deck.name}</strong>
+              <h4>{this.props.deck.name}</h4>
             </div>
             <DeckLastPlayed date={this.state.lastPlayedAt} />
             <ProgressBar deck={this.props.deck} />
             <div className="center">
               <button
                 onClick={this.chooseDeckToStudy}
-                className="btn cyan lighten-3"
+                className="btn blue"
               >
                 Study
               </button>

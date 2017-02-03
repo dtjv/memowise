@@ -1,0 +1,27 @@
+input[type=text],
+input[type=email],
+input[type=password] {
+  padding: 0 5px;
+  border-bottom: 1px solid #2196f3;
+
+  &:focus {
+    background-color: transparent;
+  }
+}
+
+input[type=submit] {
+  &:focus {
+    outline: none;
+    font-weight: 700;
+  }
+}
+
+.input-field {
+  label {
+    color: #2196f3;
+
+    &.active {
+      transform: translateY(-160%);
+    }
+  }
+}
