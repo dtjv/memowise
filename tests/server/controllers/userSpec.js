@@ -25,7 +25,7 @@ describe('User Controller', () => {
     mongoose.connection.db.dropDatabase(err => err || done());
   });
 
-  describe('Account', () => {
+  describe('SignUp', () => {
     it('should return error trying to save duplicate username', (done) => {
       request(baseUrl)
         .post('/api/user/sign-up')
@@ -43,7 +43,7 @@ describe('User Controller', () => {
     });
   });
 
-  describe('Authentication', () => {
+  describe('SignIn', () => {
     it('should fail to sign in with bad credentials', (done) => {
       User.create(user)
         .then(() => {
@@ -72,20 +72,25 @@ describe('User Controller', () => {
             });
         });
     });
+  });
 
-    xit('should fail to verify athentication when not signed in', (done) => {
+  describe('fetchUser', () => {
+    it('should return empty object when not signed in', (done) => {
       request(baseUrl)
-        .get('/api/auth/verify')
-        .expect(401)
-        .end(err => (err ? done(err) : done()));
+        .get('/api/user')
+        .expect(404)
+        .end((err, res) => {
+          expect(res.body).to.deep.equal({});
+          done();
+        });
     });
 
-    xit('should verify athentication when signed in', (done) => {
+    it('should verify athentication when signed in', (done) => {
       let session;
 
       // used to verify after setup
-      const verify = () => {
-        const req = request(baseUrl).get('/api/auth/verify');
+      const fetchUser = () => {
+        const req = request(baseUrl).get('/api/user');
 
         req.cookies = session;
         req.expect(200)
@@ -110,8 +115,9 @@ describe('User Controller', () => {
               if (err) {
                 return done(err);
               }
+              // http://stackoverflow.com/questions/3467114/how-are-cookies-passed-in-the-http-protocol
               session = res.headers['set-cookie'].pop().split(';')[0];
-              return verify();
+              return fetchUser();
             });
         });
     });

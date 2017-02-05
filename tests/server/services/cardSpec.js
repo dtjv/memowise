@@ -11,7 +11,7 @@ describe('Card Services', () => {
       expect(getNextCardToPlay).to.be.a('function');
     });
 
-    xit('', () => {
-    });
+    // well, the method is essentially random. lame.
+    // i need to rewrite this using SM-2 algorithm.
   });
 });

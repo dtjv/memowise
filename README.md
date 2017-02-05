@@ -1,4 +1,5 @@
-# Memowise 
+# Memowise
+[![build status](https://travis-ci.org/dtjv/memowise.svg?branch=master)](https://travis-ci.org/dtjv/memowise)
 
 A flashcard web application.
 
