@@ -9,7 +9,11 @@ const App = ({ children }) => (
 );
 
 App.propTypes = {
-  children: React.PropTypes.node.isRequired,
+  children: React.PropTypes.node,
+};
+
+App.defaultProps = {
+  children: null,
 };
 
 export default App;
