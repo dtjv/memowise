@@ -1,4 +1,3 @@
-/* global describe, xdescribe, it, before, beforeEach, after, afterEach */
 import { expect } from 'chai';
 import { card } from '../../../src/client/reducers';
 import { RECEIVE_CARD } from '../../../src/client/constants/actionTypes';

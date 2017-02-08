@@ -1,4 +1,3 @@
-/* global describe, it, before, beforeEach, after, afterEach */
 import { expect } from 'chai';
 import { play } from '../../../src/client/reducers';
 import {

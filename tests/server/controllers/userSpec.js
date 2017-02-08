@@ -1,5 +1,3 @@
-/* global describe, xdescribe, it, xit, before, beforeEach, after, afterEach */
-
 import { expect } from 'chai';
 import request from 'supertest';
 import mongoose from '../../../src/server/db';

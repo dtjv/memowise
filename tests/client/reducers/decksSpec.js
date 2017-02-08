@@ -1,4 +1,3 @@
-/* global describe, it, before, beforeEach, after, afterEach */
 import { expect } from 'chai';
 import { decks } from '../../../src/client/reducers';
 import { RECEIVE_DECKS } from '../../../src/client/constants/actionTypes';

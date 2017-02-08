@@ -1,4 +1,3 @@
-/* global describe, xdescribe, it, before, beforeEach, after, afterEach */
 import 'isomorphic-fetch';
 import { expect } from 'chai';
 import nock from 'nock';

@@ -1,4 +1,3 @@
-/* global describe, xdescribe, it, before, beforeEach, after, afterEach */
 import { expect } from 'chai';
 import { user } from '../../../src/client/reducers';
 import { SIGN_IN, SIGN_OUT } from '../../../src/client/constants/actionTypes';

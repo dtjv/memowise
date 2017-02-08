@@ -1,5 +1,3 @@
-/* global describe, xdescribe, it, before, beforeEach, after, afterEach */
-
 import { expect } from 'chai';
 import nock from 'nock';
 import thunk from 'redux-thunk';
