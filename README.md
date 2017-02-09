@@ -1,37 +1,24 @@
-# Memowise
+# MemoWise
 [![build status](https://travis-ci.org/dtjv/memowise.svg?branch=master)](https://travis-ci.org/dtjv/memowise)
 
 A flashcard web application.
 
 ![memowise home](./docs/media/memowise-home.png)
 
+## Demo
+
+[Live Demo](https://memowise.herokuapp.com/)
+
 ## Features
 
-### Responsive UI
-
-Memowise offers a simple and intuitive UI for the desktop or mobile device.
-
-![memowise mobile](./docs/media/memowise-mobile.png)
-
-### Study Progress
-
-Each deck studied displays a progress bar to indicate percent of cards studied.
-
-![memowise dashboard](./docs/media/memowise-dashboard.png)
-
-### Flip Cards
-
-Similar to physical cards, each Memowise card displays a prompt on one side and the answer on the reverse.
-
-#### Question
-![memowise card front](./docs/media/memowise-card-front.png)
-
-#### Answer
-![memowise card back](./docs/media/memowise-card-back.png)
+* MemoWise offers a simple and intuitive UI for the desktop or mobile device.
+* Each deck studied displays a progress bar to indicate percent of cards studied.
+* Similar to physical cards, each MemoWise card displays a prompt on one side and the answer on the reverse.
+* Write cards in markdown and import them into MemoWise
 
 ## Deck Import
 
-You can import decks of flashcards using a simple command line utility.
+You can import decks of flashcards using a command line utility.
 
 ### Usage
 
@@ -120,12 +107,9 @@ Copy `.env.example` to `.env`. Then set all environment variables. An *example* 
 
 ```
 NODE_ENV=development
-PROTOCOL=http
-HOST=localhost
+HOST=http://localhost
 PORT=3000
-DB_NAME=wonky
-DB_HOST=localhost
-DB_PORT=27017
+MONGODB_URI=mongodb://localhost:27017/memowise
 SESSION_SECRET=memowise
 ```
 
@@ -299,8 +283,9 @@ Below is a sample snapshot of what the state looks like.
 
 ## Todo
 
-* [ ] Add more tests
-* [ ] Deploy
+* [ ] Add e2e tests 
+* [ ] Restructure ([Resource](https://jaysoo.ca/2016/02/28/organizing-redux-application/))
+* [x] Deploy
 * [ ] Integrate Materialize Sass into build
 * [ ] Use [SM-2](https://www.supermemo.com/english/ol/sm2.htm) algorithm for card selection 
 * [ ] Improve profile UI
@@ -313,7 +298,7 @@ The original team:
 - *Scrum Master*: Matt Vargeson
 - *Development Team Members*: Peter Chim, David Valles
 
-This repo is *almost* a complete rewrite of the [original code](https://github.com/wonky-mongoose/wonky-mongoose).
+This repo is *big* refactor of the [original code](https://github.com/wonky-mongoose/wonky-mongoose).
 
 ## License
 
