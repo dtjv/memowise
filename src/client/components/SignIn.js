@@ -37,9 +37,6 @@ class SignIn extends React.Component {
     return (
       <div className="container">
         <h1 className="center">Sign In</h1>
-        {this.state.error ? <div className="row red">
-          <div clasName="col s12 white-text">{this.state.error.message}</div>
-        </div> : null}
         <div className="row">
           <form className="col s8 offset-s2" onSubmit={this.handleSignIn}>
             <div className="row">
@@ -70,7 +67,7 @@ class SignIn extends React.Component {
             </div>
             <div className="row center">
               <div className="col s12">
-                <button type="submit" className="btn-large blue">
+                <button type="submit" className="btn btn-large blue">
                   Sign In
                 </button>
               </div>
