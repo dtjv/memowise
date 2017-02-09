@@ -15,8 +15,8 @@ import {
 
 require('dotenv-safe').load();
 
-const { HOST, PORT, PROTOCOL } = process.env;
-const baseUrl = `${PROTOCOL}://${HOST}:${PORT}`;
+const { HOST, PORT } = process.env;
+const baseUrl = `${HOST}:${PORT}`;
 const mockStore = cfgMockStore([thunk]);
 
 describe('Deck Action Creators', () => {

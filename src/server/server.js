@@ -12,8 +12,8 @@ const MongoStore = require('connect-mongo')(session);
 const mongoose = require('./db');
 const { registerAuthService } = require('./services/auth');
 
-const { SESSION_SECRET, HOST, PORT, PROTOCOL } = process.env;
-const baseUrl = `${PROTOCOL}://${HOST}:${PORT}`;
+const { SESSION_SECRET, HOST, PORT } = process.env;
+const baseUrl = `${HOST}:${PORT}`;
 
 registerAuthService();
 

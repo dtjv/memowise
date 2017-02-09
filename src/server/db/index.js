@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
-const { DB_NAME, DB_HOST, DB_PORT } = process.env;
+const { MONGODB_URI } = process.env;
 
 mongoose.Promise = global.Promise;
 
 if (!mongoose.connection.readyState) {
-  mongoose.connect(`mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}`);
+  mongoose.connect(MONGODB_URI);
 }
 
 module.exports = mongoose;

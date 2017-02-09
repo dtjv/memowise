@@ -1,12 +1,9 @@
 import { resolve } from 'path';
-import webpack from 'webpack';
 import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 
 require('dotenv-safe').load();
 
-let plugins = [
-  new webpack.EnvironmentPlugin(['PROTOCOL', 'HOST', 'PORT', 'NODE_ENV']),
-];
+let plugins = [];
 
 if (process.env.NODE_ENV === 'production') {
   plugins = [

@@ -4,11 +4,6 @@
 
 require('dotenv-safe').load();
 
-const DB_NAME = process.env.DB_NAME;
-const DB_HOST = process.env.DB_HOST;
-const DB_PORT = process.env.DB_PORT;
-const DB_URL = `mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}`;
-
 const meow = require('meow');
 const fs = require('fs');
 const { join, resolve, basename } = require('path');
@@ -49,7 +44,7 @@ const main = () => {
     .map(parseMarkdownFile)
     .filter(parsedFile => parsedFile);
 
-  importDecks(decks, DB_URL)
+  importDecks(decks, process.env.MONGODB_URI)
     .then((result) => {
       decks.forEach(({ name }, idx) =>
         console.log(`Add deck "${name}" (${result[idx].insertedCount} cards)`));

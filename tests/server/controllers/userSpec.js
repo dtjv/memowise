@@ -5,8 +5,8 @@ import User from '../../../src/server/models/User';
 
 require('dotenv-safe').load();
 
-const { HOST, PORT, PROTOCOL } = process.env;
-const baseUrl = `${PROTOCOL}://${HOST}:${PORT}`;
+const { HOST, PORT } = process.env;
+const baseUrl = `${HOST}:${PORT}`;
 
 describe('User Controller', () => {
   const user = {
