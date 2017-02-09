@@ -3,7 +3,7 @@ language:
 node_js:
   - "7"
 env:
-  - CXX=g++-5 PROTOCOL=http HOST=localhost PORT=3000 DB_NAME=memowise DB_HOST=localhost DB_PORT=27017 SESSION_SECRET=memowise NODE_ENV=development
+  - CXX=g++-5 HOST=http://localhost PORT=3000 MONGODB_URI=mongodb://localhost:27017/memowise SESSION_SECRET=memowise NODE_ENV=development
 sudo:
   - required
 services:
