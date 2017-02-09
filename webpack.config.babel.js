@@ -1,4 +1,5 @@
 import { resolve } from 'path';
+import webpack from 'webpack';
 import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 
 require('dotenv-safe').load();
@@ -8,13 +9,8 @@ let plugins = [];
 if (process.env.NODE_ENV === 'production') {
   plugins = [
     ...plugins,
-    new UglifyJSPlugin({
-      compress: {
-        warnings: false,
-      },
-      mangle: false,
-      sourcemap: false,
-    }),
+    new webpack.EnvironmentPlugin(['NODE_ENV']),
+    new UglifyJSPlugin(),
   ];
 }
 
