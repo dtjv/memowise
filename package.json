@@ -2,6 +2,9 @@
   "name": "memowise",
   "version": "1.0.0",
   "description": "A flashcard app using React + Redux",
+  "engines": {
+    "node": "7"
+  },
   "scripts": {
     "clean": "rimraf build",
     "lint": "eslint *.js bin src tests --color",
@@ -9,7 +12,8 @@
     "start": "node src/server/server.js",
     "test": "npm run lint && nyc mocha --compilers js:babel-register --bail --recursive tests",
     "coverage": "nyc report --reporter=html && open ./coverage/index.html",
-    "import": "./bin/deck-import-cli.js -a"
+    "import": "./bin/deck-import-cli.js -a",
+    "postinstall": "npm run build"
   },
   "devDependencies": {
     "babel-core": "^6.22.1",
