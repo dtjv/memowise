@@ -1,10 +1,12 @@
-const mongoose = require('../db');
+const { getDatabase } = require('../db');
 
-const PlaySchema = new mongoose.Schema({
+const db = getDatabase();
+
+const PlaySchema = new db.Schema({
   rating: String,
   cardId: String,
   deckId: String,
   userId: String,
 }, { timestamps: true });
 
-module.exports = mongoose.model('Play', PlaySchema);
+module.exports = db.model('Play', PlaySchema);

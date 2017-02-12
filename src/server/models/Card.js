@@ -1,6 +1,8 @@
-const mongoose = require('../db');
+const { getDatabase } = require('../db');
 
-const CardSchema = new mongoose.Schema({
+const db = getDatabase();
+
+const CardSchema = new db.Schema({
   deckId: String,
   question: {
     text: String,
@@ -11,4 +13,4 @@ const CardSchema = new mongoose.Schema({
   },
 }, { timestamps: true });
 
-module.exports = mongoose.model('Card', CardSchema);
+module.exports = db.model('Card', CardSchema);

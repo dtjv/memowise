@@ -1,7 +1,9 @@
-const mongoose = require('../db');
+const { getDatabase } = require('../db');
 
-const DeckSchema = new mongoose.Schema({
+const db = getDatabase();
+
+const DeckSchema = new db.Schema({
   name: String,
 }, { timestamps: true });
 
-module.exports = mongoose.model('Deck', DeckSchema);
+module.exports = db.model('Deck', DeckSchema);

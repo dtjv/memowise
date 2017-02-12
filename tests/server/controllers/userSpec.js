@@ -1,12 +1,14 @@
 import { expect } from 'chai';
 import request from 'supertest';
-import mongoose from '../../../src/server/db';
+import { getDatabase } from '../../../src/server/db';
 import User from '../../../src/server/models/User';
 
 require('dotenv-safe').load();
 
 const { HOST, PORT } = process.env;
 const baseUrl = `${HOST}:${PORT}`;
+
+const db = getDatabase();
 
 describe('User Controller', () => {
   const user = {
@@ -16,11 +18,11 @@ describe('User Controller', () => {
   };
 
   beforeEach((done) => {
-    mongoose.connection.db.dropDatabase(err => err || done());
+    db.connection.db.dropDatabase(err => (err ? done(err) : done()));
   });
 
   afterEach((done) => {
-    mongoose.connection.db.dropDatabase(err => err || done());
+    db.connection.db.dropDatabase(err => (err ? done(err) : done()));
   });
 
   describe('SignUp', () => {

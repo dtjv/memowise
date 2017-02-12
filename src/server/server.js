@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const MongoStore = require('connect-mongo')(session);
-const mongoose = require('./db');
+const { getDatabase } = require('./db');
 const { registerAuthService } = require('./services/auth');
 
 const { SESSION_SECRET, HOST, PORT } = process.env;
@@ -33,7 +33,7 @@ express()
     secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    store: new MongoStore({ mongooseConnection: getDatabase().connection }),
   }))
   .use(passport.initialize())
   .use(passport.session())

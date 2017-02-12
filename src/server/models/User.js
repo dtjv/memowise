@@ -1,7 +1,9 @@
-const mongoose = require('../db');
+const { getDatabase } = require('../db');
 const bcrypt = require('bcrypt');
 
-const UserSchema = new mongoose.Schema({
+const db = getDatabase();
+
+const UserSchema = new db.Schema({
   name: String,
   email: {
     type: String,
@@ -34,4 +36,4 @@ UserSchema.methods.validatePassword = function validatePassword(password) {
   return bcrypt.compare(password, this.password);
 };
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = db.model('User', UserSchema);
