@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'production') {
   ];
 }
 
-export default {
+module.exports = {
   entry: './src/client/app.js',
   output: {
     path: resolve(__dirname, 'build'),
