@@ -25,7 +25,7 @@ if (process.env.TRAVIS) {
 const BASE_TEST_DIR = './test/e2e';
 
 exports.config = {
-  tests: resolve(BASE_TEST_DIR, 'tests/*AT.js'),
+  tests: resolve(BASE_TEST_DIR, 'tests/*Spec.js'),
   timeout: 10000,
   output: resolve(BASE_TEST_DIR, 'output'),
   helpers: {
