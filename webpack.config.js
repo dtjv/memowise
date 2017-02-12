@@ -1,8 +1,8 @@
-import { resolve } from 'path';
-import webpack from 'webpack';
-import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
-
 require('dotenv-safe').load();
+
+const { resolve } = require('path');
+const webpack = require('webpack');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 let plugins = [];
 
