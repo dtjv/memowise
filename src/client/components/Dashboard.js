@@ -14,7 +14,8 @@ class Dashboard extends React.Component {
         <h4 className="center grey-text text-darken-4"> Dashboard </h4>
         <div className="card-list">
           <div className="card-columns">
-            {decks.map(deck => <Deck key={deck._id} deck={deck} />)}
+            {decks.map((deck, idx) =>
+              <Deck key={deck._id} idx={idx} deck={deck} />)}
           </div>
         </div>
       </div>

@@ -60,6 +60,7 @@ class SignUp extends React.Component {
               <div className="input-field col s12">
                 <input
                   required
+                  id="username"
                   type="text"
                   className="validate"
                   value={this.state.name}
@@ -74,6 +75,7 @@ class SignUp extends React.Component {
               <div className="input-field col s12">
                 <input
                   required
+                  id="email"
                   type="email"
                   className="validate"
                   value={this.state.email}
@@ -86,6 +88,7 @@ class SignUp extends React.Component {
               <div className="input-field col s12">
                 <input
                   required
+                  id="password"
                   type="password"
                   className="validate"
                   value={this.state.password}
@@ -98,7 +101,7 @@ class SignUp extends React.Component {
             </div>
             <div className="row center">
               <div className="col s12">
-                <button type="submit" className="btn-large blue">
+                <button name="submit" type="submit" className="btn-large blue">
                   Create Account
                 </button>
               </div>

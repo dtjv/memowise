@@ -73,18 +73,21 @@ class StudyDeck extends React.Component {
           <p>How well did you do?</p>
           <div>
             <button
+              id="btn-bad"
               onClick={() => this.handlePlay(play, BAD)}
               className="btn btn-large blue"
             >
               <i className="material-icons">thumb_down</i>
             </button>
             <button
+              id="btn-ok"
               onClick={() => this.handlePlay(play, OKAY)}
               className="btn btn-large blue"
             >
               <i className="material-icons">help</i>
             </button>
             <button
+              id="btn-great"
               onClick={() => this.handlePlay(play, GREAT)}
               className="btn btn-large blue"
             >

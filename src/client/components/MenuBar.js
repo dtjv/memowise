@@ -15,15 +15,15 @@ const MenuBar = ({ user, mobile, signOut }) => {
         <li>
           {
             name ?
-              <Link to="/profile">{name}</Link> :
-              <Link to="/sign-in">Sign In</Link>
+              <Link to="/profile" id="user">{name}</Link> :
+              <Link to="/sign-in" id="menu-signin">Sign In</Link>
           }
         </li>
         <li>
           {
             name ?
-              <Link to="" onClick={handleSignOut}>Sign Out</Link> :
-              <Link to="/sign-up">Create Account</Link>
+              <Link to="" id="menu-signout" onClick={handleSignOut}>Sign Out</Link> :
+              <Link to="/sign-up" id="menu-signup">Create Account</Link>
           }
         </li>
       </ul>
@@ -35,15 +35,15 @@ const MenuBar = ({ user, mobile, signOut }) => {
       <li>
         {
           name ?
-            <Link to="/profile">{name}</Link> :
-            <Link to="/sign-in">Sign In</Link>
+            <Link to="/profile" id="user">{name}</Link> :
+            <Link to="/sign-in" id="menu-signin">Sign In</Link>
         }
       </li>
       <li>
         {
           name ?
-            <Link to="" onClick={handleSignOut}>Sign Out</Link> :
-            <Link to="/sign-up">Create Account</Link>
+            <Link to="" id="menu-signout" onClick={handleSignOut}>Sign Out</Link> :
+            <Link to="/sign-up" id="menu-signup">Create Account</Link>
         }
       </li>
     </ul>

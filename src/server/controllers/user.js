@@ -5,7 +5,11 @@ exports.signUp = (req, res) => {
   User.findOne({ email: req.body.email })
     .then((existingUser) => {
       if (existingUser) {
-        res.status(400).json({ error: { message: 'Email already exists.' } });
+        return res.status(400).json({
+          error: {
+            message: 'Email already exists.',
+          },
+        });
       }
 
       return User.create({

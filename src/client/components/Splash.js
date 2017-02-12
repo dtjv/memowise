@@ -27,7 +27,7 @@ const Splash = () => (
       </div>
     </div>
     <div className="row center">
-      <Link to="/dashboard" className="btn-large blue splashsubtitle">
+      <Link to="/dashboard" id="cta" className="btn-large blue splashsubtitle">
         Study Now!
       </Link>
     </div>

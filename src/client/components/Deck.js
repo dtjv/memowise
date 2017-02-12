@@ -51,6 +51,7 @@ class Deck extends Component {
             <ProgressBar deck={this.props.deck} />
             <div className="center">
               <button
+                id={`deck${this.props.idx}`}
                 onClick={this.chooseDeckToStudy}
                 className="btn blue"
               >
@@ -69,6 +70,7 @@ Deck.propTypes = {
     _id: PropTypes.string,
     name: PropTypes.string,
   }).isRequired,
+  idx: PropTypes.number.isRequired,
   selectDeck: PropTypes.func.isRequired,
 };
 
