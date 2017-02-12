@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import {
   getNextCardToPlay,
-} from '../../../src/server/services/card';
+} from 'server/services/card';
 
 describe('Card Services', () => {
   describe('getNextCardToPlay', () => {

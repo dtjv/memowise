@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import nock from 'nock';
 import thunk from 'redux-thunk';
 import configStore from 'redux-mock-store';
-import { receiveCard, fetchCard } from '../../../src/client/actions';
-import { RECEIVE_CARD } from '../../../src/client/constants/actionTypes';
+import { receiveCard, fetchCard } from 'client/actions';
+import { RECEIVE_CARD } from 'client/constants/actionTypes';
 
 require('dotenv-safe').load();
 

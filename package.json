@@ -7,10 +7,12 @@
   },
   "scripts": {
     "clean": "rimraf build",
-    "lint": "eslint *.js bin src tests --color",
+    "lint": "eslint *.js bin src test --color",
     "build": "npm run clean && webpack --progress --colors",
     "start": "node src/server/server.js",
-    "test": "npm run lint && nyc mocha",
+    "e2e": "codeceptjs run --steps",
+    "test": "npm run lint && cross-env NODE_PATH=src nyc mocha",
+    "selenium": "selenium-standalone install && selenium-standalone start",
     "coverage": "nyc report --reporter=html && open ./coverage/index.html",
     "import": "./bin/deck-import-cli.js -a",
     "postinstall": "npm run build"
@@ -18,9 +20,12 @@
   "devDependencies": {
     "babel-register": "^6.22.0",
     "chai": "^3.5.0",
+    "codeceptjs": "0.5.0",
+    "cross-env": "3.1.4",
     "enzyme": "2.7.1",
     "eslint": "^3.15.0",
     "eslint-config-airbnb": "^14.1.0",
+    "eslint-import-resolver-node": "0.3.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.9.0",
@@ -30,7 +35,9 @@
     "nyc": "^10.1.2",
     "react-addons-test-utils": "15.4.2",
     "redux-mock-store": "^1.2.2",
-    "supertest": "^3.0.0"
+    "selenium-standalone": "6.0.1",
+    "supertest": "^3.0.0",
+    "webdriverio": "4.6.2"
   },
   "dependencies": {
     "babel-core": "^6.22.1",

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import { decks } from '../../../src/client/reducers';
-import { RECEIVE_DECKS } from '../../../src/client/constants/actionTypes';
+import { decks } from 'client/reducers';
+import { RECEIVE_DECKS } from 'client/constants/actionTypes';
 
 describe('Decks Reducer', () => {
   describe('RECEIVE_DECKS', () => {

@@ -7,11 +7,11 @@ import {
   receiveDecks,
   selectDeck,
   fetchDecks,
-} from '../../../src/client/actions';
+} from 'client/actions';
 import {
   RECEIVE_DECKS,
   SELECT_DECK,
-} from '../../../src/client/constants/actionTypes';
+} from 'client/constants/actionTypes';
 
 require('dotenv-safe').load();
 

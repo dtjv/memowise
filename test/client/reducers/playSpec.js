@@ -1,11 +1,11 @@
 import { expect } from 'chai';
-import { play } from '../../../src/client/reducers';
+import { play } from 'client/reducers';
 import {
   START_PLAY,
   FLIP_CARD,
   FINISH_PLAY,
-} from '../../../src/client/constants/actionTypes';
-import { FRONT, BACK, GREAT, BAD } from '../../../src/client/constants/play';
+} from 'client/constants/actionTypes';
+import { FRONT, BACK, GREAT, BAD } from 'client/constants/play';
 
 describe('Play Reducer', () => {
   it('should be a function', () => {

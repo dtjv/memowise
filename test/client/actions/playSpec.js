@@ -3,13 +3,13 @@ import { expect } from 'chai';
 import nock from 'nock';
 import thunk from 'redux-thunk';
 import cfgMockStore from 'redux-mock-store';
-import { startPlay, flipCard, savePlay } from '../../../src/client/actions';
+import { startPlay, flipCard, savePlay } from 'client/actions';
 import {
   START_PLAY,
   FLIP_CARD,
   FINISH_PLAY,
-} from '../../../src/client/constants/actionTypes';
-import { GREAT } from '../../../src/client/constants/play';
+} from 'client/constants/actionTypes';
+import { GREAT } from 'client/constants/play';
 
 require('dotenv-safe').load();
 

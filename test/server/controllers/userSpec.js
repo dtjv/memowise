@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import request from 'supertest';
-import { getDatabase } from '../../../src/server/db';
-import User from '../../../src/server/models/User';
+import { getDatabase } from 'server/db';
+import User from 'server/models/User';
 
 require('dotenv-safe').load();
 

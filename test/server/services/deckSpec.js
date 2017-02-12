@@ -2,11 +2,11 @@ import { expect } from 'chai';
 import range from 'lodash.range';
 import {
   getPercentComplete,
-} from '../../../src/server/services/deck';
-import Deck from '../../../src/server/models/Deck';
-import Card from '../../../src/server/models/Card';
-import Play from '../../../src/server/models/Play';
-import { OKAY } from '../../../src/client/constants/play';
+} from 'server/services/deck';
+import Deck from 'server/models/Deck';
+import Card from 'server/models/Card';
+import Play from 'server/models/Play';
+import { OKAY } from 'client/constants/play';
 
 const resetDB = () =>
   Deck.remove({})
