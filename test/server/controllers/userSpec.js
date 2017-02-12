@@ -1,28 +1,34 @@
 import { expect } from 'chai';
 import request from 'supertest';
-import { getDatabase } from 'server/db';
 import User from 'server/models/User';
+import Deck from 'server/models/Deck';
+import Card from 'server/models/Card';
+import Play from 'server/models/Play';
 
 require('dotenv-safe').load();
 
 const { HOST, PORT } = process.env;
 const baseUrl = `${HOST}:${PORT}`;
 
-const db = getDatabase();
+const resetDB = () =>
+  Deck.remove({})
+    .then(() => User.remove({}))
+    .then(() => Card.remove({}))
+    .then(() => Play.remove({}));
 
 describe('User Controller', () => {
   const user = {
-    name: 'Tester Name',
-    email: 'name@tester.com',
-    password: 'testing',
+    name: 'hans',
+    email: 'gruber@yahoo.com',
+    password: '123hanS!',
   };
 
   beforeEach((done) => {
-    db.connection.db.dropDatabase(err => (err ? done(err) : done()));
+    resetDB().then(() => done()).catch(err => done(err));
   });
 
   afterEach((done) => {
-    db.connection.db.dropDatabase(err => (err ? done(err) : done()));
+    resetDB().then(() => done()).catch(err => done(err));
   });
 
   describe('SignUp', () => {

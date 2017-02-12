@@ -41,27 +41,33 @@ const createPlays = (card, numPlays) =>
       rating: OKAY,
     }));
 
-const importIntoDB = () =>
-  resetDB()
-    .then(() => {
-      const decks = createDecks(1);
-      return Deck.create(decks)
-        .then((savedDecks) => {
-          const cards = savedDecks.reduce((memo, deck) =>
-            ([...memo, ...createCards(deck, 4)]), []);
-          return Card.create(cards)
-            .then((savedCards) => {
-              const plays = savedCards.slice(2).reduce((memo, card) =>
-                ([...memo, ...createPlays(card, 4)]), []);
-              return Play.create(plays)
-                .then(savedPlays => ({ savedDecks, savedCards, savedPlays }));
-            });
+const importIntoDB = () => {
+  const decks = createDecks(1);
+
+  return Deck.create(decks)
+    .then((savedDecks) => {
+      const cards = savedDecks.reduce((memo, deck) =>
+        ([...memo, ...createCards(deck, 4)]), []);
+      return Card.create(cards)
+        .then((savedCards) => {
+          const plays = savedCards.slice(2).reduce((memo, card) =>
+            ([...memo, ...createPlays(card, 4)]), []);
+          return Play.create(plays)
+            .then(savedPlays => ({ savedDecks, savedCards, savedPlays }));
         });
     });
-
+};
 
 describe('Deck Services', () => {
   describe('getPercentComplete', () => {
+    before((done) => {
+      resetDB().then(() => done()).catch(err => done(err));
+    });
+
+    after((done) => {
+      resetDB().then(() => done()).catch(err => done(err));
+    });
+
     it('should be a function', () => {
       expect(getPercentComplete).to.be.a('function');
     });
