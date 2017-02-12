@@ -10,7 +10,7 @@
     "lint": "eslint *.js bin src tests --color",
     "build": "npm run clean && webpack --progress --colors",
     "start": "node src/server/server.js",
-    "test": "npm run lint && nyc mocha --compilers js:babel-register --bail --recursive tests",
+    "test": "npm run lint && nyc mocha",
     "coverage": "nyc report --reporter=html && open ./coverage/index.html",
     "import": "./bin/deck-import-cli.js -a",
     "postinstall": "npm run build"
