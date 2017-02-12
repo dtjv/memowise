@@ -14,10 +14,15 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-5
+  sauce_connect: true
 before_install:
   - npm install -g node-gyp
 before_script:
   - sleep 15
   - npm start &
+  - npm run import
+script:
+  - npm test
+  - npm run e2e
 after_success:
   - npm run codecov
