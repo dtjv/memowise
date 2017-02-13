@@ -22,8 +22,6 @@ before_script:
   - npm run import
   - npm start &
 script:
-  - sleep 15
-  - npm run checkdb
   - npm test
   - npm run e2e
 after_success:
