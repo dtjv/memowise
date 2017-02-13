@@ -3,7 +3,7 @@ language:
 node_js:
   - "7"
 env:
-  - CXX=g++-5 HOST=http://localhost PORT=3000 MONGODB_URI=mongodb://localhost:27017/memowise SESSION_SECRET=memowise NODE_ENV=production
+  - CXX=g++-5 HOST=http://localhost PORT=3000 MONGODB_URI=mongodb://localhost:27017/memowise SESSION_SECRET=memowise NODE_ENV=staging
 sudo:
   - required
 services:
@@ -18,9 +18,9 @@ addons:
 before_install:
   - npm install -g node-gyp
 before_script:
-  - sleep 15
-  - npm start &
+  - sleep 20
   - npm run import
+  - npm start &
 script:
   - npm test
   - npm run e2e
