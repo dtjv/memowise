@@ -5,6 +5,7 @@ const { resolve } = require('path');
 const WebDriverIO = {};
 WebDriverIO.url = 'http://localhost:3000';
 WebDriverIO.browser = 'chrome';
+WebDriverIO.waitForTimeout = 3;
 
 if (process.env.TRAVIS) {
   const caps = {};
@@ -19,6 +20,7 @@ if (process.env.TRAVIS) {
   WebDriverIO.port = 80;
   WebDriverIO.user = process.env.SAUCE_USERNAME;
   WebDriverIO.key = process.env.SAUCE_ACCESS_KEY;
+  WebDriverIO.waitForTimeout = 20;
   WebDriverIO.desiredCapabilities = caps;
 }
 
@@ -26,8 +28,7 @@ const BASE_TEST_DIR = './test/e2e';
 
 exports.config = {
   tests: resolve(BASE_TEST_DIR, 'tests/*Spec.js'),
-  timeout: 10000,
-  waitForTimeout: 6,
+  timeout: 60000,
   output: resolve(BASE_TEST_DIR, 'output'),
   helpers: {
     WebDriverIO,
