@@ -26,7 +26,7 @@ Scenario('/sign-up', (I) => {
 
 Scenario('Submit Valid Credentials', (I) => {
   I.signUp(user.name, user.email, user.password);
-  I.wait();
+  I.wait(3);
   I.see(user.name);
   I.see('Sign Out');
   I.seeInCurrentUrl('/dashboard');
@@ -34,9 +34,9 @@ Scenario('Submit Valid Credentials', (I) => {
 
 Scenario('Submit Invalid Credentials', (I) => {
   I.signUp(user.name, user.email, user.password);
-  I.wait();
+  I.wait(3);
   I.click({ id: 'menu-signout' });
-  I.wait();
+  I.wait(3);
   I.click({ id: 'menu-signup' });
   I.signUp(user.name, user.email, user.password);
   I.see('Email already exists.');

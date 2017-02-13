@@ -4,6 +4,7 @@ require('dotenv-safe').load();
 const cors = require('cors');
 const { resolve } = require('path');
 const express = require('express');
+const morgan = require('morgan');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -18,6 +19,7 @@ const baseUrl = `${HOST}:${PORT}`;
 registerAuthService();
 
 express()
+  .use(morgan('combined'))
   .use(cors({
     origin: '*',
     methods: ['GET, POST, OPTIONS'],

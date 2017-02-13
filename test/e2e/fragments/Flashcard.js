@@ -17,16 +17,16 @@ module.exports = {
 
   flipCard() {
     I.click({ css: this.buttons.flipcard });
-    I.wait();
+    I.wait(3);
   },
 
   rateCard(rating) {
     I.click({ css: this.buttons[rating] });
-    I.wait();
+    I.wait(3);
   },
 
   close() {
     I.click({ css: this.buttons.close });
-    I.wait();
+    I.wait(3);
   },
 };

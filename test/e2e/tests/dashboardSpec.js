@@ -15,7 +15,7 @@ AfterSuite(() => {
   emptyUsersCollection();
 });
 
-Scenario.only('/dashboard', (I) => {
+Scenario('/dashboard', (I) => {
   I.see('Math');
   I.see('Git Command Line');
   I.see('Sublime Text Shortcuts');

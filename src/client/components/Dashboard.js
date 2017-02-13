@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react';
 import Deck from '../containers/Deck';
+import { handleError } from '../services/ErrorService';
 
 class Dashboard extends React.Component {
   componentWillMount() {
-    this.props.fetchDecks();
+    this.props.fetchDecks()
+      .catch(handleError);
   }
 
   render() {

@@ -10,12 +10,11 @@
     "lint": "eslint *.js bin src test --color",
     "build": "npm run clean && webpack --progress --colors",
     "start": "node src/server/server.js",
-    "e2e": "cross-env NODE_PATH=src codeceptjs run --steps",
+    "e2e": "npm run import && cross-env NODE_PATH=src codeceptjs run --steps",
     "test": "npm run lint && cross-env NODE_PATH=src nyc mocha test/client test/server",
     "selenium": "selenium-standalone install && selenium-standalone start",
     "coverage": "nyc report --reporter=html && open ./coverage/index.html",
     "import": "./bin/deck-import-cli.js -a",
-    "checkdb": "./bin/check-db.js",
     "postinstall": "npm run build"
   },
   "devDependencies": {
@@ -63,6 +62,7 @@
     "moment": "^2.17.1",
     "mongodb": "^2.2.22",
     "mongoose": "^4.8.1",
+    "morgan": "1.8.1",
     "node-sass": "^4.5.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
@@ -80,8 +80,8 @@
     "style-loader": "^0.13.1",
     "uglify-js": "2.7.5",
     "uglifyjs-webpack-plugin": "0.1.4",
-    "webpack": "^2.2.1",
-    "unique-random-array": "1.0.0"
+    "unique-random-array": "1.0.0",
+    "webpack": "^2.2.1"
   },
   "babel": {
     "presets": [

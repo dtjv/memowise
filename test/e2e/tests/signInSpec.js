@@ -25,12 +25,12 @@ Scenario('/sign-in', (I) => {
 Scenario('Submit Valid Credentials', (I) => {
   I.amOnPage('/sign-up');
   I.signUp(user.name, user.email, user.password);
-  I.wait();
+  I.wait(3);
   I.click('Sign Out');
-  I.wait();
+  I.wait(3);
   I.click('Sign In');
   I.signIn(user.email, user.password);
-  I.wait();
+  I.wait(3);
   I.see(user.name);
   I.see('Sign Out');
   I.seeInCurrentUrl('/dashboard');

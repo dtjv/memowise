@@ -19,7 +19,6 @@ before_install:
   - npm install -g node-gyp
 before_script:
   - sleep 15
-  - npm run import
   - npm start &
 script:
   - npm test
