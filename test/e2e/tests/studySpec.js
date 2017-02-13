@@ -1,4 +1,4 @@
-/* global Feature, Before, Scenario */
+/* global Feature, Before, Scenario, AfterSuite */
 
 const { emptyUsersCollection } = require('../libs/collections');
 const user = require('../fixtures/user.json');
@@ -9,6 +9,10 @@ Before((dashboardPage) => {
   emptyUsersCollection().then(() => {
     dashboardPage.load(user);
   });
+});
+
+AfterSuite(() => {
+  emptyUsersCollection();
 });
 
 Scenario('Flip Card', (I, studyStep) => {

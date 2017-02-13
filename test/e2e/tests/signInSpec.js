@@ -1,4 +1,4 @@
-/* global Feature, Before, Scenario */
+/* global Feature, Before, Scenario, AfterSuite */
 
 const { emptyUsersCollection } = require('../libs/collections');
 const user = require('../fixtures/user.json');
@@ -6,6 +6,10 @@ const user = require('../fixtures/user.json');
 Feature('SignIn');
 
 Before(() => {
+  emptyUsersCollection();
+});
+
+AfterSuite(() => {
   emptyUsersCollection();
 });
 
@@ -21,12 +25,12 @@ Scenario('/sign-in', (I) => {
 Scenario('Submit Valid Credentials', (I) => {
   I.amOnPage('/sign-up');
   I.signUp(user.name, user.email, user.password);
-  I.wait(3);
+  I.wait();
   I.click('Sign Out');
-  I.wait(3);
+  I.wait();
   I.click('Sign In');
   I.signIn(user.email, user.password);
-  I.wait(3);
+  I.wait();
   I.see(user.name);
   I.see('Sign Out');
   I.seeInCurrentUrl('/dashboard');

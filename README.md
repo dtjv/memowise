@@ -20,7 +20,7 @@ A flashcard web application.
 
 You can import decks of flashcards using a command line utility.
 
-### Usage
+#### Usage
 
 ```
 $ npm run import -- --help
@@ -43,7 +43,7 @@ Examples:
 > The `bin/deck-import` utility is not installed globally. An npm script is provided and flags are passed to that script using `--`.
 > By default the utility loads decks on `docs/decks/`.
 
-### Writing Flash Cards
+#### Writing Flash Cards
 
 A deck of flashcards are written in one markdown file.
 
@@ -72,9 +72,7 @@ The structure complies to the following format. Text inside `[` and `]` are plac
   ---
 ```
 
-## Development
-
-### Tech Stack
+## Tech Stack
 
 * MongoDB
 * Express
@@ -85,7 +83,7 @@ The structure complies to the following format. Text inside `[` and `]` are plac
 * Mocha/Chai
 * [Materialize CSS](http://materializecss.com/)
 
-### Steps to Run Application 
+## Steps to Run Application 
 
 #### Step 1: Install MongoDB via Homebrew
 
@@ -119,6 +117,8 @@ SESSION_SECRET=memowise
 $ npm run build 
 ```
 
+> **Recommended**: For development, watch files: `npm run build -- --watch`
+
 #### Step 5: Start Mongo Server
 
 Open terminal and type:
@@ -135,9 +135,21 @@ Open another terminal and type:
 $ npm start
 ```
 
+> **Recommended**: For development, install [nodemon](https://www.npmjs.com/package/nodemon) globally, then type: `nodemon src/server/server.js`. 
+
 #### Step 7: Study!
 
 Navigate to configured url. Using the example in Step 3, go to **http://localhost:3000**.
+
+
+#### Step 8: Mongo CLI *(optional)*
+
+Open another terminal and type:
+
+```
+$ mongo
+```
+> This allowed me to inspect the database and clear out data if needed during development.
 
 ### Other Commands
 
@@ -163,7 +175,7 @@ $ npm run coverage
 
 ## Data Model
 
-### `users` Collection
+#### `users` Collection
 
 An example of a `user` entry in the `users` collection.
 
@@ -176,7 +188,7 @@ An example of a `user` entry in the `users` collection.
 }
 ```
 
-## `decks` Collection
+#### `decks` Collection
 
 An example of a `deck` entry in the `decks` collection.
 
@@ -187,7 +199,7 @@ An example of a `deck` entry in the `decks` collection.
 }
 ```
 
-## `cards` Collection
+#### `cards` Collection
 
 An example of a `card` entry in the `cards` collection.
 
@@ -205,7 +217,7 @@ An example of a `card` entry in the `cards` collection.
 }
 ```
 
-## `plays` Collection
+#### `plays` Collection
 
 An example of a `play` entry in the `plays` collection.
 
@@ -224,23 +236,23 @@ An example of a `play` entry in the `plays` collection.
 
 We're using [Redux](http://redux.js.org/) to store our application state. Here are the top level state properties.
 
-### `decks`
+#### `decks`
 
 Holds all decks in the database.
 
-### `deck`
+#### `deck`
 
 Holds the currently selected deck the user is studying.
 
-### `card`
+#### `card`
 
 Holds the current card being studied
 
-### `plays`
+#### `plays`
 
 Holds the stats of each card studied by each user. A `side` can hold a value of 0 or 1 for displaying the front or back of a card. A `rating` can hold a user's self assessment of how she performed on a studied card (-1 = poor, 0 = ok, 1 = great).
 
-### Sample State
+#### Sample State
 
 Below is a sample snapshot of what the state looks like.
 
@@ -283,7 +295,7 @@ Below is a sample snapshot of what the state looks like.
 
 ## Todo
 
-* [ ] Add e2e tests 
+* [x] Add e2e tests 
 * [ ] Restructure ([Resource](https://jaysoo.ca/2016/02/28/organizing-redux-application/))
 * [x] Deploy
 * [ ] Integrate Materialize Sass into build

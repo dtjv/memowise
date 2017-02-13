@@ -14,13 +14,13 @@ module.exports = {
   load({ name, email, password }) {
     I.amOnPage('/');
     I.click('#menu-signup');
-    I.wait(3);
+    I.wait();
     I.signUp(name, email, password);
-    I.wait(3);
+    I.wait();
   },
 
   chooseDeck() {
     I.click({ css: this.decks.first });
-    I.wait(3);
+    I.wait();
   },
 };

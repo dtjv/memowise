@@ -27,6 +27,7 @@ const BASE_TEST_DIR = './test/e2e';
 exports.config = {
   tests: resolve(BASE_TEST_DIR, 'tests/*Spec.js'),
   timeout: 10000,
+  waitForTimeout: 6,
   output: resolve(BASE_TEST_DIR, 'output'),
   helpers: {
     WebDriverIO,
