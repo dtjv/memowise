@@ -16,7 +16,7 @@ module.exports = {
     I.click('#menu-signup');
     I.wait();
     I.signUp(name, email, password);
-    I.wait(30);
+    I.wait(60);
   },
 
   chooseDeck() {
