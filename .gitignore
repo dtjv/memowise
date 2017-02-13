@@ -5,3 +5,4 @@ coverage
 build
 NOTES.md
 npm-debug.log
+test/e2e/output

@@ -18,10 +18,12 @@ addons:
 before_install:
   - npm install -g node-gyp
 before_script:
-  - sleep 20
+  - sleep 15
   - npm run import
   - npm start &
 script:
+  - sleep 15
+  - npm run checkdb
   - npm test
   - npm run e2e
 after_success:

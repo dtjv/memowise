@@ -15,6 +15,7 @@
     "selenium": "selenium-standalone install && selenium-standalone start",
     "coverage": "nyc report --reporter=html && open ./coverage/index.html",
     "import": "./bin/deck-import-cli.js -a",
+    "checkdb": "./bin/check-db.js",
     "postinstall": "npm run build"
   },
   "devDependencies": {
