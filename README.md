@@ -20,7 +20,7 @@ A flashcard web application.
 
 You can import decks of flashcards using a command line utility.
 
-#### Usage
+### Usage
 
 ```
 $ npm run import -- --help
@@ -40,10 +40,9 @@ Examples:
   $ deck-import -f math.md
 ```
 
-> The `bin/deck-import` utility is not installed globally. An npm script is provided and flags are passed to that script using `--`.
-> By default the utility loads decks on `docs/decks/`.
+> The `bin/deck-import` utility is not installed globally. An npm script is provided and flags are passed to that script using `--` followed by the flag (i.e. `npm run import -- -f math.md`). By default the utility loads decks from `docs/decks/`.
 
-#### Writing Flash Cards
+### Writing Flash Cards
 
 A deck of flashcards are written in one markdown file.
 
@@ -79,9 +78,16 @@ The structure complies to the following format. Text inside `[` and `]` are plac
 * React
 * React Router
 * Redux
-* Passport
+* [PassportJS](http://passportjs.org/)
 * Mocha/Chai
+* [CodeceptJS](http://codecept.io/)
 * [Materialize CSS](http://materializecss.com/)
+
+## Services
+
+* [TravisCI](https://travis-ci.org/)
+* [Codecov](https://codecov.io/)
+* [Sauce Labs](https://saucelabs.com/)
 
 ## Steps to Run Application 
 
@@ -121,13 +127,13 @@ $ npm run build
 
 #### Step 5: Start Mongo Server
 
-Open terminal and type:
+Open a new terminal and type:
 
 ```
 $ mongod
 ```
 
-#### Step 6: Start Application 
+#### Step 6: Start Application Server
 
 Open another terminal and type: 
 
@@ -149,9 +155,28 @@ Open another terminal and type:
 ```
 $ mongo
 ```
-> This allowed me to inspect the database and clear out data if needed during development.
+> This allows you to inspect the database and clear out data if needed during development.
 
-### Other Commands
+Some common mongo CLI commands that are useful:
+
+```
+> show dbs
+> show collections
+> use [db-name] 
+> db.[collection-name].find({})
+> db.[collection-name].remove({})
+> db.dropDatabase()
+```
+
+## Other Commands
+
+#### Selenium Server
+
+Open a separate terminal and type:
+
+```
+$ npm run selenium
+```
 
 #### Lint
 
@@ -159,11 +184,25 @@ $ mongo
 $ npm run lint
 ```
 
-#### Test
+#### Test (Unit & Integration)
 
 ```
 $ npm test
 ```
+> **IMPORTANT**: Ensure the [MongoDB Server](#step-5-start-mongo-server) **and** the [Application Server](#step6-start-application-server) are running.
+
+#### Acceptance Tests (End-2-End)
+
+```
+$ npm run e2e
+```
+> **IMPORTANT**: Ensure the follow are running:
+>
+> * [MongoDB Server](#step-5-start-mongo-server) 
+> * [Application Server](#step6-start-application-server)
+> * [Selenium Server](#Selenium)
+
+
 
 #### Coverage
 
