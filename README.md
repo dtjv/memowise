@@ -85,6 +85,7 @@ The structure complies to the following format. Text inside `[` and `]` are plac
 
 ## Services
 
+* [Heroku](https://heroku.com/)
 * [TravisCI](https://travis-ci.org/)
 * [Codecov](https://codecov.io/)
 * [Sauce Labs](https://saucelabs.com/)
