@@ -1,7 +1,6 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow, render } from 'enzyme';
-// import Deck from 'client/components/Deck';
 import Dashboard from 'client/components/Dashboard';
 
 describe('Dashboard', () => {

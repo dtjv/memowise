@@ -93,7 +93,7 @@
   },
   "nyc": {
     "exclude": [
-      "tests/**/*.js"
+      "test/**/*.js"
     ],
     "require": [
       "babel-register"
