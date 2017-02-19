@@ -72,6 +72,61 @@ describe('Deck Services', () => {
       expect(getPercentComplete).to.be.a('function');
     });
 
+    it('should return 0% for undefined deckId', (done) => {
+      importIntoDB()
+        .then(() => {
+          const deckId = undefined;
+          const userId = '0';
+          const expected = '0%';
+
+          getPercentComplete(deckId, userId)
+            .then((percentage) => {
+              expect(percentage).to.equal(expected);
+              done();
+            })
+            .catch(err => done(err));
+        })
+        .catch(error => done(error));
+    });
+
+    it('should return 0% for undefined deckId', (done) => {
+      importIntoDB()
+        .then((result) => {
+          const { savedDecks } = result;
+          const deckId = savedDecks[0]._id.toString();
+          const userId = undefined;
+          const expected = '0%';
+
+          getPercentComplete(deckId, userId)
+            .then((percentage) => {
+              expect(percentage).to.equal(expected);
+              done();
+            })
+            .catch(err => done(err));
+        })
+        .catch(error => done(error));
+    });
+
+    it('should return 0% for no cards found', (done) => {
+      importIntoDB()
+        .then((result) => {
+          const { savedDecks } = result;
+          const deckId = savedDecks[0]._id.toString();
+          const userId = '0';
+          return { deckId, userId };
+        })
+        .then(({ deckId, userId }) => {
+          resetDB().then(() => {
+            getPercentComplete(deckId, userId)
+              .then((percentage) => {
+                expect(percentage).to.equal('0%');
+                done();
+              });
+          });
+        })
+        .catch(error => done(error));
+    });
+
     it('should return percent of cards studied in deck', (done) => {
       importIntoDB()
         .then((result) => {
