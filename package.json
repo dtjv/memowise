@@ -63,7 +63,7 @@
     "meow": "3.7.0",
     "moment": "^2.17.1",
     "mongodb": "^2.2.22",
-    "mongoose": "^4.8.1",
+    "mongoose": "^5.9.24",
     "node-sass": "^4.5.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
