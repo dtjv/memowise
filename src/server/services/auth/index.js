@@ -17,6 +17,7 @@ exports.registerAuthService = () => {
 };
 
 exports.isLoggedIn = (req, res, next) => {
+  // `.isAuthenticated()` is found in passportjs, under lib/framework/connect.js
   if (req.isAuthenticated()) {
     next();
   } else {

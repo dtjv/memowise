@@ -7,13 +7,10 @@ import {
   FINISH_PLAY,
   SIGN_IN,
   SIGN_OUT,
-  SET_USER,
+  SET_USER
 } from '../constants/actionTypes';
 
-import {
-  FRONT,
-  BACK,
-} from '../constants/play';
+import { FRONT, BACK } from '../constants/play';
 
 export const decks = (state = [], action) => {
   switch (action.type) {
@@ -45,9 +42,7 @@ export const card = (state = {}, action) => {
 export const play = (state = {}, action) => {
   switch (action.type) {
     case START_PLAY:
-      if (!action.data ||
-          !action.data.deckId ||
-          !action.data.cardId) {
+      if (!action.data || !action.data.deckId || !action.data.cardId) {
         return state;
       }
 
@@ -55,7 +50,7 @@ export const play = (state = {}, action) => {
         deckId: action.data.deckId,
         cardId: action.data.cardId,
         side: FRONT,
-        rating: null,
+        rating: null
       };
     case FLIP_CARD:
       return { ...state, side: BACK };

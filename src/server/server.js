@@ -18,23 +18,27 @@ const baseUrl = `${HOST}:${PORT}`;
 registerAuthService();
 
 express()
-  .use(cors({
-    origin: '*',
-    methods: ['GET, POST, OPTIONS'],
-    allowHeaders: 'content-type, accept',
-    credentials: true,
-    maxAge: 10,
-  }))
+  .use(
+    cors({
+      origin: '*',
+      methods: ['GET, POST, OPTIONS'],
+      allowHeaders: 'content-type, accept',
+      credentials: true,
+      maxAge: 10
+    })
+  )
   .use(bodyParser.urlencoded({ extended: true }))
   .use(bodyParser.json())
   .use(cookieParser(SESSION_SECRET))
   .use(express.static(resolve(__dirname, '../../build')))
-  .use(session({
-    secret: SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    store: new MongoStore({ mongooseConnection: getDatabase().connection }),
-  }))
+  .use(
+    session({
+      secret: SESSION_SECRET,
+      resave: false,
+      saveUninitialized: false,
+      store: new MongoStore({ mongooseConnection: getDatabase().connection })
+    })
+  )
   .use(passport.initialize())
   .use(passport.session())
   .use(require('./routes/deck'))

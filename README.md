@@ -1,13 +1,10 @@
 # MemoWise
-[![build status](https://travis-ci.org/dtjv/memowise.svg?branch=master)](https://travis-ci.org/dtjv/memowise)
+
+> **This application is a bit dated. It's here for reference only until I get a chance to update it.**
 
 A flashcard web application.
 
 ![memowise home](./docs/media/memowise-home.png)
-
-## Demo
-
-[Live Demo](https://memowise.herokuapp.com/)
 
 ## Features
 
@@ -15,6 +12,17 @@ A flashcard web application.
 * Each deck studied displays a progress bar to indicate percent of cards studied.
 * Similar to physical cards, each MemoWise card displays a prompt on one side and the answer on the reverse.
 * Write cards in markdown and import them into MemoWise
+
+## Tech Stack
+
+* [React](https://reactjs.org/)
+* [Redux](https://redux.js.org/)
+* [MongoDB](https://www.mongodb.com/)
+* [Express](https://expressjs.com/)
+* [PassportJS](http://passportjs.org/)
+* [Mocha/Chai](https://mochajs.org/)
+* [CodeceptJS](http://codecept.io/)
+* [Materialize CSS](http://materializecss.com/)
 
 ## Deck Import
 
@@ -71,24 +79,6 @@ The structure complies to the following format. Text inside `[` and `]` are plac
   ---
 ```
 
-## Tech Stack
-
-* MongoDB
-* Express
-* React
-* React Router
-* Redux
-* [PassportJS](http://passportjs.org/)
-* Mocha/Chai
-* [CodeceptJS](http://codecept.io/)
-* [Materialize CSS](http://materializecss.com/)
-
-## Services
-
-* [Heroku](https://heroku.com/)
-* [TravisCI](https://travis-ci.org/)
-* [Codecov](https://codecov.io/)
-* [Sauce Labs](https://saucelabs.com/)
 
 ## Steps to Run Application 
 
@@ -202,7 +192,6 @@ $ npm run e2e
 > * [MongoDB Server](#step-5-start-mongo-server) 
 > * [Application Server](#step6-start-application-server)
 > * [Selenium Server](#Selenium)
-
 
 
 #### Coverage
@@ -335,12 +324,7 @@ Below is a sample snapshot of what the state looks like.
 
 ## Todo
 
-* [x] Add e2e tests 
-* [ ] Restructure ([Resource](https://jaysoo.ca/2016/02/28/organizing-redux-application/))
-* [x] Deploy
-* [ ] Integrate Materialize Sass into build
-* [ ] Use [SM-2](https://www.supermemo.com/english/ol/sm2.htm) algorithm for card selection 
-* [ ] Improve profile UI
+* Use [SM-2](https://www.supermemo.com/english/ol/sm2.htm) algorithm for card selection 
 
 ## Credit 
 
