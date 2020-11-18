@@ -10,13 +10,14 @@ e: 11.20.2020
    - [x] requirements
    - [x] sprints
 1. sprint
-   - [ ] data model
-   - [ ] routes
-   - [ ] render (static data; no styles)
+   - [x] data model
+   - [x] routes
+   - [x] render (static data; no styles)
    - [ ] ci/cd setup
 1. sprint
-   - [ ] auth
+   - [ ] study
 1. sprint
+   - [ ] auth
    - [ ] database
 1. sprint
    - [ ] styles
