@@ -1,24 +1,26 @@
-# Sprints
+# sprints
 
 ## v1
+
+### sprint a
 
 s: 11.16.2020
 e: 11.20.2020
 
-1. sprint
+1. mon
    - [x] research
    - [x] requirements
    - [x] sprints
-1. sprint
+1. tue
    - [x] data model
-   - [x] routes
-   - [x] render (static data; no styles)
-   - [ ] ci/cd setup
-1. sprint
-   - [ ] study
-1. sprint
+   - [x] page routes
+   - [x] render static data
+1. wed
+   - [ ] browse sets
+   - [ ] add sets to user account
+1. thu
    - [ ] auth
-   - [ ] database
-1. sprint
+   - [ ] styles
+1. fri
    - [ ] styles
    - [ ] documentation
