@@ -1,23 +1,52 @@
-import util from "util";
+import { useState } from "react";
 import { db } from "../../../data/db";
 
-const FlashcardSet = ({ flashcardSet }) => {
-  // i've got incremental static regeneration set. so, the server should
-  // regenerate this page. perhaps i don't need client side rendering.
-
+const Card = ({ card }) => {
+  const [cardField, setCardField] = useState("term");
   return (
     <div>
-      <h1>Flashcard Set</h1>
-      {console.log(util.inspect(flashcardSet, { depth: 4, color: true }))}
+      <p>{card[cardField]}</p>
+      <button
+        onClick={() =>
+          setCardField(cardField === "term" ? "definition" : "term")
+        }
+      >
+        Flip
+      </button>
     </div>
   );
 };
 
-export default FlashcardSet;
+const ViewSet = ({ cardSet }) => {
+  const [cardIdx, setCardIdx] = useState(0);
+  const { name, cards } = cardSet;
+
+  if (!cards.length) throw new Error("No cards!!");
+
+  return (
+    <div>
+      <h1>{name}</h1>
+      <br />
+      <div>
+        <Card card={cards[cardIdx]} />
+        <div>
+          {cardIdx >= 1 && (
+            <button onClick={() => setCardIdx(cardIdx - 1)}>Prev</button>
+          )}
+          {cardIdx < cards.length - 1 && (
+            <button onClick={() => setCardIdx(cardIdx + 1)}>Next</button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ViewSet;
 
 export async function getStaticPaths() {
   const paths = db.sets.map((set) => ({
-    params: { setid: set.id.toString() },
+    params: { setid: set.id },
   }));
   return {
     paths,
@@ -26,11 +55,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const flashcardSet = db.sets
-    .filter((set) => set.id === parseInt(params.setid))
-    .pop();
+  const cardSet = db.sets.filter((set) => set.id === params.setid).pop();
   return {
-    props: { flashcardSet },
+    props: { cardSet },
     revalidate: 1,
   };
 }

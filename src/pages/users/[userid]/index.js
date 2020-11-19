@@ -5,7 +5,7 @@ import { db } from "../../data/db";
 // the user's dashboard displays all public flashcards sets in a user's
 // collection. if the user is logged in, then display private flashcards sets as
 // well.
-const UserDashboard = ({ flashcardSets }) => {
+export default UserDashboard = ({ flashcardSets }) => {
   const router = useRouter();
   const { userid } = router.query;
 
@@ -25,17 +25,15 @@ const UserDashboard = ({ flashcardSets }) => {
 
 export async function getStaticPaths() {
   return {
-    paths: db.users.map((user) => ({ params: { userid: user.id.toString() } })),
+    paths: db.users.map((user) => ({ params: { userid: user.id } })),
     fallback: true,
   };
 }
 
 export async function getStaticProps({ params }) {
   const flashcardSet = db.users
-    .filter((user) => user.id === parseInt(params.userid))
+    .filter((user) => user.id === params.userid)
     .map((user) => user.sets);
   const { everyone, onlyme } = flashcardSet.pop();
   return { props: { flashcardSets: [...everyone, ...onlyme] }, revalidate: 1 };
 }
-
-export default UserDashboard;
