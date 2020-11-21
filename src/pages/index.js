@@ -2,6 +2,8 @@ import { db } from "../data/db";
 import Link from "next/link";
 import util from "util";
 
+import { Nav } from "../components/Nav";
+
 const Home = () => {
   const userId = "1xg5";
   const sets = db.sets
@@ -29,8 +31,11 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Home</h1>
-      <ul>{sets}</ul>
+      <Nav />
+      <main>
+        <p>hello world!</p>
+        <ul>{sets}</ul>
+      </main>
     </div>
   );
 };
