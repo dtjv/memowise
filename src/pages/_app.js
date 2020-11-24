@@ -1,5 +1,6 @@
 import Router from "next/router";
 import { Auth0Provider } from "@auth0/auth0-react";
+import "tailwindcss/tailwind.css";
 
 const onRedirectCallback = (appState) => {
   Router.replace(appState?.returnTo || "/");
