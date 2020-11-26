@@ -8,13 +8,13 @@ const Home = () => {
   return (
     <div className="max-w-3xl px-4 mx-auto antialiased sm:px-8 md:px-12 lg:px-0">
       <nav>
-        <div className="flex items-center justify-between py-8 mb-12">
+        <div className="flex items-center justify-between py-6 border-b border-gray-200">
           <div>memowise</div>
           <div>menu</div>
         </div>
       </nav>
       <main>
-        <header className="mb-14">
+        <header className="my-12">
           <div className="flex items-center">
             <svg
               className="w-12 h-12 mr-2 text-blue-500"
@@ -42,28 +42,79 @@ const Home = () => {
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
           <Link href="/">
-            <a className="inline-flex items-center px-6 py-3 text-lg font-semibold border border-transparent border-gray-900 leading-6 rounded-md">
-              Start Learning
+            <a className="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-gray-900 rounded-md">
+              Get started
             </a>
           </Link>
         </header>
         <Section>
-          <h2 className="mb-3 text-lg font-semibold leading-snug text-purple-600 uppercase">
+          <h2 className="mb-3 text-lg font-semibold leading-snug text-blue-500 uppercase">
             Algorithm Based
           </h2>
           <p className="mb-8 text-3xl font-extrabold leading-none tracking-tight text-gray-900">
             Lorem ipsum dolor sit amet, consectetur.
           </p>
-          <p className="text-lg font-medium text-gray-500">
+          <p className="mb-8 text-lg font-medium text-gray-500">
             Eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
             ipsum dolor sit amet, consectetur adipiscing elit, sed do
           </p>
           <Link href="/">
-            <a className="text-lg font-medium text-purple-600 hover:text-purple-800">
-              {" "}
+            <a className="text-lg font-medium text-blue-500 hover:text-blue-800">
               Learn more -{">"}
             </a>
           </Link>
+        </Section>
+        <Section>
+          <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight text-gray-900 ">
+            Explore Topics
+          </h2>
+          <ul className="text-white space-y-8">
+            <li className="p-6 shadow-lg rounded-3xl bg-gradient-to-br from-blue-400 to-blue-700">
+              <h2 className="text-2xl font-semibold">Math</h2>
+              <p className="mb-4 text-sm font-medium text-blue-100 uppercase text-shadow">
+                35 sets
+              </p>
+              <p className="mb-8 font-medium text-blue-100 text-shadow">
+                Eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              </p>
+              <Link href="/">
+                <a className="inline-flex items-center px-4 py-2 font-semibold bg-blue-800 rounded-lg bg-opacity-50">
+                  Explore Math
+                </a>
+              </Link>
+            </li>
+            <li className="p-6 shadow-lg rounded-3xl bg-gradient-to-br from-purple-400 to-purple-700">
+              <h2 className="text-2xl font-semibold">Languages</h2>
+              <p className="mb-8 text-sm font-medium text-purple-100 uppercase text-shadow">
+                20 sets
+              </p>
+              <p className="mb-8 font-medium text-purple-100 text-shadow">
+                Eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.
+              </p>
+              <Link href="/">
+                <a className="inline-flex items-center px-4 py-2 font-semibold bg-purple-800 rounded-lg bg-opacity-50">
+                  Explore Languages
+                </a>
+              </Link>
+            </li>
+            <li className="p-6 shadow-lg rounded-3xl bg-gradient-to-br from-yellow-400 to-yellow-800">
+              <h2 className="text-2xl font-semibold">Science</h2>
+              <p className="mb-8 text-sm font-medium text-yellow-100 uppercase text-shadow">
+                105 sets
+              </p>
+              <p className="mb-8 font-medium text-yellow-100 text-shadow">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.
+                Ipsum dolor sit amet.
+              </p>
+              <Link href="/">
+                <a className="inline-flex items-center px-4 py-2 font-semibold bg-yellow-800 rounded-lg bg-opacity-50">
+                  Explore Science
+                </a>
+              </Link>
+            </li>
+          </ul>
         </Section>
       </main>
       <footer></footer>
