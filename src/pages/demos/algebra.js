@@ -36,28 +36,30 @@ const Math = () => {
               </a>
             </Link>
             <span className="mx-1">/</span>
-            <span className="mx-1">Math</span>
+            <Link href="/">
+              <a>
+                <span className="mx-1 text-blue-500">Math</span>
+              </a>
+            </Link>
+            <span className="mx-1">/</span>
+            <span className="mx-1">Algebra</span>
           </div>
-          <h1 className="mb-4 text-4xl font-extrabold text-gray-900 ">Math</h1>
+          <h1 className="mb-4 text-4xl font-extrabold text-gray-900 ">
+            Algebra
+          </h1>
           <p className="text-2xl font-normal tracking-tight text-gray-500">
             Eiusmod tempor incididunt labore et dolore magna aliqua. Lorem ipsum
             dolor sit amet, consectetur adipiscing elit, sed do.
           </p>
         </header>
         <Section>
-          <div className="flex items-baseline justify-between">
-            <h2 className="mb-6 text-3xl font-bold tracking-tight">
-              Algebra Sets
-            </h2>
-            <Link href="/">
-              <a className="font-medium text-blue-500">View all -{">"}</a>
-            </Link>
-          </div>
           <ul className="text-white space-y-8">
             <li className="p-6 bg-gray-800 shadow-lg rounded-3xl">
-              <h2 className="text-2xl font-semibold leading-tight">Math 101</h2>
+              <h2 className="text-2xl font-semibold leading-tight">
+                Expression and Equations
+              </h2>
               <p className="mb-4 text-sm font-medium text-gray-400 uppercase">
-                35 terms
+                10 terms
               </p>
               <p className="mb-8 font-medium">
                 A few basic questions about pre-algebra. You should know this
@@ -77,10 +79,10 @@ const Math = () => {
             </li>
             <li className="p-6 bg-gray-800 shadow-lg rounded-3xl">
               <h2 className="text-2xl font-semibold leading-tight">
-                Middle Grade Math and Pre-Algebra
+                7th Grade Algebra Vocabulary
               </h2>
               <p className="mb-4 text-sm font-medium text-gray-400 uppercase">
-                35 terms
+                20 terms
               </p>
               <p className="mb-8 font-medium">
                 A few basic questions about pre-algebra. You should know this
