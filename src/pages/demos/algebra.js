@@ -55,7 +55,7 @@ const Math = () => {
         <Section>
           <ul className="text-white space-y-8">
             <li className="p-6 bg-gray-800 shadow-lg rounded-3xl">
-              <h2 className="text-2xl font-semibold leading-tight">
+              <h2 className="text-2xl font-semibold">
                 Expression and Equations
               </h2>
               <p className="mb-4 text-sm font-medium text-gray-400 uppercase">
@@ -78,7 +78,7 @@ const Math = () => {
               </div>
             </li>
             <li className="p-6 bg-gray-800 shadow-lg rounded-3xl">
-              <h2 className="text-2xl font-semibold leading-tight">
+              <h2 className="text-2xl font-semibold">
                 7th Grade Algebra Vocabulary
               </h2>
               <p className="mb-4 text-sm font-medium text-gray-400 uppercase">

@@ -15,7 +15,7 @@ const Math = () => {
         </div>
       </nav>
       <main>
-        <header className="pb-6 mt-10 mb-6 border-b border-gray-200">
+        <header className="pb-6 mt-10">
           <div className="flex items-center mb-4 text-sm font-medium text-gray-700">
             <Link href="/">
               <a>
@@ -68,27 +68,87 @@ const Math = () => {
           </div>
         </header>
         <Section>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 ">
+              Cards
+            </h2>
+            <button
+              className="p-1 text-blue-500 bg-blue-500 rounded-full bg-opacity-10"
+              aria-label="add set to my account"
+            >
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                ></path>
+              </svg>
+            </button>
+          </div>
           <ul className="space-y-8">
             <li className="relative p-6 shadow-sm ring-1 ring-black ring-opacity-5 rounded-xl">
               <p className="text-xs text-gray-500 uppercase">term</p>
-              <div className="flex justify-center py-8">
+              <div className="flex justify-center py-10">
                 <p>Algebraic Expression</p>
               </div>
-              <span className="absolute bottom-2 right-2 uppercase text-xs rounded-full bg-pink-100 text-pink-600 py-0.5 px-2">
-                tap
-              </span>
+              <div className="flex justify-end">
+                <button
+                  className="p-1 text-blue-500 bg-blue-500 rounded-full bg-opacity-10"
+                  aria-label="add set to my account"
+                >
+                  <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
             </li>
-            <li className="relative p-6 shadow-sm ring-1 ring-black ring-opacity-5 rounded-xl">
+            <li className="relative p-6 shadow-sm ring-1 ring-gray-500 rounded-xl">
               <p className="text-xs text-gray-500 uppercase">definition</p>
-              <div className="flex justify-center py-8">
+              <div className="flex justify-center py-10">
                 <p>
                   A combination of variables, numbers, and at least one
                   operation.
                 </p>
               </div>
-              <span className="absolute bottom-2 right-2 uppercase text-xs rounded-full bg-pink-100 text-pink-600 py-0.5 px-2">
-                tap
-              </span>
+              <div className="flex justify-end">
+                <button
+                  className="p-1 text-blue-500 bg-blue-500 rounded-full bg-opacity-10"
+                  aria-label="add set to my account"
+                >
+                  <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
             </li>
           </ul>
         </Section>
