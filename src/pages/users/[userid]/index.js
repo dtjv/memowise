@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
 import util from "util";
-import { db } from "../../data/db";
+import { db } from "../../../data/db";
 
 // the user's dashboard displays all public flashcards sets in a user's
 // collection. if the user is logged in, then display private flashcards sets as
 // well.
-export default UserDashboard = ({ flashcardSets }) => {
+const UserDashboard = ({ flashcardSets }) => {
   const router = useRouter();
   const { userid } = router.query;
 
@@ -23,7 +23,10 @@ export default UserDashboard = ({ flashcardSets }) => {
   );
 };
 
+export default UserDashboard;
+
 export async function getStaticPaths() {
+  // set params to an object, with param field names match dynamic folder name
   return {
     paths: db.users.map((user) => ({ params: { userid: user.id } })),
     fallback: true,

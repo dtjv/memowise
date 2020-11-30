@@ -17,12 +17,40 @@ export const db = {
       },
     },
   ],
+  topics: {
+    DEFAULT: [
+      {
+        id: "xx1m",
+        name: "Math",
+        description:
+          "Get up to speed on all things Math! Ace those SAT tests and get into the college you've always dreamed of.",
+        categories: ["Algebra", "Calculus", "Geometry"],
+      },
+      {
+        id: "ma30",
+        name: "Languages",
+        description:
+          "Study hard to improve your foreign language skills. Then share what you learn with the world.",
+        categories: ["Spanish", "French", "Italian"],
+      },
+      {
+        id: "zza9",
+        name: "Science",
+        description:
+          "Learn about the world around you. Discover exciting things from the deep sea to the moon.",
+        categories: ["Spanish", "French", "Italian"],
+      },
+    ],
+  },
   sets: [
     {
       id: "adfw",
       ownerid: "1xg5",
       name: "My Basic Math",
-      category: "Math",
+      description:
+        "Eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
+      topic: "Math",
+      categories: ["Algebra"],
       cards: [
         {
           id: "56o3",
@@ -46,8 +74,11 @@ export const db = {
     {
       id: "23rf",
       ownerid: "1xg5",
-      name: "Cooking Terms",
-      category: "Cooking",
+      name: "Learn You Spanish",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
+      topic: "Languages",
+      categories: ["Spanish"],
       cards: [],
       access: "public",
       linked: ["1xg5", "2opv"],
@@ -56,7 +87,10 @@ export const db = {
       id: "qfrd",
       ownerid: "2opv",
       name: "CSC 101",
-      category: "Computer Science",
+      description:
+        "Eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Eiusmod tempor incididunt ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
+      topic: "Computer Science",
+      categories: ["Algorithms", "Data Structures"],
       cards: [],
       access: "public",
       linked: ["1xg5"],
@@ -64,8 +98,11 @@ export const db = {
     {
       id: "avl9",
       ownerid: "2opv",
-      name: "Car Terms",
-      category: "Cars",
+      name: "Biology",
+      description:
+        "Eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
+      topic: "Science",
+      categories: ["Biology", "Chemistry"],
       cards: [],
       access: "public",
       linked: ["2opv"],
@@ -74,7 +111,10 @@ export const db = {
       id: "90gd",
       ownerid: "2opv",
       name: "My Algebra",
-      category: "Math",
+      description:
+        "Eiusmod tempor! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
+      topic: "Math",
+      categories: ["Algebra"],
       cards: [],
       access: "public",
       linked: ["2opv"],
@@ -83,7 +123,10 @@ export const db = {
       id: "a40b",
       ownerid: "1xg5",
       name: "Make-up",
-      category: "Cosmetics",
+      description:
+        "Eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      topic: "Cosmetics",
+      categories: [],
       cards: [],
       access: "private",
       linked: ["1xg5"],

@@ -1,4 +1,4 @@
-export default Quiz = () => {
+const Quiz = () => {
   return (
     <div>
       <h1>Quiz</h1>
@@ -6,3 +6,5 @@ export default Quiz = () => {
     </div>
   );
 };
+
+export default Quiz;

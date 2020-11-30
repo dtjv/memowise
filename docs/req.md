@@ -25,19 +25,28 @@
 
 ## page details
 
-    👍 /                         static gen
-    👍 /users/:userid            static gen + incremental
-       /browse/:topic            static gen + incremental
-       /browse/:topic/:category  static gen + incremental
-    👍 /sets/new
-    👍 /sets/:setid              stattc gen + incremental
-    👍 /sets/:setid/quiz         static gen + client render
-       /sets/:setid/study        static gen + client render
+    /                         static gen
+
+    /users/:id                static gen + incremental
+
+    /browse                   static gen + incremental
+    /browse/:topic            static gen + incremental
+    /browse/:topic/:category  static gen + incremental
+
+    /sets
+    /sets/new
+    /sets/:id                 stattc gen + incremental
+    /sets/:id/quiz            static gen + client render
+    /sets/:id/study           static gen + client render
 
 ### `/`
 
 - marketing
 - user can choose to browse by topic or topic/category
+
+### `/browse`
+
+- list all topics (and maybe categories as well)
 
 ### `/browse/:topic`
 
@@ -51,21 +60,25 @@
 - ui provides sub-category links
 - if user is logged in, then user can add (link) a set to personal collection
 
+### `/sets`
+
+- route to `/browse`
+
 ### `/sets/new`
 
 - display a form to create a set and cards
 
-### `/sets/:setid`
+### `/sets/:id`
 
 - allows user to go thru set of cards, forward and backward,
   flipping cards over - in a traditional style of study.
 
-### `/sets/:setid/quiz`
+### `/sets/:id/quiz`
 
 - is a test - multiple choice, written and true/false - all at once. only
   the last attempt result, as a percentage correct, is stored.
 
-### `/sets/:setid/study`
+### `/sets/:id/study`
 
 - is a test, card by card - multiple choice, written and true/false.
   this method uses an algo to present cards. results are saved to be used in
@@ -73,7 +86,7 @@
   (3 badges available). each mastery achievement assigns a badge and resets
   study results.
 
-### `/users/:userid`
+### `/users/:id`
 
 - user can create, update, or remove folders
 - user can add sets into 1+ folders
@@ -87,7 +100,7 @@
 
 ## quiz details
 
-    make an api call w/ 'setid' to get the set of cards.
+    make an api call w/ 'id' to get the set of cards.
     make an api call to generate quiz for that set
     if user is logged in, store result of a completed test in their account.
 
