@@ -24,21 +24,36 @@ export const db = {
         name: "Math",
         description:
           "Get up to speed on all things Math! Ace those SAT tests and get into the college you've always dreamed of.",
-        categories: ["Algebra", "Calculus", "Geometry"],
       },
       {
         id: "ma30",
         name: "Languages",
         description:
           "Study hard to improve your foreign language skills. Then share what you learn with the world.",
-        categories: ["Spanish", "French", "Italian"],
       },
       {
         id: "zza9",
         name: "Science",
         description:
           "Learn about the world around you. Discover exciting things from the deep sea to the moon.",
-        categories: ["Spanish", "French", "Italian"],
+      },
+      {
+        id: "3456",
+        name: "History",
+        description:
+          "Learn the history of everything - from our ancient ancestors to what happened last year.",
+      },
+      {
+        id: "poi3",
+        name: "Art",
+        description:
+          "All things art - drawing, painting, photography, digital, watercolor, etc. The world is your canvas!",
+      },
+      {
+        id: "9asd",
+        name: "Other",
+        description:
+          "Learn all the things! Interested in Programming, Sports, Trivia? Then you'll find plenty to learn here.",
       },
     ],
   },

@@ -1,20 +1,14 @@
-import { db } from "../data/db";
 import Link from "next/link";
-import pluralize from "pluralize";
 
-const Section = ({ children }) => (
-  <section className="py-8 sm:py-10">{children}</section>
-);
+import { Nav } from "../components/Nav";
+import { Topics } from "../components/Topics";
+import { Section } from "../components/Section";
+import { db } from "../data/db";
 
 const Home = ({ topics }) => {
   return (
     <div className="max-w-3xl px-4 mx-auto antialiased sm:px-8 md:px-12 lg:px-0">
-      <nav>
-        <div className="flex items-center justify-between py-6 border-b border-gray-200">
-          <div>memowise</div>
-          <div>menu</div>
-        </div>
-      </nav>
+      <Nav />
       <main>
         <header className="my-12">
           <div className="flex items-center">
@@ -70,50 +64,7 @@ const Home = ({ topics }) => {
           <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight text-gray-900 ">
             Explore Topics
           </h2>
-          <ul className="text-white space-y-8">
-            <li className="p-6 shadow-lg rounded-3xl bg-gradient-to-br from-blue-400 to-blue-700">
-              <h2 className="text-2xl font-semibold">{topics[0].topic.name}</h2>
-              <p className="mb-4 text-sm font-medium text-blue-100 uppercase text-shadow">
-                {pluralize("set", topics[0].setCount, true)}
-              </p>
-              <p className="mb-8 font-medium text-blue-100 text-shadow">
-                {topics[0].topic.description}
-              </p>
-              <Link href="/">
-                <a className="inline-flex items-center px-4 py-2 font-semibold bg-blue-800 rounded-lg bg-opacity-50">
-                  Explore {topics[0].topic.name}
-                </a>
-              </Link>
-            </li>
-            <li className="p-6 shadow-lg rounded-3xl bg-gradient-to-br from-purple-400 to-purple-700">
-              <h2 className="text-2xl font-semibold">{topics[1].topic.name}</h2>
-              <p className="mb-8 text-sm font-medium text-purple-100 uppercase text-shadow">
-                {pluralize("set", topics[1].setCount, true)}
-              </p>
-              <p className="mb-8 font-medium text-purple-100 text-shadow">
-                {topics[1].topic.description}
-              </p>
-              <Link href="/">
-                <a className="inline-flex items-center px-4 py-2 font-semibold bg-purple-800 rounded-lg bg-opacity-50">
-                  Explore {topics[1].topic.name}
-                </a>
-              </Link>
-            </li>
-            <li className="p-6 shadow-lg rounded-3xl bg-gradient-to-br from-yellow-400 to-yellow-800">
-              <h2 className="text-2xl font-semibold">{topics[2].topic.name}</h2>
-              <p className="mb-8 text-sm font-medium text-yellow-100 uppercase text-shadow">
-                {pluralize("set", topics[2].setCount, true)}
-              </p>
-              <p className="mb-8 font-medium text-yellow-100 text-shadow">
-                {topics[2].topic.description}
-              </p>
-              <Link href="/">
-                <a className="inline-flex items-center px-4 py-2 font-semibold bg-yellow-800 rounded-lg bg-opacity-50">
-                  Explore {topics[2].topic.name}
-                </a>
-              </Link>
-            </li>
-          </ul>
+          <Topics topics={topics} />
         </Section>
       </main>
       <footer></footer>
@@ -130,13 +81,11 @@ export default Home;
  *   props: {
  *     topics: [
  *       {
- *         topic: {
- *           name: 'Math',
- *           description: 'blah, blah',
- *           ...
- *         },
- *         setCount: 5
+ *         name: 'Math',
+ *         setCount: 5,
+ *         ...
  *       }
+ *       ...
  *     ]
  *   },
  *   revalidate: 1
@@ -144,7 +93,7 @@ export default Home;
  */
 export async function getStaticProps() {
   const topics = db.topics.DEFAULT.map((topic) => ({
-    topic,
+    ...topic,
     setCount: db.sets.reduce(
       (count, set) => (set.topic === topic.name ? count + 1 : count),
       0
