@@ -1,19 +1,58 @@
 import Link from "next/link";
 import Image from "next/image";
+import pluralize from "pluralize";
 
-const Section = ({ children }) => (
-  <section className="py-8 sm:py-10">{children}</section>
-);
+import { db } from "../../../data/db";
+import { Nav } from "../../../components/Nav";
+import { Section } from "../../../components/Section";
 
-const Math = () => {
+const Topic = ({ topic, categories }) => {
+  const renderSets = (sets) => {
+    if (!sets.length) {
+      return (
+        <p className="text-xl font-normal tracking-tight text-gray-500">
+          No sets in this Topic.
+        </p>
+      );
+    }
+
+    const setsHTML = sets.map((set) => (
+      <li key={set.id} className="p-6 bg-gray-800 shadow-lg rounded-3xl">
+        <h2 className="text-2xl font-semibold leading-tight">{set.name}</h2>
+        <p className="mb-4 text-sm font-medium text-gray-400 uppercase">
+          {pluralize("term", set.numTerms, true)}
+        </p>
+        <p className="mb-8 font-medium">{set.description}</p>
+        <div className="flex items-center">
+          <Image
+            src="/me.jpg"
+            alt="a pic of me"
+            width={50}
+            height={50}
+            className="rounded-full"
+          />
+          <p className="ml-3 font-semibold">David Valles</p>
+        </div>
+      </li>
+    ));
+
+    return <ul className="text-white space-y-8"> {setsHTML} </ul>;
+  };
+
+  const renderCategories = topic.categories.map((category) => {
+    return (
+      <Section key={category.id}>
+        <h2 className="mb-6 text-3xl font-bold tracking-tight">
+          {category.name} Sets
+        </h2>
+        {renderSets(categories[category.id])}
+      </Section>
+    );
+  });
+
   return (
     <div className="max-w-3xl px-4 mx-auto antialiased sm:px-8 md:px-12 lg:px-0">
-      <nav>
-        <div className="flex items-center justify-between py-6 border-b border-gray-200">
-          <div>memowise</div>
-          <div>menu</div>
-        </div>
-      </nav>
+      <Nav />
       <main>
         <header className="mt-10 mb-6">
           <div className="flex items-center mb-4 text-sm font-medium text-gray-700">
@@ -36,73 +75,71 @@ const Math = () => {
               </a>
             </Link>
             <span className="mx-1">/</span>
-            <span className="mx-1">Math</span>
+            <span className="mx-1">{topic.name}</span>
           </div>
-          <h1 className="mb-4 text-4xl font-extrabold text-gray-900 ">Math</h1>
+          <h1 className="mb-4 text-4xl font-extrabold text-gray-900">
+            {topic.name}
+          </h1>
           <p className="text-2xl font-normal tracking-tight text-gray-500">
-            Eiusmod tempor incididunt labore et dolore magna aliqua. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit, sed do.
+            {topic.description}
           </p>
         </header>
-        <Section>
-          <div className="flex items-baseline justify-between">
-            <h2 className="mb-6 text-3xl font-bold tracking-tight">
-              Algebra Sets
-            </h2>
-            <Link href="/">
-              <a className="font-medium text-blue-500">View all -{">"}</a>
-            </Link>
-          </div>
-          <ul className="text-white space-y-8">
-            <li className="p-6 bg-gray-800 shadow-lg rounded-3xl">
-              <h2 className="text-2xl font-semibold leading-tight">Math 101</h2>
-              <p className="mb-4 text-sm font-medium text-gray-400 uppercase">
-                35 terms
-              </p>
-              <p className="mb-8 font-medium">
-                A few basic questions about pre-algebra. You should know this
-                inside and out. These terms cover all you need to get into high
-                school calculus.
-              </p>
-              <div className="flex items-center">
-                <Image
-                  src="/me.jpg"
-                  alt="a pic of me"
-                  width={50}
-                  height={50}
-                  className="rounded-full"
-                />
-                <p className="ml-3 font-semibold">David Valles</p>
-              </div>
-            </li>
-            <li className="p-6 bg-gray-800 shadow-lg rounded-3xl">
-              <h2 className="text-2xl font-semibold leading-tight">
-                Middle Grade Math and Pre-Algebra
-              </h2>
-              <p className="mb-4 text-sm font-medium text-gray-400 uppercase">
-                35 terms
-              </p>
-              <p className="mb-8 font-medium">
-                A few basic questions about pre-algebra. You should know this
-                inside and out.
-              </p>
-              <div className="flex items-center">
-                <Image
-                  src="/me.jpg"
-                  alt="a pic of me"
-                  width={50}
-                  height={50}
-                  className="rounded-full"
-                />
-                <p className="ml-3 font-semibold">David Valles</p>
-              </div>
-            </li>
-          </ul>
-        </Section>
+        {renderCategories}
       </main>
       <footer></footer>
     </div>
   );
 };
 
-export default Math;
+export default Topic;
+
+export async function getStaticPaths() {
+  return {
+    paths: db.topics.DEFAULT.map((topic) => ({
+      params: { topic: topic.slug },
+    })),
+    fallback: true,
+  };
+}
+
+/*
+ * Example return object:
+ *
+ * {
+ *   props: {
+ *     topic: {
+ *       name: 'Math',
+ *       categories: [
+ *         { id: 'abse', name: 'Algebra' },
+ *         { id: 'erb3', name: 'Geometry' },
+ *       ]
+ *     },
+ *     categories: {
+ *       'abse': [
+ *         { name: 'My Basic Math', description: '', numTerms: 3 }
+ *         { name: 'My Algebra', description: '', numTerms: 0 }
+ *       ],
+ *       'erb3': [
+ *         { name: '', description: '', numTerms: 0 }
+ *         { name: '', description: '', numTerms: 0 }
+ *       ]
+ *     }
+ *   },
+ *   revalidate: 1
+ * }
+ */
+export async function getStaticProps({ params }) {
+  const topic = db.topics.DEFAULT.find((topic) => topic.slug === params.topic);
+  const categories = topic.categories.reduce((result, category) => {
+    result[category.id] = db.sets
+      .filter((set) => set.category === category.id)
+      .map((set) => ({
+        id: set.id,
+        name: set.name,
+        description: set.description,
+        numTerms: set.cards.length,
+      }));
+    return result;
+  }, {});
+  return { props: { topic, categories }, revalidate: 1 };
+}
