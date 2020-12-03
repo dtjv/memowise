@@ -77,7 +77,7 @@ const Math = () => {
               aria-label="add set to my account"
             >
               <svg
-                class="w-6 h-6"
+                className="w-6 h-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -104,7 +104,7 @@ const Math = () => {
                   aria-label="add set to my account"
                 >
                   <svg
-                    class="w-6 h-6"
+                    className="w-6 h-6"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -134,7 +134,7 @@ const Math = () => {
                   aria-label="add set to my account"
                 >
                   <svg
-                    class="w-6 h-6"
+                    className="w-6 h-6"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
