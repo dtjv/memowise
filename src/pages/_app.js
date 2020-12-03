@@ -1,12 +1,12 @@
 //import "tailwindcss/tailwind.css"
-import Router from "next/router";
-import { Auth0Provider } from "@auth0/auth0-react";
+import Router from 'next/router'
+import { Auth0Provider } from '@auth0/auth0-react'
 
-import "../styles/app.css";
+import '../styles/app.css'
 
 const onRedirectCallback = (appState) => {
-  Router.replace(appState?.returnTo || "/");
-};
+  Router.replace(appState?.returnTo || '/')
+}
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -14,12 +14,12 @@ function MyApp({ Component, pageProps }) {
       domain={process.env.NEXT_PUBLIC_DOMAIN}
       clientId={process.env.NEXT_PUBLIC_CLIENT_ID}
       scope="read:users"
-      redirectUri={typeof window !== "undefined" && window.location.origin}
+      redirectUri={typeof window !== 'undefined' && window.location.origin}
       onRedirectCallback={onRedirectCallback}
     >
       <Component {...pageProps} />
     </Auth0Provider>
-  );
+  )
 }
 
-export default MyApp;
+export default MyApp

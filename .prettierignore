@@ -1,6 +1,10 @@
 # deps
 node_modules
 
+# locks
+yarn.lock
+package-lock.json
+
 # env
 .env*
 
@@ -17,9 +21,9 @@ coverage
 
 # misc
 .DS_Store
-NOTES.md
 
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+

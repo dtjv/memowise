@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "format": "prettier -w .",
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
@@ -20,6 +21,7 @@
     "@tailwindcss/typography": "0.3.1",
     "autoprefixer": "10.0.2",
     "postcss": "8.1.10",
+    "prettier": "2.2.1",
     "tailwindcss": "2.0.1"
   }
 }

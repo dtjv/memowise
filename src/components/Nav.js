@@ -5,4 +5,4 @@ export const Nav = () => (
       <div>menu</div>
     </div>
   </nav>
-);
+)

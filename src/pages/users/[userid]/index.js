@@ -1,10 +1,10 @@
-import Link from "next/link";
-import Image from "next/image";
-import pluralize from "pluralize";
+import Link from 'next/link'
+import Image from 'next/image'
+import pluralize from 'pluralize'
 
-import { db } from "../../../data/db";
-import { Nav } from "../../../components/Nav";
-import { Section } from "../../../components/Section";
+import { db } from '../../../data/db'
+import { Nav } from '../../../components/Nav'
+import { Section } from '../../../components/Section'
 
 const UserDashboard = ({ user, sets }) => {
   const renderSets = () => (
@@ -13,7 +13,7 @@ const UserDashboard = ({ user, sets }) => {
         <li key={set.id} className="p-6 bg-gray-800 shadow-lg rounded-3xl">
           <h2 className="text-2xl font-semibold leading-tight">{set.name}</h2>
           <p className="mb-4 text-sm font-medium text-gray-400 uppercase">
-            {pluralize("term", set.cards.length, true)}
+            {pluralize('term', set.cards.length, true)}
           </p>
           <p className="mb-8 font-medium">{set.description}</p>
           <Link href={`/sets/${set.id}`}>
@@ -24,7 +24,7 @@ const UserDashboard = ({ user, sets }) => {
         </li>
       ))}
     </ul>
-  );
+  )
 
   return (
     <div className="max-w-3xl px-4 mx-auto antialiased sm:px-8 md:px-12 lg:px-0">
@@ -51,16 +51,16 @@ const UserDashboard = ({ user, sets }) => {
       </main>
       <footer></footer>
     </div>
-  );
-};
+  )
+}
 
-export default UserDashboard;
+export default UserDashboard
 
 export async function getStaticPaths() {
   return {
     paths: db.users.map((user) => ({ params: { userid: user.userid } })),
     fallback: true,
-  };
+  }
 }
 
 /*
@@ -95,15 +95,15 @@ export async function getStaticPaths() {
  * }
  */
 export async function getStaticProps({ params }) {
-  const user = db.users.find((user) => user.userid === params.userid);
+  const user = db.users.find((user) => user.userid === params.userid)
   const sets = user.sets
     .map((setId) => db.sets.find((set) => set.id === setId))
     .map((set) => {
-      const topic = db.topics.find((topic) => topic.id === set.topicId);
+      const topic = db.topics.find((topic) => topic.id === set.topicId)
       return {
         ...set,
         topic,
-      };
-    });
-  return { props: { user, sets }, revalidate: 1 };
+      }
+    })
+  return { props: { user, sets }, revalidate: 1 }
 }

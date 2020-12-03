@@ -1,9 +1,9 @@
-import Link from "next/link";
+import Link from 'next/link'
 
-import { Nav } from "../components/Nav";
-import { Topics } from "../components/Topics";
-import { Section } from "../components/Section";
-import { db } from "../data/db";
+import { Nav } from '../components/Nav'
+import { Topics } from '../components/Topics'
+import { Section } from '../components/Section'
+import { db } from '../data/db'
 
 const Home = ({ topics }) => {
   return (
@@ -56,7 +56,7 @@ const Home = ({ topics }) => {
           </p>
           <Link href="/">
             <a className="text-lg font-medium text-blue-500 hover:text-blue-800">
-              Learn more -{">"}
+              Learn more -{'>'}
             </a>
           </Link>
         </Section>
@@ -69,10 +69,10 @@ const Home = ({ topics }) => {
       </main>
       <footer></footer>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
 
 /*
  * Example return object:
@@ -98,10 +98,10 @@ export async function getStaticProps() {
       (count, set) => (set.topicId === topic.id ? count + 1 : count),
       0
     ),
-  }));
+  }))
 
   return {
     props: { topics },
     revalidate: 1,
-  };
+  }
 }

@@ -1,4 +1,4 @@
-import { Nav } from "../../../components/Nav";
+import { Nav } from '../../../components/Nav'
 
 const Study = () => {
   return (
@@ -35,7 +35,7 @@ const Study = () => {
       </main>
       <footer></footer>
     </div>
-  );
-};
+  )
+}
 
-export default Study;
+export default Study

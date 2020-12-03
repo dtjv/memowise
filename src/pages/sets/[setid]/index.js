@@ -1,9 +1,9 @@
-import Link from "next/link";
-import Image from "next/image";
+import Link from 'next/link'
+import Image from 'next/image'
 
 const Section = ({ children }) => (
   <section className="py-8 sm:py-10">{children}</section>
-);
+)
 
 const Math = () => {
   return (
@@ -155,7 +155,7 @@ const Math = () => {
       </main>
       <footer></footer>
     </div>
-  );
-};
+  )
+}
 
-export default Math;
+export default Math

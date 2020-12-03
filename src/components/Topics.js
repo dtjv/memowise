@@ -1,36 +1,36 @@
-import Link from "next/link";
-import pluralize from "pluralize";
-import slugify from "@sindresorhus/slugify";
+import Link from 'next/link'
+import pluralize from 'pluralize'
+import slugify from '@sindresorhus/slugify'
 
 const colors = [
   {
-    gradient: "from-purple-400 to-purple-700",
-    text: "text-purple-100",
-    bg: "bg-purple-800",
+    gradient: 'from-purple-400 to-purple-700',
+    text: 'text-purple-100',
+    bg: 'bg-purple-800',
   },
   {
-    gradient: "from-green-400 to-green-700",
-    text: "text-green-100",
-    bg: "bg-green-800",
+    gradient: 'from-green-400 to-green-700',
+    text: 'text-green-100',
+    bg: 'bg-green-800',
   },
   {
-    gradient: "from-pink-400 to-pink-700",
-    text: "text-pink-100",
-    bg: "bg-pink-800",
+    gradient: 'from-pink-400 to-pink-700',
+    text: 'text-pink-100',
+    bg: 'bg-pink-800',
   },
   {
-    gradient: "from-blue-400 to-blue-700",
-    text: "text-blue-100",
-    bg: "bg-blue-800",
+    gradient: 'from-blue-400 to-blue-700',
+    text: 'text-blue-100',
+    bg: 'bg-blue-800',
   },
   {
-    gradient: "from-yellow-400 to-yellow-700",
-    text: "text-yellow-100",
-    bg: "bg-yellow-800",
+    gradient: 'from-yellow-400 to-yellow-700',
+    text: 'text-yellow-100',
+    bg: 'bg-yellow-800',
   },
-];
+]
 
-const getNextIndex = (idx = -1) => (idx === colors.length - 1 ? 0 : idx + 1);
+const getNextIndex = (idx = -1) => (idx === colors.length - 1 ? 0 : idx + 1)
 
 /*
  * Example of topics received:
@@ -45,10 +45,10 @@ const getNextIndex = (idx = -1) => (idx === colors.length - 1 ? 0 : idx + 1);
  * ]
  */
 export const Topics = ({ topics }) => {
-  let colorIdx = -1;
+  let colorIdx = -1
 
   const renderTopics = topics.map((topic) => {
-    colorIdx = getNextIndex(colorIdx);
+    colorIdx = getNextIndex(colorIdx)
 
     return (
       <li
@@ -59,7 +59,7 @@ export const Topics = ({ topics }) => {
         <p
           className={`mb-4 text-sm font-medium ${colors[colorIdx].text} uppercase text-shadow`}
         >
-          {pluralize("set", topic.setCount, true)}
+          {pluralize('set', topic.setCount, true)}
         </p>
         <p className={`mb-8 font-medium ${colors[colorIdx].text} text-shadow`}>
           {topic.description}
@@ -72,8 +72,8 @@ export const Topics = ({ topics }) => {
           </a>
         </Link>
       </li>
-    );
-  });
+    )
+  })
 
-  return <ul className="text-white space-y-8">{renderTopics}</ul>;
-};
+  return <ul className="text-white space-y-8">{renderTopics}</ul>
+}

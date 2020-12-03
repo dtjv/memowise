@@ -2,20 +2,20 @@ module.exports = {
   async redirects() {
     return [
       {
-        source: "/browse",
-        destination: "/",
+        source: '/browse',
+        destination: '/',
         permanent: true,
       },
       {
-        source: "/sets",
-        destination: "/",
+        source: '/sets',
+        destination: '/',
         permanent: true,
       },
       {
-        source: "/users",
-        destination: "/",
+        source: '/users',
+        destination: '/',
         permanent: true,
       },
-    ];
+    ]
   },
-};
+}

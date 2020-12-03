@@ -1,11 +1,11 @@
-import Link from "next/link";
-import Image from "next/image";
-import pluralize from "pluralize";
-import slugify from "@sindresorhus/slugify";
+import Link from 'next/link'
+import Image from 'next/image'
+import pluralize from 'pluralize'
+import slugify from '@sindresorhus/slugify'
 
-import { db } from "../../../data/db";
-import { Nav } from "../../../components/Nav";
-import { Section } from "../../../components/Section";
+import { db } from '../../../data/db'
+import { Nav } from '../../../components/Nav'
+import { Section } from '../../../components/Section'
 
 const Topic = ({ topic, categories }) => {
   const renderSets = (sets) => {
@@ -14,14 +14,14 @@ const Topic = ({ topic, categories }) => {
         <p className="text-xl font-normal tracking-tight text-gray-500">
           No sets in this Topic.
         </p>
-      );
+      )
     }
 
     const setsHTML = sets.map((set) => (
       <li key={set.id} className="p-6 bg-gray-800 shadow-lg rounded-3xl">
         <h2 className="text-2xl font-semibold leading-tight">{set.name}</h2>
         <p className="mb-4 text-sm font-medium text-gray-400 uppercase">
-          {pluralize("term", set.cards.length, true)}
+          {pluralize('term', set.cards.length, true)}
         </p>
         <p className="mb-8 font-medium">{set.description}</p>
         <div className="flex items-center">
@@ -35,10 +35,10 @@ const Topic = ({ topic, categories }) => {
           <p className="ml-3 font-semibold">David Valles</p>
         </div>
       </li>
-    ));
+    ))
 
-    return <ul className="text-white space-y-8">{setsHTML}</ul>;
-  };
+    return <ul className="text-white space-y-8">{setsHTML}</ul>
+  }
 
   const renderCategories = topic.categories.map((category) => {
     return (
@@ -48,8 +48,8 @@ const Topic = ({ topic, categories }) => {
         </h2>
         {renderSets(categories[category.id])}
       </Section>
-    );
-  });
+    )
+  })
 
   return (
     <div className="max-w-3xl px-4 mx-auto antialiased sm:px-8 md:px-12 lg:px-0">
@@ -89,10 +89,10 @@ const Topic = ({ topic, categories }) => {
       </main>
       <footer></footer>
     </div>
-  );
-};
+  )
+}
 
-export default Topic;
+export default Topic
 
 export async function getStaticPaths() {
   return {
@@ -100,7 +100,7 @@ export async function getStaticPaths() {
       params: { topic: slugify(topic.name) },
     })),
     fallback: true,
-  };
+  }
 }
 
 /*
@@ -127,13 +127,13 @@ export async function getStaticPaths() {
  * }
  */
 export async function getStaticProps({ params }) {
-  const topic = db.topics.find((topic) => slugify(topic.name) === params.topic);
+  const topic = db.topics.find((topic) => slugify(topic.name) === params.topic)
   const categories = topic.categories.reduce(
     (result, category) => ({
       ...result,
       [category.id]: db.sets.filter((set) => set.categoryId === category.id),
     }),
     {}
-  );
-  return { props: { topic, categories }, revalidate: 1 };
+  )
+  return { props: { topic, categories }, revalidate: 1 }
 }
