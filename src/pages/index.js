@@ -92,10 +92,10 @@ export default Home;
  * }
  */
 export async function getStaticProps() {
-  const topics = db.topics.DEFAULT.map((topic) => ({
+  const topics = db.topics.map((topic) => ({
     ...topic,
     setCount: db.sets.reduce(
-      (count, set) => (set.topic === topic.name ? count + 1 : count),
+      (count, set) => (set.topicId === topic.id ? count + 1 : count),
       0
     ),
   }));

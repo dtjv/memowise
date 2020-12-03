@@ -1,5 +1,6 @@
 import Link from "next/link";
 import pluralize from "pluralize";
+import slugify from "@sindresorhus/slugify";
 
 const colors = [
   {
@@ -63,7 +64,7 @@ export const Topics = ({ topics }) => {
         <p className={`mb-8 font-medium ${colors[colorIdx].text} text-shadow`}>
           {topic.description}
         </p>
-        <Link href={`/browse/${topic.slug}`}>
+        <Link href={`/browse/${slugify(topic.name)}`}>
           <a
             className={`inline-flex items-center px-4 py-2 font-semibold ${colors[colorIdx].bg} rounded-lg bg-opacity-50`}
           >

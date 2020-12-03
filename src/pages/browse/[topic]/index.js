@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import pluralize from "pluralize";
+import slugify from "@sindresorhus/slugify";
 
 import { db } from "../../../data/db";
 import { Nav } from "../../../components/Nav";
@@ -20,7 +21,7 @@ const Topic = ({ topic, categories }) => {
       <li key={set.id} className="p-6 bg-gray-800 shadow-lg rounded-3xl">
         <h2 className="text-2xl font-semibold leading-tight">{set.name}</h2>
         <p className="mb-4 text-sm font-medium text-gray-400 uppercase">
-          {pluralize("term", set.numTerms, true)}
+          {pluralize("term", set.cards.length, true)}
         </p>
         <p className="mb-8 font-medium">{set.description}</p>
         <div className="flex items-center">
@@ -36,7 +37,7 @@ const Topic = ({ topic, categories }) => {
       </li>
     ));
 
-    return <ul className="text-white space-y-8"> {setsHTML} </ul>;
+    return <ul className="text-white space-y-8">{setsHTML}</ul>;
   };
 
   const renderCategories = topic.categories.map((category) => {
@@ -95,8 +96,8 @@ export default Topic;
 
 export async function getStaticPaths() {
   return {
-    paths: db.topics.DEFAULT.map((topic) => ({
-      params: { topic: topic.slug },
+    paths: db.topics.map((topic) => ({
+      params: { topic: slugify(topic.name) },
     })),
     fallback: true,
   };
@@ -111,35 +112,28 @@ export async function getStaticPaths() {
  *       name: 'Math',
  *       categories: [
  *         { id: 'abse', name: 'Algebra' },
- *         { id: 'erb3', name: 'Geometry' },
+ *         ...
  *       ]
  *     },
  *     categories: {
  *       'abse': [
- *         { name: 'My Basic Math', description: '', numTerms: 3 }
- *         { name: 'My Algebra', description: '', numTerms: 0 }
+ *         { name: 'My Math Set', description: '', cards: [...] }
+ *         ...
  *       ],
- *       'erb3': [
- *         { name: '', description: '', numTerms: 0 }
- *         { name: '', description: '', numTerms: 0 }
- *       ]
+ *       ...
  *     }
  *   },
  *   revalidate: 1
  * }
  */
 export async function getStaticProps({ params }) {
-  const topic = db.topics.DEFAULT.find((topic) => topic.slug === params.topic);
-  const categories = topic.categories.reduce((result, category) => {
-    result[category.id] = db.sets
-      .filter((set) => set.category === category.id)
-      .map((set) => ({
-        id: set.id,
-        name: set.name,
-        description: set.description,
-        numTerms: set.cards.length,
-      }));
-    return result;
-  }, {});
+  const topic = db.topics.find((topic) => slugify(topic.name) === params.topic);
+  const categories = topic.categories.reduce(
+    (result, category) => ({
+      ...result,
+      [category.id]: db.sets.filter((set) => set.categoryId === category.id),
+    }),
+    {}
+  );
   return { props: { topic, categories }, revalidate: 1 };
 }
