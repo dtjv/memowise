@@ -2,9 +2,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import pluralize from 'pluralize'
 
-import { db } from '../../../data/db'
-import { Nav } from '../../../components/Nav'
-import { Section } from '../../../components/Section'
+import { db } from '@/data/db'
+import { Nav } from '@/components/Nav'
+import { Section } from '@/components/Section'
 
 const UserDashboard = ({ user, sets }) => {
   const renderSets = () => (

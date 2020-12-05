@@ -1,9 +1,9 @@
 import Link from 'next/link'
 
-import { Nav } from '../components/Nav'
-import { Topics } from '../components/Topics'
-import { Section } from '../components/Section'
-import { db } from '../data/db'
+import { Nav } from '@/components/Nav'
+import { Topics } from '@/components/Topics'
+import { Section } from '@/components/Section'
+import { db } from '@/data/db'
 
 const Home = ({ topics }) => {
   return (
