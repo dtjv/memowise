@@ -4,6 +4,7 @@ import { Nav } from '@/components/Nav'
 import { Topics } from '@/components/Topics'
 import { Section } from '@/components/Section'
 import { db } from '@/data/db'
+import { connectToDB } from '@/utils/connectToDB'
 
 const Home = ({ topics }) => {
   return (
@@ -92,6 +93,8 @@ export default Home
  * }
  */
 export async function getStaticProps() {
+  await connectToDB()
+
   const topics = db.topics.map((topic) => ({
     ...topic,
     setCount: db.sets.reduce(
