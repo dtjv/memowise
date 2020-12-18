@@ -39,7 +39,7 @@ const getNextIndex = (idx = -1) => (idx === colors.length - 1 ? 0 : idx + 1)
  *   {
  *     name: 'Math',
  *     ...
- *     setCount: 5,  // set by the caller of this component
+ *     deckCount: 5,  // set by the caller of this component
  *   },
  *   ...
  * ]
@@ -59,7 +59,7 @@ export const Topics = ({ topics }) => {
         <p
           className={`mb-4 text-sm font-medium ${colors[colorIdx].text} uppercase text-shadow`}
         >
-          {pluralize('set', topic.setCount, true)}
+          {pluralize('set', topic.deckCount, true)}
         </p>
         <p className={`mb-8 font-medium ${colors[colorIdx].text} text-shadow`}>
           {topic.description}

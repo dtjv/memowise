@@ -8,17 +8,17 @@ exports.data = {
         {
           name: 'Algebra',
           description: 'A few basic Algebra flashcard sets.',
-          numSets: 2,
+          numDecks: 2,
         },
         {
           name: 'Geometry',
           description: 'Learn Geometry concepts like area and circumference.',
-          numSets: 1,
+          numDecks: 1,
         },
         {
           name: 'Calculus',
           description: 'Calculus is integral to understanding advanced math.',
-          numSets: 0,
+          numDecks: 0,
         },
       ],
     },
@@ -30,17 +30,17 @@ exports.data = {
         {
           name: 'Spanish',
           description: '?Habla Espanol? If not, then start here!',
-          numSets: 1,
+          numDecks: 1,
         },
         {
           name: 'French',
           description: 'Learn how to speak fluent French.',
-          numSets: 0,
+          numDecks: 0,
         },
         {
           name: 'Italian',
           description: 'Italian is the easiest language to learn.',
-          numSets: 1,
+          numDecks: 1,
         },
       ],
     },
@@ -51,17 +51,17 @@ exports.data = {
         {
           name: 'Biology',
           description: 'Learn all about the Biology of living things.',
-          numSets: 1,
+          numDecks: 1,
         },
         {
           name: 'Chemistry',
           description: 'What makes us tick?',
-          numSets: 0,
+          numDecks: 0,
         },
         {
           name: 'Physics',
           description: 'Learn Physics!',
-          numSets: 1,
+          numDecks: 1,
         },
       ],
     },
@@ -72,17 +72,17 @@ exports.data = {
         {
           name: 'Computer Science',
           description: 'Learn how computers work.',
-          numSets: 1,
+          numDecks: 1,
         },
         {
           name: 'History',
           description: 'Take a History lesson and learn from past mistakes..',
-          numSets: 1,
+          numDecks: 1,
         },
         {
           name: 'US State Capitols',
           description: 'Learn all about the US state capitols.',
-          numSets: 0,
+          numDecks: 0,
         },
       ],
     },

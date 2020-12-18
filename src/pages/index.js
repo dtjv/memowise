@@ -1,9 +1,10 @@
 import Link from 'next/link'
 
+import { Topic } from '@/models/Topic'
 import { Nav } from '@/components/Nav'
 import { Topics } from '@/components/Topics'
 import { Section } from '@/components/Section'
-import { db } from '@/data/seed'
+import { connectToDB } from '@/utils/connectToDB'
 
 const Home = ({ topics }) => {
   return (
@@ -82,7 +83,7 @@ export default Home
  *     topics: [
  *       {
  *         name: 'Math',
- *         setCount: 5,
+ *         deckCount: 5,
  *         ...
  *       }
  *       ...
@@ -93,11 +94,14 @@ export default Home
  */
 export async function getStaticProps() {
   await connectToDB()
+  let topics = await Topic.find({})
 
-  const topics = db.topics.map((topic) => ({
-    ...topic,
-    setCount: db.sets.reduce(
-      (count, set) => (set.topicId === topic.id ? count + 1 : count),
+  topics = topics.map((topic) => ({
+    id: topic.id.toString(),
+    name: topic.name,
+    description: topic.description,
+    deckCount: topic.subTopics.reduce(
+      (count, { numDecks }) => count + numDecks,
       0
     ),
   }))

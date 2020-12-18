@@ -7,7 +7,7 @@ const topicSchema = new mongoose.Schema({
     {
       name: String,
       description: String,
-      numSets: Number,
+      numDecks: Number,
     },
   ],
 })
