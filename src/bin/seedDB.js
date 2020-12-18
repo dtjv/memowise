@@ -18,6 +18,7 @@ const composeDbURI = () =>
 
 // -----------------------------------------------------------------------------
 // Models
+// TODO: remove and import from 'models/' - once I port to Typescript
 // -----------------------------------------------------------------------------
 
 const topicSchema = new mongoose.Schema({
@@ -51,6 +52,7 @@ const Deck = mongoose.model('Deck', deckSchema)
 
 // -----------------------------------------------------------------------------
 // DB
+// TODO: remove and import from 'utils/' - once I port to Typescript
 // -----------------------------------------------------------------------------
 
 const connectToDB = async () => {
