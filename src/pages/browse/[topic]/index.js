@@ -3,7 +3,7 @@ import Image from 'next/image'
 import pluralize from 'pluralize'
 import slugify from '@sindresorhus/slugify'
 
-import { db } from '@/data/db'
+import { db } from '@/data/seed'
 import { Nav } from '@/components/Nav'
 import { Section } from '@/components/Section'
 
