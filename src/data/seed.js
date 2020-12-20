@@ -2,6 +2,7 @@ exports.data = {
   topics: [
     {
       name: 'Math',
+      slug: 'math',
       description:
         "Get up to speed on all things Math! Ace those SAT tests and get into the college you've always dreamed of.",
       subTopics: [
@@ -24,6 +25,7 @@ exports.data = {
     },
     {
       name: 'Languages',
+      slug: 'languages',
       description:
         'Study hard to improve your foreign language skills. Then share what you learn with the world.',
       subTopics: [
@@ -46,6 +48,7 @@ exports.data = {
     },
     {
       name: 'Science',
+      slug: 'science',
       description: 'Discover exciting things from the deep sea to the moon.',
       subTopics: [
         {
@@ -66,7 +69,8 @@ exports.data = {
       ],
     },
     {
-      name: 'Other',
+      name: 'All The Things',
+      slug: 'all_the_things',
       description: 'Interested in Programming, History, or Trivia? Start here!',
       subTopics: [
         {
@@ -167,7 +171,7 @@ exports.data = {
         },
       ],
       meta: {
-        topic: 'Other',
+        topic: 'All The Things',
         subTopic: 'Computer Science',
       },
     },
@@ -220,7 +224,7 @@ exports.data = {
       description: '7th Grade Social Studies is eiusmod tempor incididunt.',
       cards: [],
       meta: {
-        topic: 'Other',
+        topic: 'All The Things',
         subTopic: 'History',
       },
     },

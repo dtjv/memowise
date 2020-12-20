@@ -23,6 +23,7 @@ const composeDbURI = () =>
 
 const topicSchema = new mongoose.Schema({
   name: String,
+  slug: String,
   description: String,
   subTopics: [
     {

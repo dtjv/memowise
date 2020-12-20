@@ -5,8 +5,9 @@ import { Nav } from '@/components/Nav'
 import { Topics } from '@/components/Topics'
 import { Section } from '@/components/Section'
 import { connectToDB } from '@/utils/connectToDB'
+import { transformObjectId } from '@/utils/transformObjectId'
 
-const Home = ({ topics }) => {
+const HomePage = ({ topics }) => {
   return (
     <div className="max-w-3xl px-4 mx-auto antialiased sm:px-8 md:px-12 lg:px-0">
       <Nav />
@@ -73,7 +74,7 @@ const Home = ({ topics }) => {
   )
 }
 
-export default Home
+export default HomePage
 
 /*
  * Example return object:
@@ -94,17 +95,20 @@ export default Home
  */
 export async function getStaticProps() {
   await connectToDB()
+
   let topics = await Topic.find({})
 
-  topics = topics.map((topic) => ({
-    id: topic.id.toString(),
-    name: topic.name,
-    description: topic.description,
-    deckCount: topic.subTopics.reduce(
-      (count, { numDecks }) => count + numDecks,
-      0
-    ),
-  }))
+  topics = topics.map((doc) => {
+    const topic = doc.toObject({ transform: transformObjectId })
+
+    return {
+      ...topic,
+      deckCount: topic.subTopics.reduce(
+        (count, { numDecks }) => count + numDecks,
+        0
+      ),
+    }
+  })
 
   return {
     props: { topics },

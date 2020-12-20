@@ -1,15 +1,20 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import pluralize from 'pluralize'
-import slugify from '@sindresorhus/slugify'
 
-import { db } from '@/data/seed'
+import { Topic } from '@/models/Topic'
+import { Deck } from '@/models/Deck'
 import { Nav } from '@/components/Nav'
 import { Section } from '@/components/Section'
+import { connectToDB } from '@/utils/connectToDB'
+import { transformObjectId } from '@/utils/transformObjectId'
+import { dump } from '@/utils/dump'
 
-const Topic = ({ topic, categories }) => {
-  const renderSets = (sets) => {
-    if (!sets.length) {
+const TopicPage = ({ topic, decksBySubTopic }) => {
+  dump(topic)
+
+  const renderDecks = (decks) => {
+    if (!decks.length) {
       return (
         <p className="text-xl font-normal tracking-tight text-gray-500">
           No sets in this Topic.
@@ -17,13 +22,13 @@ const Topic = ({ topic, categories }) => {
       )
     }
 
-    const setsHTML = sets.map((set) => (
-      <li key={set.id} className="p-6 bg-gray-800 shadow-lg rounded-3xl">
-        <h2 className="text-2xl font-semibold leading-tight">{set.name}</h2>
+    const decksHTML = decks.map((deck) => (
+      <li key={deck.id} className="p-6 bg-gray-800 shadow-lg rounded-3xl">
+        <h2 className="text-2xl font-semibold leading-tight">{deck.name}</h2>
         <p className="mb-4 text-sm font-medium text-gray-400 uppercase">
-          {pluralize('term', set.cards.length, true)}
+          {pluralize('term', deck.cards.length, true)}
         </p>
-        <p className="mb-8 font-medium">{set.description}</p>
+        <p className="mb-8 font-medium">{deck.description}</p>
         <div className="flex items-center">
           <Image
             src="/me.jpg"
@@ -37,16 +42,16 @@ const Topic = ({ topic, categories }) => {
       </li>
     ))
 
-    return <ul className="text-white space-y-8">{setsHTML}</ul>
+    return <ul className="text-white space-y-8">{decksHTML}</ul>
   }
 
-  const renderCategories = topic.categories.map((category) => {
+  const renderSubTopics = topic.subTopics.map((subTopic) => {
     return (
-      <Section key={category.id}>
+      <Section key={subTopic.id}>
         <h2 className="mb-6 text-3xl font-bold tracking-tight">
-          {category.name} Sets
+          {subTopic.name} Decks
         </h2>
-        {renderSets(categories[category.id])}
+        {renderDecks(decksBySubTopic[subTopic.id])}
       </Section>
     )
   })
@@ -85,19 +90,23 @@ const Topic = ({ topic, categories }) => {
             {topic.description}
           </p>
         </header>
-        {renderCategories}
+        {renderSubTopics}
       </main>
       <footer></footer>
     </div>
   )
 }
 
-export default Topic
+export default TopicPage
 
 export async function getStaticPaths() {
+  await connectToDB()
+
+  const topics = await Topic.find({})
+
   return {
-    paths: db.topics.map((topic) => ({
-      params: { topic: slugify(topic.name) },
+    paths: topics.map((topic) => ({
+      params: { topic: topic.slug },
     })),
     fallback: true,
   }
@@ -110,14 +119,14 @@ export async function getStaticPaths() {
  *   props: {
  *     topic: {
  *       name: 'Math',
- *       categories: [
- *         { id: 'abse', name: 'Algebra' },
+ *       subTopics: [
+ *         { _id: ObjectId, name: 'Algebra' },
  *         ...
  *       ]
  *     },
- *     categories: {
- *       'abse': [
- *         { name: 'My Math Set', description: '', cards: [...] }
+ *     decksBySubTopic: {
+ *       'xxxx': [ // <-- subTopic._id
+ *         { name: 'My Math Set', description: '', cards: [...] } // <-- deck
  *         ...
  *       ],
  *       ...
@@ -127,13 +136,33 @@ export async function getStaticPaths() {
  * }
  */
 export async function getStaticProps({ params }) {
-  const topic = db.topics.find((topic) => slugify(topic.name) === params.topic)
-  const categories = topic.categories.reduce(
-    (result, category) => ({
+  await connectToDB()
+
+  let topic = await Topic.findOne({ slug: params.topic })
+  topic = topic.toObject({ transform: transformObjectId })
+
+  let decks = await Deck.find({ topicId: topic.id })
+  decks = decks
+    .map((deck) => deck.toObject({ transform: transformObjectId }))
+    .map((deck) => ({
+      ...deck,
+      topicId: deck.topicId.toString(),
+      subTopicId: deck.subTopicId.toString(),
+    }))
+
+  const decksBySubTopic = topic.subTopics.reduce(
+    (result, subTopic) => ({
       ...result,
-      [category.id]: db.sets.filter((set) => set.categoryId === category.id),
+      [subTopic.id]: decks.filter((deck) => deck.subTopicId === subTopic.id),
     }),
     {}
   )
-  return { props: { topic, categories }, revalidate: 1 }
+
+  return {
+    props: {
+      topic,
+      decksBySubTopic,
+    },
+    revalidate: 1,
+  }
 }
