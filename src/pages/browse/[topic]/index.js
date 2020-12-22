@@ -11,8 +11,6 @@ import { transformObjectId } from '@/utils/transformObjectId'
 import { dump } from '@/utils/dump'
 
 const TopicPage = ({ topic, decksBySubTopic }) => {
-  dump(topic)
-
   const renderDecks = (decks) => {
     if (!decks.length) {
       return (
