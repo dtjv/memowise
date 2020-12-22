@@ -1,19 +1,17 @@
 import Link from 'next/link'
-import Image from 'next/image'
 
-const Section = ({ children }) => (
-  <section className="py-8 sm:py-10">{children}</section>
-)
+import { Topic } from '@/models/Topic'
+import { Deck } from '@/models/Deck'
+import { Nav } from '@/components/Nav'
+import { Section } from '@/components/Section'
+import { Decks } from '@/components/Decks'
+import { connectToDB } from '@/utils/connectToDB'
+import { transformObjectId } from '@/utils/transformObjectId'
 
-const Math = () => {
+const SubTopicPage = ({ topic, subTopic, decks }) => {
   return (
     <div className="max-w-3xl px-4 mx-auto antialiased sm:px-8 md:px-12 lg:px-0">
-      <nav>
-        <div className="flex items-center justify-between py-6 border-b border-gray-200">
-          <div>memowise</div>
-          <div>menu</div>
-        </div>
-      </nav>
+      <Nav />
       <main>
         <header className="mt-10 mb-6">
           <div className="flex items-center mb-4 text-sm font-medium text-gray-700">
@@ -38,68 +36,21 @@ const Math = () => {
             <span className="mx-1">/</span>
             <Link href="/">
               <a>
-                <span className="mx-1 text-blue-500">Math</span>
+                <span className="mx-1 text-blue-500">{topic.name}</span>
               </a>
             </Link>
             <span className="mx-1">/</span>
-            <span className="mx-1">Algebra</span>
+            <span className="mx-1">{subTopic.name}</span>
           </div>
           <h1 className="mb-4 text-4xl font-extrabold text-gray-900 ">
-            Algebra
+            {subTopic.name}
           </h1>
           <p className="text-2xl font-normal tracking-tight text-gray-500">
-            Eiusmod tempor incididunt labore et dolore magna aliqua. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit, sed do.
+            {subTopic.description}
           </p>
         </header>
         <Section>
-          <ul className="text-white space-y-8">
-            <li className="p-6 bg-gray-800 shadow-lg rounded-3xl">
-              <h2 className="text-2xl font-semibold">
-                Expression and Equations
-              </h2>
-              <p className="mb-4 text-sm font-medium text-gray-400 uppercase">
-                10 terms
-              </p>
-              <p className="mb-8 font-medium">
-                A few basic questions about pre-algebra. You should know this
-                inside and out. These terms cover all you need to get into high
-                school calculus.
-              </p>
-              <div className="flex items-center">
-                <Image
-                  src="/me.jpg"
-                  alt="a pic of me"
-                  width={50}
-                  height={50}
-                  className="rounded-full"
-                />
-                <p className="ml-3 font-semibold">David Valles</p>
-              </div>
-            </li>
-            <li className="p-6 bg-gray-800 shadow-lg rounded-3xl">
-              <h2 className="text-2xl font-semibold">
-                7th Grade Algebra Vocabulary
-              </h2>
-              <p className="mb-4 text-sm font-medium text-gray-400 uppercase">
-                20 terms
-              </p>
-              <p className="mb-8 font-medium">
-                A few basic questions about pre-algebra. You should know this
-                inside and out.
-              </p>
-              <div className="flex items-center">
-                <Image
-                  src="/me.jpg"
-                  alt="a pic of me"
-                  width={50}
-                  height={50}
-                  className="rounded-full"
-                />
-                <p className="ml-3 font-semibold">David Valles</p>
-              </div>
-            </li>
-          </ul>
+          <Decks decks={decks} />
         </Section>
       </main>
       <footer></footer>
@@ -107,4 +58,50 @@ const Math = () => {
   )
 }
 
-export default Math
+export default SubTopicPage
+
+export async function getStaticPaths() {
+  await connectToDB()
+
+  const topics = await Topic.find({})
+  const subTopics = topics.flatMap((topic) => {
+    return topic.subTopics.map((subTopic) => {
+      return {
+        params: {
+          topic: topic.slug,
+          subtopic: subTopic.slug,
+        },
+      }
+    })
+  })
+
+  return {
+    paths: subTopics,
+    fallback: true,
+  }
+}
+
+/*
+ *
+ */
+export async function getStaticProps({ params }) {
+  await connectToDB()
+
+  let topic = await Topic.findOne({ slug: params.topic })
+  topic = topic.toObject({ transform: transformObjectId })
+
+  let subTopic = topic.subTopics.find(
+    (subTopic) => subTopic.slug === params.subtopic
+  )
+
+  let decks = await Deck.find({ subTopicId: subTopic.id })
+  decks = decks
+    .map((deck) => deck.toObject({ transform: transformObjectId }))
+    .map((deck) => ({
+      ...deck,
+      topicId: deck.topicId.toString(),
+      subTopicId: deck.subTopicId.toString(),
+    }))
+
+  return { props: { topic, subTopic, decks } }
+}

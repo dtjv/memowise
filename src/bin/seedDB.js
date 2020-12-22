@@ -28,6 +28,7 @@ const topicSchema = new mongoose.Schema({
   subTopics: [
     {
       name: String,
+      slug: String,
       description: String,
       numDecks: Number,
     },

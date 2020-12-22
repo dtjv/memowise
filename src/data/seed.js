@@ -8,16 +8,19 @@ exports.data = {
       subTopics: [
         {
           name: 'Algebra',
+          slug: 'algebra',
           description: 'A few basic Algebra flashcard sets.',
           numDecks: 2,
         },
         {
           name: 'Geometry',
+          slug: 'geometry',
           description: 'Learn Geometry concepts like area and circumference.',
           numDecks: 1,
         },
         {
           name: 'Calculus',
+          slug: 'calculus',
           description: 'Calculus is integral to understanding advanced math.',
           numDecks: 0,
         },
@@ -31,16 +34,19 @@ exports.data = {
       subTopics: [
         {
           name: 'Spanish',
+          slug: 'spanish',
           description: '?Habla Espanol? If not, then start here!',
           numDecks: 1,
         },
         {
           name: 'French',
+          slug: 'french',
           description: 'Learn how to speak fluent French.',
           numDecks: 0,
         },
         {
           name: 'Italian',
+          slug: 'italian',
           description: 'Italian is the easiest language to learn.',
           numDecks: 1,
         },
@@ -53,16 +59,19 @@ exports.data = {
       subTopics: [
         {
           name: 'Biology',
+          slug: 'biology',
           description: 'Learn all about the Biology of living things.',
           numDecks: 1,
         },
         {
           name: 'Chemistry',
+          slug: 'chemistry',
           description: 'What makes us tick?',
           numDecks: 0,
         },
         {
           name: 'Physics',
+          slug: 'physics',
           description: 'Learn Physics!',
           numDecks: 1,
         },
@@ -75,16 +84,19 @@ exports.data = {
       subTopics: [
         {
           name: 'Computer Science',
+          slug: 'computer_science',
           description: 'Learn how computers work.',
           numDecks: 1,
         },
         {
           name: 'History',
+          slug: 'history',
           description: 'Take a History lesson and learn from past mistakes..',
           numDecks: 1,
         },
         {
           name: 'US State Capitols',
+          slug: 'us_state_capitols',
           description: 'Learn all about the US state capitols.',
           numDecks: 0,
         },
