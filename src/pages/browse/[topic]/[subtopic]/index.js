@@ -81,9 +81,6 @@ export async function getStaticPaths() {
   }
 }
 
-/*
- *
- */
 export async function getStaticProps({ params }) {
   await connectToDB()
 
@@ -94,6 +91,7 @@ export async function getStaticProps({ params }) {
     (subTopic) => subTopic.slug === params.subtopic
   )
 
+  // inline transform converts only `._id` (including subdocs) to strings.
   let decks = await Deck.find({ subTopicId: subTopic.id })
   decks = decks
     .map((deck) => deck.toObject({ transform: transformObjectId }))

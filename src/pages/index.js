@@ -76,28 +76,12 @@ const HomePage = ({ topics }) => {
 
 export default HomePage
 
-/*
- * Example return object:
- *
- * {
- *   props: {
- *     topics: [
- *       {
- *         name: 'Math',
- *         deckCount: 5,
- *         ...
- *       }
- *       ...
- *     ]
- *   },
- *   revalidate: 1
- * }
- */
 export async function getStaticProps() {
   await connectToDB()
 
   let topics = await Topic.find({})
 
+  // inline transform converts all `._id` (including subdocs) to strings
   topics = topics.map((doc) => {
     const topic = doc.toObject({ transform: transformObjectId })
 

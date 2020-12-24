@@ -76,35 +76,13 @@ export async function getStaticPaths() {
   }
 }
 
-/*
- * Example return object:
- *
- * {
- *   props: {
- *     topic: {
- *       name: 'Math',
- *       subTopics: [
- *         { _id: ObjectId, name: 'Algebra' },
- *         ...
- *       ]
- *     },
- *     decksBySubTopic: {
- *       'xxxx': [ // <-- subTopic._id
- *         { name: 'My Math Set', description: '', cards: [...] } // <-- deck
- *         ...
- *       ],
- *       ...
- *     }
- *   },
- *   revalidate: 1
- * }
- */
 export async function getStaticProps({ params }) {
   await connectToDB()
 
   let topic = await Topic.findOne({ slug: params.topic })
   topic = topic.toObject({ transform: transformObjectId })
 
+  // inline transform converts only `._id` (including subdocs) to strings.
   let decks = await Deck.find({ topicId: topic.id })
   decks = decks
     .map((deck) => deck.toObject({ transform: transformObjectId }))
@@ -123,10 +101,7 @@ export async function getStaticProps({ params }) {
   )
 
   return {
-    props: {
-      topic,
-      decksBySubTopic,
-    },
+    props: { topic, decksBySubTopic },
     revalidate: 1,
   }
 }
