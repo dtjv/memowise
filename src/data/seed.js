@@ -79,7 +79,7 @@ exports.data = {
     },
     {
       name: 'All The Things',
-      slug: 'all_the_things',
+      slug: 'all-the-things',
       description: 'Interested in Programming, History, or Trivia? Start here!',
       subTopics: [
         {
