@@ -69,6 +69,7 @@ const DeckPage = ({ deck, topic, subTopic }) => {
             <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 ">
               Cards
             </h2>
+            {/*
             <button
               className="p-1 text-blue-500 bg-blue-500 rounded-full bg-opacity-10"
               aria-label="add set to my account"
@@ -88,6 +89,7 @@ const DeckPage = ({ deck, topic, subTopic }) => {
                 ></path>
               </svg>
             </button>
+            */}
           </div>
           <Cards cards={deck.cards} />
         </Section>
