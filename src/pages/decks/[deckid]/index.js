@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import Image from 'next/image'
 
 import { Topic } from '@/models/Topic'
@@ -6,52 +5,30 @@ import { Deck } from '@/models/Deck'
 import { Nav } from '@/components/Nav'
 import { Section } from '@/components/Section'
 import { Cards } from '@/components/Cards'
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { connectToDB } from '@/utils/connectToDB'
 import { transformObjectId } from '@/utils/transformObjectId'
 
 const DeckPage = ({ deck, topic, subTopic }) => {
+  const crumbs = [
+    { name: topic.name, path: `/browse/${topic.slug}`, isLink: true },
+    {
+      name: subTopic.name,
+      path: `/browse/${topic.slug}/${subTopic.slug}`,
+      isLink: true,
+    },
+  ]
   return (
     <div className="max-w-3xl px-4 mx-auto antialiased sm:px-8 md:px-12 lg:px-0">
       <Nav />
       <main>
         <header className="pb-6 mt-10">
-          <div className="flex items-center mb-4 text-sm font-medium text-gray-700">
-            <Link href="/">
-              <a>
-                <svg
-                  className="w-4 h-4 mr-1 text-blue-500"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                  ></path>
-                </svg>
-              </a>
-            </Link>
-            <span className="mx-1">/</span>
-            <Link href="/">
-              <a>
-                <span className="mx-1 text-blue-500">{topic.name}</span>
-              </a>
-            </Link>
-            <span className="mx-1">/</span>
-            <Link href="/">
-              <a>
-                <span className="mx-1 text-blue-500">{subTopic.name}</span>
-              </a>
-            </Link>
-          </div>
+          <Breadcrumbs crumbs={crumbs} />
           <h1 className="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 ">
             {deck.name}
           </h1>
           <p className="mb-4 text-xl font-normal tracking-tight text-gray-500">
-            {deck.descrption}
+            {deck.description}
           </p>
           <div className="flex items-center">
             <Image
