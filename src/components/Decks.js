@@ -3,14 +3,6 @@ import Link from 'next/link'
 import pluralize from 'pluralize'
 
 export const Decks = ({ decks }) => {
-  if (!decks.length) {
-    return (
-      <p className="text-xl font-normal tracking-tight text-gray-500">
-        No sets in this Topic.
-      </p>
-    )
-  }
-
   const renderDecks = decks.map((deck) => (
     <li key={deck.id} className="p-6 bg-gray-800 shadow-lg rounded-3xl">
       <Link href={`/decks/${deck.id}`}>

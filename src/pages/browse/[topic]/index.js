@@ -12,6 +12,10 @@ import { transformObjectId } from '@/utils/transformObjectId'
 const TopicPage = ({ topic, decksBySubTopic }) => {
   const crumbs = [{ name: topic.name, path: '', isLink: false }]
   const renderSubTopics = topic.subTopics.map((subTopic) => {
+    const decks = decksBySubTopic[subTopic.id]
+
+    if (!decks.length) return null
+
     return (
       <Section key={subTopic.id}>
         <div className="flex items-center justify-between">
