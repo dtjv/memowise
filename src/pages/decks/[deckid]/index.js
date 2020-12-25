@@ -18,6 +18,11 @@ const DeckPage = ({ deck, topic, subTopic }) => {
       path: `/browse/${topic.slug}/${subTopic.slug}`,
       isLink: true,
     },
+    {
+      name: deck.name,
+      path: '',
+      isLink: false,
+    },
   ]
   return (
     <div className="max-w-3xl px-4 mx-auto antialiased sm:px-8 md:px-12 lg:px-0">
