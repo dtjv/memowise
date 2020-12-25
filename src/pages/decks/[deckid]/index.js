@@ -4,7 +4,8 @@ import { Topic } from '@/models/Topic'
 import { Deck } from '@/models/Deck'
 import { Nav } from '@/components/Nav'
 import { Section } from '@/components/Section'
-import { Cards } from '@/components/Cards'
+import { CardsList } from '@/components/CardsList'
+import { CardsFlip } from '@/components/CardsFlip'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { connectToDB } from '@/utils/connectToDB'
 import { transformObjectId } from '@/utils/transformObjectId'
@@ -42,6 +43,9 @@ const DeckPage = ({ deck, topic, subTopic }) => {
           </div>
         </header>
         <Section>
+          <CardsFlip cards={deck.cards} />
+        </Section>
+        <Section>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 ">
               Cards
@@ -68,7 +72,7 @@ const DeckPage = ({ deck, topic, subTopic }) => {
             </button>
             */}
           </div>
-          <Cards cards={deck.cards} />
+          <CardsList cards={deck.cards} />
         </Section>
       </main>
       <footer></footer>
