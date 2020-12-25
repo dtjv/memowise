@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
 export const Breadcrumbs = ({ crumbs }) => {
-  const renderCrumbs = crumbs.map((crumb) => (
-    <>
+  const renderCrumbs = crumbs.map((crumb, idx) => (
+    <div key={idx}>
       <span className="mx-1">/</span>
       {crumb.isLink ? (
         <Link href={crumb.path}>
@@ -13,7 +13,7 @@ export const Breadcrumbs = ({ crumbs }) => {
       ) : (
         <span className="mx-1">{crumb.name}</span>
       )}
-    </>
+    </div>
   ))
 
   return (
