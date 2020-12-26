@@ -113,5 +113,11 @@ export async function getStaticProps({ params }) {
     (subTopic) => subTopic.id === deck.subTopicId.toString()
   )
 
-  return { props: { deck, topic, subTopic } }
+  return {
+    props: {
+      deck,
+      topic: { name: topic.name, slug: topic.slug },
+      subTopic: { name: subTopic.name, slug: subTopic.slug },
+    },
+  }
 }
