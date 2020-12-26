@@ -9,22 +9,22 @@ export const Footer = () => {
             <h4 className="font-semibold text-gray-500 uppercase">Topics</h4>
             <ul className="text-gray-500 space-y-4">
               <li>
-                <Link href="browse/math">
+                <Link href="/browse/math">
                   <a> Math </a>
                 </Link>
               </li>
               <li>
-                <Link href="browse/languages">
+                <Link href="/browse/languages">
                   <a> Languages </a>
                 </Link>
               </li>
               <li>
-                <Link href="browse/science">
+                <Link href="/browse/science">
                   <a> Science </a>
                 </Link>
               </li>
               <li>
-                <Link href="browse/all-the-things">
+                <Link href="/browse/all-the-things">
                   <a> All The Things </a>
                 </Link>
               </li>
