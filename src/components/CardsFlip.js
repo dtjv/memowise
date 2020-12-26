@@ -3,16 +3,18 @@ import { useState } from 'react'
 const Card = ({ card, field, onClick }) => {
   return (
     <div
-      className="relative py-20 text-center shadow-md ring-1 ring-gray-300 rounded-xl"
+      className="p-4 shadow-md ring-1 ring-gray-300 rounded-xl"
       onClick={() => onClick(field === 'term' ? 'definition' : 'term')}
     >
-      <span className="absolute text-xs text-gray-500 uppercase top-2 left-2">
-        {field}
-      </span>
-      <p>{card[field]}</p>
-      <span className="absolute px-2 py-1 text-xs text-gray-500 bg-gray-200 rounded-lg bottom-2 right-2">
-        Tap to Flip
-      </span>
+      <span className="text-xs text-gray-500 uppercase">{field}</span>
+      <div className="flex justify-center py-14">
+        <p>{card[field]}</p>
+      </div>
+      <div className="flex justify-end">
+        <span className="px-2 py-1 text-xs text-gray-500 bg-gray-200 rounded-lg">
+          Tap to Flip
+        </span>
+      </div>
     </div>
   )
 }
