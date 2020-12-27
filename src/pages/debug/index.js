@@ -1,38 +1,45 @@
-import { Topic } from '@/models/Topic'
-import { dump } from '@/utils/dump'
-import { connectToDB } from '@/utils/connectToDB'
-//import { transformObjectId } from '@/utils/transformObjectId'
+import { useEffect, useState } from 'react'
+
+const SkeletonText = () => {
+  return (
+    <div className="animate-pulse">
+      <div className="w-full h-6 bg-blue-400 rounded"> </div>
+    </div>
+  )
+}
 
 const Demo = () => {
-  return <h1>demo</h1>
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 5000)
+  }, [])
+
+  return (
+    <div className="p-10 bg-gray-200">
+      {isLoading ? (
+        <SkeletonText />
+      ) : (
+        <p className="bg-blue-400 rounded"> demo </p>
+      )}
+    </div>
+  )
 }
 
 export default Demo
 
+/*
 export async function getStaticProps() {
   await connectToDB()
 
   const topics = await Topic.find({})
-  /*
-  const subTopics = topics
-    .flatMap((topic) => topic.subTopics)
-    .map((subTopic) => subTopic.slug)
-  */
 
-  const subTopics = topics.flatMap((topic) => {
-    return topic.subTopics.map((subTopic) => {
-      return {
-        params: {
-          topic: topic.slug,
-          subtopic: subTopic.slug,
-        },
-      }
-    })
-  })
-
-  dump(subTopics)
+  dump(topics)
 
   return {
     props: { demo: 'demo' },
   }
 }
+*/
