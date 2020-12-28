@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import useSWR from 'swr'
+//import { dump } from '@/utils/debug'
 
 const SkeletonText = () => {
   return (
@@ -8,38 +10,36 @@ const SkeletonText = () => {
   )
 }
 
-const Demo = () => {
-  const [isLoading, setIsLoading] = useState(true)
+const fetcher = (url) => fetch(url).then((r) => r.json())
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 5000)
-  }, [])
+const deckid = `5fe1268490b6eac9a9561113`
+
+const Demo = () => {
+  const [cardIdx, setCardIdx] = useState(0)
+  const { data } = useSWR(`/api/decks/${deckid}`, fetcher)
+  const isLoading = !data
+  const cards = data?.deck.cards || []
+  const currentCard = cards.length && cards[cardIdx]
 
   return (
     <div className="p-10 bg-gray-200">
       {isLoading ? (
         <SkeletonText />
       ) : (
-        <p className="bg-blue-400 rounded"> demo </p>
+        <>
+          <p className="mb-4 font-bold">{currentCard.term}</p>
+          <div className="bg-blue-400 rounded">
+            {cards.map((card) => (
+              <div key={card.id}>{card.term}</div>
+            ))}
+          </div>
+          <button onClick={() => setCardIdx(() => cardIdx + 1)}>
+            Choose Next Card
+          </button>
+        </>
       )}
     </div>
   )
 }
 
 export default Demo
-
-/*
-export async function getStaticProps() {
-  await connectToDB()
-
-  const topics = await Topic.find({})
-
-  dump(topics)
-
-  return {
-    props: { demo: 'demo' },
-  }
-}
-*/
