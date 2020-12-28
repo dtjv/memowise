@@ -1,8 +1,11 @@
+//import { useState } from 'react'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import Image from 'next/image'
+//import arrayShuffle from 'array-shuffle'
 
 import { Nav } from '@/components/Nav'
+import { Section } from '@/components/Section'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 //import { dump } from '@/utils/debug'
@@ -18,53 +21,85 @@ const fetcher = async (url) => {
   return data
 }
 
-// [x] i got a deck
-// [ ] i need to compute what card to show
-// [ ] i need to compute list of answer choices
-//
-// tbd...
-// [ ] save each play to db?
-// [ ] to compute next card, i need a history of play results
-//
-// hmm...
-// - do i do all this in memory?
-// - do i store all this in local storage, then batch update db?
-//
-// render a card + choices
-// user makes a choice, then
-//   POST results to /api/deckid/study
-//     { cardId, isCorrectAnswer: true }
-//     receive next card + choices in response
-//
-// hmm...
-// - how do we know when we're done with the deck?
-//
+// returns an integer between minimum(inclusive) and maximum(exclusive).
+const getRandomInt = (minimum, maximum) => {
+  const min = Math.ceil(minimum)
+  const max = Math.floor(maximum)
+  return Math.floor(Math.random() * (max - min) + min)
+}
+
+const takeRandomItem = (arr = []) => (count = 1) => {
+  const limit = count > arr.length ? arr.length : count
+  const list = arr.slice()
+  let result = []
+
+  for (let i = 0; i < limit; i += 1) {
+    const randomIdx = getRandomInt(0, list.length)
+    result.push(list[randomIdx])
+    list.splice(randomIdx, 1)
+  }
+
+  return result
+}
+
+// TODO:
+// - to be the brains of pulling the next card.
+const getNextCard = (cards = [], currentCard) => {
+  if (!cards.length) {
+    return undefined
+  }
+
+  return !currentCard
+    ? takeRandomItem(cards)().pop()
+    : takeRandomItem(cards.filter((c) => c.id !== currentCard.id))().pop()
+}
+
+const generateAnswerChoices = (currentCard, cards = [], options = {}) => {
+  const field = options?.field || 'definition'
+
+  return !currentCard
+    ? []
+    : [
+        currentCard,
+        ...takeRandomItem(cards.filter((card) => card.id !== currentCard.id))(
+          3
+        ),
+      ].map((card) => ({
+        id: card.id,
+        text: card[field],
+        isCorrectChoice: card.id === currentCard.id,
+      }))
+}
+
 const StudyPage = () => {
   const { query } = useRouter()
-  const { data, error } = useSWR(
+  const { data } = useSWR(
     () => query.deckid && `/api/decks/${query.deckid}`,
     fetcher
   )
+  const isLoading = !data
+  const { deck, topic, subTopic } = data || {}
+  const crumbs =
+    deck && topic && subTopic
+      ? [
+          { name: topic.name, path: `/browse/${topic.slug}`, isLink: true },
+          {
+            name: subTopic.name,
+            path: `/browse/${topic.slug}/${subTopic.slug}`,
+            isLink: true,
+          },
+          {
+            name: deck.name,
+            path: '',
+            isLink: false,
+          },
+        ]
+      : []
 
-  if (error) return <div>api call failed</div>
+  const card = getNextCard(deck?.cards)
+  const cardAnswerChoices = generateAnswerChoices(card, deck?.cards)
 
-  if (!data) return <Skeleton />
-
-  const { deck, topic, subTopic } = data
-
-  const crumbs = [
-    { name: topic.name, path: `/browse/${topic.slug}`, isLink: true },
-    {
-      name: subTopic.name,
-      path: `/browse/${topic.slug}/${subTopic.slug}`,
-      isLink: true,
-    },
-    {
-      name: deck.name,
-      path: '',
-      isLink: false,
-    },
-  ]
+  if (isLoading) return <Skeleton />
 
   return (
     <div className="max-w-3xl px-4 mx-auto antialiased sm:px-8 md:px-12 lg:px-0">
@@ -89,30 +124,26 @@ const StudyPage = () => {
             <p className="ml-3 font-semibold">David Valles</p>
           </div>
         </header>
-        {/*
-        <div>
-          <div className="p-6 mb-8 shadow-sm ring-1 ring-black ring-opacity-5 rounded-xl">
-            <p className="text-xs text-gray-500 uppercase">term</p>
-            <div className="flex justify-center py-10">
-              <p>Algebraic Expression</p>
+        <Section>
+          <div className="mb-8 space-y-6">
+            <div className="p-4 ring-1 ring-gray-300 rounded-xl">
+              <span className="text-xs text-gray-500 uppercase">term</span>
+              <div className="flex justify-center py-14">
+                <p>{card.term}</p>
+              </div>
             </div>
+            <ul className="space-y-4">
+              {cardAnswerChoices.map((choice) => (
+                <li
+                  key={choice.id}
+                  className="px-4 py-4 shadow-sm ring-1 ring-blue-500 rounded-xl"
+                >
+                  {choice.text}
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul className="space-y-4">
-            <li className="px-4 py-4 shadow-sm ring-1 ring-blue-500 rounded-xl">
-              Loreum ipsum orem ipsum dolor sit amet.
-            </li>
-            <li className="px-4 py-4 shadow-sm ring-1 ring-blue-500 rounded-xl">
-              Loreum ipsum orem ipsum dolor sit amet.
-            </li>
-            <li className="px-4 py-4 shadow-sm ring-1 ring-blue-500 rounded-xl">
-              Loreum ipsum orem ipsum dolor sit amet.
-            </li>
-            <li className="px-4 py-4 shadow-sm ring-1 ring-blue-500 rounded-xl">
-              Loreum ipsum orem ipsum dolor sit amet.
-            </li>
-          </ul>
-        </div>
-        */}
+        </Section>
       </main>
       <footer></footer>
     </div>
