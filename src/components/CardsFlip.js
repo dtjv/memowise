@@ -3,7 +3,7 @@ import { useState } from 'react'
 const Card = ({ card, field, onClick }) => {
   return (
     <div
-      className="p-4 shadow-md ring-1 ring-gray-300 rounded-xl"
+      className="p-4 ring-1 ring-gray-300 rounded-xl"
       onClick={() => onClick(field === 'term' ? 'definition' : 'term')}
     >
       <span className="text-xs text-gray-500 uppercase">{field}</span>
