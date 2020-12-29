@@ -1,14 +1,14 @@
-//import { useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import Image from 'next/image'
-//import arrayShuffle from 'array-shuffle'
+import arrayShuffle from 'array-shuffle'
 
 import { Nav } from '@/components/Nav'
 import { Section } from '@/components/Section'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 
-//import { dump } from '@/utils/debug'
+import { dump } from '@/utils/debug'
 
 const fetcher = async (url) => {
   const res = await fetch(url)
@@ -44,17 +44,17 @@ const takeRandomItem = (arr = []) => (count = 1) => {
 
 // TODO:
 // - to be the brains of pulling the next card.
-const getNextCard = (cards = [], currentCard) => {
+const getNextCard = (cards = [], currentCardId) => {
   if (!cards.length) {
     return undefined
   }
 
-  return !currentCard
+  return currentCardId === undefined
     ? takeRandomItem(cards)().pop()
-    : takeRandomItem(cards.filter((c) => c.id !== currentCard.id))().pop()
+    : takeRandomItem(cards.filter((card) => card.id !== currentCardId))().pop()
 }
 
-const generateAnswerChoices = (currentCard, cards = [], options = {}) => {
+const generateChoices = (currentCard, cards = [], options = {}) => {
   const field = options?.field || 'definition'
 
   return !currentCard
@@ -62,7 +62,7 @@ const generateAnswerChoices = (currentCard, cards = [], options = {}) => {
     : [
         currentCard,
         ...takeRandomItem(cards.filter((card) => card.id !== currentCard.id))(
-          3
+          2
         ),
       ].map((card) => ({
         id: card.id,
@@ -72,6 +72,9 @@ const generateAnswerChoices = (currentCard, cards = [], options = {}) => {
 }
 
 const StudyPage = () => {
+  const [selectedChoice, setSelectedChoice] = useState(undefined)
+  const [card, setCard] = useState(undefined)
+  const [choices, setChoices] = useState([])
   const { query } = useRouter()
   const { data } = useSWR(
     () => query.deckid && `/api/decks/${query.deckid}`,
@@ -96,8 +99,36 @@ const StudyPage = () => {
         ]
       : []
 
-  const card = getNextCard(deck?.cards)
-  const cardAnswerChoices = generateAnswerChoices(card, deck?.cards)
+  const cardRef = useRef(card)
+  cardRef.current = card
+
+  useEffect(() => {
+    setCard(getNextCard(deck?.cards))
+  }, [deck])
+
+  useEffect(() => {
+    setChoices(arrayShuffle(generateChoices(card, deck?.cards)))
+  }, [card, deck])
+
+  useEffect(() => {
+    let timer
+
+    if (selectedChoice) {
+      timer = setTimeout(() => {
+        if (selectedChoice) {
+          setCard(getNextCard(deck?.cards, cardRef.current.id))
+          setChoices(
+            arrayShuffle(generateChoices(cardRef.current, deck?.cards))
+          )
+          setSelectedChoice(undefined)
+        }
+      }, 1000)
+    }
+
+    return () => {
+      if (timer) clearTimeout(timer)
+    }
+  }, [selectedChoice])
 
   if (isLoading) return <Skeleton />
 
@@ -129,16 +160,53 @@ const StudyPage = () => {
             <div className="p-4 ring-1 ring-gray-300 rounded-xl">
               <span className="text-xs text-gray-500 uppercase">term</span>
               <div className="flex justify-center py-14">
-                <p>{card.term}</p>
+                <p>{card?.term}</p>
               </div>
             </div>
             <ul className="space-y-4">
-              {cardAnswerChoices.map((choice) => (
+              {choices.map((choice) => (
                 <li
                   key={choice.id}
-                  className="px-4 py-4 shadow-sm ring-1 ring-blue-500 rounded-xl"
+                  className="flex items-center justify-between px-4 py-4 shadow-sm ring-1 ring-blue-500 rounded-xl"
+                  onClick={() => setSelectedChoice(choice)}
                 >
-                  {choice.text}
+                  <span>{choice.text}</span>
+                  {selectedChoice &&
+                    selectedChoice?.isCorrectChoice &&
+                    selectedChoice?.id === choice.id && (
+                      <svg
+                        className="w-6 h-6 text-green-500"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M5 13l4 4L19 7"
+                        ></path>
+                      </svg>
+                    )}
+                  {selectedChoice &&
+                    !selectedChoice?.isCorrectChoice &&
+                    selectedChoice.id === choice.id && (
+                      <svg
+                        className="w-6 h-6 text-red-500"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M6 18L18 6M6 6l12 12"
+                        ></path>
+                      </svg>
+                    )}
                 </li>
               ))}
             </ul>
