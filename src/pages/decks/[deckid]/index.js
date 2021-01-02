@@ -1,9 +1,10 @@
-import Image from 'next/image'
+//import Image from 'next/image'
 
 import { Topic } from '@/models/Topic'
 import { Deck } from '@/models/Deck'
 import { Nav } from '@/components/Nav'
 import { Section } from '@/components/Section'
+import { DeckHeader } from '@/components/DeckHeader'
 import { CardsList } from '@/components/CardsList'
 import { CardsFlip } from '@/components/CardsFlip'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
@@ -30,22 +31,7 @@ const DeckPage = ({ deck, topic, subTopic }) => {
       <main>
         <header className="pb-6 mt-10">
           <Breadcrumbs crumbs={crumbs} />
-          <h1 className="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 ">
-            {deck.name}
-          </h1>
-          <p className="mb-4 text-xl font-normal tracking-tight text-gray-500">
-            {deck.description}
-          </p>
-          <div className="flex items-center">
-            <Image
-              src="/me.jpg"
-              alt="a pic of me"
-              width={50}
-              height={50}
-              className="rounded-full"
-            />
-            <p className="ml-3 font-semibold">David Valles</p>
-          </div>
+          <DeckHeader deck={deck} />
         </header>
         <Section>
           <CardsFlip cards={deck.cards} />

@@ -1,4 +1,4 @@
-import Image from 'next/image'
+//import Image from 'next/image'
 import Link from 'next/link'
 import pluralize from 'pluralize'
 
@@ -7,11 +7,13 @@ export const Decks = ({ decks }) => {
     <li key={deck.id} className="p-6 bg-gray-800 shadow-lg rounded-3xl">
       <Link href={`/decks/${deck.id}`}>
         <a>
-          <h2 className="text-2xl font-semibold">{deck.name}</h2>
-          <p className="mb-4 text-sm font-medium text-gray-400 uppercase">
-            {pluralize('term', deck.cards.length, true)}
-          </p>
-          <p className="mb-8 font-medium">{deck.description}</p>
+          <div>
+            <h2 className="text-2xl font-semibold">{deck.name}</h2>
+            <p className="mb-4 text-sm font-medium text-gray-400 uppercase">
+              {pluralize('term', deck.cards.length, true)}
+            </p>
+            <p className="font-medium">{deck.description}</p>
+            {/*
           <div className="flex items-center">
             <Image
               src="/me.jpg"
@@ -21,6 +23,8 @@ export const Decks = ({ decks }) => {
               className="rounded-full"
             />
             <p className="ml-3 font-semibold">David Valles</p>
+          </div>
+          */}
           </div>
         </a>
       </Link>

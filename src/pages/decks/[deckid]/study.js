@@ -1,14 +1,12 @@
 import { useRef, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
-import Image from 'next/image'
 import arrayShuffle from 'array-shuffle'
 
 import { Nav } from '@/components/Nav'
 import { Section } from '@/components/Section'
+import { DeckHeader } from '@/components/DeckHeader'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
-
-import { dump } from '@/utils/debug'
 
 const fetcher = async (url) => {
   const res = await fetch(url)
@@ -138,22 +136,7 @@ const StudyPage = () => {
       <main>
         <header className="mt-10 mb-6">
           <Breadcrumbs crumbs={crumbs} />
-          <h1 className="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 ">
-            {deck.name}
-          </h1>
-          <p className="mb-4 text-xl font-normal tracking-tight text-gray-500">
-            {deck.description}
-          </p>
-          <div className="flex items-center">
-            <Image
-              src="/me.jpg"
-              alt="a pic of me"
-              width={50}
-              height={50}
-              className="rounded-full"
-            />
-            <p className="ml-3 font-semibold">David Valles</p>
-          </div>
+          <DeckHeader deck={deck} />
         </header>
         <Section>
           <div className="mb-8 space-y-6">
