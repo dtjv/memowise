@@ -6,6 +6,7 @@ import { Nav } from '@/components/Nav'
 import { Decks } from '@/components/Decks'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { Section } from '@/components/Section'
+import { BrowseHeader } from '@/components/BrowseHeader'
 import { connectToDB } from '@/utils/connectToDB'
 import { transformObjectId } from '@/utils/transformObjectId'
 
@@ -18,10 +19,8 @@ const TopicPage = ({ topic, decksBySubTopic }) => {
 
     return (
       <Section key={subTopic.id}>
-        <div className="flex items-center justify-between">
-          <h2 className="mb-6 text-3xl font-bold tracking-tight">
-            {subTopic.name}
-          </h2>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-3xl font-bold tracking-tight">{subTopic.name}</h2>
           <Link href={`/browse/${topic.slug}/${subTopic.slug}`}>
             <a>
               <span className="text-base font-semibold text-blue-500">
@@ -41,12 +40,7 @@ const TopicPage = ({ topic, decksBySubTopic }) => {
       <main>
         <header className="mt-10 mb-6">
           <Breadcrumbs crumbs={crumbs} />
-          <h1 className="mb-4 text-4xl font-extrabold text-gray-900">
-            {topic.name}
-          </h1>
-          <p className="text-2xl font-normal tracking-tight text-gray-500">
-            {topic.description}
-          </p>
+          <BrowseHeader name={topic.name} description={topic.description} />
         </header>
         {renderSubTopics}
       </main>

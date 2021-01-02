@@ -2,6 +2,7 @@ import { Topic } from '@/models/Topic'
 import { Deck } from '@/models/Deck'
 import { Nav } from '@/components/Nav'
 import { Section } from '@/components/Section'
+import { BrowseHeader } from '@/components/BrowseHeader'
 import { Decks } from '@/components/Decks'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { connectToDB } from '@/utils/connectToDB'
@@ -19,12 +20,10 @@ const SubTopicPage = ({ topic, subTopic, decks }) => {
       <main>
         <header className="mt-10 mb-6">
           <Breadcrumbs crumbs={crumbs} />
-          <h1 className="mb-4 text-4xl font-extrabold text-gray-900 ">
-            {subTopic.name}
-          </h1>
-          <p className="text-2xl font-normal tracking-tight text-gray-500">
-            {subTopic.description}
-          </p>
+          <BrowseHeader
+            name={subTopic.name}
+            description={subTopic.description}
+          />
         </header>
         <Section>
           <Decks decks={decks} />
