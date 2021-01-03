@@ -1,10 +1,12 @@
+import Head from 'next/head'
+
 import { Topic } from '@/models/Topic'
 import { Deck } from '@/models/Deck'
-import { Nav } from '@/components/Nav'
-import { Section } from '@/components/Section'
+import { Layout } from '@/components/Layout'
+import { Container } from '@/components/Container'
 import { BrowseHeader } from '@/components/BrowseHeader'
 import { Decks } from '@/components/Decks'
-import { Breadcrumbs } from '@/components/Breadcrumbs'
+import { BreadCrumbs } from '@/components/BreadCrumbs'
 import { connectToDB } from '@/utils/connectToDB'
 import { transformObjectId } from '@/utils/transformObjectId'
 
@@ -15,22 +17,20 @@ const SubTopicPage = ({ topic, subTopic, decks }) => {
   ]
 
   return (
-    <div className="max-w-3xl px-4 mx-auto antialiased sm:px-8 md:px-12 lg:px-0">
-      <Nav />
-      <main>
-        <header className="mt-10 mb-6">
-          <Breadcrumbs crumbs={crumbs} />
-          <BrowseHeader
-            name={subTopic.name}
-            description={subTopic.description}
-          />
-        </header>
-        <Section>
-          <Decks decks={decks} />
-        </Section>
-      </main>
-      <footer></footer>
-    </div>
+    <Layout>
+      <Head>
+        <title>
+          MemoWise - {topic.name} - {subTopic.name}
+        </title>
+      </Head>
+      <Container>
+        <BreadCrumbs crumbs={crumbs} />
+        <BrowseHeader name={subTopic.name} description={subTopic.description} />
+      </Container>
+      <Container>
+        <Decks decks={decks} />
+      </Container>
+    </Layout>
   )
 }
 

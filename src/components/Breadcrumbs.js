@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export const Breadcrumbs = ({ crumbs }) => {
+export const BreadCrumbs = ({ crumbs }) => {
   const renderCrumbs = crumbs.map((crumb, idx) => (
     <div key={idx}>
       <span className="mx-1">/</span>

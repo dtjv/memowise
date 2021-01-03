@@ -1,11 +1,12 @@
 import Link from 'next/link'
+import Head from 'next/head'
 
 import { Topic } from '@/models/Topic'
 import { Deck } from '@/models/Deck'
-import { Nav } from '@/components/Nav'
 import { Decks } from '@/components/Decks'
-import { Breadcrumbs } from '@/components/Breadcrumbs'
-import { Section } from '@/components/Section'
+import { BreadCrumbs } from '@/components/BreadCrumbs'
+import { Layout } from '@/components/Layout'
+import { Container } from '@/components/Container'
 import { BrowseHeader } from '@/components/BrowseHeader'
 import { connectToDB } from '@/utils/connectToDB'
 import { transformObjectId } from '@/utils/transformObjectId'
@@ -18,7 +19,7 @@ const TopicPage = ({ topic, decksBySubTopic }) => {
     if (!decks.length) return null
 
     return (
-      <Section key={subTopic.id}>
+      <Container key={subTopic.id}>
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-3xl font-bold tracking-tight">{subTopic.name}</h2>
           <Link href={`/browse/${topic.slug}/${subTopic.slug}`}>
@@ -30,22 +31,21 @@ const TopicPage = ({ topic, decksBySubTopic }) => {
           </Link>
         </div>
         <Decks decks={decksBySubTopic[subTopic.id]} />
-      </Section>
+      </Container>
     )
   })
 
   return (
-    <div className="max-w-3xl px-4 mx-auto antialiased sm:px-8 md:px-12 lg:px-0">
-      <Nav />
-      <main>
-        <header className="mt-10 mb-6">
-          <Breadcrumbs crumbs={crumbs} />
-          <BrowseHeader name={topic.name} description={topic.description} />
-        </header>
-        {renderSubTopics}
-      </main>
-      <footer></footer>
-    </div>
+    <Layout>
+      <Head>
+        <title>MemoWise - {topic.name}</title>
+      </Head>
+      <Container>
+        <BreadCrumbs crumbs={crumbs} />
+        <BrowseHeader name={topic.name} description={topic.description} />
+      </Container>
+      {renderSubTopics}
+    </Layout>
   )
 }
 

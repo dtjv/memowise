@@ -1,5 +1,11 @@
 #!/usr/bin/env node
 
+const { inspect } = require('util')
+const { site } = require('../data/site')
+
+console.log(inspect(site))
+
+/*
 require('dotenv-safe').config({
   example: './.env.example',
 })
@@ -100,3 +106,4 @@ const main = async () => {
 }
 
 main()
+*/

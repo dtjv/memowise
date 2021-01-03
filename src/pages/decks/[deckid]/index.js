@@ -1,13 +1,15 @@
 //import Image from 'next/image'
+import Head from 'next/head'
+import Link from 'next/link'
 
 import { Topic } from '@/models/Topic'
 import { Deck } from '@/models/Deck'
-import { Nav } from '@/components/Nav'
-import { Section } from '@/components/Section'
+import { Layout } from '@/components/Layout'
+import { Container } from '@/components/Container'
 import { DeckHeader } from '@/components/DeckHeader'
-import { CardsList } from '@/components/CardsList'
+import { Cards } from '@/components/Cards'
 import { CardsFlip } from '@/components/CardsFlip'
-import { Breadcrumbs } from '@/components/Breadcrumbs'
+import { BreadCrumbs } from '@/components/BreadCrumbs'
 import { connectToDB } from '@/utils/connectToDB'
 import { transformObjectId } from '@/utils/transformObjectId'
 
@@ -26,48 +28,52 @@ const DeckPage = ({ deck, topic, subTopic }) => {
     },
   ]
   return (
-    <div className="max-w-3xl px-4 mx-auto antialiased sm:px-8 md:px-12 lg:px-0">
-      <Nav />
-      <main>
-        <header className="pb-6 mt-10">
-          <Breadcrumbs crumbs={crumbs} />
-          <DeckHeader deck={deck} />
-        </header>
-        <Section>
-          <CardsFlip cards={deck.cards} />
-        </Section>
-        <Section>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 ">
-              Cards
-            </h2>
-            {/*
-            <button
-              className="p-1 text-blue-500 bg-blue-500 rounded-full bg-opacity-10"
-              aria-label="add set to my account"
+    <Layout>
+      <Head>
+        <title>MemoWise - {deck.name}</title>
+      </Head>
+      <Container>
+        <BreadCrumbs crumbs={crumbs} />
+        <DeckHeader deck={deck} />
+      </Container>
+      <Container>
+        <CardsFlip cards={deck.cards} />
+      </Container>
+      <Container>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 ">
+            Cards
+          </h2>
+          <Link href={`/decks/${deck.id}/quiz`}>
+            <a className="inline-flex items-center px-5 py-2 font-semibold text-white bg-gray-900 text-md rounded-md">
+              Take Quiz
+            </a>
+          </Link>
+          {/*
+          <button
+            className="p-1 text-blue-500 bg-blue-500 rounded-full bg-opacity-10"
+            aria-label="add set to my account"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                ></path>
-              </svg>
-            </button>
-            */}
-          </div>
-          <CardsList cards={deck.cards} />
-        </Section>
-      </main>
-      <footer></footer>
-    </div>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              ></path>
+            </svg>
+          </button>
+          */}
+        </div>
+        <Cards cards={deck.cards} />
+      </Container>
+    </Layout>
   )
 }
 

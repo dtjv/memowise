@@ -1,12 +1,13 @@
 import { useRef, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 import useSWR from 'swr'
 import arrayShuffle from 'array-shuffle'
 
-import { Nav } from '@/components/Nav'
-import { Section } from '@/components/Section'
+import { Layout } from '@/components/Layout'
+import { Container } from '@/components/Container'
 import { DeckHeader } from '@/components/DeckHeader'
-import { Breadcrumbs } from '@/components/Breadcrumbs'
+import { BreadCrumbs } from '@/components/BreadCrumbs'
 
 const fetcher = async (url) => {
   const res = await fetch(url)
@@ -69,7 +70,7 @@ const generateChoices = (currentCard, cards = [], options = {}) => {
       }))
 }
 
-const StudyPage = () => {
+const QuizPage = () => {
   const [selectedChoice, setSelectedChoice] = useState(undefined)
   const [card, setCard] = useState(undefined)
   const [choices, setChoices] = useState([])
@@ -131,84 +132,82 @@ const StudyPage = () => {
   if (isLoading) return <Skeleton />
 
   return (
-    <div className="max-w-3xl px-4 mx-auto antialiased sm:px-8 md:px-12 lg:px-0">
-      <Nav />
-      <main>
-        <header className="mt-10 mb-6">
-          <Breadcrumbs crumbs={crumbs} />
-          <DeckHeader deck={deck} />
-        </header>
-        <Section>
-          <div className="mb-8 space-y-6">
-            <div className="p-4 ring-1 ring-gray-300 rounded-xl">
-              <span className="text-xs text-gray-500 uppercase">term</span>
-              <div className="flex justify-center py-14">
-                <p>{card?.term}</p>
-              </div>
+    <Layout>
+      <Head>
+        <title>MemoWise - {deck.name}</title>
+      </Head>
+      <Container>
+        <BreadCrumbs crumbs={crumbs} />
+        <DeckHeader deck={deck} />
+      </Container>
+      <Container>
+        <div className="mb-8 space-y-6">
+          <div className="p-4 ring-1 ring-gray-300 rounded-xl">
+            <span className="text-xs text-gray-500 uppercase">term</span>
+            <div className="flex justify-center py-14">
+              <p>{card?.term}</p>
             </div>
-            <ul className="space-y-4">
-              {choices.map((choice) => (
-                <li
-                  key={choice.id}
-                  className="flex items-center justify-between px-4 py-4 shadow-sm ring-1 ring-blue-500 rounded-xl"
-                  onClick={() => setSelectedChoice(choice)}
-                >
-                  <span>{choice.text}</span>
-                  {selectedChoice &&
-                    selectedChoice?.isCorrectChoice &&
-                    selectedChoice?.id === choice.id && (
-                      <svg
-                        className="w-6 h-6 text-green-500"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M5 13l4 4L19 7"
-                        ></path>
-                      </svg>
-                    )}
-                  {selectedChoice &&
-                    !selectedChoice?.isCorrectChoice &&
-                    selectedChoice.id === choice.id && (
-                      <svg
-                        className="w-6 h-6 text-red-500"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M6 18L18 6M6 6l12 12"
-                        ></path>
-                      </svg>
-                    )}
-                </li>
-              ))}
-            </ul>
           </div>
-        </Section>
-      </main>
-      <footer></footer>
-    </div>
+          <ul className="space-y-4">
+            {choices.map((choice) => (
+              <li
+                key={choice.id}
+                className="flex items-center justify-between px-4 py-4 shadow-sm ring-1 ring-blue-500 rounded-xl"
+                onClick={() => setSelectedChoice(choice)}
+              >
+                <span>{choice.text}</span>
+                {selectedChoice &&
+                  selectedChoice?.isCorrectChoice &&
+                  selectedChoice?.id === choice.id && (
+                    <svg
+                      className="w-6 h-6 text-green-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M5 13l4 4L19 7"
+                      ></path>
+                    </svg>
+                  )}
+                {selectedChoice &&
+                  !selectedChoice?.isCorrectChoice &&
+                  selectedChoice.id === choice.id && (
+                    <svg
+                      className="w-6 h-6 text-red-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M6 18L18 6M6 6l12 12"
+                      ></path>
+                    </svg>
+                  )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Container>
+    </Layout>
   )
 }
 
-export default StudyPage
+export default QuizPage
 
 const Skeleton = () => {
   return (
-    <div className="max-w-3xl px-4 mx-auto antialiased sm:px-8 md:px-12 lg:px-0">
-      <Nav />
-      <main className="animate-pulse">
-        <header className="mt-10 mb-6">
+    <Layout>
+      <div className="animate-pulse">
+        <Container>
           <div className="w-3/4 h-4 mb-4 bg-gray-300 rounded"></div>
           <div className="w-1/2 mb-5 bg-gray-300 rounded h-9"></div>
           <div className="mb-4 space-y-2">
@@ -219,8 +218,8 @@ const Skeleton = () => {
             <div className="bg-gray-300 rounded-full w-14 h-14"></div>
             <div className="w-1/4 h-6 ml-3 bg-gray-300 rounded"></div>
           </div>
-        </header>
-      </main>
-    </div>
+        </Container>
+      </div>
+    </Layout>
   )
 }

@@ -1,4 +1,4 @@
-export const CardsList = ({ cards }) => {
+export const Cards = ({ cards }) => {
   const renderCards = cards.map((card) => {
     return (
       <li key={card.id}>
