@@ -1,7 +1,7 @@
 {
   "name": "memowise",
   "version": "0.1.0",
-  "description":"A flashcard app running Next.js, MongoDB and TailwindCSS.",
+  "description": "A flashcard app running Next.js, MongoDB and TailwindCSS.",
   "private": true,
   "scripts": {
     "format": "prettier -w .",
