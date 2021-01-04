@@ -24,7 +24,7 @@ const TopicPage = ({ topic, decksBySubTopic }) => {
           <h2 className="text-3xl font-bold tracking-tight">{subTopic.name}</h2>
           <Link href={`/browse/${topic.slug}/${subTopic.slug}`}>
             <a>
-              <span className="text-base font-semibold text-blue-500">
+              <span className="text-base font-semibold text-blue-600">
                 View all -{`>`}
               </span>
             </a>

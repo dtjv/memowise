@@ -152,7 +152,7 @@ const QuizPage = () => {
             {choices.map((choice) => (
               <li
                 key={choice.id}
-                className="flex items-center justify-between px-4 py-4 shadow-sm ring-1 ring-blue-500 rounded-xl"
+                className="flex items-center justify-between px-4 py-4 shadow-sm ring-1 ring-blue-600 rounded-xl"
                 onClick={() => setSelectedChoice(choice)}
               >
                 <span>{choice.text}</span>

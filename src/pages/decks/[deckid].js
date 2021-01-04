@@ -51,7 +51,7 @@ const DeckPage = ({ deck, topic, subTopic }) => {
           </Link>
           {/*
           <button
-            className="p-1 text-blue-500 bg-blue-500 rounded-full bg-opacity-10"
+            className="p-1 text-blue-600 bg-blue-600 rounded-full bg-opacity-10"
             aria-label="add set to my account"
           >
             <svg

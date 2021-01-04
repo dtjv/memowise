@@ -7,7 +7,7 @@ export const BreadCrumbs = ({ crumbs }) => {
       {crumb.isLink ? (
         <Link href={crumb.path}>
           <a>
-            <span className="mx-1 text-blue-500">{crumb.name}</span>
+            <span className="mx-1 text-blue-600">{crumb.name}</span>
           </a>
         </Link>
       ) : (
@@ -19,9 +19,9 @@ export const BreadCrumbs = ({ crumbs }) => {
   return (
     <div className="flex items-center mb-4 text-sm font-medium text-gray-700">
       <Link href="/">
-        <a>
+        <a aria-label="home page icon">
           <svg
-            className="w-4 h-4 mr-1 text-blue-500"
+            className="w-4 h-4 mr-1 text-blue-600"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

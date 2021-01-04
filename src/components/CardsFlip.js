@@ -5,7 +5,7 @@ const Card = ({ card, field, onClick }) => {
 
   return (
     <div
-      className="p-4 cursor-pointer ring-1 ring-blue-500 rounded-xl hover:shadow-md focus:shadow-md"
+      className="p-4 cursor-pointer ring-1 ring-blue-600 rounded-xl hover:shadow-md focus:shadow-md"
       onClick={() => onClick(field === 'term' ? 'definition' : 'term')}
     >
       <span className="text-xs text-gray-500 uppercase">{field}</span>
@@ -32,7 +32,7 @@ export const CardsFlip = ({ cards }) => {
               setCardIdx(cardIdx - 1)
               setCardField('term')
             }}
-            className="p-1 text-blue-500 bg-blue-500 rounded-full focus:outline-none bg-opacity-10"
+            className="p-1 text-blue-600 bg-blue-600 rounded-full focus:outline-none bg-opacity-10"
             aria-label="add set to my account"
           >
             <svg
@@ -57,7 +57,7 @@ export const CardsFlip = ({ cards }) => {
               setCardIdx(cardIdx + 1)
               setCardField('term')
             }}
-            className="p-1 text-blue-500 bg-blue-500 rounded-full bg-opacity-10 focus:outline-none"
+            className="p-1 text-blue-600 bg-blue-600 rounded-full bg-opacity-10 focus:outline-none"
             aria-label="add set to my account"
           >
             <svg

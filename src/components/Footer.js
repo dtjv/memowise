@@ -11,22 +11,22 @@ export const Footer = () => {
             <ul className="text-gray-500 space-y-4">
               <li>
                 <Link href="/browse/math">
-                  <a className="hover:text-blue-500"> Math </a>
+                  <a className="hover:text-blue-600"> Math </a>
                 </Link>
               </li>
               <li>
                 <Link href="/browse/languages">
-                  <a className="hover:text-blue-500"> Languages </a>
+                  <a className="hover:text-blue-600"> Languages </a>
                 </Link>
               </li>
               <li>
                 <Link href="/browse/science">
-                  <a className="hover:text-blue-500"> Science </a>
+                  <a className="hover:text-blue-600"> Science </a>
                 </Link>
               </li>
               <li>
                 <Link href="/browse/all-the-things">
-                  <a className="hover:text-blue-500"> All The Things </a>
+                  <a className="hover:text-blue-600"> All The Things </a>
                 </Link>
               </li>
             </ul>
@@ -36,24 +36,24 @@ export const Footer = () => {
             <ul className="text-gray-500 space-y-4">
               <li>
                 <Link href="/features#browse">
-                  <a className="hover:text-blue-500">
+                  <a className="hover:text-blue-600">
                     Browse Topics & Flashcards
                   </a>
                 </Link>
               </li>
               <li>
                 <Link href="/features#quiz">
-                  <a className="hover:text-blue-500">Flashcard Quiz</a>
+                  <a className="hover:text-blue-600">Flashcard Quiz</a>
                 </Link>
               </li>
               <li>
                 <Link href="/features#create">
-                  <a className="hover:text-blue-500">Create Flashcards</a>
+                  <a className="hover:text-blue-600">Create Flashcards</a>
                 </Link>
               </li>
               <li>
                 <Link href="/features#personalize">
-                  <a className="hover:text-blue-500">Personalized Collection</a>
+                  <a className="hover:text-blue-600">Personalized Collection</a>
                 </Link>
               </li>
             </ul>
@@ -63,12 +63,12 @@ export const Footer = () => {
             <ul className="text-gray-500 space-y-4">
               <li>
                 <Link href="/about#how">
-                  <a className="hover:text-blue-500">How I Built MemoWise</a>
+                  <a className="hover:text-blue-600">How I Built MemoWise</a>
                 </Link>
               </li>
               <li>
                 <Link href="/about#algorithm">
-                  <a className="hover:text-blue-500">Study Algorithm</a>
+                  <a className="hover:text-blue-600">Study Algorithm</a>
                 </Link>
               </li>
             </ul>
@@ -80,7 +80,7 @@ export const Footer = () => {
             Made with ☕️☕️☕️ by{' '}
             <a
               href="https://dtjv.io"
-              className="font-semibold text-gray-900 hover:text-blue-500"
+              className="font-semibold text-gray-900 hover:text-blue-600"
             >
               David Valles
             </a>

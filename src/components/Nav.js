@@ -12,15 +12,15 @@ export const Nav = () => (
         {/*
         <div>
           <Link href="/about">
-            <a className="font-medium text-gray-500 hover:text-blue-500">
+            <a className="font-medium text-gray-500 hover:text-blue-600">
               About
             </a>
           </Link>
         </div>
         */}
-        <a href="https://github.com/dtjv/memowise">
+        <a href="https://github.com/dtjv/memowise" aria-label="github logo">
           <svg
-            className="text-gray-500 hover:text-blue-500"
+            className="text-gray-500 hover:text-blue-600"
             width="24"
             height="24"
             viewBox="0 0 16 16"

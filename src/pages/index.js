@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 import { Topic } from '@/models/Topic'
 import { Topics } from '@/components/Topics'
 import { Layout } from '@/components/Layout'
@@ -14,7 +12,7 @@ const HomePage = ({ topics }) => {
         <header className="my-12">
           <div className="flex items-center">
             <svg
-              className="w-12 h-12 mr-2 text-blue-500"
+              className="w-12 h-12 mr-2 text-blue-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -46,7 +44,7 @@ const HomePage = ({ topics }) => {
           </a>
         </header>
         <Container>
-          <h2 className="mb-3 text-lg font-semibold leading-snug text-blue-500 uppercase">
+          <h2 className="mb-3 text-lg font-semibold leading-snug text-blue-600 uppercase">
             Basics to Advanced
           </h2>
           <p className="mb-6 text-3xl font-extrabold leading-none tracking-tight text-gray-900">
@@ -59,14 +57,14 @@ const HomePage = ({ topics }) => {
           </p>
           {/*
           <Link href="/">
-            <a className="text-lg font-medium text-blue-500">
+            <a className="text-lg font-medium text-blue-600">
               Learn more -{'>'}
             </a>
           </Link>
           */}
         </Container>
         <Container>
-          <h2 className="mb-3 text-lg font-semibold leading-snug text-blue-500 uppercase">
+          <h2 className="mb-3 text-lg font-semibold leading-snug text-blue-600 uppercase">
             Study
           </h2>
           <p className="mb-6 text-3xl font-extrabold leading-none tracking-tight text-gray-900">
@@ -78,14 +76,14 @@ const HomePage = ({ topics }) => {
           </p>
           {/*
           <Link href="/">
-            <a className="text-lg font-medium text-blue-500">
+            <a className="text-lg font-medium text-blue-600">
               Learn more -{'>'}
             </a>
           </Link>
           */}
         </Container>
         <Container>
-          <h2 className="mb-3 text-lg font-semibold leading-snug text-blue-500 uppercase">
+          <h2 className="mb-3 text-lg font-semibold leading-snug text-blue-600 uppercase">
             Self Quiz
           </h2>
           <p className="mb-6 text-3xl font-extrabold leading-none tracking-tight text-gray-900">
@@ -98,7 +96,7 @@ const HomePage = ({ topics }) => {
           </p>
           {/*
           <Link href="/">
-            <a className="text-lg font-medium text-blue-500">
+            <a className="text-lg font-medium text-blue-600">
               Learn more -{'>'}
             </a>
           </Link>
