@@ -45,7 +45,7 @@ const DeckPage = ({ deck, topic, subTopic }) => {
             Cards
           </h2>
           <Link href={`/decks/${deck.id}/quiz`}>
-            <a className="inline-flex items-center px-5 py-2 font-semibold text-white bg-gray-900 text-md rounded-md">
+            <a className="inline-flex items-center px-5 py-2 font-semibold text-white bg-gray-900 text-md rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-700">
               Take Quiz
             </a>
           </Link>

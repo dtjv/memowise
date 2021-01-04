@@ -65,7 +65,7 @@ export const Topics = ({ topics }) => {
         </p>
         <Link href={`/browse/${encodeURIComponent(topic.slug)}`}>
           <a
-            className={`inline-flex items-center px-4 py-2 font-semibold ${colors[colorIdx].bg} rounded-lg bg-opacity-50`}
+            className={`inline-flex items-center px-4 py-2 font-semibold ${colors[colorIdx].bg} rounded-lg bg-opacity-50 hover:bg-opacity-90 focus:outline-none focus:bg-opacity-90`}
           >
             Explore {topic.name}
           </a>

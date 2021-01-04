@@ -5,7 +5,7 @@ export const Nav = () => (
     <div className="flex items-center justify-between py-6 border-b border-gray-200">
       <div>
         <Link href="/">
-          <a className="text-lg font-semibold track">memowise</a>
+          <a className="text-lg font-semibold tracking-wide">memowise</a>
         </Link>
       </div>
       <div className="flex items-center space-x-4">

@@ -38,10 +38,11 @@ const HomePage = ({ topics }) => {
             A lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
-          <a href="#explore-topics">
-            <span className="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-gray-900 rounded-md hover:bg-gray-700">
-              Get started
-            </span>
+          <a
+            href="#explore-topics"
+            className="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-gray-900 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+          >
+            Get started
           </a>
         </header>
         <Container>

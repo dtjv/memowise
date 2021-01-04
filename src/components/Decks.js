@@ -4,9 +4,9 @@ import pluralize from 'pluralize'
 
 export const Decks = ({ decks }) => {
   const renderDecks = decks.map((deck) => (
-    <li key={deck.id} className="p-6 bg-gray-800 shadow-lg rounded-3xl">
+    <li key={deck.id}>
       <Link href={`/decks/${deck.id}`}>
-        <a>
+        <a className="block p-6 bg-gray-800 shadow-lg rounded-3xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-opacity-95">
           <div>
             <h2 className="text-2xl font-semibold">{deck.name}</h2>
             <p className="mb-4 text-sm font-medium text-gray-400 uppercase">
