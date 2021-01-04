@@ -60,7 +60,7 @@ export async function getStaticPaths() {
     paths: topics.map((topic) => ({
       params: { topic: topic.slug },
     })),
-    fallback: true,
+    fallback: false,
   }
 }
 
@@ -87,7 +87,6 @@ export async function getStaticProps({ params }) {
     }),
     {}
   )
-
   return {
     props: { topic, decksBySubTopic },
     revalidate: 1,

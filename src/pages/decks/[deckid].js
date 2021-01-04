@@ -88,11 +88,13 @@ export async function getStaticPaths() {
     paths: decks.map((deck) => ({
       params: { deckid: deck._id.toString() },
     })),
-    fallback: true,
+    fallback: false,
   }
 }
 
 export async function getStaticProps({ params }) {
+  await connectToDB()
+
   let deck = await Deck.findById(params.deckid)
   deck = deck.toObject({ transform: transformObjectId })
   deck.topicId = deck.topicId.toString()

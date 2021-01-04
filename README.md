@@ -1,6 +1,6 @@
 # MemoWise
 
-A flashcard app running Next.js, Auth0, MongoDB Atlas & Typescript.
+A flashcard app running Next.js, TailwindCSS and MongoDB Atlas.
 
 ## License
 

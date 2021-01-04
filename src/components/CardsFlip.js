@@ -1,6 +1,8 @@
 import { useState } from 'react'
 
 const Card = ({ card, field, onClick }) => {
+  if (!card) return null
+
   return (
     <div
       className="p-4 cursor-pointer ring-1 ring-blue-500 rounded-xl hover:shadow-md focus:shadow-md"
@@ -17,6 +19,8 @@ const Card = ({ card, field, onClick }) => {
 export const CardsFlip = ({ cards }) => {
   const [cardIdx, setCardIdx] = useState(0)
   const [cardField, setCardField] = useState('term')
+
+  if (cards.length === 0) return null
 
   return (
     <>

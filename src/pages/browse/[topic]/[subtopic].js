@@ -53,7 +53,7 @@ export async function getStaticPaths() {
 
   return {
     paths: subTopics,
-    fallback: true,
+    fallback: false,
   }
 }
 
