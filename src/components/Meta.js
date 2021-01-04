@@ -3,8 +3,8 @@ import { site } from '../data/site'
 
 export const Meta = (props) => {
   const title = props.title ?? site.title
-  const url = props.url ?? ''
-  const description = props.description ?? ''
+  const url = props.url ?? site.url
+  const description = props.description ?? site.description
 
   return (
     <Head>

@@ -9,6 +9,7 @@ export const Nav = () => (
         </Link>
       </div>
       <div className="flex items-center space-x-4">
+        {/*
         <div>
           <Link href="/about">
             <a className="font-medium text-gray-500 hover:text-blue-500">
@@ -16,6 +17,7 @@ export const Nav = () => (
             </a>
           </Link>
         </div>
+        */}
         <a href="https://github.com/dtjv/memowise">
           <svg
             className="text-gray-500 hover:text-blue-500"

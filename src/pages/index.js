@@ -38,33 +38,78 @@ const HomePage = ({ topics }) => {
             A lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
-          <Link href="/">
-            <a className="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-gray-900 rounded-md">
+          <a href="#explore-topics">
+            <span className="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-gray-900 rounded-md hover:bg-gray-700">
               Get started
-            </a>
-          </Link>
+            </span>
+          </a>
         </header>
         <Container>
           <h2 className="mb-3 text-lg font-semibold leading-snug text-blue-500 uppercase">
-            Algorithm Based
+            Basics to Advanced
           </h2>
-          <p className="mb-8 text-3xl font-extrabold leading-none tracking-tight text-gray-900">
-            Lorem ipsum dolor sit amet, consectetur.
+          <p className="mb-6 text-3xl font-extrabold leading-none tracking-tight text-gray-900">
+            Learn in-demand topics at any level.
           </p>
-          <p className="mb-8 text-lg font-medium text-gray-500">
-            Eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
-            ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          <p className="text-lg font-medium text-gray-500">
+            Out of the box, Memowise includes 4 topics, each with 2 Sub-Topics
+            and a total of 20 flashcard sets. Get started by browsing topics
+            below and learn something new.
           </p>
+          {/*
           <Link href="/">
-            <a className="text-lg font-medium text-blue-500 hover:text-blue-800">
+            <a className="text-lg font-medium text-blue-500">
               Learn more -{'>'}
             </a>
           </Link>
+          */}
         </Container>
         <Container>
-          <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight text-gray-900 ">
+          <h2 className="mb-3 text-lg font-semibold leading-snug text-blue-500 uppercase">
+            Study
+          </h2>
+          <p className="mb-6 text-3xl font-extrabold leading-none tracking-tight text-gray-900">
+            Flip flashcards the old-school way.
+          </p>
+          <p className="text-lg font-medium text-gray-500">
+            Memowise flashcard sets are accessible for all to peruse at once or
+            flip through in a more traditional style of study.
+          </p>
+          {/*
+          <Link href="/">
+            <a className="text-lg font-medium text-blue-500">
+              Learn more -{'>'}
+            </a>
+          </Link>
+          */}
+        </Container>
+        <Container>
+          <h2 className="mb-3 text-lg font-semibold leading-snug text-blue-500 uppercase">
+            Self Quiz
+          </h2>
+          <p className="mb-6 text-3xl font-extrabold leading-none tracking-tight text-gray-900">
+            Test your knowledge.
+          </p>
+          <p className="text-lg font-medium text-gray-500">
+            You can access your learning progress through our self quiz feature.
+            Flashcard quizzes are multiple choice and report in real-time your
+            overall performance.
+          </p>
+          {/*
+          <Link href="/">
+            <a className="text-lg font-medium text-blue-500">
+              Learn more -{'>'}
+            </a>
+          </Link>
+          */}
+        </Container>
+        <Container id="explore-topics">
+          <h2 className="mb-6 text-3xl font-extrabold leading-none tracking-tight text-gray-900 ">
             Explore Topics
           </h2>
+          <p className="mb-8 text-lg font-medium text-gray-500">
+            Begin your learning journey below, by browsing topics of interest.
+          </p>
           <Topics topics={topics} />
         </Container>
       </div>

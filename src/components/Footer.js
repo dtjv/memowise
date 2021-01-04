@@ -4,6 +4,7 @@ export const Footer = () => {
   return (
     <footer className="py-12 mt-8 border-t bg-gray-50">
       <div className="max-w-3xl px-4 mx-auto antialiased sm:px-8 md:px-12 lg:px-0 divide-y divide-gray-200">
+        {/*
         <ul className="pb-12 grid gap-5 grid-cols-1 sm:grid-cols-3 gap-y-10">
           <li className="space-y-5">
             <h4 className="font-semibold text-gray-500 uppercase">Topics</h4>
@@ -73,7 +74,8 @@ export const Footer = () => {
             </ul>
           </li>
         </ul>
-        <div className="pt-8 text-center">
+        */}
+        <div className="text-center">
           <p className="text-base font-medium text-gray-500">
             Made with ☕️☕️☕️ by{' '}
             <a
