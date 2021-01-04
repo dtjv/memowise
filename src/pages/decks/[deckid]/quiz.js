@@ -8,41 +8,9 @@ import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
 import { DeckHeader } from '@/components/DeckHeader'
 import { BreadCrumbs } from '@/components/BreadCrumbs'
+import { fetcher } from '@/utils/fetcher'
+import { takeRandomItem } from '@/utils/takeRandomItem'
 
-const fetcher = async (url) => {
-  const res = await fetch(url)
-  const data = await res.json()
-
-  if (res.status !== 200) {
-    throw new Error(data.message)
-  }
-
-  return data
-}
-
-// returns an integer between minimum(inclusive) and maximum(exclusive).
-const getRandomInt = (minimum, maximum) => {
-  const min = Math.ceil(minimum)
-  const max = Math.floor(maximum)
-  return Math.floor(Math.random() * (max - min) + min)
-}
-
-const takeRandomItem = (arr = []) => (count = 1) => {
-  const limit = count > arr.length ? arr.length : count
-  const list = arr.slice()
-  let result = []
-
-  for (let i = 0; i < limit; i += 1) {
-    const randomIdx = getRandomInt(0, list.length)
-    result.push(list[randomIdx])
-    list.splice(randomIdx, 1)
-  }
-
-  return result
-}
-
-// TODO:
-// - to be the brains of pulling the next card.
 const getNextCard = (cards = [], currentCardId) => {
   if (!cards.length) {
     return undefined
@@ -97,7 +65,6 @@ const QuizPage = () => {
           },
         ]
       : []
-
   const cardRef = useRef(card)
   cardRef.current = card
 

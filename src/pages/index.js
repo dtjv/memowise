@@ -2,6 +2,7 @@ import { Topic } from '@/models/Topic'
 import { Topics } from '@/components/Topics'
 import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
+import { Features } from '@/components/Features'
 import { connectToDB } from '@/utils/connectToDB'
 import { transformObjectId } from '@/utils/transformObjectId'
 
@@ -33,8 +34,8 @@ const HomePage = ({ topics }) => {
             Learn all the things with a modern approach to a proven technique.
           </h1>
           <p className="mb-10 text-lg font-medium text-gray-500">
-            A lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Memowise uses algorithm-based logic to accelerate your learning and
+            improve material retention. It is the smart Flashcard app.
           </p>
           <a
             href="#explore-topics"
@@ -43,65 +44,7 @@ const HomePage = ({ topics }) => {
             Get started
           </a>
         </header>
-        <Container>
-          <h2 className="mb-3 text-lg font-semibold leading-snug text-blue-600 uppercase">
-            Basics to Advanced
-          </h2>
-          <p className="mb-6 text-3xl font-extrabold leading-none tracking-tight text-gray-900">
-            Learn in-demand topics at any level.
-          </p>
-          <p className="text-lg font-medium text-gray-500">
-            Out of the box, Memowise includes 4 topics, each with 2 Sub-Topics
-            and a total of 20 flashcard sets. Get started by browsing topics
-            below and learn something new.
-          </p>
-          {/*
-          <Link href="/">
-            <a className="text-lg font-medium text-blue-600">
-              Learn more -{'>'}
-            </a>
-          </Link>
-          */}
-        </Container>
-        <Container>
-          <h2 className="mb-3 text-lg font-semibold leading-snug text-blue-600 uppercase">
-            Study
-          </h2>
-          <p className="mb-6 text-3xl font-extrabold leading-none tracking-tight text-gray-900">
-            Flip flashcards the old-school way.
-          </p>
-          <p className="text-lg font-medium text-gray-500">
-            Memowise flashcard sets are accessible for all to peruse at once or
-            flip through in a more traditional style of study.
-          </p>
-          {/*
-          <Link href="/">
-            <a className="text-lg font-medium text-blue-600">
-              Learn more -{'>'}
-            </a>
-          </Link>
-          */}
-        </Container>
-        <Container>
-          <h2 className="mb-3 text-lg font-semibold leading-snug text-blue-600 uppercase">
-            Self Quiz
-          </h2>
-          <p className="mb-6 text-3xl font-extrabold leading-none tracking-tight text-gray-900">
-            Test your knowledge.
-          </p>
-          <p className="text-lg font-medium text-gray-500">
-            You can access your learning progress through our self quiz feature.
-            Flashcard quizzes are multiple choice and report in real-time your
-            overall performance.
-          </p>
-          {/*
-          <Link href="/">
-            <a className="text-lg font-medium text-blue-600">
-              Learn more -{'>'}
-            </a>
-          </Link>
-          */}
-        </Container>
+        <Features />
         <Container id="explore-topics">
           <h2 className="mb-6 text-3xl font-extrabold leading-none tracking-tight text-gray-900 ">
             Explore Topics
