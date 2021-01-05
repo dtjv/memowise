@@ -7,7 +7,8 @@
     "format": "prettier -w .",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "seed":"./src/bin/seedDB.js"
   },
   "dependencies": {
     "@auth0/auth0-react": "1.2.0",

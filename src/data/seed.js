@@ -497,27 +497,5 @@ exports.data = {
         subTopic: 'Biology',
       },
     },
-    {
-      name: 'My Algebra',
-      description: 'My Algebra is eiusmod tempor incididunt labore et dolore.',
-      cards: [
-        {
-          term: 'A natural number',
-          definition: 'Whole numbers starting at 1',
-        },
-        {
-          term: 'The slope of a line.',
-          definition: 'rise over run.',
-        },
-        {
-          term: 'y-intercept',
-          definition: 'the point at which a line crosses the y-axis.',
-        },
-      ],
-      meta: {
-        topic: 'Math',
-        subTopic: 'Algebra',
-      },
-    },
   ],
 }
