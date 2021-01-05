@@ -34,8 +34,8 @@ const HomePage = ({ topics }) => {
             Learn all the things with a modern approach to a proven technique.
           </h1>
           <p className="mb-10 text-lg font-medium text-gray-500">
-            Memowise uses algorithm-based logic to accelerate your learning and
-            improve material retention. It is the smart Flashcard app.
+            Memowise, <em>the</em> smart Flashcard app, uses algorithm-based
+            logic to accelerate your learning and improve retention.
           </p>
           <a
             href="#explore-topics"
