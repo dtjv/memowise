@@ -2,7 +2,7 @@ export const features = [
   {
     label: `foundation`,
     header: `In-demand topics at any level.`,
-    summary: `Out of the box, Memowise includes 4 topics, each with 2 Sub-Topics and a total of 20 flashcard sets. Get started by browsing topics below and learn something new.`,
+    summary: `Out of the box, Memowise includes 4 topics, 9 sub-topics and a total of 13 flashcard sets. Get started by browsing topics below and learn something new.`,
   },
   {
     label: `Explore. Study. Learn.`,
