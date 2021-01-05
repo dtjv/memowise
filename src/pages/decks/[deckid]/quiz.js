@@ -42,6 +42,7 @@ const QuizPage = () => {
   const [selectedChoice, setSelectedChoice] = useState(undefined)
   const [card, setCard] = useState(undefined)
   const [choices, setChoices] = useState([])
+  const [results, setResults] = useState([])
   const { query } = useRouter()
   const { data } = useSWR(
     () => query.deckid && `/api/decks/${query.deckid}`,
@@ -73,23 +74,16 @@ const QuizPage = () => {
   }, [deck])
 
   useEffect(() => {
-    setChoices(arrayShuffle(generateChoices(card, deck?.cards)))
+    setChoices(arrayShuffle(generateChoices(cardRef.current, deck?.cards)))
+    setSelectedChoice(undefined)
   }, [card, deck])
 
   useEffect(() => {
-    let timer
-
-    if (selectedChoice) {
-      timer = setTimeout(() => {
-        if (selectedChoice) {
-          setCard(getNextCard(deck?.cards, cardRef.current.id))
-          setChoices(
-            arrayShuffle(generateChoices(cardRef.current, deck?.cards))
-          )
-          setSelectedChoice(undefined)
-        }
-      }, 1000)
-    }
+    const timer = setTimeout(() => {
+      if (selectedChoice) {
+        setCard(getNextCard(deck?.cards, cardRef.current.id))
+      }
+    }, 1000)
 
     return () => {
       if (timer) clearTimeout(timer)
@@ -109,23 +103,39 @@ const QuizPage = () => {
       </Container>
       <Container>
         <div className="mb-8 space-y-6">
-          <div className="p-4 ring-1 ring-gray-300 rounded-xl">
+          <div className="p-4 ring-1 ring-black rounded-xl">
             <span className="text-xs text-gray-500 uppercase">term</span>
-            <div className="flex justify-center py-14">
+            <div className="flex justify-center mb-4 py-14">
               <p>{card?.term}</p>
             </div>
           </div>
           <ul className="space-y-4">
-            {choices.map((choice) => (
-              <li
-                key={choice.id}
-                className="flex items-center justify-between px-4 py-4 shadow-sm ring-1 ring-blue-600 rounded-xl"
-                onClick={() => setSelectedChoice(choice)}
-              >
-                <span>{choice.text}</span>
-                {selectedChoice &&
-                  selectedChoice?.isCorrectChoice &&
-                  selectedChoice?.id === choice.id && (
+            {choices.map((choice, idx) => {
+              const isRightAnswer =
+                selectedChoice?.isCorrectChoice &&
+                selectedChoice?.id === choice.id
+              const isWrongAnswer =
+                !selectedChoice?.isCorrectChoice &&
+                selectedChoice?.id === choice.id
+              const ringColor = isRightAnswer
+                ? 'ring-green-500'
+                : isWrongAnswer
+                ? 'ring-red-500'
+                : 'ring-gray-300'
+
+              return (
+                <li
+                  key={choice.id}
+                  className={`flex items-center justify-between px-4 py-4 shadow-sm ring-1 ${ringColor} rounded-xl`}
+                  onClick={() => setSelectedChoice(choice)}
+                >
+                  <span>
+                    <span className="mr-3 font-semibold">
+                      {`${String.fromCharCode('A'.charCodeAt() + idx)}`}
+                    </span>
+                    {choice.text}
+                  </span>
+                  {isRightAnswer && (
                     <svg
                       className="w-6 h-6 text-green-500"
                       fill="none"
@@ -141,9 +151,7 @@ const QuizPage = () => {
                       ></path>
                     </svg>
                   )}
-                {selectedChoice &&
-                  !selectedChoice?.isCorrectChoice &&
-                  selectedChoice.id === choice.id && (
+                  {isWrongAnswer && (
                     <svg
                       className="w-6 h-6 text-red-500"
                       fill="none"
@@ -159,8 +167,9 @@ const QuizPage = () => {
                       ></path>
                     </svg>
                   )}
-              </li>
-            ))}
+                </li>
+              )
+            })}
           </ul>
         </div>
       </Container>
@@ -176,14 +185,26 @@ const Skeleton = () => {
       <div className="animate-pulse">
         <Container>
           <div className="w-3/4 h-4 mb-4 bg-gray-300 rounded"></div>
-          <div className="w-1/2 mb-5 bg-gray-300 rounded h-9"></div>
+          <div className="w-1/2 h-10 mb-5 bg-gray-300 rounded"></div>
           <div className="mb-4 space-y-2">
-            <div className="w-full h-4 bg-gray-300 rounded"></div>
-            <div className="w-full h-4 bg-gray-300 rounded"></div>
+            <div className="w-full h-6 bg-gray-300 rounded"></div>
+            <div className="w-2/3 h-6 bg-gray-300 rounded"></div>
           </div>
+          {/*
           <div className="flex items-center">
             <div className="bg-gray-300 rounded-full w-14 h-14"></div>
             <div className="w-1/4 h-6 ml-3 bg-gray-300 rounded"></div>
+          </div>
+          */}
+        </Container>
+        <Container>
+          <div className="space-y-6">
+            <div className="w-full bg-gray-300 h-52 rounded-xl"></div>
+            <div className="space-y-4">
+              <div className="w-full h-12 bg-gray-300 rounded-xl"></div>
+              <div className="w-full h-12 bg-gray-300 rounded-xl"></div>
+              <div className="w-full h-12 bg-gray-300 rounded-xl"></div>
+            </div>
           </div>
         </Container>
       </div>
