@@ -18,7 +18,7 @@ export const Features = () => {
       {/*
           <Link href="/">
             <a className="text-lg font-medium text-blue-600">
-              Learn more -{'>'}
+              Learn more -&lt;
             </a>
           </Link>
           */}
