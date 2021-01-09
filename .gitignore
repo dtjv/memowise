@@ -17,7 +17,6 @@ coverage
 
 # misc
 .DS_Store
-NOTES.md
 
 # debug
 npm-debug.log*
