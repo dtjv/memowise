@@ -117,16 +117,16 @@ const QuizPage = () => {
               const isWrongAnswer =
                 !selectedChoice?.isCorrectChoice &&
                 selectedChoice?.id === choice.id
-              const ringColor = isRightAnswer
-                ? 'ring-green-500'
+              const ring = isRightAnswer
+                ? 'ring-2 ring-green-500'
                 : isWrongAnswer
-                ? 'ring-red-500'
-                : 'ring-gray-300'
+                ? 'ring-2 ring-red-500'
+                : 'ring-1 ring-gray-300'
 
               return (
                 <li
                   key={choice.id}
-                  className={`flex items-center justify-between px-4 py-4 shadow-sm ring-1 ${ringColor} rounded-xl`}
+                  className={`flex items-center justify-between px-4 py-4 shadow-sm ${ring} rounded-xl hover:shadow-lg cursor-pointer`}
                   onClick={() => setSelectedChoice(choice)}
                 >
                   <span>
@@ -135,38 +135,6 @@ const QuizPage = () => {
                     </span>
                     {choice.text}
                   </span>
-                  {isRightAnswer && (
-                    <svg
-                      className="w-6 h-6 text-green-500"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M5 13l4 4L19 7"
-                      ></path>
-                    </svg>
-                  )}
-                  {isWrongAnswer && (
-                    <svg
-                      className="w-6 h-6 text-red-500"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M6 18L18 6M6 6l12 12"
-                      ></path>
-                    </svg>
-                  )}
                 </li>
               )
             })}
