@@ -9,7 +9,7 @@ const Card = ({ card, field, onClick }) => {
       onClick={() => onClick(field === 'term' ? 'definition' : 'term')}
     >
       <span className="text-xs text-gray-500 uppercase">{field}</span>
-      <div className="flex justify-center mb-4 py-14">
+      <div className="flex justify-center h-40 my-4 overflow-y-auto">
         <p>{card[field]}</p>
       </div>
     </div>
