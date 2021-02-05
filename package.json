@@ -8,24 +8,24 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "seed":"./src/bin/seedDB.js"
+    "seed": "./src/bin/seedDB.js"
   },
   "dependencies": {
-    "@auth0/auth0-react": "1.2.0",
     "array-shuffle": "2.0.0",
     "dotenv-safe": "8.2.0",
-    "mongoose": "5.11.9",
-    "next": "10.0.4",
+    "mongoose": "5.11.15",
+    "next": "10.0.6",
+    "next-auth": "3.2.0",
     "pluralize": "8.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "swr": "0.3.11"
+    "swr": "0.4.1"
   },
   "devDependencies": {
     "@tailwindcss/forms": "0.2.1",
-    "@tailwindcss/typography": "0.3.1",
-    "autoprefixer": "10.1.0",
-    "postcss": "8.2.2",
+    "@tailwindcss/typography": "0.4.0",
+    "autoprefixer": "10.2.4",
+    "postcss": "8.2.4",
     "prettier": "2.2.1",
     "tailwindcss": "2.0.2"
   }
