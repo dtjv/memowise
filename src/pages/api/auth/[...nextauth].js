@@ -27,7 +27,12 @@ export default NextAuth({
     encryption: true,
   },
   pages: {},
-  callbacks: {},
+  callbacks: {
+    // ensure user stays on same page when signing in or out.
+    async redirect(url, baseUrl) {
+      return url.startsWith(baseUrl) ? url : baseUrl
+    },
+  },
   events: {},
   debug: false,
 })
