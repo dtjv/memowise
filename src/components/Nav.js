@@ -42,7 +42,6 @@ export const Nav = () => {
         <div className="flex items-center space-x-4">
           <SignInButton />
           <UserAvatar />
-          {session && <button onClick={() => signOut()}>SignOut</button>}
         </div>
       </div>
     </nav>
