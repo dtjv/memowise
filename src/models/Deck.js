@@ -1,16 +1,32 @@
 import mongoose from 'mongoose'
 
-const deckSchema = new mongoose.Schema({
-  name: String,
-  description: String,
-  topicId: mongoose.Schema.Types.ObjectId,
-  subTopicId: mongoose.Schema.Types.ObjectId,
-  cards: [
-    {
-      term: String,
-      definition: String,
+const deckSchema = new mongoose.Schema(
+  {
+    name: String,
+    description: String,
+    topic: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Topic',
     },
-  ],
-})
+    subTopic: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'SubTopic',
+    },
+    cards: [
+      {
+        term: String,
+        definition: String,
+      },
+    ],
+  },
+  {
+    toJSON: {
+      transform(_, ret) {
+        ret.id = ret._id
+        delete ret._id
+      },
+    },
+  }
+)
 
 export const Deck = mongoose.models.Deck || mongoose.model('Deck', deckSchema)

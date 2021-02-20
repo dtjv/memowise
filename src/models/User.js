@@ -1,22 +1,32 @@
 import mongoose from 'mongoose'
 
-const userSchema = new mongoose.Schema({
-  name: String,
-  image: String,
-  decks: {
-    linked: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Deck',
-      },
-    ],
-    created: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Deck',
-      },
-    ],
+const userSchema = new mongoose.Schema(
+  {
+    name: String,
+    image: String,
+    decks: {
+      linked: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Deck',
+        },
+      ],
+      created: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Deck',
+        },
+      ],
+    },
   },
-})
+  {
+    toJSON: {
+      transform(_, ret) {
+        ret.id = ret._id
+        delete ret._id
+      },
+    },
+  }
+)
 
 export const User = mongoose.models.User || mongoose.model('User', userSchema)
