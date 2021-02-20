@@ -73,7 +73,8 @@ export async function getStaticProps({ params }) {
   let decks = await Deck.find({ topic: topic.id }).populate('subTopic')
   decks = decks.map((deck) => {
     deck = deck.toObject({ transform: transformObjectId })
-    deck.topic = deck.topic.toString()
+    //deck.topic = deck.topic.toString()
+    delete deck.topic
     return deck
   })
 

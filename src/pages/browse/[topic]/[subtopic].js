@@ -1,7 +1,8 @@
 import Head from 'next/head'
 
-import { Topic } from '@/models/Topic'
 import { Deck } from '@/models/Deck'
+import { Topic } from '@/models/Topic'
+import { SubTopic } from '@/models/SubTopic'
 import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
 import { BrowseHeader } from '@/components/BrowseHeader'
@@ -39,20 +40,18 @@ export default SubTopicPage
 export async function getStaticPaths() {
   await connectToDB()
 
-  const topics = await Topic.find({})
-  const subTopics = topics.flatMap((topic) => {
-    return topic.subTopics.map((subTopic) => {
-      return {
-        params: {
-          topic: topic.slug,
-          subtopic: subTopic.slug,
-        },
-      }
-    })
-  })
+  const topics = await Topic.find({}).populate('subTopics')
+  const paths = topics.flatMap((topic) =>
+    topic.subTopics.map((subTopic) => ({
+      params: {
+        topic: topic.slug,
+        subtopic: subTopic.slug,
+      },
+    }))
+  )
 
   return {
-    paths: subTopics,
+    paths,
     fallback: false,
   }
 }
@@ -62,20 +61,18 @@ export async function getStaticProps({ params }) {
 
   let topic = await Topic.findOne({ slug: params.topic })
   topic = topic.toObject({ transform: transformObjectId })
+  delete topic.subTopics
 
-  let subTopic = topic.subTopics.find(
-    (subTopic) => subTopic.slug === params.subtopic
-  )
+  let subTopic = await SubTopic.findOne({ slug: params.subtopic })
+  subTopic = subTopic.toObject({ transform: transformObjectId })
 
-  // inline transform converts only `._id` (including subdocs) to strings.
-  let decks = await Deck.find({ subTopicId: subTopic.id })
-  decks = decks
-    .map((deck) => deck.toObject({ transform: transformObjectId }))
-    .map((deck) => ({
-      ...deck,
-      topicId: deck.topicId.toString(),
-      subTopicId: deck.subTopicId.toString(),
-    }))
+  let decks = await Deck.find({ subTopic: subTopic.id })
+  decks = decks.map((deck) => {
+    deck = deck.toObject({ transform: transformObjectId })
+    delete deck.topic
+    delete deck.subTopic
+    return deck
+  })
 
   return { props: { topic, subTopic, decks } }
 }
