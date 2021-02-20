@@ -3,10 +3,9 @@ import Link from 'next/link'
 import pluralize from 'pluralize'
 
 export const Decks = ({ decks }) => {
-  // TODO: deck ids from dashbaord have _id - that'll break browse?
   const renderDecks = decks.map((deck) => (
-    <li key={deck._id}>
-      <Link href={`/decks/${deck._id}`}>
+    <li key={deck.id}>
+      <Link href={`/decks/${deck.id}`}>
         <a
           className="block p-6 bg-gray-800 shadow-lg rounded-3xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-opacity-95"
           aria-label={`link to flashcard deck ${deck.name}`}

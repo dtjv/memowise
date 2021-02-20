@@ -13,10 +13,10 @@ import { transformObjectId } from '@/utils/transformObjectId'
 
 const TopicPage = ({ topic, decksBySubTopic }) => {
   const crumbs = [{ name: topic.name, path: '', isLink: false }]
-  const renderSubTopics = topic.subTopics.map((subTopic) => {
+  const renderDecks = topic.subTopics.map((subTopic) => {
     const decks = decksBySubTopic[subTopic.id]
 
-    if (!decks.length) return null
+    if (!decks?.length) return null
 
     return (
       <Container key={subTopic.id}>
@@ -30,7 +30,7 @@ const TopicPage = ({ topic, decksBySubTopic }) => {
             </a>
           </Link>
         </div>
-        <Decks decks={decksBySubTopic[subTopic.id]} />
+        <Decks decks={decks} />
       </Container>
     )
   })
@@ -44,7 +44,7 @@ const TopicPage = ({ topic, decksBySubTopic }) => {
         <BreadCrumbs crumbs={crumbs} />
         <BrowseHeader name={topic.name} description={topic.description} />
       </Container>
-      {renderSubTopics}
+      {renderDecks}
     </Layout>
   )
 }
@@ -67,26 +67,24 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   await connectToDB()
 
-  let topic = await Topic.findOne({ slug: params.topic })
+  let topic = await Topic.findOne({ slug: params.topic }).populate('subTopics')
   topic = topic.toObject({ transform: transformObjectId })
 
-  // inline transform converts only `._id` (including subdocs) to strings.
-  let decks = await Deck.find({ topicId: topic.id })
-  decks = decks
-    .map((deck) => deck.toObject({ transform: transformObjectId }))
-    .map((deck) => ({
-      ...deck,
-      topicId: deck.topicId.toString(),
-      subTopicId: deck.subTopicId.toString(),
-    }))
+  let decks = await Deck.find({ topic: topic.id }).populate('subTopic')
+  decks = decks.map((deck) => {
+    deck = deck.toObject({ transform: transformObjectId })
+    deck.topic = deck.topic.toString()
+    return deck
+  })
 
-  const decksBySubTopic = topic.subTopics.reduce(
-    (result, subTopic) => ({
-      ...result,
-      [subTopic.id]: decks.filter((deck) => deck.subTopicId === subTopic.id),
-    }),
+  const decksBySubTopic = decks.reduce(
+    (hash, deck) =>
+      !(deck.subTopic.id in hash)
+        ? { ...hash, [deck.subTopic.id]: [deck] }
+        : { ...hash, [deck.subTopic.id]: [...hash[deck.subTopic.id], deck] },
     {}
   )
+
   return {
     props: { topic, decksBySubTopic },
     revalidate: 1,
