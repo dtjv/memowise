@@ -1,22 +1,31 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { signOut, useSession, getSession } from 'next-auth/client'
+import useSWR from 'swr'
+import { signOut, useSession } from 'next-auth/client'
 
-import { Deck } from '@/models/Deck'
+import { fetcher } from '@/utils/fetcher'
 import { Decks } from '@/components/Decks'
 import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
-import { connectToDB } from '@/utils/connectToDB'
-import { transformObjectId } from '@/utils/transformObjectId'
 
-const DashBoardPage = ({ decks = [] }) => {
+const DashBoardPage = () => {
   const router = useRouter()
   const [session] = useSession()
+  const { data } = useSWR(
+    session ? `/api/users/${session.user.id}` : null,
+    fetcher
+  )
 
   if (!session) {
     return <div>Access Denied</div>
   }
+
+  if (!data) {
+    return <div>Loading...</div>
+  }
+
+  const decks = [...data.decks.created, ...data.decks.linked]
 
   return (
     <Layout>
@@ -53,8 +62,11 @@ const DashBoardPage = ({ decks = [] }) => {
 
 export default DashBoardPage
 
-export async function getServerSideProps(context) {
+/*
+export async function getStaticProps(context) {
   const session = await getSession(context)
+
+  dump(session, '<<-- session')
 
   if (!session) {
     return { props: {} }
@@ -62,17 +74,19 @@ export async function getServerSideProps(context) {
 
   await connectToDB()
 
-  let decks = await Deck.find({ creator: session.user.id })
-  decks = decks
-    .map((deck) => deck.toObject({ transform: transformObjectId }))
-    .map((deck) => ({
-      ...deck,
-      creator: deck.creator.toString(),
-      topicId: deck.topicId.toString(),
-      subTopicId: deck.subTopicId.toString(),
-    }))
+  const user = await User.findById(session.user.id)
+
+  dump(user, '<<-- user')
+
+  const decks = await Deck.find({
+    _id: {
+      $in: [...user.decks?.created, ...user.decks?.linked],
+    },
+  })
 
   return {
     props: { decks },
+    revalidate: 1,
   }
 }
+*/
