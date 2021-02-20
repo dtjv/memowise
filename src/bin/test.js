@@ -10,7 +10,18 @@ const main = async () => {
     process.exit(1)
   }
 
-  let topic = await Topic.findOne({ slug: 'math' }).populate('subTopics')
+  let topics = await Topic.find({}).populate('subTopics')
+  const paths = topics.flatMap((topic) =>
+    topic.subTopics.map((subTopic) => ({
+      params: {
+        topic: topic.slug,
+        subtopic: subTopic.slug,
+      },
+    }))
+  )
+
+  dump(paths)
+  /*
   topic = topic.toObject({ transform: transformObjectId })
 
   let decks = await Deck.find({ topic: topic.id }).populate('subTopic')
@@ -19,7 +30,6 @@ const main = async () => {
     deck.topic = deck.topic.toString()
     return deck
   })
-  dump(decks)
 
   const decksBySubTopic = decks.reduce(
     (hash, deck) =>
@@ -28,8 +38,7 @@ const main = async () => {
         : { ...hash, [deck.subTopic.id]: [...hash[deck.subTopic.id], deck] },
     {}
   )
-
-  //dump(decksBySubTopic)
+  */
 
   /*
   let user
