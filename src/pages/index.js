@@ -1,8 +1,10 @@
+import '@/models/SubTopic'
 import { Topic } from '@/models/Topic'
 import { Topics } from '@/components/Topics'
 import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
 import { Features } from '@/components/Features'
+import { CapIcon } from '@/components/icons/cap'
 import { connectToDB } from '@/utils/connectToDB'
 import { transformObjectId } from '@/utils/transformObjectId'
 
@@ -12,22 +14,7 @@ const HomePage = ({ topics }) => {
       <div className="mb-4">
         <header className="my-12">
           <div className="flex items-center">
-            <svg
-              className="w-12 h-12 mr-2 text-blue-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
-              <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-              ></path>
-            </svg>
+            <CapIcon className="w-12 h-12 mr-2 text-blue-600" />
             <p className="text-3xl font-semibold text-gray-900">memowise</p>
           </div>
           <h1 className="my-8 text-4xl font-extrabold tracking-tight text-gray-900 ">
@@ -64,15 +51,13 @@ export default HomePage
 export async function getStaticProps() {
   await connectToDB()
 
-  let topics = await Topic.find({})
+  let topics = await Topic.find({}).populate('subTopics')
 
-  // inline transform converts all `._id` (including subdocs) to strings
-  topics = topics.map((doc) => {
-    const topic = doc.toObject({ transform: transformObjectId })
-
+  topics = topics.map((topic) => {
+    topic = topic.toObject({ transform: transformObjectId })
     return {
       ...topic,
-      deckCount: topic.subTopics.reduce(
+      numDecks: topic.subTopics.reduce(
         (count, { numDecks }) => count + numDecks,
         0
       ),
