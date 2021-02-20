@@ -9,8 +9,6 @@ node_modules
 out
 build
 
-bin
-
 # testing
 coverage
 
