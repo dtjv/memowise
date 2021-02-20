@@ -1,28 +1,11 @@
 import mongoose from 'mongoose'
 
-const topicSchema = new mongoose.Schema(
-  {
-    name: String,
-    slug: String,
-    description: String,
-    subTopics: [
-      {
-        name: String,
-        slug: String,
-        description: String,
-        numDecks: Number,
-      },
-    ],
-  },
-  {
-    toJSON: {
-      transform(_, ret) {
-        ret.id = ret._id
-        delete ret._id
-      },
-    },
-  }
-)
+const subTopicSchema = new mongoose.Schema({
+  name: String,
+  slug: String,
+  description: String,
+  numDecks: Number,
+})
 
-export const Topic =
-  mongoose.models.Topic || mongoose.model('Topic', topicSchema)
+export const SubTopic =
+  mongoose.models?.SubTopic ?? mongoose.model('SubTopic', subTopicSchema)
