@@ -1,12 +1,11 @@
 import Head from 'next/head'
 
-import { Deck } from '@/models/Deck'
 import { Decks } from '@/components/Decks'
 import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
 import { BrowseHeader } from '@/components/BrowseHeader'
-import { connectToDB } from '@/utils/connectToDB'
-import { transformObjectId } from '@/utils/transformObjectId'
+
+import { getDeckList } from '@/lib/data'
 
 const DecksPage = ({ decks }) => {
   return (
@@ -30,15 +29,18 @@ const DecksPage = ({ decks }) => {
 export default DecksPage
 
 export async function getStaticProps() {
-  await connectToDB()
+  let decks = []
 
-  let decks = await Deck.find({})
-  decks = decks.map((deck) => {
-    deck = deck.toObject({ transform: transformObjectId })
-    delete deck.topic
-    delete deck.subTopic
-    return deck
-  })
+  try {
+    decks = await getDeckList()
+    decks = decks.map((deck) => {
+      delete deck.topic
+      delete deck.subTopic
+      return deck
+    })
+  } catch (error) {
+    console.error(error)
+  }
 
   return {
     props: { decks },
