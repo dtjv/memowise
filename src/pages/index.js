@@ -1,14 +1,11 @@
 import Link from 'next/link'
 
-import '@/models/SubTopic'
-import { Topic } from '@/models/Topic'
 import { Topics } from '@/components/Topics'
 import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
 import { Features } from '@/components/Features'
 import { CapIcon } from '@/components/icons/cap'
-import { connectToDB } from '@/utils/connectToDB'
-import { transformObjectId } from '@/utils/transformObjectId'
+import { getTopicList } from '@/lib/data'
 
 const HomePage = ({ topics }) => {
   return (
@@ -60,20 +57,13 @@ const HomePage = ({ topics }) => {
 export default HomePage
 
 export async function getStaticProps() {
-  await connectToDB()
+  let topics = []
 
-  let topics = await Topic.find({}).populate('subTopics')
-
-  topics = topics.map((topic) => {
-    topic = topic.toObject({ transform: transformObjectId })
-    return {
-      ...topic,
-      numDecks: topic.subTopics.reduce(
-        (count, { numDecks }) => count + numDecks,
-        0
-      ),
-    }
-  })
+  try {
+    topics = await getTopicList()
+  } catch (error) {
+    console.error(error)
+  }
 
   return {
     props: { topics },
