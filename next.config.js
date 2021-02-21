@@ -9,6 +9,11 @@ module.exports = {
         destination: '/',
         permanent: true,
       },
+      {
+        source: '/decks',
+        destination: '/browse',
+        permanent: true,
+      },
     ]
   },
 }
