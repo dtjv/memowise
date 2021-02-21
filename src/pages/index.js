@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import '@/models/SubTopic'
 import { Topic } from '@/models/Topic'
 import { Topics } from '@/components/Topics'
@@ -33,9 +35,18 @@ const HomePage = ({ topics }) => {
         </header>
         <Features />
         <Container id="explore-topics">
-          <h2 className="mb-6 text-3xl font-extrabold leading-none tracking-tight text-gray-900 ">
-            Explore Topics
-          </h2>
+          <div className="flex items-baseline justify-between mb-6">
+            <h2 className="text-3xl font-extrabold leading-none tracking-tight text-gray-900 ">
+              Explore Topics
+            </h2>
+            <Link href="/browse">
+              <a>
+                <span className="text-base font-semibold text-blue-600">
+                  View all sets -&gt;
+                </span>
+              </a>
+            </Link>
+          </div>
           <p className="mb-8 text-lg font-medium text-gray-500">
             Begin your learning journey below, by browsing topics of interest.
           </p>
