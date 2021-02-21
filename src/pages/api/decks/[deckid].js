@@ -1,24 +1,27 @@
-import { Deck } from '@/models/Deck'
-import { connectToDB } from '@/utils/connectToDB'
-import { transformObjectId } from '@/utils/transformObjectId'
+//import { getSession } from 'next-auth'
 
-export default async function handler(req, res) {
-  const {
-    query: { deckid },
-  } = req
+import { getDeck, updateDeck, deleteDeck } from '@/lib/data'
 
-  connectToDB()
+//------------------------------------------------------------------------------
+// Handler for api calls to `/api/deck/:deckid`
+//------------------------------------------------------------------------------
+export default async (req, res) => {
+  const deckId = req.query.deckid
 
-  try {
-    let deck = await Deck.findById(deckid)
-      .populate('topic')
-      .populate('subTopic')
-    deck = deck.toObject({ transform: transformObjectId })
-    delete deck.topic?.subTopics
-
-    res.status(200).json({ deck })
-  } catch (error) {
-    console.error(error)
-    res.status(400).json(error)
+  if (req.method === 'GET') {
+    const deck = await getDeck(deckId)
+    return res.status(200).json({ deck })
   }
+
+  if (req.method === 'PATCH') {
+    const deck = await updateDeck(deckId, req.query.payload)
+    return res.status(200).json({ deck })
+  }
+
+  if (req.method === 'DELETE') {
+    await deleteDeck(deckId)
+    return res.status(200)
+  }
+
+  res.status(404).send(`Unsupported method: ${req.method}`)
 }
