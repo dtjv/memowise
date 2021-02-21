@@ -2,18 +2,18 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
-import { Topic } from '@/models/Topic'
 import { Deck } from '@/models/Deck'
 import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
 import { DeckHeader } from '@/components/DeckHeader'
 import { Cards } from '@/components/Cards'
 import { CardsFlip } from '@/components/CardsFlip'
-import { BreadCrumbs } from '@/components/BreadCrumbs'
+//import { BreadCrumbs } from '@/components/BreadCrumbs'
 import { connectToDB } from '@/utils/connectToDB'
 import { transformObjectId } from '@/utils/transformObjectId'
 
-const DeckPage = ({ deck, topic, subTopic }) => {
+const DeckPage = ({ deck }) => {
+  /*
   const crumbs = [
     { name: topic.name, path: `/browse/${topic.slug}`, isLink: true },
     {
@@ -27,13 +27,13 @@ const DeckPage = ({ deck, topic, subTopic }) => {
       isLink: false,
     },
   ]
+  */
   return (
     <Layout>
       <Head>
         <title>MemoWise - {deck.name}</title>
       </Head>
       <Container>
-        <BreadCrumbs crumbs={crumbs} />
         <DeckHeader deck={deck} />
       </Container>
       <Container>
@@ -88,7 +88,7 @@ export async function getStaticPaths() {
     paths: decks.map((deck) => ({
       params: { deckid: deck._id.toString() },
     })),
-    fallback: false,
+    fallback: false, // TODO: make true
   }
 }
 
@@ -96,22 +96,10 @@ export async function getStaticProps({ params }) {
   await connectToDB()
 
   let deck = await Deck.findById(params.deckid)
+    .populate('topic')
+    .populate('subTopic')
   deck = deck.toObject({ transform: transformObjectId })
-  deck.topicId = deck.topicId.toString()
-  deck.subTopicId = deck.subTopicId.toString()
+  delete deck.topic?.subTopics
 
-  let topic = await Topic.findById(deck.topicId)
-  topic = topic.toObject({ transform: transformObjectId })
-
-  const subTopic = topic.subTopics.find(
-    (subTopic) => subTopic.id === deck.subTopicId.toString()
-  )
-
-  return {
-    props: {
-      deck,
-      topic: { name: topic.name, slug: topic.slug },
-      subTopic: { name: subTopic.name, slug: subTopic.slug },
-    },
-  }
+  return { props: { deck } }
 }
