@@ -1,15 +1,12 @@
 import Head from 'next/head'
 
-import { Deck } from '@/models/Deck'
-import { Topic } from '@/models/Topic'
-import { SubTopic } from '@/models/SubTopic'
 import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
 import { BrowseHeader } from '@/components/BrowseHeader'
 import { Decks } from '@/components/Decks'
 import { BreadCrumbs } from '@/components/BreadCrumbs'
-import { connectToDB } from '@/utils/connectToDB'
-import { transformObjectId } from '@/utils/transformObjectId'
+
+import { getTopic, getTopicList, getSubTopic, getDeckList } from '@/lib/data'
 
 const SubTopicPage = ({ topic, subTopic, decks }) => {
   const crumbs = [
@@ -38,9 +35,7 @@ const SubTopicPage = ({ topic, subTopic, decks }) => {
 export default SubTopicPage
 
 export async function getStaticPaths() {
-  await connectToDB()
-
-  const topics = await Topic.find({}).populate('subTopics')
+  const topics = await getTopicList()
   const paths = topics.flatMap((topic) =>
     topic.subTopics.map((subTopic) => ({
       params: {
@@ -57,18 +52,11 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  await connectToDB()
+  const topic = await getTopic({ slug: params.topic })
+  const subTopic = await getSubTopic({ slug: params.subtopic })
+  let decks = await getDeckList({ subTopic: subTopic.id })
 
-  let topic = await Topic.findOne({ slug: params.topic })
-  topic = topic.toObject({ transform: transformObjectId })
-  delete topic.subTopics
-
-  let subTopic = await SubTopic.findOne({ slug: params.subtopic })
-  subTopic = subTopic.toObject({ transform: transformObjectId })
-
-  let decks = await Deck.find({ subTopic: subTopic.id })
   decks = decks.map((deck) => {
-    deck = deck.toObject({ transform: transformObjectId })
     delete deck.topic
     delete deck.subTopic
     return deck
