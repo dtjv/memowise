@@ -7,7 +7,7 @@ import arrayShuffle from 'array-shuffle'
 import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
 import { DeckHeader } from '@/components/DeckHeader'
-//import { BreadCrumbs } from '@/components/BreadCrumbs'
+import { BreadCrumbs } from '@/components/BreadCrumbs'
 import { fetcher } from '@/utils/fetcher'
 import { takeRandomItem } from '@/utils/takeRandomItem'
 
@@ -49,7 +49,8 @@ const QuizPage = () => {
   )
   const isLoading = !data
   const { deck } = data || {}
-  /*
+  const topic = deck?.topic
+  const subTopic = deck?.subTopic
   const crumbs =
     deck && topic && subTopic
       ? [
@@ -66,7 +67,6 @@ const QuizPage = () => {
           },
         ]
       : []
-  */
   const cardRef = useRef(card)
   cardRef.current = card
 
@@ -99,7 +99,7 @@ const QuizPage = () => {
         <title>MemoWise - {deck.name}</title>
       </Head>
       <Container>
-        {/*<BreadCrumbs crumbs={crumbs} />*/}
+        <BreadCrumbs crumbs={crumbs} />
         <DeckHeader deck={deck} />
       </Container>
       <Container>

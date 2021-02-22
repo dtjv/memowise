@@ -7,32 +7,40 @@ import { Container } from '@/components/Container'
 import { DeckHeader } from '@/components/DeckHeader'
 import { Cards } from '@/components/Cards'
 import { CardsFlip } from '@/components/CardsFlip'
-//import { BreadCrumbs } from '@/components/BreadCrumbs'
+import { BreadCrumbs } from '@/components/BreadCrumbs'
 
 import { getDeck, getDeckList } from '@/lib/data'
 
 const DeckPage = ({ deck }) => {
-  /*
-  const crumbs = [
-    { name: topic.name, path: `/browse/${topic.slug}`, isLink: true },
-    {
-      name: subTopic.name,
-      path: `/browse/${topic.slug}/${subTopic.slug}`,
-      isLink: true,
-    },
-    {
-      name: deck.name,
-      path: '',
-      isLink: false,
-    },
-  ]
-  */
+  const { topic, subTopic } = deck
+  const crumbs =
+    topic && subTopic
+      ? [
+          {
+            name: topic.name,
+            path: `/browse/${topic.slug}`,
+            isLink: true,
+          },
+          {
+            name: subTopic.name,
+            path: `/browse/${topic.slug}/${subTopic.slug}`,
+            isLink: true,
+          },
+          {
+            name: deck.name,
+            path: '',
+            isLink: false,
+          },
+        ]
+      : []
+
   return (
     <Layout>
       <Head>
         <title>MemoWise - {deck.name}</title>
       </Head>
       <Container>
+        <BreadCrumbs crumbs={crumbs} />
         <DeckHeader deck={deck} />
       </Container>
       <Container>
