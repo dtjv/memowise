@@ -1,13 +1,14 @@
 import Link from 'next/link'
+import pluralize from 'pluralize'
 
 import { Topics } from '@/components/Topics'
 import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
 import { Features } from '@/components/Features'
 import { CapIcon } from '@/components/icons/cap'
-import { getTopicList } from '@/lib/data'
+import { getTopicList, getDeckList } from '@/lib/data'
 
-const HomePage = ({ topics }) => {
+const HomePage = ({ topics, numDecks }) => {
   return (
     <Layout>
       <div className="mb-4">
@@ -30,24 +31,35 @@ const HomePage = ({ topics }) => {
             Get started
           </a>
         </header>
-        <Features />
+        <div>
+          <Features />
+        </div>
         <Container id="explore-topics">
-          <div className="flex items-baseline justify-between mb-6">
-            <h2 className="text-3xl font-extrabold leading-none tracking-tight text-gray-900 ">
-              Explore Topics
-            </h2>
-            <Link href="/browse">
-              <a>
-                <span className="text-base font-semibold text-blue-600">
-                  View all sets -&gt;
-                </span>
-              </a>
-            </Link>
-          </div>
+          <h2 className="mb-6 text-3xl font-extrabold leading-none tracking-tight text-gray-900 ">
+            Explore Topics
+          </h2>
           <p className="mb-8 text-lg font-medium text-gray-500">
             Begin your learning journey below, by browsing topics of interest.
           </p>
           <Topics topics={topics} />
+        </Container>
+        <div className="my-4 border-b border-gray-200" />
+        <Container>
+          <div className="p-6 text-white shadow-lg rounded-3xl bg-gradient-to-br from-gray-400 to-gray-700">
+            <h2 className="text-2xl font-semibold">All Sets</h2>
+            <p className="mb-4 text-sm font-medium uppercase text-shadow">
+              {pluralize('set', numDecks, true)}
+            </p>
+            <p className="mb-8 font-medium text-shadow">
+              Check out all the decks Memowise has to offer - from Spanish terms
+              to programming concepts and cooking skills.
+            </p>
+            <Link href="/browse">
+              <a className="inline-flex items-center px-4 py-2 font-semibold bg-gray-800 rounded-lg bg-opacity-50 hover:bg-opacity-90 focus:outline-none focus:bg-opacity-90">
+                Explore all sets
+              </a>
+            </Link>
+          </div>
         </Container>
       </div>
     </Layout>
@@ -58,15 +70,17 @@ export default HomePage
 
 export async function getStaticProps() {
   let topics = []
+  let decks = []
 
   try {
     topics = await getTopicList()
+    decks = await getDeckList()
   } catch (error) {
     console.error(error)
   }
 
   return {
-    props: { topics },
+    props: { topics, numDecks: decks.length },
     revalidate: 1,
   }
 }
