@@ -9,12 +9,12 @@ export const createDeck = async () => {
   return mongo.createDeck()
 }
 
-export const getDeck = async (deckId) => {
-  return mongo.getDeck(deckId)
+export const getDeck = async (filter = {}) => {
+  return mongo.getDeck(filter)
 }
 
-export const getDeckList = async () => {
-  return mongo.getDeckList()
+export const getDeckList = async (filter = {}) => {
+  return mongo.getDeckList(filter)
 }
 
 export const updateDeck = async (deckId, payload) => {
@@ -30,4 +30,16 @@ export const getUser = async (userId) => {
 
 export const updateUser = async (userId, payload) => {
   return mongo.updateUser(userId, payload)
+}
+
+export const getTopic = async (filter = {}) => {
+  return mongo.getTopic(filter)
+}
+
+export const getTopicList = async (filter = {}) => {
+  return mongo.getTopicList(filter)
+}
+
+export const getSubTopic = async (filter = {}) => {
+  return mongo.getSubTopic(filter)
 }
