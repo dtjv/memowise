@@ -9,7 +9,7 @@ export default async (req, res) => {
   const deckId = req.query.deckid
 
   if (req.method === 'GET') {
-    const deck = await getDeck(deckId)
+    const deck = await getDeck({ id: deckId })
     return res.status(200).json({ deck })
   }
 
