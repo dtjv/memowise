@@ -2,15 +2,14 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
-import { Deck } from '@/models/Deck'
 import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
 import { DeckHeader } from '@/components/DeckHeader'
 import { Cards } from '@/components/Cards'
 import { CardsFlip } from '@/components/CardsFlip'
 //import { BreadCrumbs } from '@/components/BreadCrumbs'
-import { connectToDB } from '@/utils/connectToDB'
-import { transformObjectId } from '@/utils/transformObjectId'
+
+import { getDeck, getDeckList } from '@/lib/data'
 
 const DeckPage = ({ deck }) => {
   /*
@@ -80,26 +79,20 @@ const DeckPage = ({ deck }) => {
 export default DeckPage
 
 export async function getStaticPaths() {
-  await connectToDB()
-
-  const decks = await Deck.find({})
+  const decks = await getDeckList()
 
   return {
     paths: decks.map((deck) => ({
-      params: { deckid: deck._id.toString() },
+      params: { deckid: deck.id },
     })),
     fallback: false, // TODO: make true
   }
 }
 
 export async function getStaticProps({ params }) {
-  await connectToDB()
-
-  let deck = await Deck.findById(params.deckid)
-    .populate('topic')
-    .populate('subTopic')
-  deck = deck.toObject({ transform: transformObjectId })
+  const deck = await getDeck({ id: params.deckid })
   delete deck.topic?.subTopics
 
+  // TODO: why not revalidate: 1 ??
   return { props: { deck } }
 }
