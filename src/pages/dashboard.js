@@ -9,7 +9,7 @@ import { Decks } from '@/components/Decks'
 import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
 
-const DashBoardPage = () => {
+const DashboardPage = () => {
   const router = useRouter()
   const [session] = useSession()
   const { data } = useSWR(
@@ -25,7 +25,7 @@ const DashBoardPage = () => {
     return <div>Loading...</div>
   }
 
-  const decks = [...data.decks.created, ...data.decks.linked]
+  const decks = [...data.user.decks.created, ...data.user.decks.linked]
 
   return (
     <Layout>
@@ -60,7 +60,7 @@ const DashBoardPage = () => {
   )
 }
 
-export default DashBoardPage
+export default DashboardPage
 
 /*
 export async function getStaticProps(context) {
