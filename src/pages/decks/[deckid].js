@@ -1,6 +1,7 @@
 //import Image from 'next/image'
 import Head from 'next/head'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
@@ -12,6 +13,7 @@ import { BreadCrumbs } from '@/components/BreadCrumbs'
 import { getDeck, getDeckList } from '@/lib/data'
 
 const DeckPage = ({ deck }) => {
+  const router = useRouter()
   const { topic, subTopic } = deck
   const crumbs =
     topic && subTopic
@@ -33,6 +35,10 @@ const DeckPage = ({ deck }) => {
           },
         ]
       : []
+
+  if (router.isFallback) {
+    return <div>Loading...</div>
+  }
 
   return (
     <Layout>
@@ -93,7 +99,7 @@ export async function getStaticPaths() {
     paths: decks.map((deck) => ({
       params: { deckid: deck.id },
     })),
-    fallback: false, // TODO: make true
+    fallback: true,
   }
 }
 
@@ -101,6 +107,5 @@ export async function getStaticProps({ params }) {
   const deck = await getDeck({ id: params.deckid })
   delete deck.topic?.subTopics
 
-  // TODO: why not revalidate: 1 ??
-  return { props: { deck } }
+  return { props: { deck }, revalidate: 1 }
 }
