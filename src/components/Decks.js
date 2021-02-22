@@ -34,5 +34,7 @@ export const Decks = ({ decks }) => {
     </li>
   ))
 
-  return <ul className="text-white space-y-8">{renderDecks}</ul>
+  return renderDecks.length === 0 ? null : (
+    <ul className="text-white space-y-8">{renderDecks}</ul>
+  )
 }

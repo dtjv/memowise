@@ -74,7 +74,7 @@ export const Topics = ({ topics }) => {
     )
   })
 
-  return renderTopics.length <= 0 ? null : (
+  return renderTopics.length === 0 ? null : (
     <ul className="text-white space-y-8">{renderTopics}</ul>
   )
 }
