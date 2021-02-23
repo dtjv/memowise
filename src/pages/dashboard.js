@@ -61,32 +61,3 @@ const DashboardPage = () => {
 }
 
 export default DashboardPage
-
-/*
-export async function getStaticProps(context) {
-  const session = await getSession(context)
-
-  dump(session, '<<-- session')
-
-  if (!session) {
-    return { props: {} }
-  }
-
-  await connectToDB()
-
-  const user = await User.findById(session.user.id)
-
-  dump(user, '<<-- user')
-
-  const decks = await Deck.find({
-    _id: {
-      $in: [...user.decks?.created, ...user.decks?.linked],
-    },
-  })
-
-  return {
-    props: { decks },
-    revalidate: 1,
-  }
-}
-*/
