@@ -1,8 +1,7 @@
-import { inspect } from 'util'
 import { useState } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-//import { useSession } from 'next-auth/client'
+import { useSession } from 'next-auth/client'
 import { v4 as uuid } from 'uuid'
 
 import { dump } from '@/utils/debug'
@@ -43,21 +42,25 @@ const NewCard = ({ card, onChange, onDelete }) => (
   </li>
 )
 
-const NewDeckPage = () => {
+const CreateDeckPage = () => {
   const router = useRouter()
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [cards, setCards] = useState([])
+  const [session, loading] = useSession()
 
-  console.log(inspect(cards, { depth: 4, colors: true }))
+  //console.log(inspect(cards, { depth: 4, colors: true }))
 
-  /*
-  const [session] = useSession()
-
+  // TODO: improve
   if (!session) {
     return <div>Please Sign In</div>
   }
-  */
+
+  // TODO: improve
+  if (loading) {
+    return <div>Loading...</div>
+  }
+
   const handleChangeCard = (cardId, field, newValue) => {
     setCards((cardList) =>
       cardList.map((card) =>
@@ -74,13 +77,10 @@ const NewDeckPage = () => {
   }
 
   const handleCreateDeck = async () => {
-    const deck = {
+    const newDeck = {
       name,
       description,
-      creator: '', // pulled from session
-      topicId: '', // swr. show in drop-down. optional.
-      subTopicId: '', // swr. show in drop-down. optional.
-      // strip id fields out... they were for rendering purposes only.
+      // strip card.id out (id is for render purposes only)
       cards: cards.map((card) => ({
         term: card.term,
         definition: card.definition,
@@ -92,9 +92,10 @@ const NewDeckPage = () => {
       headers: {
         'Content-type': 'application/json',
       },
-      body: JSON.stringify({ deck }),
+      body: JSON.stringify({ userId: session.user.id, newDeck }),
     })
 
+    // TODO: improve
     if (!res.ok) {
       dump(await res.text())
       return
@@ -162,4 +163,4 @@ const NewDeckPage = () => {
   )
 }
 
-export default NewDeckPage
+export default CreateDeckPage

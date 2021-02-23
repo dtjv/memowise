@@ -7,7 +7,9 @@ import { createDeck } from '@/lib/data'
 //------------------------------------------------------------------------------
 export default async (req, res) => {
   if (req.method === 'POST') {
-    const deck = await createDeck(req.body.deck)
+    const { userId, newDeck } = req.body
+    const deck = await createDeck(userId, newDeck)
+
     return res.status(200).json({ deck })
   }
 

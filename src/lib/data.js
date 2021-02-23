@@ -4,9 +4,8 @@ import * as mongo from './mongo-db'
 // The generic data layer interface.
 //------------------------------------------------------------------------------
 
-// TODO: do calls to mongo need to be awaited?
-export const createDeck = async () => {
-  return mongo.createDeck()
+export const createDeck = async (userId, newDeck) => {
+  return mongo.createDeck(userId, newDeck)
 }
 
 export const getDeck = async (filter = {}) => {
