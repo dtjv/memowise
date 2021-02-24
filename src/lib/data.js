@@ -16,9 +16,10 @@ export const getDeckList = async (filter = {}) => {
   return mongo.getDeckList(filter)
 }
 
-export const updateDeck = async (deckId, payload) => {
-  return mongo.updateDeck(deckId, payload)
+export const updateDeck = async (deckId, updatedDeck) => {
+  return mongo.updateDeck(deckId, updatedDeck)
 }
+
 export const deleteDeck = async (deckId) => {
   return mongo.deleteDeck(deckId)
 }

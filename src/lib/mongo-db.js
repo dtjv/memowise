@@ -17,6 +17,7 @@ export const createDeck = async (userId, newDeck) => {
   const savedDeck = await Deck.create(newDeck)
   const user = await User.findById(userId)
 
+  // TODO: move this to undateUser.
   user.decks = user.decks ?? { created: [], linked: [] }
   user.decks.created.push(savedDeck._id)
   await user.save()
@@ -43,7 +44,15 @@ export const getDeckList = async (filter = {}) => {
   return decks.map((deck) => deck.toObject({ transform: transformObjectId }))
 }
 
-export const updateDeck = async (deckId, payload) => {}
+export const updateDeck = async (deckId, updatedDeck) => {
+  await connectToDB()
+
+  const deck = await Deck.findById(deckId)
+
+  deck.set(updatedDeck)
+
+  return deck.save()
+}
 
 export const deleteDeck = async (deckId) => {}
 
@@ -57,7 +66,14 @@ export const getUser = async (userId) => {
   return user.toObject({ transform: transformObjectId })
 }
 
-export const updateUser = async (userId, payload) => {}
+// how this method is called:
+//    updateUser(userId, { created: savedDeck._id })
+//    updateUser(userId, { link: deck._id })
+//    updateUser(userId, { remove: deck._id })
+// no no no... the application should handle construciton of an updated deck.
+// this function should be as dump as possible....
+// you don't want application logic in your data layer!!!
+export const updateUser = async (userId, options) => {}
 
 export const getTopic = async (filter = {}) => {
   await connectToDB()

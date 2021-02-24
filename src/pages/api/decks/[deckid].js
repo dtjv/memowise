@@ -14,7 +14,7 @@ export default async (req, res) => {
   }
 
   if (req.method === 'PATCH') {
-    const deck = await updateDeck(deckId, req.query.payload)
+    const deck = await updateDeck(deckId, req.body.updatedDeck)
     return res.status(200).json({ deck })
   }
 
