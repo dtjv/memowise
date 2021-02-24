@@ -3,12 +3,14 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/client'
 import { v4 as uuid } from 'uuid'
+import axios from 'axios'
 
-import { dump } from '@/utils/debug'
 import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
 
-const createEmptyCard = () => ({ id: uuid(), term: '', definition: '' })
+import { dump } from '@/utils/debug'
+
+const createEmptyCard = () => ({ __uid: uuid(), term: '', definition: '' })
 
 const NewCard = ({ card, onChange, onDelete }) => (
   <li>
@@ -17,7 +19,7 @@ const NewCard = ({ card, onChange, onDelete }) => (
       <input
         type="text"
         value={card.term}
-        onChange={(e) => onChange(card.id, 'term', e.target.value)}
+        onChange={(e) => onChange(card.__uid, 'term', e.target.value)}
         placeholder="Add term"
         className="block w-full"
       />
@@ -26,14 +28,14 @@ const NewCard = ({ card, onChange, onDelete }) => (
       Definition
       <textarea
         value={card.definition}
-        onChange={(e) => onChange(card.id, 'definition', e.target.value)}
+        onChange={(e) => onChange(card.__uid, 'definition', e.target.value)}
         placeholder="Add definition"
         className="block w-full"
         rows="1"
       ></textarea>
     </label>
     <button
-      onClick={() => onDelete(card.id)}
+      onClick={() => onDelete(card.__uid)}
       className="inline-flex items-center px-3 py-1.5 text-base font-semibold text-white bg-gray-900 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
       aria-label="add card"
     >
@@ -49,8 +51,6 @@ const CreateDeckPage = () => {
   const [cards, setCards] = useState([])
   const [session, loading] = useSession()
 
-  //console.log(inspect(cards, { depth: 4, colors: true }))
-
   // TODO: improve
   if (!session) {
     return <div>Please Sign In</div>
@@ -64,7 +64,7 @@ const CreateDeckPage = () => {
   const handleChangeCard = (cardId, field, newValue) => {
     setCards((cardList) =>
       cardList.map((card) =>
-        card.id === cardId ? { ...card, [field]: newValue } : card
+        card.__uid === cardId ? { ...card, [field]: newValue } : card
       )
     )
   }
@@ -73,33 +73,16 @@ const CreateDeckPage = () => {
   }
 
   const handleDeleteCard = (cardId) => {
-    setCards((cardList) => cardList.filter((card) => card.id !== cardId))
+    setCards((cardList) => cardList.filter((card) => card.__uid !== cardId))
   }
 
   const handleCreateDeck = async () => {
-    const newDeck = {
-      name,
-      description,
-      // strip card.id out (id is for render purposes only)
-      cards: cards.map((card) => ({
-        term: card.term,
-        definition: card.definition,
-      })),
-    }
+    const newDeck = { name, description, cards }
 
-    const res = await fetch(`/api/decks`, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify({ userId: session.user.id, newDeck }),
+    await axios.post(`/api/decks`, {
+      userId: session.user.id,
+      newDeck,
     })
-
-    // TODO: improve
-    if (!res.ok) {
-      dump(await res.text())
-      return
-    }
 
     router.push('/')
   }
@@ -142,7 +125,7 @@ const CreateDeckPage = () => {
         <ul>
           {cards.map((card) => (
             <NewCard
-              key={card.id}
+              key={card.__uid}
               card={card}
               onChange={handleChangeCard}
               onDelete={handleDeleteCard}
