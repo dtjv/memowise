@@ -1,8 +1,20 @@
 #!/usr/bin/env node
 
 const mongoose = require('mongoose')
+const { v4: uuid } = require('uuid')
 
 const { data } = require('../data/seed')
+
+// -----------------------------------------------------------------------------
+//
+//
+// READ!!!!!
+//
+// Don't forget to make any necessary changes to the schema in `base`. This does
+// not use the schema in `models/`.
+//
+//
+// -----------------------------------------------------------------------------
 const { Topic, SubTopic, Deck, connectToDB } = require('./base')
 
 // -----------------------------------------------------------------------------
@@ -16,7 +28,7 @@ const main = async ({ data }) => {
   }
 
   try {
-    await mongoose.connection.db.dropCollection('topics')
+    //    await mongoose.connection.db.dropCollection('topics')
     await mongoose.connection.db.dropCollection('decks')
   } catch (error) {
     console.error(`failed to drop collections.`, error)
@@ -31,6 +43,7 @@ const main = async ({ data }) => {
   const subTopicList = await SubTopic.find({})
 
   // Topic
+  /*
   const topicData = data.topics.map((topic) => {
     topic.subTopics = topic.subTopics.map((subTopic) => {
       const doc = subTopicList.find((doc) => doc.name === subTopic.name)
@@ -39,6 +52,7 @@ const main = async ({ data }) => {
     return topic
   })
   await Topic.create(topicData)
+  */
   const topicList = await Topic.find({})
 
   // Deck
@@ -51,7 +65,7 @@ const main = async ({ data }) => {
     return {
       name: deck.name,
       description: deck.description,
-      cards: deck.cards,
+      cards: deck.cards.map((card) => ({ ...card, __uid: uuid() })),
       topic: topicDoc._id,
       subTopic: subTopicDoc._id,
     }

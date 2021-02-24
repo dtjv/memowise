@@ -84,6 +84,7 @@ const deckSchema = new mongoose.Schema({
   },
   cards: [
     {
+      __uid: String,
       term: String,
       definition: String,
     },
