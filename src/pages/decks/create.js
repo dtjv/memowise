@@ -8,7 +8,7 @@ import axios from 'axios'
 import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
 
-import { dump } from '@/utils/debug'
+//import { dump } from '@/utils/debug'
 
 const createEmptyCard = () => ({ __uid: uuid(), term: '', definition: '' })
 
@@ -78,13 +78,8 @@ const CreateDeckPage = () => {
 
   const handleCreateDeck = async () => {
     const newDeck = { name, description, cards }
-
-    await axios.post(`/api/decks`, {
-      userId: session.user.id,
-      newDeck,
-    })
-
-    router.push('/')
+    await axios.post(`/api/decks`, { newDeck })
+    router.push('/dashboard')
   }
 
   return (

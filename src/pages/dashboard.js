@@ -14,7 +14,7 @@ const DashboardPage = () => {
   const router = useRouter()
   const [session] = useSession()
   const { data } = useSWR(
-    session ? `/api/users/${session.user.id}` : null,
+    session?.user ? `/api/users/${session.user.id}` : null,
     fetcher
   )
 
