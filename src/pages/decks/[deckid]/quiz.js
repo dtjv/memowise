@@ -4,7 +4,6 @@ import Head from 'next/head'
 import useSWR from 'swr'
 import arrayShuffle from 'array-shuffle'
 
-import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
 import { BreadCrumbs } from '@/components/BreadCrumbs'
 import { fetcher } from '@/utils/fetcher'
@@ -93,7 +92,7 @@ const QuizPage = () => {
   if (isLoading) return <Skeleton />
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>MemoWise - {deck.name}</title>
       </Head>
@@ -146,7 +145,7 @@ const QuizPage = () => {
           </ul>
         </div>
       </Container>
-    </Layout>
+    </>
   )
 }
 
@@ -154,7 +153,7 @@ export default QuizPage
 
 const Skeleton = () => {
   return (
-    <Layout>
+    <>
       <div className="animate-pulse">
         <Container>
           <div className="w-3/4 h-4 mb-4 bg-gray-300 rounded"></div>
@@ -181,6 +180,6 @@ const Skeleton = () => {
           </div>
         </Container>
       </div>
-    </Layout>
+    </>
   )
 }

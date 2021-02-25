@@ -3,7 +3,6 @@ import Head from 'next/head'
 
 import { Decks } from '@/components/Decks'
 import { BreadCrumbs } from '@/components/BreadCrumbs'
-import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
 import { BrowseHeader } from '@/components/BrowseHeader'
 
@@ -34,7 +33,7 @@ const TopicPage = ({ topic, decksBySubTopic }) => {
   })
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>MemoWise - {topic.name}</title>
       </Head>
@@ -43,7 +42,7 @@ const TopicPage = ({ topic, decksBySubTopic }) => {
         <BrowseHeader name={topic.name} description={topic.description} />
       </Container>
       {renderDecks}
-    </Layout>
+    </>
   )
 }
 

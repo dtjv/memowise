@@ -7,7 +7,6 @@ import { signOut, useSession } from 'next-auth/client'
 
 import { fetcher } from '@/utils/fetcher'
 import { Decks } from '@/components/Decks'
-import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
 
 const DashboardPage = () => {
@@ -29,7 +28,7 @@ const DashboardPage = () => {
   const decks = data.user.decks
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>MemoWise - {session.user.name}</title>
       </Head>
@@ -73,7 +72,7 @@ const DashboardPage = () => {
           <Decks decks={decks.linked} />
         </Container>
       )}
-    </Layout>
+    </>
   )
 }
 

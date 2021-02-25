@@ -6,7 +6,6 @@ import { useSession } from 'next-auth/client'
 import axios from 'axios'
 import useSWR from 'swr'
 
-import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
 import { Cards } from '@/components/Cards'
 import { CardsFlip } from '@/components/CardsFlip'
@@ -64,7 +63,7 @@ const DeckPage = ({ deck }) => {
   }
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>MemoWise - {deck.name}</title>
       </Head>
@@ -128,7 +127,7 @@ const DeckPage = ({ deck }) => {
         </div>
         <Cards cards={deck.cards} />
       </Container>
-    </Layout>
+    </>
   )
 }
 

@@ -5,7 +5,6 @@ import { useSession } from 'next-auth/client'
 import { v4 as uuid } from 'uuid'
 import axios from 'axios'
 
-import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
 
 //import { dump } from '@/utils/debug'
@@ -83,7 +82,7 @@ const CreateDeckPage = () => {
   }
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>MemoWise - Create New Flashcard Set</title>
       </Head>
@@ -137,7 +136,7 @@ const CreateDeckPage = () => {
         </button>
       </Container>
       <Container></Container>
-    </Layout>
+    </>
   )
 }
 

@@ -5,7 +5,6 @@ import { getSession } from 'next-auth/client'
 import { v4 as uuid } from 'uuid'
 import axios from 'axios'
 
-import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
 
 import { getDeck } from '@/lib/data'
@@ -76,7 +75,7 @@ const EditDeckPage = ({ deck }) => {
   }
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>MemoWise - Edit a Flashcard Set</title>
       </Head>
@@ -130,7 +129,7 @@ const EditDeckPage = ({ deck }) => {
         </button>
       </Container>
       <Container></Container>
-    </Layout>
+    </>
   )
 }
 

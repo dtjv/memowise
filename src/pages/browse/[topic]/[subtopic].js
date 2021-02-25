@@ -1,6 +1,5 @@
 import Head from 'next/head'
 
-import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
 import { BrowseHeader } from '@/components/BrowseHeader'
 import { Decks } from '@/components/Decks'
@@ -15,7 +14,7 @@ const SubTopicPage = ({ topic, subTopic, decks }) => {
   ]
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>
           MemoWise - {topic.name} - {subTopic.name}
@@ -28,7 +27,7 @@ const SubTopicPage = ({ topic, subTopic, decks }) => {
       <Container>
         <Decks decks={decks} />
       </Container>
-    </Layout>
+    </>
   )
 }
 
