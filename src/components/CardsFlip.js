@@ -5,7 +5,7 @@ const Card = ({ card, field, onClick }) => {
 
   return (
     <div
-      className="p-4 cursor-pointer ring-1 ring-blue-600 rounded-xl hover:shadow-md focus:shadow-md"
+      className="p-4 cursor-pointer ring-1 ring-blue-600 rounded-xl hover:shadow-md focus:outline-none"
       onClick={() => onClick(field === 'term' ? 'definition' : 'term')}
     >
       <span className="text-xs text-gray-500 uppercase">{field}</span>
