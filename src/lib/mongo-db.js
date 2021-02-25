@@ -5,24 +5,13 @@ import { SubTopic } from '@/models/SubTopic'
 import { connectToDB } from '@/utils/connectToDB'
 import { transformObjectId } from '@/utils/transformObjectId'
 
-//import { dump } from '@/utils/debug'
-
 //------------------------------------------------------------------------------
 // MongoDB specific data layer.
 //------------------------------------------------------------------------------
 
-export const createDeck = async (userId, newDeck) => {
+export const createDeck = async (newDeck) => {
   await connectToDB()
-
-  const savedDeck = await Deck.create(newDeck)
-  const user = await User.findById(userId)
-
-  // TODO: move this to undateUser.
-  user.decks = user.decks ?? { created: [], linked: [] }
-  user.decks.created.push(savedDeck._id)
-  await user.save()
-
-  return savedDeck
+  return Deck.create(newDeck)
 }
 
 export const getDeck = async (filter = {}) => {
@@ -38,23 +27,21 @@ export const getDeck = async (filter = {}) => {
 
 export const getDeckList = async (filter = {}) => {
   await connectToDB()
-
   const decks = await Deck.find(filter).populate('topic').populate('subTopic')
-
   return decks.map((deck) => deck.toObject({ transform: transformObjectId }))
 }
 
 export const updateDeck = async (deckId, updatedDeck) => {
   await connectToDB()
-
   const deck = await Deck.findById(deckId)
-
   deck.set(updatedDeck)
-
   return deck.save()
 }
 
-export const deleteDeck = async (deckId) => {}
+export const deleteDeck = async (deckId) => {
+  await connectToDB()
+  return Deck.deleteOne({ _id: deckId })
+}
 
 export const getUser = async (userId) => {
   await connectToDB()
@@ -66,14 +53,28 @@ export const getUser = async (userId) => {
   return user.toObject({ transform: transformObjectId })
 }
 
-// how this method is called:
-//    updateUser(userId, { created: savedDeck._id })
-//    updateUser(userId, { link: deck._id })
-//    updateUser(userId, { remove: deck._id })
-// no no no... the application should handle construciton of an updated deck.
-// this function should be as dump as possible....
-// you don't want application logic in your data layer!!!
-export const updateUser = async (userId, options) => {}
+export const updateUser = async (userId, data) => {
+  await connectToDB()
+
+  const user = await User.findById(userId)
+  user.decks = user.decks ?? { created: [], linked: [] }
+
+  if (data?.created) {
+    user.decks.created.push(data.created)
+  }
+
+  if (data?.linked) {
+    user.decks.linked.push(data.linked)
+  }
+
+  if (data?.remove) {
+    user.decks.created = user.decks.created.filter(
+      (deck) => deck.id !== data.remove.deckId
+    )
+  }
+
+  return user.save()
+}
 
 export const getTopic = async (filter = {}) => {
   await connectToDB()
