@@ -4,7 +4,6 @@ import Head from 'next/head'
 import { Decks } from '@/components/Decks'
 import { BreadCrumbs } from '@/components/BreadCrumbs'
 import { Container } from '@/components/Container'
-import { BrowseHeader } from '@/components/BrowseHeader'
 
 import { getTopic, getTopicList, getDeckList } from '@/lib/data'
 
@@ -39,7 +38,12 @@ const TopicPage = ({ topic, decksBySubTopic }) => {
       </Head>
       <Container>
         <BreadCrumbs crumbs={crumbs} />
-        <BrowseHeader name={topic.name} description={topic.description} />
+        <h1 className="mb-4 text-4xl font-extrabold text-gray-900">
+          {topic.name}
+        </h1>
+        <p className="text-2xl font-normal tracking-tight text-gray-500">
+          {topic.description}
+        </p>
       </Container>
       {renderDecks}
     </>

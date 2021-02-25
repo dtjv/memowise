@@ -2,7 +2,6 @@ import Head from 'next/head'
 
 import { Decks } from '@/components/Decks'
 import { Container } from '@/components/Container'
-import { BrowseHeader } from '@/components/BrowseHeader'
 
 import { getDeckList } from '@/lib/data'
 
@@ -13,10 +12,10 @@ const DecksPage = ({ decks }) => {
         <title>MemoWise - All Sets</title>
       </Head>
       <Container>
-        <BrowseHeader
-          name="All Sets"
-          description="A full list of all flashcard sets."
-        />
+        <h1 className="mb-4 text-4xl font-extrabold text-gray-900">All Sets</h1>
+        <p className="text-2xl font-normal tracking-tight text-gray-500">
+          A full list of all flashcard sets
+        </p>
       </Container>
       <Container>
         <Decks decks={decks} />

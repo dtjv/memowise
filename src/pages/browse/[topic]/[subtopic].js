@@ -1,7 +1,6 @@
 import Head from 'next/head'
 
 import { Container } from '@/components/Container'
-import { BrowseHeader } from '@/components/BrowseHeader'
 import { Decks } from '@/components/Decks'
 import { BreadCrumbs } from '@/components/BreadCrumbs'
 
@@ -22,7 +21,12 @@ const SubTopicPage = ({ topic, subTopic, decks }) => {
       </Head>
       <Container>
         <BreadCrumbs crumbs={crumbs} />
-        <BrowseHeader name={subTopic.name} description={subTopic.description} />
+        <h1 className="mb-4 text-4xl font-extrabold text-gray-900">
+          {subTopic.name}
+        </h1>
+        <p className="text-2xl font-normal tracking-tight text-gray-500">
+          {subTopic.description}
+        </p>
       </Container>
       <Container>
         <Decks decks={decks} />
