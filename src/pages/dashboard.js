@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import { signOut, useSession } from 'next-auth/client'
@@ -25,7 +26,7 @@ const DashboardPage = () => {
     return <div>Loading...</div>
   }
 
-  const decks = [...data.user.decks.created, ...data.user.decks.linked]
+  const decks = data.user.decks
 
   return (
     <Layout>
@@ -40,22 +41,38 @@ const DashboardPage = () => {
           width={100}
           height={100}
         />
-        <div className="flex items-center justify-between">
-          <h1 className="text-4xl font-extrabold text-gray-900">
-            {session.user.name}
-          </h1>
-          <button
-            onClick={() => signOut({ callbackUrl: router.basePath })}
-            className="inline-flex items-center px-3 py-1.5 text-base font-semibold text-white bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
-            aria-label="sign-out button"
-          >
-            Sign out
-          </button>
+        <div className="flex items-start justify-between">
+          <div>
+            <h1 className="text-4xl font-extrabold text-gray-900">
+              {session.user.name}
+            </h1>
+            <button
+              onClick={() => signOut({ callbackUrl: router.basePath })}
+              className="inline-flex flex-none items-center px-3 py-1.5 text-base font-semibold text-white bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
+              aria-label="sign-out button"
+            >
+              Sign out
+            </button>
+          </div>
+          <Link href="/decks/create">
+            <a className="inline-flex flex-none items-center px-3 py-1.5 text-base font-semibold text-white bg-blue-700 rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-800">
+              Create
+            </a>
+          </Link>
         </div>
       </Container>
-      <Container>
-        <Decks decks={decks} />
-      </Container>
+      {decks.created?.length === 0 ? null : (
+        <Container>
+          <h2 className="mb-8 text-3xl font-bold">Created by you</h2>
+          <Decks decks={decks.created} editable />
+        </Container>
+      )}
+      {decks.linked?.length === 0 ? null : (
+        <Container>
+          <h2 className="mb-8 text-3xl font-bold">Community sets</h2>
+          <Decks decks={decks.linked} />
+        </Container>
+      )}
     </Layout>
   )
 }
