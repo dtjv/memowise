@@ -148,6 +148,8 @@ export async function getServerSideProps({ req, res, params }) {
   }
 
   const deck = await getDeck({ id: params.deckid })
+  delete deck.topic
+  delete deck.subTopic
 
   return {
     props: {
