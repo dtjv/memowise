@@ -31,18 +31,6 @@ const colors = [
 
 const getNextIndex = (idx = -1) => (idx === colors.length - 1 ? 0 : idx + 1)
 
-/*
- * Example of topics received:
- *
- * topics = [
- *   {
- *     name: 'Math',
- *     ...
- *     numDecks: 5,  // set by the caller of this component
- *   },
- *   ...
- * ]
- */
 export const Topics = ({ topics }) => {
   let colorIdx = -1
 
@@ -52,9 +40,9 @@ export const Topics = ({ topics }) => {
     return (
       <li
         key={topic.id}
-        className={`p-6 shadow-lg rounded-3xl bg-gradient-to-br ${colors[colorIdx].gradient}`}
+        className={`p-6 shadow-lg rounded-2xl bg-gradient-to-br ${colors[colorIdx].gradient}`}
       >
-        <h2 className="text-2xl font-semibold">{topic.name}</h2>
+        <h3 className="text-2xl font-semibold">{topic.name}</h3>
         <p
           className={`mb-4 text-sm font-medium ${colors[colorIdx].text} uppercase text-shadow`}
         >

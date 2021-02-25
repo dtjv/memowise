@@ -6,7 +6,6 @@ import arrayShuffle from 'array-shuffle'
 
 import { Layout } from '@/components/Layout'
 import { Container } from '@/components/Container'
-import { DeckHeader } from '@/components/DeckHeader'
 import { BreadCrumbs } from '@/components/BreadCrumbs'
 import { fetcher } from '@/utils/fetcher'
 import { takeRandomItem } from '@/utils/takeRandomItem'
@@ -100,7 +99,12 @@ const QuizPage = () => {
       </Head>
       <Container>
         <BreadCrumbs crumbs={crumbs} />
-        <DeckHeader deck={deck} />
+        <h1 className="mb-4 text-3xl font-extrabold tracking-tight text-gray-900">
+          {deck.name}
+        </h1>
+        <p className="mb-4 text-xl font-normal tracking-tight text-gray-500">
+          {deck.description}
+        </p>
       </Container>
       <Container>
         <div className="mb-8 space-y-6">

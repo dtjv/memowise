@@ -34,8 +34,9 @@ const HomePage = ({ topics, numDecks }) => {
         <div>
           <Features />
         </div>
+        <div className="my-4 border-b border-gray-200" />
         <Container id="explore-topics">
-          <h2 className="mb-6 text-3xl font-extrabold leading-none tracking-tight text-gray-900 ">
+          <h2 className="mb-6 text-3xl font-bold leading-none tracking-tight text-gray-900 ">
             Explore Topics
           </h2>
           <p className="mb-8 text-lg font-medium text-gray-500">
@@ -45,7 +46,7 @@ const HomePage = ({ topics, numDecks }) => {
         </Container>
         <div className="my-4 border-b border-gray-200" />
         <Container>
-          <div className="p-6 text-white shadow-lg rounded-3xl bg-gradient-to-br from-gray-400 to-gray-700">
+          <div className="p-6 text-white shadow-lg rounded-2xl bg-gradient-to-br from-gray-400 to-gray-700">
             <h2 className="text-2xl font-semibold">All Sets</h2>
             <p className="mb-4 text-sm font-medium uppercase text-shadow">
               {pluralize('set', numDecks, true)}
