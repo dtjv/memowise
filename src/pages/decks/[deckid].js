@@ -70,7 +70,7 @@ const DeckPage = ({ deck }) => {
       <Container>
         <BreadCrumbs crumbs={crumbs} />
         <div className="mb-4">
-          <h1 className="mb-4 text-3xl font-extrabold tracking-tight text-gray-900">
+          <h1 className="mb-4 text-3xl font-extrabold leading-tight text-gray-900">
             {deck.name}
           </h1>
           {isEditable && (
@@ -95,11 +95,9 @@ const DeckPage = ({ deck }) => {
       </Container>
       <Container>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 ">
-            Cards
-          </h2>
+          <h2 className="text-2xl font-bold text-gray-900 ">Cards</h2>
           <Link href={`/decks/${deck.id}/quiz`}>
-            <a className="inline-flex items-center px-5 py-2 font-semibold text-white bg-gray-900 text-md rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-700">
+            <a className="inline-flex items-center px-3 py-1.5 font-semibold text-white bg-gray-900 text-md rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-700">
               Take Quiz
             </a>
           </Link>

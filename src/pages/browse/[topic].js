@@ -17,9 +17,11 @@ const TopicPage = ({ topic, decksBySubTopic }) => {
     return (
       <Container key={subTopic.id}>
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-3xl font-bold tracking-tight">{subTopic.name}</h2>
+          <h2 className="text-2xl font-bold leading-tight text-gray-900">
+            {subTopic.name}
+          </h2>
           <Link href={`/browse/${topic.slug}/${subTopic.slug}`}>
-            <a>
+            <a className="flex-shrink-0 ml-2">
               <span className="text-base font-semibold text-blue-600">
                 View all -&gt;
               </span>
@@ -38,12 +40,10 @@ const TopicPage = ({ topic, decksBySubTopic }) => {
       </Head>
       <Container>
         <BreadCrumbs crumbs={crumbs} />
-        <h1 className="mb-4 text-4xl font-extrabold text-gray-900">
+        <h1 className="mb-4 text-3xl font-extrabold text-gray-900">
           {topic.name}
         </h1>
-        <p className="text-2xl font-normal tracking-tight text-gray-500">
-          {topic.description}
-        </p>
+        <p className="text-xl font-normal text-gray-500">{topic.description}</p>
       </Container>
       {renderDecks}
     </>

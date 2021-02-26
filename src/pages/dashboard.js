@@ -42,7 +42,7 @@ const DashboardPage = () => {
         />
         <div className="flex items-start justify-between">
           <div>
-            <h1 className="text-4xl font-extrabold text-gray-900">
+            <h1 className="text-3xl font-extrabold text-gray-900">
               {session.user.name}
             </h1>
             <button
@@ -62,13 +62,17 @@ const DashboardPage = () => {
       </Container>
       {decks.created?.length === 0 ? null : (
         <Container>
-          <h2 className="mb-8 text-3xl font-bold">Created by you</h2>
+          <h2 className="mb-6 text-2xl font-bold leading-tight text-gray-900">
+            Created by you
+          </h2>
           <Decks decks={decks.created} editable />
         </Container>
       )}
       {decks.linked?.length === 0 ? null : (
         <Container>
-          <h2 className="mb-8 text-3xl font-bold">Community sets</h2>
+          <h2 className="mb-6 text-2xl font-bold leading-tight text-gray-900">
+            Community sets
+          </h2>
           <Decks decks={decks.linked} />
         </Container>
       )}

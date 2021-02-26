@@ -16,7 +16,9 @@ const Deck = ({ deck, editable }) => {
   return (
     <li className="border rounded-lg shadow">
       <div className="p-4">
-        <h3 className="text-2xl font-semibold">{deck.name}</h3>
+        <h3 className="text-2xl font-semibold leading-tight text-gray-800">
+          {deck.name}
+        </h3>
         <p className="mb-4 text-sm font-medium text-gray-400 uppercase">
           {pluralize('term', deck.cards.length, true)}
         </p>

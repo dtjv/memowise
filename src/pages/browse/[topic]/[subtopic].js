@@ -21,10 +21,10 @@ const SubTopicPage = ({ topic, subTopic, decks }) => {
       </Head>
       <Container>
         <BreadCrumbs crumbs={crumbs} />
-        <h1 className="mb-4 text-4xl font-extrabold text-gray-900">
+        <h1 className="mb-4 text-3xl font-extrabold text-gray-900">
           {subTopic.name}
         </h1>
-        <p className="text-2xl font-normal tracking-tight text-gray-500">
+        <p className="text-xl font-normal text-gray-500">
           {subTopic.description}
         </p>
       </Container>

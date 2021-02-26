@@ -98,7 +98,7 @@ const QuizPage = () => {
       </Head>
       <Container>
         <BreadCrumbs crumbs={crumbs} />
-        <h1 className="mb-4 text-3xl font-extrabold tracking-tight text-gray-900">
+        <h1 className="mb-4 text-3xl font-extrabold leading-tight text-gray-900">
           {deck.name}
         </h1>
         <p className="mb-4 text-xl font-normal tracking-tight text-gray-500">

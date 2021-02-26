@@ -16,7 +16,7 @@ const HomePage = ({ topics, numDecks }) => {
           <p className="text-3xl font-semibold text-gray-900">memowise</p>
         </div>
         <h1 className="my-8 text-4xl font-extrabold tracking-tight text-gray-900 ">
-          Learn all the things with a modern approach to a proven technique.
+          Learn using a modern approach to a proven technique.
         </h1>
         <p className="mb-10 text-lg font-medium text-gray-500">
           Memowise, <em>the</em> smart Flashcard app, uses algorithm-based logic

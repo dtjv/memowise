@@ -12,8 +12,8 @@ const DecksPage = ({ decks }) => {
         <title>MemoWise - All Sets</title>
       </Head>
       <Container>
-        <h1 className="mb-4 text-4xl font-extrabold text-gray-900">All Sets</h1>
-        <p className="text-2xl font-normal tracking-tight text-gray-500">
+        <h1 className="mb-4 text-3xl font-extrabold text-gray-900">All Sets</h1>
+        <p className="text-xl font-normal text-gray-500">
           A full list of all flashcard sets
         </p>
       </Container>
