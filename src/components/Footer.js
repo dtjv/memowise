@@ -1,9 +1,9 @@
-import Link from 'next/link'
+//import Link from 'next/link'
 
 export const Footer = () => {
   return (
-    <footer className="py-12 mt-8 border-t bg-gray-50">
-      <div className="max-w-3xl px-4 mx-auto antialiased sm:px-8 md:px-12 lg:px-0 divide-y divide-gray-200">
+    <footer className="py-12 border-t bg-gray-50">
+      <div className="max-w-3xl px-4 antialiased sm:px-8 md:px-12 lg:px-0 divide-y divide-gray-200">
         {/*
         <ul className="pb-12 grid gap-5 grid-cols-1 sm:grid-cols-3 gap-y-10">
           <li className="space-y-5">
