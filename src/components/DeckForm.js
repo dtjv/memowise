@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import { v4 as uuid } from 'uuid'
 
 import { Container } from '@/components/Container'
@@ -43,6 +44,7 @@ const CardsForm = ({ cards, onChange, onDelete }) => {
 }
 
 export const DeckForm = ({ deck = {}, submitLabel, onSubmit }) => {
+  const router = useRouter()
   const [name, setName] = useState(deck.name ?? '')
   const [description, setDescription] = useState(deck.description ?? '')
   const [cards, setCards] = useState(deck.cards ?? [])
@@ -106,6 +108,13 @@ export const DeckForm = ({ deck = {}, submitLabel, onSubmit }) => {
         onClick={() => onSubmit({ name, description, cards })}
       >
         {submitLabel}
+      </button>
+      <button
+        className="inline-flex items-center px-3 py-1.5 text-base font-semibold text-red-500 rounded-md border border-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+        aria-label="cancel button"
+        onClick={() => router.back()}
+      >
+        Cancel
       </button>
     </Container>
   )
