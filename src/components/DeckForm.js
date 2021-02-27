@@ -8,10 +8,12 @@ import { TrashCanIcon } from '@/components/icons/trash-can'
 const createEmptyCard = () => ({ __uid: uuid(), term: '', definition: '' })
 
 const CardsForm = ({ cards, onChange, onDelete }) => {
+  if (!cards.length) return null
+
   return (
-    <ul>
+    <ul className="space-y-6">
       {cards.map((card) => (
-        <li key={card.__uid}>
+        <li key={card.__uid} className="p-4 border rounded-lg shadow space-y-4">
           <label className="block">
             Term
             <input
@@ -19,7 +21,7 @@ const CardsForm = ({ cards, onChange, onDelete }) => {
               value={card.term}
               onChange={(e) => onChange(card.__uid, 'term', e.target.value)}
               placeholder="Add term"
-              className="block w-full"
+              className="block w-full bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0"
             />
           </label>
           <label className="block">
@@ -30,8 +32,8 @@ const CardsForm = ({ cards, onChange, onDelete }) => {
                 onChange(card.__uid, 'definition', e.target.value)
               }
               placeholder="Add definition"
-              className="block w-full"
-              rows="1"
+              className="block w-full bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0"
+              rows="3"
             ></textarea>
           </label>
           <button onClick={() => onDelete(card.__uid)}>
@@ -47,7 +49,9 @@ export const DeckForm = ({ deck = {}, submitLabel, onSubmit }) => {
   const router = useRouter()
   const [name, setName] = useState(deck.name ?? '')
   const [description, setDescription] = useState(deck.description ?? '')
-  const [cards, setCards] = useState(deck.cards ?? [])
+  const [cards, setCards] = useState(
+    deck.cards ?? [createEmptyCard(), createEmptyCard()]
+  )
 
   const handleChangeCard = (cardId, field, newValue) => {
     setCards((cardList) =>
@@ -58,7 +62,7 @@ export const DeckForm = ({ deck = {}, submitLabel, onSubmit }) => {
   }
 
   const handleAddCard = () => {
-    setCards((cardList) => [createEmptyCard(), ...cardList])
+    setCards((cardList) => [...cardList, createEmptyCard()])
   }
 
   const handleDeleteCard = (cardId) => {
@@ -66,56 +70,75 @@ export const DeckForm = ({ deck = {}, submitLabel, onSubmit }) => {
   }
 
   return (
-    <Container>
-      <p>Create a new flashcard deck</p>
-      <label className="block">
-        Name
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Add a name (i.e. Math 101)"
-          className="block w-full"
+    <>
+      <div className="space-y-4">
+        <label className="block">
+          Set Name
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Add a name (i.e. Math 101)"
+            className="block w-full bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0"
+          />
+        </label>
+        <label className="block">
+          Set Description
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Add a description"
+            className="block w-full bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0"
+            rows="3"
+          ></textarea>
+        </label>
+      </div>
+
+      <Container>
+        <h2 className="mb-4 text-2xl font-bold text-gray-900 ">Cards</h2>
+        <CardsForm
+          cards={cards}
+          onChange={handleChangeCard}
+          onDelete={handleDeleteCard}
         />
-      </label>
-      <label className="block">
-        Description
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="Add a description"
-          className="block w-full"
-          rows="3"
-        ></textarea>
-      </label>
-      <button
-        onClick={handleAddCard}
-        className="inline-flex items-center px-3 py-1.5 text-base font-semibold text-white bg-gray-900 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
-        aria-label="add card"
-      >
-        Add Card
-      </button>
+      </Container>
 
-      <CardsForm
-        cards={cards}
-        onChange={handleChangeCard}
-        onDelete={handleDeleteCard}
-      />
+      <div className="flex justify-center">
+        <button
+          onClick={handleAddCard}
+          className="inline-flex items-center px-3 py-1.5 text-base font-semibold text-gray-900 bg-white rounded-md border border-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500"
+          aria-label="add card"
+        >
+          Add Card
+        </button>
+      </div>
 
-      <button
-        className="inline-flex items-center px-3 py-1.5 text-base font-semibold text-white bg-gray-900 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
-        aria-label="update deck"
-        onClick={() => onSubmit({ name, description, cards })}
-      >
-        {submitLabel}
-      </button>
-      <button
-        className="inline-flex items-center px-3 py-1.5 text-base font-semibold text-red-500 rounded-md border border-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-        aria-label="cancel button"
-        onClick={() => router.back()}
-      >
-        Cancel
-      </button>
-    </Container>
+      <Container>
+        <div className="flex justify-center">
+          <button
+            className="inline-flex flex-none items-center px-3 py-1.5 text-base font-semibold text-white bg-blue-700 rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-800"
+            aria-label="update deck"
+            onClick={() =>
+              onSubmit({
+                name,
+                description,
+                cards: cards.filter(
+                  (card) => !!(card.name && card.description)
+                ),
+              })
+            }
+          >
+            {submitLabel}
+          </button>
+          <button
+            className="ml-2 inline-flex items-center px-3 py-1.5 text-base font-semibold text-red-500 rounded-md border border-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+            aria-label="cancel button"
+            onClick={() => router.back()}
+          >
+            Cancel
+          </button>
+        </div>
+      </Container>
+    </>
   )
 }

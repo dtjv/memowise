@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/client'
 import axios from 'axios'
 
 import { DeckForm } from '@/components/DeckForm'
+import { Container } from '@/components/Container'
 
 const CreateDeckPage = () => {
   const router = useRouter()
@@ -27,6 +28,9 @@ const CreateDeckPage = () => {
       <Head>
         <title>MemoWise - Create New Flashcard Set</title>
       </Head>
+      <Container>
+        <h1 className="text-3xl font-extrabold text-gray-900">Create a Set</h1>
+      </Container>
       <DeckForm submitLabel={'Create'} onSubmit={handleCreateDeck} />
     </>
   )
