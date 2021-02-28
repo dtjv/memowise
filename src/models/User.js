@@ -1,9 +1,7 @@
 import mongoose from 'mongoose'
 
-const userSchema = new mongoose.Schema({
-  name: String,
-  image: String,
-  decks: {
+const userDecksSchema = new mongoose.Schema(
+  {
     linked: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -16,6 +14,15 @@ const userSchema = new mongoose.Schema({
         ref: 'Deck',
       },
     ],
+  },
+  { _id: false }
+)
+const userSchema = new mongoose.Schema({
+  name: String,
+  image: String,
+  decks: {
+    type: userDecksSchema,
+    default: {},
   },
 })
 
