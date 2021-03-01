@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { User, Deck, connectToDB } = require('./base')
+const { User, Deck, connectToDB, dump, transformObjectId } = require('./base')
 
 // -----------------------------------------------------------------------------
 // main
@@ -12,6 +12,7 @@ const main = async () => {
     process.exit(1)
   }
 
+  /*
   const user = await User.findOne({ name: 'David Valles' })
   const decks = await Deck.find({})
 
@@ -31,7 +32,14 @@ const main = async () => {
 
     await user.save()
   }
+  */
 
+  const user = await User.findById('603c5a2c0ec7c65f3484df98')
+    .populate('decks.linked')
+    .populate('decks.created')
+
+  const userObj = user.toObject({ transform: transformObjectId })
+  dump(userObj)
   process.exit(0)
 }
 
