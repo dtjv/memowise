@@ -7,7 +7,7 @@ export const Layout = ({ children }) => {
     <>
       <Meta />
       <div className="flex flex-col items-stretch min-h-full">
-        <div className="flex-grow max-w-3xl px-4 antialiased sm:px-8 md:px-12 lg:px-0">
+        <div className="flex-grow max-w-3xl px-4 antialiased sm:px-8 md:px-12 lg:mx-auto lg:px-0">
           <Nav />
           <main className="mt-4">{children}</main>
         </div>
