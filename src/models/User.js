@@ -17,6 +17,7 @@ const userDecksSchema = new mongoose.Schema(
   },
   { _id: false }
 )
+
 const userSchema = new mongoose.Schema({
   name: String,
   image: String,
