@@ -25,7 +25,10 @@ const DashboardPage = () => {
     return <div>Loading...</div>
   }
 
-  const decks = data.user.decks
+  const decks = [
+    ...(data?.user?.decks?.created || []),
+    ...(data?.user?.decks?.linked || []),
+  ]
 
   return (
     <>
@@ -60,22 +63,7 @@ const DashboardPage = () => {
           </Link>
         </div>
       </Container>
-      {decks.created?.length === 0 ? null : (
-        <Container>
-          <h2 className="mb-6 text-2xl font-bold leading-tight text-gray-900">
-            Created by you
-          </h2>
-          <Decks decks={decks.created} editable />
-        </Container>
-      )}
-      {decks.linked?.length === 0 ? null : (
-        <Container>
-          <h2 className="mb-6 text-2xl font-bold leading-tight text-gray-900">
-            Community sets
-          </h2>
-          <Decks decks={decks.linked} />
-        </Container>
-      )}
+      <Decks decks={decks} user={data.user} />
     </>
   )
 }

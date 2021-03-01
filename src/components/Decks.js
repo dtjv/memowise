@@ -3,13 +3,83 @@ import { useRouter } from 'next/router'
 import pluralize from 'pluralize'
 import axios from 'axios'
 
+import { Container } from './Container'
 import { TrashCanIcon } from './icons/trash-can'
 import { PencilIcon } from './icons/pencil'
+import { PlusIcon } from './icons/plus'
+import { DocRemoveIcon } from './icons/doc-remove'
 
-const Deck = ({ deck, editable }) => {
+export const Decks = ({ decks = [], user }) => {
+  const createdDeckList = decks.filter((deck) =>
+    (user?.decks?.created ?? []).find((created) => created.id === deck.id)
+  )
+  const linkedDeckList = decks.filter((deck) =>
+    (user?.decks?.linked ?? []).find((linked) => linked.id === deck.id)
+  )
+  const unlinkedDeckList = decks.filter(
+    (deck) =>
+      !linkedDeckList.find((linked) => linked.id === deck.id) &&
+      !createdDeckList.find((created) => created.id === deck.id)
+  )
+  const renderCreatedDecks = createdDeckList.map((deck) => (
+    <Deck key={deck.id} deck={deck} created />
+  ))
+  const renderLinkedDecks = linkedDeckList.map((deck) => (
+    <Deck key={deck.id} deck={deck} linked />
+  ))
+  const renderUnlinkedDecks = unlinkedDeckList.map((deck) => (
+    <Deck key={deck.id} deck={deck} unlinked />
+  ))
+  const renderAllDecks = decks.map((deck) => <Deck key={deck.id} deck={deck} />)
+
+  if (user) {
+    return (
+      <>
+        {renderCreatedDecks.length ? (
+          <Container>
+            <h2 className="mb-6 text-2xl font-bold leading-tight text-gray-900">
+              Created by you
+            </h2>
+            <ul className="space-y-8">{renderCreatedDecks}</ul>
+          </Container>
+        ) : null}
+        {renderLinkedDecks.length || renderUnlinkedDecks.length ? (
+          <Container>
+            <h2 className="mb-6 text-2xl font-bold leading-tight text-gray-900">
+              Community sets
+            </h2>
+            <ul className="space-y-8">
+              {renderLinkedDecks}
+              {renderUnlinkedDecks}
+            </ul>
+          </Container>
+        ) : null}
+      </>
+    )
+  }
+
+  return (
+    <Container>
+      <h2 className="mb-6 text-2xl font-bold leading-tight text-gray-900">
+        Community sets
+      </h2>
+      <ul className="space-y-8">{renderAllDecks}</ul>
+    </Container>
+  )
+}
+
+const Deck = ({ deck, ...props }) => {
   const router = useRouter()
   const handleDelete = async () => {
     await axios.delete(`/api/decks/${deck.id}`)
+    router.reload()
+  }
+  const handleLink = async () => {
+    // call api
+    router.reload()
+  }
+  const handleUnLink = async () => {
+    // call api
     router.reload()
   }
 
@@ -30,7 +100,7 @@ const Deck = ({ deck, editable }) => {
             Study
           </a>
         </Link>
-        {editable && (
+        {props.created && (
           <div className="flex items-center space-x-2">
             <Link href={`/decks/${deck.id}/edit`}>
               <a>
@@ -42,15 +112,17 @@ const Deck = ({ deck, editable }) => {
             </button>
           </div>
         )}
+        {props.linked && (
+          <button onClick={handleUnLink}>
+            <DocRemoveIcon className="w-6 h-6" />
+          </button>
+        )}
+        {props.unlinked && (
+          <button onClick={handleLink}>
+            <PlusIcon className="w-6 h-6" />
+          </button>
+        )}
       </div>
     </li>
   )
-}
-
-export const Decks = ({ decks, editable = false }) => {
-  const renderDecks = decks.map((deck) => (
-    <Deck key={deck.id} deck={deck} editable={editable} />
-  ))
-
-  return <ul className="space-y-8">{renderDecks}</ul>
 }
