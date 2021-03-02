@@ -67,6 +67,12 @@ export const updateUser = async (userId, data) => {
     user.decks.linked.push(data.linked)
   }
 
+  if (data?.unlink) {
+    user.decks.linked = user.decks.linked.filter(
+      (deck) => deck.id !== data.unlink.deckId
+    )
+  }
+
   if (data?.remove) {
     user.decks.created = user.decks.created.filter(
       (deck) => deck.id !== data.remove.deckId

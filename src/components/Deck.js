@@ -14,12 +14,12 @@ export const Deck = ({ deck, ...props }) => {
     await axios.delete(`/api/decks/${deck.id}`)
     router.reload()
   }
-  const handleLink = async () => {
-    // call api
+  const handleLink = async (deckId) => {
+    await axios.post(`/api/decks/${deckId}/link`)
     router.reload()
   }
-  const handleUnLink = async () => {
-    // call api
+  const handleUnLink = async (deckId) => {
+    await axios.post(`/api/decks/${deckId}/unlink`)
     router.reload()
   }
 
@@ -53,12 +53,12 @@ export const Deck = ({ deck, ...props }) => {
           </div>
         )}
         {props.linked && (
-          <button onClick={handleUnLink}>
+          <button onClick={() => handleUnLink(deck.id)}>
             <DocRemoveIcon className="w-6 h-6" />
           </button>
         )}
         {props.unlinked && (
-          <button onClick={handleLink}>
+          <button onClick={() => handleLink(deck.id)}>
             <PlusIcon className="w-6 h-6" />
           </button>
         )}
