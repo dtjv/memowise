@@ -133,7 +133,7 @@ export const DeckForm = ({ deck = {}, submitLabel, onSubmit }) => {
           <button
             className="ml-2 inline-flex items-center px-3 py-1.5 text-base font-semibold text-red-500 rounded-md border border-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
             aria-label="cancel button"
-            onClick={() => router.back()}
+            onClick={() => router.push('/dashboard')}
           >
             Cancel
           </button>
