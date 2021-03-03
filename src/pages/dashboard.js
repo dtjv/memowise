@@ -16,6 +16,7 @@ const DashboardPage = () => {
     session?.user ? `/api/users/${session.user.id}` : null,
     fetcher
   )
+  const user = data?.user
 
   if (!session) {
     return <div>Access Denied</div>
@@ -24,11 +25,6 @@ const DashboardPage = () => {
   if (!data) {
     return <div>Loading...</div>
   }
-
-  const decks = [
-    ...(data?.user?.decks?.created || []),
-    ...(data?.user?.decks?.linked || []),
-  ]
 
   return (
     <>
@@ -63,7 +59,22 @@ const DashboardPage = () => {
           </Link>
         </div>
       </Container>
-      <Decks decks={decks} user={data.user} />
+      {user?.decks?.created ? (
+        <Container>
+          <h2 className="mb-6 text-2xl font-bold leading-tight text-gray-900">
+            Created By You
+          </h2>
+          <Decks decks={user.decks.created} created />
+        </Container>
+      ) : null}
+      {user?.decks?.linked ? (
+        <Container>
+          <h2 className="mb-6 text-2xl font-bold leading-tight text-gray-900">
+            Added to Your Collection
+          </h2>
+          <Decks decks={user.decks.linked} linked />
+        </Container>
+      ) : null}
     </>
   )
 }
