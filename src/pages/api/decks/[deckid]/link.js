@@ -17,9 +17,13 @@ export default async (req, res) => {
 
     const deck = await getDeck({ id: deckId })
 
-    await updateUser(session.user.id, { linked: deck })
+    if (!deck) {
+      return res.status(404).send('Set not found')
+    }
 
-    return res.status(200).json({ deck })
+    await updateUser(session.user.id, { linked: deckId })
+
+    return res.status(200).json({})
   }
 
   res.status(404).send(`Unsupported method: ${req.method}`)

@@ -69,13 +69,13 @@ export const updateUser = async (userId, data) => {
 
   if (data?.unlink) {
     user.decks.linked = user.decks.linked.filter(
-      (deck) => deck.id !== data.unlink.deckId
+      (deckId) => deckId.toString() !== data.unlink.deckId
     )
   }
 
   if (data?.remove) {
     user.decks.created = user.decks.created.filter(
-      (deck) => deck.id !== data.remove.deckId
+      (deckId) => deckId !== data.remove.deckId
     )
   }
 

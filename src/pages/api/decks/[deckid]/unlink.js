@@ -15,7 +15,7 @@ export default async (req, res) => {
       return res.status(401).send('Unauthorized')
     }
 
-    await updateUser(session.user.id, { unlinked: { deckId } })
+    await updateUser(session.user.id, { unlink: { deckId } })
 
     return res.status(200).json({})
   }
