@@ -23,7 +23,7 @@ const DashboardPage = () => {
   }
 
   if (!data) {
-    return <div>Loading...</div>
+    return <Skeleton />
   }
 
   return (
@@ -36,17 +36,17 @@ const DashboardPage = () => {
           src={session.user.image}
           className="rounded-full"
           alt={`avatar for user ${session.user.name}`}
-          width={100}
-          height={100}
+          width={112}
+          height={112}
         />
-        <div className="flex items-start justify-between">
+        <div className="flex items-start justify-between mt-4">
           <div>
             <h1 className="text-3xl font-extrabold text-gray-900">
               {session.user.name}
             </h1>
             <button
               onClick={() => signOut({ callbackUrl: router.basePath })}
-              className="inline-flex flex-none items-center px-3 py-1.5 text-base font-semibold text-white bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
+              className="mt-4 inline-flex flex-none items-center px-3 py-1.5 text-base font-semibold text-white bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
               aria-label="sign-out button"
             >
               Sign out
@@ -80,3 +80,38 @@ const DashboardPage = () => {
 }
 
 export default DashboardPage
+
+const Skeleton = () => {
+  return (
+    <>
+      <div className="animate-pulse">
+        <Container>
+          <div className="space-y-4">
+            <div className="bg-gray-300 rounded-full w-28 h-28"></div>
+            <div className="flex justify-between">
+              <div className="w-1/4 h-10 bg-gray-300 rounded"></div>
+              <div className="w-24 h-10 bg-gray-300 rounded"></div>
+            </div>
+            <div className="w-24 h-10 bg-gray-300 rounded"></div>
+          </div>
+        </Container>
+        <Container>
+          <div className="space-y-8">
+            <div className="w-1/4 h-8 bg-gray-300 rounded"></div>
+            <div className="w-full bg-gray-300 rounded-xl h-36"></div>
+            <div className="w-full bg-gray-300 rounded-xl h-36"></div>
+            <div className="w-full bg-gray-300 rounded-xl h-36"></div>
+          </div>
+        </Container>
+        <Container>
+          <div className="space-y-8">
+            <div className="w-1/4 h-8 bg-gray-300 rounded"></div>
+            <div className="w-full bg-gray-300 rounded-xl h-36"></div>
+            <div className="w-full bg-gray-300 rounded-xl h-36"></div>
+            <div className="w-full bg-gray-300 rounded-xl h-36"></div>
+          </div>
+        </Container>
+      </div>
+    </>
+  )
+}
