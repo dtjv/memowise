@@ -8,6 +8,7 @@ import { signOut, useSession } from 'next-auth/client'
 import { fetcher } from '@/utils/fetcher'
 import { Decks } from '@/components/Decks'
 import { Container } from '@/components/Container'
+import { NotAuthorized } from '@/components/NotAuthorized'
 
 const DashboardPage = () => {
   const router = useRouter()
@@ -19,7 +20,7 @@ const DashboardPage = () => {
   const user = data?.user
 
   if (!session) {
-    return <div>Access Denied</div>
+    return <NotAuthorized />
   }
 
   if (!data) {
