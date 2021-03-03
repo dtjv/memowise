@@ -3,21 +3,20 @@ import Link from 'next/link'
 
 import { Container } from '@/components/Container'
 
-const Error = ({ statusCode }) => {
+const Error = ({ title, statusCode }) => {
   const errorMessage = statusCode
     ? `An error ${statusCode} occurred on server`
     : 'An error occurred on client'
+  title = title ?? 'Error'
 
   return (
     <>
       <Head>
-        <title>Internal Error</title>
+        <title>Memowise - {title}</title>
       </Head>
       <Container>
         <div className="space-y-4">
-          <h1 className="text-3xl font-extrabold text-gray-900">
-            Internal Error
-          </h1>
+          <h1 className="text-3xl font-extrabold text-gray-900">{title}</h1>
           <p className="text-xl font-normal text-gray-500">{errorMessage}.</p>
           <p className="text-xl font-normal text-gray-500">
             Return to{' '}
