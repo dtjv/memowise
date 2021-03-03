@@ -59,7 +59,7 @@ const DeckPage = ({ deck }) => {
   }, [data])
 
   if (router.isFallback) {
-    return <div>Loading...</div>
+    return <Skeleton />
   }
 
   return (
@@ -101,27 +101,6 @@ const DeckPage = ({ deck }) => {
               Take Quiz
             </a>
           </Link>
-          {/*
-          <button
-            className="p-1 text-blue-600 bg-blue-600 rounded-full bg-opacity-10"
-            aria-label="add set to my account"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-              ></path>
-            </svg>
-          </button>
-          */}
         </div>
         <Cards cards={deck.cards} />
       </Container>
@@ -147,4 +126,40 @@ export async function getStaticProps({ params }) {
   delete deck.topic?.subTopics
 
   return { props: { deck }, revalidate: 1 }
+}
+
+const Skeleton = () => {
+  return (
+    <>
+      <div className="animate-pulse">
+        <Container>
+          <div className="space-y-4">
+            <div className="w-2/3 h-4 bg-gray-300 rounded"></div>
+            <div className="w-1/2 h-10 bg-gray-300 rounded"></div>
+            <div className="space-y-2">
+              <div className="w-full h-6 bg-gray-300 rounded"></div>
+              <div className="w-2/3 h-6 bg-gray-300 rounded"></div>
+            </div>
+          </div>
+        </Container>
+        <Container>
+          <div className="w-full bg-gray-300 rounded-xl h-52"></div>
+          <div className="flex justify-center mt-4">
+            <div className="w-8 h-8 bg-gray-300 rounded-full"></div>
+          </div>
+        </Container>
+        <Container>
+          <div className="flex justify-between">
+            <div className="w-1/4 h-10 bg-gray-300 rounded"></div>
+            <div className="w-24 h-10 bg-gray-300 rounded"></div>
+          </div>
+          <div className="mt-4 space-y-8">
+            <div className="w-full h-32 bg-gray-300 rounded-xl"></div>
+            <div className="w-full h-32 bg-gray-300 rounded-xl"></div>
+            <div className="w-full h-32 bg-gray-300 rounded-xl"></div>
+          </div>
+        </Container>
+      </div>
+    </>
+  )
 }
