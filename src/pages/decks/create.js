@@ -1,6 +1,7 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useSession } from 'next-auth/client'
+import { useSession, signIn } from 'next-auth/client'
 import axios from 'axios'
 
 import { DeckForm } from '@/components/DeckForm'
@@ -8,14 +9,31 @@ import { Container } from '@/components/Container'
 
 const CreateDeckPage = () => {
   const router = useRouter()
-  const [session, loading] = useSession()
+  const [session] = useSession()
 
   if (!session) {
-    return <div>Please Sign In</div>
-  }
-
-  if (loading) {
-    return <div>Loading...</div>
+    return (
+      <>
+        <Head>
+          <title>Not Authorized</title>
+        </Head>
+        <Container>
+          <h1 className="mb-4 text-3xl font-extrabold text-gray-900">
+            Not Authorized
+          </h1>
+          <p className="text-xl font-normal text-gray-500">
+            Please{' '}
+            <button className="text-blue-600" onClick={() => signIn()}>
+              Sign in
+            </button>{' '}
+            or return to{' '}
+            <Link href="/">
+              <a className="text-blue-600">Home Page.</a>
+            </Link>
+          </p>
+        </Container>
+      </>
+    )
   }
 
   const handleCreateDeck = async (newDeck) => {
