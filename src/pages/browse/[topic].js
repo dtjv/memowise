@@ -1,18 +1,38 @@
 import Link from 'next/link'
 import Head from 'next/head'
+import useSWR from 'swr'
+import { useSession } from 'next-auth/client'
 
 import { Decks } from '@/components/Decks'
 import { BreadCrumbs } from '@/components/BreadCrumbs'
 import { Container } from '@/components/Container'
 
+import { fetcher } from '@/utils/fetcher'
 import { getTopic, getTopicList, getDeckList } from '@/lib/data'
 
 const TopicPage = ({ topic, decksBySubTopic }) => {
+  const [session] = useSession()
+  const { data } = useSWR(
+    session?.user ? `/api/users/${session.user.id}` : null,
+    fetcher
+  )
+  const user = data?.user
   const crumbs = [{ name: topic.name, path: '', isLink: false }]
   const renderDecks = topic.subTopics.map((subTopic) => {
-    const decks = decksBySubTopic[subTopic.id]
+    const decks = decksBySubTopic[subTopic.id] ?? []
+    const created = decks.filter((deck) =>
+      (user?.decks?.created ?? []).find((created) => created.id === deck.id)
+    )
+    const linked = decks.filter((deck) =>
+      (user?.decks?.linked ?? []).find((linked) => linked.id === deck.id)
+    )
+    const unlinked = decks.filter(
+      (deck) =>
+        !(user?.decks?.linked ?? []).find((linked) => linked.id === deck.id) &&
+        !(user?.decks?.created ?? []).find((created) => created.id === deck.id)
+    )
 
-    if (!decks?.length) return null
+    if (!decks.length) return null
 
     return (
       <Container key={subTopic.id}>
@@ -28,7 +48,14 @@ const TopicPage = ({ topic, decksBySubTopic }) => {
             </a>
           </Link>
         </div>
-        <Decks decks={decks} />
+        {user && (
+          <div className="space-y-8">
+            <Decks decks={created} created />
+            <Decks decks={linked} linked />
+            <Decks decks={unlinked} unlinked />
+          </div>
+        )}
+        {!user && <Decks decks={decks} />}
       </Container>
     )
   })
