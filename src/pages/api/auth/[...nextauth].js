@@ -28,9 +28,8 @@ export default NextAuth({
   },
   pages: {},
   callbacks: {
-    // ensure user stays on same page when signing in or out.
-    async redirect(url, baseUrl) {
-      return url.startsWith(baseUrl) ? url : baseUrl
+    async redirect(_, baseUrl) {
+      return baseUrl
     },
     // on signin, jwt called before session callback, and user.id is from db!
     async jwt(token, user) {
