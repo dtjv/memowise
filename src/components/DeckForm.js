@@ -15,24 +15,24 @@ const CardsForm = ({ cards, onChange, onDelete }) => {
       {cards.map((card) => (
         <li key={card.__uid} className="p-4 border rounded-lg shadow space-y-4">
           <label className="block">
-            Term
+            <span className="text-gray-600">Term</span>
             <input
               type="text"
               value={card.term}
               onChange={(e) => onChange(card.__uid, 'term', e.target.value)}
               placeholder="Add term"
-              className="block w-full bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0"
+              className="block w-full mt-1 text-gray-800 bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0"
             />
           </label>
           <label className="block">
-            Definition
+            <span className="text-gray-600">Definition</span>
             <textarea
               value={card.definition}
               onChange={(e) =>
                 onChange(card.__uid, 'definition', e.target.value)
               }
               placeholder="Add definition"
-              className="block w-full bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0"
+              className="block w-full mt-1 text-gray-800 bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0"
               rows="3"
             ></textarea>
           </label>
@@ -73,22 +73,22 @@ export const DeckForm = ({ deck = {}, submitLabel, onSubmit }) => {
     <>
       <div className="space-y-4">
         <label className="block">
-          Set Name
+          <span className="text-gray-600">Set Name</span>
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Add a name (i.e. Math 101)"
-            className="block w-full bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0"
+            className="block w-full mt-1 text-gray-800 bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0"
           />
         </label>
         <label className="block">
-          Set Description
+          <span className="text-gray-600"> Set Description</span>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Add a description"
-            className="block w-full bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0"
+            className="block w-full mt-1 text-gray-800 bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0"
             rows="3"
           ></textarea>
         </label>
@@ -119,13 +119,8 @@ export const DeckForm = ({ deck = {}, submitLabel, onSubmit }) => {
             className="inline-flex flex-none items-center px-3 py-1.5 text-base font-semibold text-white bg-blue-700 rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-800"
             aria-label="update deck"
             onClick={() =>
-              onSubmit({
-                name,
-                description,
-                cards: cards.filter(
-                  (card) => !!(card.name && card.description)
-                ),
-              })
+              // @TODO: add field validation
+              onSubmit({ name, description, cards })
             }
           >
             {submitLabel}

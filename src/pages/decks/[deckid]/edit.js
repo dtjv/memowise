@@ -4,6 +4,7 @@ import { getSession } from 'next-auth/client'
 import axios from 'axios'
 
 import { DeckForm } from '@/components/DeckForm'
+import { Container } from '@/components/Container'
 
 import { getDeck } from '@/lib/data'
 
@@ -20,6 +21,9 @@ const EditDeckPage = ({ deck }) => {
       <Head>
         <title>MemoWise - Edit a Flashcard Set</title>
       </Head>
+      <Container>
+        <h1 className="text-3xl font-extrabold text-gray-900">Edit a Set</h1>
+      </Container>
       <DeckForm deck={deck} submitLabel={'Update'} onSubmit={handleEditDeck} />
     </>
   )
