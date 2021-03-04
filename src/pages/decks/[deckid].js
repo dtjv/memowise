@@ -1,10 +1,8 @@
-import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/client'
 import axios from 'axios'
-import useSWR from 'swr'
 
 import { Container } from '@/components/Container'
 import { Cards } from '@/components/Cards'
@@ -12,20 +10,17 @@ import { CardsFlip } from '@/components/CardsFlip'
 import { BreadCrumbs } from '@/components/BreadCrumbs'
 import { PencilIcon } from '@/components/icons/pencil'
 import { TrashCanIcon } from '@/components/icons/trash-can'
-
+import { useUser } from '@/lib/useUser'
 import { getDeck, getDeckList } from '@/lib/data'
 
-import { fetcher } from '@/utils/fetcher'
-
 const DeckPage = ({ deck }) => {
-  const [isEditable, setIsEditable] = useState(false)
   const router = useRouter()
   const [session] = useSession()
-  const { data } = useSWR(
-    () => session?.user && `/api/users/${session.user.id}`,
-    fetcher
-  )
+  const { user } = useUser(session)
   const { topic, subTopic } = deck
+  const isEditable = !!(user?.decks?.created || []).find(
+    (created) => created.id === deck.id
+  )
   const crumbs =
     topic && subTopic
       ? [
@@ -50,13 +45,6 @@ const DeckPage = ({ deck }) => {
     await axios.delete(`/api/decks/${deck.id}`)
     router.back()
   }
-
-  useEffect(() => {
-    const createdDecks = data?.user?.decks?.created || []
-    if (!!createdDecks.find((createdDeck) => createdDeck.id === deck.id)) {
-      setIsEditable(true)
-    }
-  }, [data])
 
   if (router.isFallback) {
     return <Skeleton />

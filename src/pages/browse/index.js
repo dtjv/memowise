@@ -1,20 +1,14 @@
 import Head from 'next/head'
 import { useSession } from 'next-auth/client'
-import useSWR from 'swr'
 
 import { Decks } from '@/components/Decks'
 import { Container } from '@/components/Container'
-
-import { fetcher } from '@/utils/fetcher'
+import { useUser } from '@/lib/useUser'
 import { getDeckList } from '@/lib/data'
 
 const DecksPage = ({ decks = [] }) => {
   const [session] = useSession()
-  const { data } = useSWR(
-    session?.user ? `/api/users/${session.user.id}` : null,
-    fetcher
-  )
-  const user = data?.user
+  const { user } = useUser(session)
   const unlinked = decks.filter(
     (deck) =>
       !(user?.decks?.linked ?? []).find((linked) => linked.id === deck.id) &&

@@ -1,21 +1,15 @@
 import Head from 'next/head'
-import useSWR from 'swr'
 import { useSession } from 'next-auth/client'
 
 import { Container } from '@/components/Container'
 import { Decks } from '@/components/Decks'
 import { BreadCrumbs } from '@/components/BreadCrumbs'
-
-import { fetcher } from '@/utils/fetcher'
+import { useUser } from '@/lib/useUser'
 import { getTopic, getTopicList, getSubTopic, getDeckList } from '@/lib/data'
 
 const SubTopicPage = ({ topic, subTopic, decks }) => {
   const [session] = useSession()
-  const { data } = useSWR(
-    session?.user ? `/api/users/${session.user.id}` : null,
-    fetcher
-  )
-  const user = data?.user
+  const { user } = useUser(session)
   const created = decks.filter((deck) =>
     (user?.decks?.created ?? []).find((created) => created.id === deck.id)
   )

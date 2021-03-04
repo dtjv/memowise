@@ -1,22 +1,16 @@
 import Link from 'next/link'
 import Head from 'next/head'
-import useSWR from 'swr'
 import { useSession } from 'next-auth/client'
 
 import { Decks } from '@/components/Decks'
 import { BreadCrumbs } from '@/components/BreadCrumbs'
 import { Container } from '@/components/Container'
-
-import { fetcher } from '@/utils/fetcher'
+import { useUser } from '@/lib/useUser'
 import { getTopic, getTopicList, getDeckList } from '@/lib/data'
 
 const TopicPage = ({ topic, decksBySubTopic }) => {
   const [session] = useSession()
-  const { data } = useSWR(
-    session?.user ? `/api/users/${session.user.id}` : null,
-    fetcher
-  )
-  const user = data?.user
+  const { user } = useUser(session)
   const crumbs = [{ name: topic.name, path: '', isLink: false }]
   const renderDecks = topic.subTopics.map((subTopic) => {
     const decks = decksBySubTopic[subTopic.id] ?? []

@@ -2,10 +2,9 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import useSWR from 'swr'
 import { signOut, useSession } from 'next-auth/client'
 
-import { fetcher } from '@/utils/fetcher'
+import { useUser } from '@/lib/useUser'
 import { Decks } from '@/components/Decks'
 import { Container } from '@/components/Container'
 import { NotAuthorized } from '@/components/NotAuthorized'
@@ -13,17 +12,13 @@ import { NotAuthorized } from '@/components/NotAuthorized'
 const DashboardPage = () => {
   const router = useRouter()
   const [session] = useSession()
-  const { data } = useSWR(
-    session?.user ? `/api/users/${session.user.id}` : null,
-    fetcher
-  )
-  const user = data?.user
+  const { user, isLoading } = useUser(session)
 
   if (!session) {
     return <NotAuthorized />
   }
 
-  if (!data) {
+  if (isLoading) {
     return <Skeleton />
   }
 
