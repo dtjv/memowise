@@ -17,7 +17,8 @@ const DeckPage = ({ deck }) => {
   const router = useRouter()
   const [session] = useSession()
   const { user } = useUser(session)
-  const { topic, subTopic } = deck
+  const topic = deck?.topic
+  const subTopic = deck?.subTopic
   const isEditable = !!(user?.decks?.created || []).find(
     (created) => created.id === deck.id
   )
