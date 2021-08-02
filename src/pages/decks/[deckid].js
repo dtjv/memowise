@@ -54,7 +54,7 @@ const DeckPage = ({ deck }) => {
   return (
     <>
       <Head>
-        <title>MemoWise - {deck.name}</title>
+        <title>Memowise - {deck.name}</title>
       </Head>
       <Container>
         <BreadCrumbs crumbs={crumbs} />

@@ -1,5 +1,5 @@
 export const site = {
-  title: 'MemoWise',
+  title: 'Memowise',
   url: 'https://memowise.vercel.app.com',
   description: 'A modern flashcard app',
 }

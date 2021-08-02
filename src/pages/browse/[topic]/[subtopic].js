@@ -30,7 +30,7 @@ const SubTopicPage = ({ topic, subTopic, decks }) => {
     <>
       <Head>
         <title>
-          MemoWise - {topic.name} - {subTopic.name}
+          Memowise - {topic.name} - {subTopic.name}
         </title>
       </Head>
       <Container>

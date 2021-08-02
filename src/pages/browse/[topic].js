@@ -57,7 +57,7 @@ const TopicPage = ({ topic, decksBySubTopic }) => {
   return (
     <>
       <Head>
-        <title>MemoWise - {topic.name}</title>
+        <title>Memowise - {topic.name}</title>
       </Head>
       <Container>
         <BreadCrumbs crumbs={crumbs} />

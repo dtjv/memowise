@@ -25,7 +25,7 @@ const DashboardPage = () => {
   return (
     <>
       <Head>
-        <title>MemoWise - {session.user.name}</title>
+        <title>Memowise - {session.user.name}</title>
       </Head>
       <Container>
         <Image

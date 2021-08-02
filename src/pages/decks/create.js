@@ -23,7 +23,7 @@ const CreateDeckPage = () => {
   return (
     <>
       <Head>
-        <title>MemoWise - Create New Flashcard Set</title>
+        <title>Memowise - Create New Flashcard Set</title>
       </Head>
       <Container>
         <h1 className="text-3xl font-extrabold text-gray-900">Create a Set</h1>

@@ -19,7 +19,7 @@ const EditDeckPage = ({ deck }) => {
   return (
     <>
       <Head>
-        <title>MemoWise - Edit a Flashcard Set</title>
+        <title>Memowise - Edit a Flashcard Set</title>
       </Head>
       <Container>
         <h1 className="text-3xl font-extrabold text-gray-900">Edit a Set</h1>

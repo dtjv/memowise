@@ -18,7 +18,7 @@ const DecksPage = ({ decks = [] }) => {
   return (
     <>
       <Head>
-        <title>MemoWise - All Sets</title>
+        <title>Memowise - All Sets</title>
       </Head>
       <Container>
         <h1 className="mb-4 text-3xl font-extrabold text-gray-900">All Sets</h1>
