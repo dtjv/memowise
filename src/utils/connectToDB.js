@@ -8,11 +8,7 @@ export const connectToDB = async () => {
   if (connection.isConnected === 1) return
 
   try {
-    db = await mongoose.connect(process.env.DB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-    })
+    db = await mongoose.connect(process.env.DB_URI)
   } catch (error) {
     console.error(error)
     return
