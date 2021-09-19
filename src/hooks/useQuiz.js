@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useMemo } from 'react'
 import { range, random, difference } from 'lodash'
 
 export const useQuiz = (cards = []) => {
@@ -43,11 +43,11 @@ export const useQuiz = (cards = []) => {
   })
 
   return {
-    getNextCard,
+    getNextCard: useMemo(() => getNextCard, [cards]),
     resetQuiz,
     getScore,
     markCorrect,
     markIncorrect,
-    isQuizComplete,
+    isQuizComplete: useMemo(() => isQuizComplete, [cards]),
   }
 }
