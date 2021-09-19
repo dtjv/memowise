@@ -46,8 +46,8 @@ export const useQuiz = (cards = []) => {
     getNextCard: useMemo(() => getNextCard, [cards]),
     resetQuiz,
     getScore,
-    markCorrect,
-    markIncorrect,
+    markCorrect: useMemo(() => markCorrect, []),
+    markIncorrect: useMemo(() => markIncorrect, []),
     isQuizComplete: useMemo(() => isQuizComplete, [cards]),
   }
 }

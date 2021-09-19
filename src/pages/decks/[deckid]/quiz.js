@@ -89,7 +89,7 @@ const QuizPage = () => {
     return () => {
       if (timer) clearTimeout(timer)
     }
-  }, [selectedChoice, getNextCard])
+  }, [selectedChoice, getNextCard, markCorrect, markIncorrect])
 
   if (isLoading) return <Skeleton />
 
