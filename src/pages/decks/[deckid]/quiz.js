@@ -77,6 +77,11 @@ const QuizPage = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (selectedChoice) {
+        if (selectedChoice.isCorrectChoice) {
+          markCorrect()
+        } else {
+          markIncorrect()
+        }
         setCard(getNextCard())
       }
     }, 1000)
@@ -164,14 +169,7 @@ const QuizPage = () => {
                   <li
                     key={choice.id}
                     className={`flex items-center justify-between px-4 py-4 shadow-sm ${ring} rounded-xl hover:shadow-lg cursor-pointer`}
-                    onClick={() => {
-                      setSelectedChoice(choice)
-                      if (choice.isCorrectChoice) {
-                        markCorrect()
-                      } else {
-                        markIncorrect()
-                      }
-                    }}
+                    onClick={() => setSelectedChoice(choice)}
                   >
                     <span>
                       <span className="mr-3 font-semibold">
