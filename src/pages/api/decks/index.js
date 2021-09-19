@@ -5,7 +5,7 @@ import { createDeck, updateUser } from '@/lib/data'
 //------------------------------------------------------------------------------
 // Handler for api calls to `/api/deck`
 //------------------------------------------------------------------------------
-export default async (req, res) => {
+const handler = async (req, res) => {
   if (req.method === 'POST') {
     const session = await getSession({ req })
 
@@ -23,3 +23,5 @@ export default async (req, res) => {
 
   res.status(404).send(`Unsupported method: ${req.method}`)
 }
+
+export default handler

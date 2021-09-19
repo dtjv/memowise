@@ -41,7 +41,7 @@ export const BreadCrumbs = ({ crumbs }) => {
       <div className="items-center hidden sm:flex">
         <Link href="/">
           <a aria-label="home page icon">
-            <HomeIcon className="w-4 h-4 mr-1 text-blue-600" />
+            <HomeIcon />
           </a>
         </Link>
         {renderAllCrumbs}

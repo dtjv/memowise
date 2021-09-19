@@ -5,7 +5,7 @@ import { getDeck, updateUser } from '@/lib/data'
 //------------------------------------------------------------------------------
 // Handler for api calls to `/api/deck/:deckid/link`
 //------------------------------------------------------------------------------
-export default async (req, res) => {
+const handler = async (req, res) => {
   const deckId = req.query.deckid
 
   if (req.method === 'POST') {
@@ -28,3 +28,5 @@ export default async (req, res) => {
 
   res.status(404).send(`Unsupported method: ${req.method}`)
 }
+
+export default handler

@@ -1,6 +1,5 @@
-export const HomeIcon = ({ className, ...props }) => (
+export const HomeIcon = (props) => (
   <svg
-    className={`${className}`}
     {...props}
     className="w-4 h-4 mr-1 text-blue-600"
     fill="none"

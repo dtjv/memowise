@@ -5,7 +5,7 @@ import { getUser } from '@/lib/data'
 //------------------------------------------------------------------------------
 // Handler for api calls to `/api/user/:userid`
 //------------------------------------------------------------------------------
-export default async (req, res) => {
+const handler = async (req, res) => {
   const session = await getSession({ req })
 
   if (!session) {
@@ -19,3 +19,5 @@ export default async (req, res) => {
 
   res.status(404).send(`Unsupported method: ${req.method}`)
 }
+
+export default handler

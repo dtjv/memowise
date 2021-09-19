@@ -67,7 +67,7 @@ const QuizPage = () => {
 
   useEffect(() => {
     setCard(getNextCard())
-  }, [deck])
+  }, [deck, getNextCard])
 
   useEffect(() => {
     setChoices(arrayShuffle(generateChoices(card, deck?.cards)))
@@ -84,7 +84,7 @@ const QuizPage = () => {
     return () => {
       if (timer) clearTimeout(timer)
     }
-  }, [selectedChoice])
+  }, [selectedChoice, getNextCard])
 
   if (isLoading) return <Skeleton />
 
