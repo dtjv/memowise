@@ -6,7 +6,6 @@ import axios from 'axios'
 
 import { Container } from '@/components/Container'
 import { Cards } from '@/components/Cards'
-import { CardsFlip } from '@/components/CardsFlip'
 import { BreadCrumbs } from '@/components/BreadCrumbs'
 import { PencilIcon } from '@/components/icons/pencil'
 import { TrashCanIcon } from '@/components/icons/trash-can'
@@ -80,11 +79,8 @@ const DeckPage = ({ deck }) => {
         </p>
       </Container>
       <Container>
-        <CardsFlip cards={deck.cards} />
-      </Container>
-      <Container>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-bold text-gray-900 ">Cards</h2>
+          <h2 className="text-2xl font-bold text-gray-900 ">Flashcards</h2>
           <Link href={`/decks/${deck.id}/quiz`}>
             <a className="inline-flex items-center px-3 py-1.5 font-semibold text-white bg-gray-900 text-md rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-700">
               Take Quiz
