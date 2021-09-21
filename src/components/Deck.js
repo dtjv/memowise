@@ -1,14 +1,18 @@
 import Link from 'next/link'
+import { useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import pluralize from 'pluralize'
 import axios from 'axios'
 
+import { useUser } from '@/lib/useUser'
 import { TrashCanIcon } from './icons/trash-can'
 import { PencilIcon } from './icons/pencil'
 import { PlusIcon } from './icons/plus'
 import { DocRemoveIcon } from './icons/doc-remove'
 
 export const Deck = ({ deck, ...props }) => {
+  const [session] = useSession()
+  const { user } = useUser(session)
   const router = useRouter()
   const handleDelete = async () => {
     await axios.delete(`/api/decks/${deck.id}`)
@@ -35,9 +39,9 @@ export const Deck = ({ deck, ...props }) => {
         <p className="">{deck.description}</p>
       </div>
       <div className="flex justify-between p-4 bg-gray-100 rounded-b-lg">
-        <Link href={`/decks/${deck.id}`}>
+        <Link href={`/decks/${deck.id}${user ? '/study' : ''}`}>
           <a className="inline-flex items-center justify-center rounded-md px-3 py-1.5 font-semibold text-white bg-gray-800 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800">
-            Study
+            {user ? 'Study' : 'Explore'}
           </a>
         </Link>
         {props.created && (
