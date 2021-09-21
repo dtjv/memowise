@@ -33,7 +33,7 @@ export const CardsFlip = ({ cards }) => {
               setCardField('term')
             }}
             className="p-1 text-blue-600 bg-blue-600 rounded-full focus:outline-none bg-opacity-10"
-            aria-label="add set to my account"
+            aria-label="go to previous card"
           >
             <svg
               className="w-6 h-6"
@@ -42,6 +42,7 @@ export const CardsFlip = ({ cards }) => {
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
+              <title>Previous Card</title>
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -58,7 +59,7 @@ export const CardsFlip = ({ cards }) => {
               setCardField('term')
             }}
             className="p-1 text-blue-600 bg-blue-600 rounded-full bg-opacity-10 focus:outline-none"
-            aria-label="add set to my account"
+            aria-label="go to next card"
           >
             <svg
               className="w-6 h-6"
@@ -67,6 +68,7 @@ export const CardsFlip = ({ cards }) => {
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
+              <title>Next Card</title>
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
