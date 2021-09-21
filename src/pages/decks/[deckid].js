@@ -9,7 +9,7 @@ import { Cards } from '@/components/Cards'
 import { BreadCrumbs } from '@/components/BreadCrumbs'
 import { PencilIcon } from '@/components/icons/pencil'
 import { TrashCanIcon } from '@/components/icons/trash-can'
-import { useUser } from '@/lib/useUser'
+import { useUser } from '@/hooks/useUser'
 import { getDeck, getDeckList } from '@/lib/data'
 
 const DeckPage = ({ deck }) => {

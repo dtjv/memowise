@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/client'
 import { Container } from '@/components/Container'
 import { Decks } from '@/components/Decks'
 import { BreadCrumbs } from '@/components/BreadCrumbs'
-import { useUser } from '@/lib/useUser'
+import { useUser } from '@/hooks/useUser'
 import { getTopic, getTopicList, getSubTopic, getDeckList } from '@/lib/data'
 
 const SubTopicPage = ({ topic, subTopic, decks }) => {

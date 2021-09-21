@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/client'
 
 import { Decks } from '@/components/Decks'
 import { Container } from '@/components/Container'
-import { useUser } from '@/lib/useUser'
+import { useUser } from '@/hooks/useUser'
 import { getDeckList } from '@/lib/data'
 
 const DecksPage = ({ decks = [] }) => {

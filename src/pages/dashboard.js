@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/client'
 
-import { useUser } from '@/lib/useUser'
+import { useUser } from '@/hooks/useUser'
 import { Decks } from '@/components/Decks'
 import { Container } from '@/components/Container'
 import { NotAuthorized } from '@/components/NotAuthorized'

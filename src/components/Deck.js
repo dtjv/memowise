@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import pluralize from 'pluralize'
 import axios from 'axios'
 
-import { useUser } from '@/lib/useUser'
+import { useUser } from '@/hooks/useUser'
 import { TrashCanIcon } from './icons/trash-can'
 import { PencilIcon } from './icons/pencil'
 import { PlusIcon } from './icons/plus'
