@@ -9,7 +9,7 @@ export const Layout = ({ children }) => {
       <div className="flex flex-col items-stretch min-h-full antialiased">
         <div className="flex-grow px-4 sm:px-8 md:px-24 lg:px-36 xl:px-52">
           <Nav />
-          <main className="mt-4">{children}</main>
+          <main className="my-4">{children}</main>
         </div>
         <div className="flex-shrink-0">
           <Footer />

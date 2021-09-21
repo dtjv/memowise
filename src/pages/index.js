@@ -9,7 +9,7 @@ import { getTopicList, getDeckList } from '@/lib/data'
 
 const HomePage = ({ topics, numDecks }) => {
   return (
-    <div className="mb-4">
+    <>
       <header className="my-12">
         <div className="flex items-center">
           <CapIcon className="w-12 h-12 mr-2 text-blue-600" />
@@ -60,7 +60,7 @@ const HomePage = ({ topics, numDecks }) => {
           </Link>
         </div>
       </Container>
-    </div>
+    </>
   )
 }
 
