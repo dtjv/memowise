@@ -3132,6 +3132,11 @@ pbkdf2@^3.0.3:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+pick-random@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/pick-random/-/pick-random-4.0.0.tgz#fe10ba003178e234759fdb406d2fab3a0aa7ad45"
+  integrity sha512-9INS9cOoGNM1+95+4POtlIJp1//X+TomiAmGyGT2dFrrMpeAO0AD3MVam3JySyoF+FNfttlI+Bk8vk8RFzXqSQ==
+
 picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.2.3:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.3.0.tgz#f1f061de8f6a4bf022892e2d128234fb98302972"

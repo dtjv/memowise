@@ -2,13 +2,13 @@ import { useRef, useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import useSWR from 'swr'
+import pickRandom from 'pick-random'
 import arrayShuffle from 'array-shuffle'
 
 import { Container } from '@/components/Container'
 import { BreadCrumbs } from '@/components/BreadCrumbs'
 import { useQuiz } from '@/hooks/useQuiz'
 import { fetcher } from '@/utils/fetcher'
-import { takeRandomItem } from '@/utils/takeRandomItem'
 
 const generateChoices = (currentCard, cards = [], options = {}) => {
   const field = options?.field || 'definition'
@@ -17,8 +17,9 @@ const generateChoices = (currentCard, cards = [], options = {}) => {
     ? []
     : [
         currentCard,
-        ...takeRandomItem(cards.filter((card) => card.id !== currentCard.id))(
-          2
+        ...pickRandom(
+          cards.filter((card) => card.id !== currentCard.id),
+          { count: 2 }
         ),
       ].map((card) => ({
         id: card.id,
@@ -27,6 +28,9 @@ const generateChoices = (currentCard, cards = [], options = {}) => {
       }))
 }
 
+// TODO:
+// 1. this page can be statically generated. quiz results are not persisted.
+// 2. show progress
 const QuizPage = () => {
   const [selectedChoice, setSelectedChoice] = useState(undefined)
   const [card, setCard] = useState(undefined)
@@ -187,6 +191,26 @@ const QuizPage = () => {
     </>
   )
 }
+
+/* TODO: when i make this page statically generated
+export async function getStaticPaths() {
+  const decks = await getDeckList()
+
+  return {
+    paths: decks.map((deck) => ({
+      params: { deckid: deck.id },
+    })),
+    fallback: true,
+  }
+}
+
+export async function getStaticProps({ params }) {
+  const deck = await getDeck({ id: params.deckid })
+  delete deck.topic?.subTopics
+
+  return { props: { deck }, revalidate: 1 }
+}
+*/
 
 export default QuizPage
 
