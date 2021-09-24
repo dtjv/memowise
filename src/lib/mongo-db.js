@@ -49,6 +49,7 @@ export const getUser = async (userId) => {
   const user = await User.findById(userId)
     .populate('decks.linked')
     .populate('decks.created')
+    .populate('decks.studied')
 
   return user.toObject({ transform: transformObjectId })
 }
@@ -57,7 +58,8 @@ export const updateUser = async (userId, data) => {
   await connectToDB()
 
   const user = await User.findById(userId)
-  user.decks = user.decks ?? { created: [], linked: [] }
+  // TODO: deal w/ studied
+  user.decks = user.decks ?? { created: [], linked: [], studied: [] }
 
   if (data?.created) {
     user.decks.created.push(data.created)
@@ -66,6 +68,12 @@ export const updateUser = async (userId, data) => {
   if (data?.linked) {
     user.decks.linked.push(data.linked)
   }
+
+  /*
+  if (data?.studied) {
+    // ??
+  }
+  */
 
   if (data?.unlink) {
     user.decks.linked = user.decks.linked.filter(

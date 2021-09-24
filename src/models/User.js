@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 
+// TODO: add studied decks
 const userDecksSchema = new mongoose.Schema(
   {
     linked: [
@@ -12,6 +13,40 @@ const userDecksSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Deck',
+      },
+    ],
+    studied: [
+      {
+        deckId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Deck',
+        },
+        cards: [
+          {
+            cardId: mongoose.Schema.Types.ObjectId,
+            __uid: String,
+            rep: {
+              type: Number,
+              default: 0,
+            },
+            repInterval: {
+              type: Number,
+              default: 1,
+            },
+            easyFactor: {
+              type: mongoose.Schema.Types.Decimal128,
+              default: 2.5,
+            },
+            lastStudyDate: {
+              type: Date,
+              default: Date.now,
+            },
+            lastGrade: {
+              type: Number,
+              default: 0,
+            },
+          },
+        ],
       },
     ],
   },
