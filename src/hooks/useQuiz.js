@@ -1,25 +1,24 @@
 import { useRef, useMemo } from 'react'
-import { range, random, difference } from 'lodash'
+
+import getRange from 'get-range'
+import randomInteger from 'random-int'
+import arrayDiffer from 'array-differ'
 
 export const useQuiz = (cards = []) => {
-  const usedIndexHash = useRef({})
+  const usedIndices = useRef([])
   const numCorrect = useRef(0)
   const numIncorrect = useRef(0)
-
   const getNextCard = () => {
-    const allIndices = range(cards.length)
-    const usedIndices = Object.keys(usedIndexHash.current).map((v) =>
-      parseInt(v, 10)
-    )
+    const allIndices = [...getRange({ end: cards.length })]
     const indices = !usedIndices.length
       ? allIndices
-      : difference(allIndices, usedIndices)
+      : arrayDiffer(allIndices, usedIndices)
 
     if (indices.length) {
-      const randomIdx = random(indices.length - 1)
+      const randomIdx = randomInteger(indices.length - 1)
       const cardsIdx = indices[randomIdx]
 
-      usedIndexHash.current[cardsIdx] = true
+      usedIndices.current[cardsIdx] = true
 
       return cards[cardsIdx]
     }
@@ -29,7 +28,7 @@ export const useQuiz = (cards = []) => {
   const resetQuiz = () => {
     numCorrect.current = 0
     numIncorrect.current = 0
-    usedIndexHash.current = {}
+    usedIndices.current = []
   }
   const markCorrect = () => (numCorrect.current += 1)
   const markIncorrect = () => (numIncorrect.current += 1)
