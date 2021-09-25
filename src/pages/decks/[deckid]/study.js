@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import useSWR from 'swr'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/client'
 
@@ -9,12 +9,18 @@ import { Container } from '@/components/Container'
 import { Cards } from '@/components/Cards'
 import { BreadCrumbs } from '@/components/BreadCrumbs'
 import { StudyCard } from '@/components/StudyCard'
-import { useUser, useStudy } from '@/hooks/useUser'
+import { useUser } from '@/hooks/useUser'
+import { useStudy } from '@/hooks/useStudy'
 import { fetcher } from '@/utils/fetcher'
+import { isEmpty } from '@/utils/isEmpty'
 
 const StudyPage = () => {
-  const [session] = useSession()
-  const { user } = useUser(session)
+  // TODO: fix
+  //const [session] = useSession()
+  //const { user } = useUser(session)
+  const user = { decks: undefined }
+  // TODO: end_fix
+
   const { query } = useRouter()
   const { data } = useSWR(
     () => query.deckid && `/api/decks/${query.deckid}`,
@@ -45,24 +51,21 @@ const StudyPage = () => {
         ]
       : []
   const [card, setCard] = useState(undefined)
-  const [selectedGrade, setSelectedGrade] = useState(undefined)
-  const { getNextCard, resetStudy, recordGrade, isStudyComplete } = useStudy(
-    user,
-    deck
-  )
+  const [selectedGrade, setSelectedGrade] = useState({})
+  const { getNextCard, resetStudy, recordGrade } = useStudy(user, deck)
 
   useEffect(() => {
     setCard(getNextCard())
-  }, [deck, getNextCard])
+  }, [getNextCard])
 
   useEffect(() => {
-    setSelectedGrade(undefined)
+    setSelectedGrade({})
   }, [card])
 
   useEffect(() => {
     const timer = setTimeout(async () => {
-      if (selectedGrade) {
-        await recordGrade(card, selectedGrade)
+      if (!isEmpty(selectedGrade)) {
+        await recordGrade(card, selectedGrade.grade)
         setCard(getNextCard())
       }
     }, 1000)
@@ -90,15 +93,17 @@ const StudyPage = () => {
           {deck.description}
         </p>
       </Container>
-      {isStudyComplete && (
-        <Container>
-          <div className="mb-8 space-y-8">
+      <Container>
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">Study</h2>
+        {!card && (
+          <>
+            <p className="mb-6 text-xl font-normal tracking-tight text-gray-500">
+              Congratulations! You completed all cards in this deck for today.
+            </p>
             <div className="p-4 ring-1 ring-gray-500 rounded-xl">
-              <div className="flex justify-center py-14">
+              <div className="flex justify-center py-20">
                 <div
-                  className="cursor-pointer inline-flex items-center justify-center rounded
--md px-3 py-1.5 font-semibold text-white bg-gray-800 hover:bg-gray-600 focus:outline-none
- focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
+                  className="cursor-pointer inline-flex items-center justify-center rounded-md px-3 py-1.5 font-semibold text-white bg-gray-800 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
                   onClick={() => {
                     resetStudy()
                     setCard(getNextCard())
@@ -108,14 +113,22 @@ const StudyPage = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </Container>
-      )}
-      {!isStudyComplete && card && (
-        <Container>
-          <StudyCard card={card} onGradeSelected={setSelectedGrade} />
-        </Container>
-      )}
+          </>
+        )}
+        {card && (
+          <>
+            <p className="mb-6 text-xl font-normal tracking-tight text-gray-500">
+              Tap the card to see the definition. Then, rate your memory recall
+              by marking one of six choices below.
+            </p>
+            <StudyCard
+              card={card}
+              selectedGrade={selectedGrade}
+              onGradeSelected={setSelectedGrade}
+            />
+          </>
+        )}
+      </Container>
       <Container>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-2xl font-bold text-gray-900 ">Flashcards</h2>

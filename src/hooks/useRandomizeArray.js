@@ -1,3 +1,8 @@
+import { useRef, useMemo } from 'react'
+import getRange from 'get-range'
+import randomInteger from 'random-int'
+import arrayDiffer from 'array-differ'
+
 export const useRandomizeArray = (items = []) => {
   const usedIndices = useRef(new Map())
 
@@ -14,7 +19,7 @@ export const useRandomizeArray = (items = []) => {
 
       usedIndices.current.set(itemIdx, true)
 
-      return items[itemsIdx]
+      return items[itemIdx]
     }
 
     return undefined
@@ -24,11 +29,8 @@ export const useRandomizeArray = (items = []) => {
     usedIndices.current.clear()
   }
 
-  const isDone = () => usedIndices.current.size === items.length
-
   return {
-    getNextItem,
+    getNextItem: useMemo(() => getNextItem, [items]),
     reset,
-    isDone,
   }
 }
