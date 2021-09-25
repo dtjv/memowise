@@ -10,6 +10,11 @@ import { PencilIcon } from './icons/pencil'
 import { PlusIcon } from './icons/plus'
 import { DocRemoveIcon } from './icons/doc-remove'
 
+// TODO
+// the boolean props - created, linked, unlinked - should be enum-like values
+// for a single props. like, 'deckType', because a deck can only be 1 type.
+//
+// handleLink and handleUnLink functions don't need a param.
 export const Deck = ({ deck, ...props }) => {
   const [session] = useSession()
   const { user } = useUser(session)
