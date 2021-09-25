@@ -35,14 +35,19 @@ const initializeCardsToStudy = (user, deck) => {
 
 export const useStudy = (user, deck) => {
   const cardsRef = useRef([])
-  cardsRef.current = initializeCardsToStudy(user, deck)
+
+  if (cardsRef.current.length === 0) {
+    cardsRef.current = initializeCardsToStudy(user, deck)
+  }
 
   const { getNextItem, reset } = useRandomizeArray(cardsRef.current)
+
   const resetStudy = async () => {
     reset()
     // TODO: fetch user data so we can get updated cards
     console.log('reset study...')
   }
+
   const recordGrade = async (card, grade) => {
     // TODO: api call to update user.studied
     console.log('recording...')
