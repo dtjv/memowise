@@ -12,12 +12,15 @@
     "seed": "./src/bin/seedDB.js"
   },
   "dependencies": {
+    "@dtjv/sm-2": "2.0.0",
     "@dtjv/uniq-array-by": "1.0.0",
     "array-differ": "4.0.0",
     "array-shuffle": "3.0.0",
     "axios": "0.21.4",
+    "date-fns": "2.24.0",
     "dotenv-safe": "8.2.0",
     "get-range": "3.0.1",
+    "has-values": "2.0.1",
     "mongoose": "6.0.6",
     "next": "11.1.2",
     "next-auth": "3.29.0",
