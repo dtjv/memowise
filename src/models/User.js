@@ -1,6 +1,5 @@
 import mongoose from 'mongoose'
 
-// TODO: add studied decks
 const userDecksSchema = new mongoose.Schema(
   {
     linked: [
@@ -41,7 +40,7 @@ const userDecksSchema = new mongoose.Schema(
               type: Date,
               default: Date.now,
             },
-            lastGrade: {
+            lastStudyGrade: {
               type: Number,
               default: 0,
             },
