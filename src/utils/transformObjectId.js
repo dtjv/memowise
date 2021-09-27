@@ -1,7 +1,12 @@
-export const transformObjectId = (_, ret) => {
-  if (ret._id) {
-    ret.id = ret._id.toString()
-    delete ret._id
+export const transformObjectId = (_, o) => {
+  if (!o.id) {
+    delete o.id
   }
-  return ret
+
+  if (o._id) {
+    o.id = o._id.toString()
+    delete o._id
+  }
+
+  return o
 }
