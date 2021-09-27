@@ -23,7 +23,6 @@ const userDecksSchema = new mongoose.Schema(
         cards: [
           {
             cardId: mongoose.Schema.Types.ObjectId,
-            __uid: String,
             rep: {
               type: Number,
               default: 0,
