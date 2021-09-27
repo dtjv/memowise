@@ -118,10 +118,7 @@ export const DeckForm = ({ deck = {}, submitLabel, onSubmit }) => {
           <button
             className="inline-flex flex-none items-center px-3 py-1.5 text-base font-semibold text-white bg-blue-700 rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-800"
             aria-label="update deck"
-            onClick={() =>
-              // @TODO: add field validation
-              onSubmit({ name, description, cards })
-            }
+            onClick={() => onSubmit({ name, description, cards })}
           >
             {submitLabel}
           </button>
