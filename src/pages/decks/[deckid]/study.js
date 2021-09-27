@@ -15,11 +15,9 @@ import { fetcher } from '@/utils/fetcher'
 import { isEmpty } from '@/utils/isEmpty'
 
 const StudyPage = () => {
-  // TODO: fix
-  //const [session] = useSession()
-  //const { user } = useUser(session)
-  const user = { decks: undefined }
-  // TODO: end_fix
+  const [session] = useSession()
+  const { user } = useUser(session)
+  //const user = { decks: undefined }
 
   const { query } = useRouter()
   const { data } = useSWR(

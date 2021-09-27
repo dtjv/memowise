@@ -1,14 +1,13 @@
-import { useRef, useMemo } from 'react'
+import axios from 'axios'
+import { useRef, useMemo, useState } from 'react'
 import { isAfter } from 'date-fns'
 import getRange from 'get-range'
 import randomInteger from 'random-int'
 import arrayDiffer from 'array-differ'
-import { SuperMemoItemDefaults } from '@dtjv/sm-2'
+
+import { sm2, SuperMemoItemDefaults } from '@dtjv/sm-2'
 import uniqueArrayBy from '@dtjv/uniq-array-by'
 import { useRandomizeArray } from '@/hooks/useRandomizeArray'
-
-// TODO: remove
-const wait = (ms) => new Promise((success) => setTimeout(success, ms))
 
 const initializeCardsToStudy = (user, deck) => {
   if (!user || !deck) return []
@@ -20,13 +19,37 @@ const initializeCardsToStudy = (user, deck) => {
     lastStudyDate: today,
     lastStudyGrade: 0,
   }))
-  const studiedCards =
-    user.decks?.studied?.find((studiedDeck) => studiedDeck.id === deck.id) ?? []
+
+  const studiedDeck =
+    user.decks?.studied?.find(({ deckId }) => deckId === deck.id) ?? {}
+
+  // `initializeCardsToStudy` needs to return an array of sm2 cards (see
+  // `defaultCards` above).  However...
+  //   A. Studied cards only have `cardId`, no card fields.
+  //   B. Studied cards may be out of sync with deck's cards.
+  //
+  // The steps to verify studied cards and get them in the correct format are:
+  //   0. Find default card for each studied card
+  //   1. Filter out studied cards w/o a default card
+  //   2. Add default card fields to studied card
+  const studiedCards = (
+    studiedDeck.cards?.map((sc) => ({
+      sc,
+      dc: defaultCards.find((dc) => dc.id.toString() === sc.cardId.toString()),
+    })) ?? []
+  )
+    .filter(({ dc }) => dc)
+    .map(({ sc, dc }) => ({
+      ...dc,
+      ...sc, // Overwrites fields in common with default card
+    }))
 
   return uniqueArrayBy(
     [
       ...defaultCards,
-      ...studiedCards.filter((card) => isAfter(today, card.lastStudyDate)),
+      ...studiedCards.filter((card) =>
+        isAfter(today, new Date(card.lastStudyDate))
+      ),
       ...studiedCards.filter((card) => card.lastStudyGrade < 4),
     ],
     'id'
@@ -35,25 +58,37 @@ const initializeCardsToStudy = (user, deck) => {
 
 export const useStudy = (user, deck) => {
   const cardsRef = useRef([])
+  const [isInitialized, setIsInitialized] = useState(false)
 
   if (cardsRef.current.length === 0) {
     cardsRef.current = initializeCardsToStudy(user, deck)
+    if (cardsRef.current.length) {
+      setIsInitialized(true)
+    }
   }
 
   const { getNextItem, reset } = useRandomizeArray(cardsRef.current)
 
   const resetStudy = async () => {
     reset()
-    // TODO: fetch user data so we can get updated cards
-    console.log('reset study...')
+    cardsRef.current = []
+    setIsInitialized(false)
   }
 
   const recordGrade = async (card, grade) => {
-    // TODO: api call to update user.studied
-    console.log('recording...')
-    console.log('-> grade:', grade)
-    console.log('-> card :', card?.term)
-    await wait(500)
+    const { id: cardId, rep, repInterval, easyFactor } = sm2(card, grade)
+
+    await axios.patch(`/api/users/${user.id}`, {
+      deckId: deck.id,
+      card: {
+        cardId,
+        rep,
+        repInterval,
+        easyFactor,
+        lastStudyDate: new Date(),
+        lastStudyGrade: grade,
+      },
+    })
   }
 
   return {

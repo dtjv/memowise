@@ -4,6 +4,8 @@ import { Topic } from '@/models/Topic'
 import { SubTopic } from '@/models/SubTopic'
 import { connectToDB } from '@/utils/connectToDB'
 import { transformObjectId } from '@/utils/transformObjectId'
+import { transformEasyFactor } from '@/utils/transformEasyFactor'
+import { registerTransformers } from '@/utils/registerTransformers'
 
 //------------------------------------------------------------------------------
 // MongoDB specific data layer.
@@ -49,16 +51,16 @@ export const getUser = async (userId) => {
   const user = await User.findById(userId)
     .populate('decks.linked')
     .populate('decks.created')
-    .populate('decks.studied')
 
-  return user.toObject({ transform: transformObjectId })
+  return user.toObject({
+    transform: registerTransformers([transformObjectId, transformEasyFactor]),
+  })
 }
 
 export const updateUser = async (userId, data) => {
   await connectToDB()
 
   const user = await User.findById(userId)
-  // TODO: deal w/ studied
   user.decks = user.decks ?? { created: [], linked: [], studied: [] }
 
   if (data?.created) {
@@ -69,11 +71,28 @@ export const updateUser = async (userId, data) => {
     user.decks.linked.push(data.linked)
   }
 
-  /*
   if (data?.studied) {
-    // ??
+    const studiedDeck = user.decks.studied.find(
+      (sd) => sd.deckId.toString() === data.studied.deckId
+    )
+
+    if (studiedDeck) {
+      let cardIdx = studiedDeck.cards.findIndex(
+        (sc) => sc.cardId.toString() === data.studied.card.cardId
+      )
+
+      if (cardIdx !== -1) {
+        studiedDeck.cards.splice(cardIdx, 1, data.studied.card)
+      } else {
+        studiedDeck.cards.push(data.studied.card)
+      }
+    } else {
+      user.decks.studied.push({
+        deckId: data.studied.deckId,
+        cards: [data.studied.card],
+      })
+    }
   }
-  */
 
   if (data?.unlink) {
     user.decks.linked = user.decks.linked.filter(
