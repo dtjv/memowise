@@ -10,11 +10,6 @@ import { PencilIcon } from './icons/pencil'
 import { PlusIcon } from './icons/plus'
 import { DocRemoveIcon } from './icons/doc-remove'
 
-// TODO
-// the boolean props - created, linked, unlinked - should be enum-like values
-// for a single props. like, 'deckType', because a deck can only be 1 type.
-//
-// handleLink and handleUnLink functions don't need a param.
 export const Deck = ({ deck, ...props }) => {
   const [session] = useSession()
   const { user } = useUser(session)
@@ -23,12 +18,12 @@ export const Deck = ({ deck, ...props }) => {
     await axios.delete(`/api/decks/${deck.id}`)
     router.reload()
   }
-  const handleLink = async (deckId) => {
-    await axios.post(`/api/decks/${deckId}/link`)
+  const handleLink = async () => {
+    await axios.post(`/api/decks/${deck.id}/link`)
     router.reload()
   }
-  const handleUnLink = async (deckId) => {
-    await axios.post(`/api/decks/${deckId}/unlink`)
+  const handleUnLink = async () => {
+    await axios.post(`/api/decks/${deck.id}/unlink`)
     router.reload()
   }
 
@@ -62,12 +57,12 @@ export const Deck = ({ deck, ...props }) => {
           </div>
         )}
         {props.linked && (
-          <button onClick={() => handleUnLink(deck.id)}>
+          <button onClick={handleUnLink}>
             <DocRemoveIcon className="w-6 h-6" />
           </button>
         )}
         {props.unlinked && (
-          <button onClick={() => handleLink(deck.id)}>
+          <button onClick={handleLink}>
             <PlusIcon className="w-6 h-6" />
           </button>
         )}
