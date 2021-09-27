@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useRef, useMemo, useState } from 'react'
+import { useSWRConfig } from 'swr'
 import { isAfter } from 'date-fns'
 import getRange from 'get-range'
 import randomInteger from 'random-int'
@@ -57,28 +58,24 @@ const initializeCardsToStudy = (user, deck) => {
 }
 
 export const useStudy = (user, deck) => {
+  const { mutate } = useSWRConfig()
   const cardsRef = useRef([])
-  const [isInitialized, setIsInitialized] = useState(false)
 
-  if (cardsRef.current.length === 0) {
-    cardsRef.current = initializeCardsToStudy(user, deck)
-    if (cardsRef.current.length) {
-      setIsInitialized(true)
-    }
-  }
+  cardsRef.current = initializeCardsToStudy(user, deck)
 
   const { getNextItem, reset } = useRandomizeArray(cardsRef.current)
+  const userApiKey = user ? `/api/users/${user.id}` : ''
 
-  const resetStudy = async () => {
+  const resetStudy = () => {
+    mutate(userApiKey)
     reset()
     cardsRef.current = []
-    setIsInitialized(false)
   }
 
   const recordGrade = async (card, grade) => {
     const { id: cardId, rep, repInterval, easyFactor } = sm2(card, grade)
 
-    await axios.patch(`/api/users/${user.id}`, {
+    await axios.patch(userApiKey, {
       deckId: deck.id,
       card: {
         cardId,
