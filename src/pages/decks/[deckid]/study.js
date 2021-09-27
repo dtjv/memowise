@@ -9,6 +9,7 @@ import { Container } from '@/components/Container'
 import { Cards } from '@/components/Cards'
 import { BreadCrumbs } from '@/components/BreadCrumbs'
 import { StudyCard } from '@/components/StudyCard'
+import { NotAuthorized } from '@/components/NotAuthorized'
 import { useUser } from '@/hooks/useUser'
 import { useStudy } from '@/hooks/useStudy'
 import { fetcher } from '@/utils/fetcher'
@@ -17,8 +18,6 @@ import { isEmpty } from '@/utils/isEmpty'
 const StudyPage = () => {
   const [session] = useSession()
   const { user } = useUser(session)
-  //const user = { decks: undefined }
-
   const { query } = useRouter()
   const { data } = useSWR(
     () => query.deckid && `/api/decks/${query.deckid}`,
@@ -72,6 +71,10 @@ const StudyPage = () => {
       if (timer) clearTimeout(timer)
     }
   }, [card, selectedGrade, getNextCard, recordGrade])
+
+  if (!session) {
+    return <NotAuthorized />
+  }
 
   if (isLoading) {
     return <Skeleton />
@@ -144,7 +147,6 @@ const StudyPage = () => {
 
 export default StudyPage
 
-// TODO: fix
 const Skeleton = () => {
   return (
     <>
