@@ -7,7 +7,7 @@
     "format": "prettier -w .",
     "lint": "next lint",
     "dev": "next dev",
-    "build": "next build",
+    "build": "node -v && next build",
     "start": "next start",
     "seed": "./src/bin/seedDB.js"
   },
