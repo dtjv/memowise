@@ -12,7 +12,7 @@
     "seed": "./src/bin/seedDB.js"
   },
   "dependencies": {
-    "@dtjv/sm-2": "2.0.0",
+    "@dtjv/sm-2": "2.1.0",
     "@dtjv/uniq-array-by": "1.0.0",
     "array-differ": "4.0.0",
     "array-shuffle": "3.0.0",
@@ -33,14 +33,14 @@
     "uuid": "8.3.2"
   },
   "devDependencies": {
-    "@tailwindcss/forms": "0.3.3",
+    "@tailwindcss/forms": "0.3.4",
     "@tailwindcss/typography": "0.4.1",
-    "autoprefixer": "10.3.4",
+    "autoprefixer": "10.3.6",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
-    "postcss": "8.3.6",
+    "postcss": "8.3.8",
     "prettier": "2.4.1",
-    "tailwindcss": "2.2.15"
+    "tailwindcss": "2.2.16"
   },
   "peerOptionalDependencies": {
     "mongodb": "3.6.4"
