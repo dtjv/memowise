@@ -51,29 +51,54 @@ Copy `.env.example` to `.env`. Then, set the values as described below.
 Memowise uses MongoDB. Provide connection credentials to the following
 variables.
 
-- `DB_USER=` - db user name
-- `DB_PASS=` - db user's password
-- `DB_NAME=` - db name
-- `DB_URI=` - the [connection string](https://docs.mongodb.com/manual/reference/connection-string/) to db
+- `DB_USER` - db user name
+- `DB_PASS` - db user's password
+- `DB_NAME` - db name
+- `DB_URI` - the [connection string](https://docs.mongodb.com/manual/reference/connection-string/) to db
 
 #### Next-Auth
 
-- `NEXTAUTH_URL=` - for local dev, use `http://localhost:3000`
-- `SECRET=` - any value
+- `NEXTAUTH_URL` - for local dev, use `http://localhost:3000`
+- `SECRET` - any value
 
 #### GitHub
 
 Currently, Memowise only uses GitHub for authentication. Assign GitHub OAuth
 credentials to the following variables.
 
-- `GITHUB_ID=`
-- `GITHUB_SECRET=`
+- `GITHUB_ID`
+- `GITHUB_SECRET`
 
 ### Database
 
-- [ ] TODO: write up instructions on querying and seeding db
+Memowise includes a simple cli to load default data.
 
-### Run Application
+#### Usage
+
+```
+$ yarn db --help
+
+  Usage: yarn db [options]
+
+  Options:
+    --user=<id>   Set user's 'decks' field
+    --data        Load topics, sub-topics and decks
+    -h, --help
+```
+
+> Note:
+>
+> 1. `--data` drops all collections and reloads data from ./src/data/seed.js.
+> 2. `--user` assigns 3 decks to `user.linked` and 3 decks to `user.created`
+
+Follow these steps:
+
+1. Load the database via: `yarn db --data`
+2. Run the application and sign-in via GitHub
+3. Retrieve your newly created user id in MongoDB
+4. Setup default linked/created decks for user id via: `yarn db --user=<id>`
+
+### Run the app
 
 ```sh
 # development
