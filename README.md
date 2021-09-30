@@ -111,6 +111,8 @@ $ yarn build
 $ yarn start
 ```
 
+Then, navigate to `http://localhost:3000`.
+
 ## Author
 
 - [David Valles](https://dtjv.io)
