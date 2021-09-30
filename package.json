@@ -9,7 +9,7 @@
     "dev": "next dev",
     "build": "node -v && next build",
     "start": "next start",
-    "db": "babel-node -r dotenv-safe/config src/bin/db.js"
+    "db": "babel-node -r dotenv-safe/config src/bin/main.js"
   },
   "dependencies": {
     "@dtjv/sm-2": "2.1.0",
