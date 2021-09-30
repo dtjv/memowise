@@ -9,7 +9,7 @@
     "dev": "next dev",
     "build": "node -v && next build",
     "start": "next start",
-    "seed": "./src/bin/seedDB.js"
+    "db": "babel-node -r dotenv-safe/config src/bin/db.js"
   },
   "dependencies": {
     "@dtjv/sm-2": "2.1.0",
@@ -21,6 +21,7 @@
     "dotenv-safe": "8.2.0",
     "get-range": "3.0.1",
     "has-values": "2.0.1",
+    "minimist": "1.2.5",
     "mongoose": "5.12.13",
     "next": "11.1.2",
     "next-auth": "3.29.0",
@@ -33,6 +34,8 @@
     "uuid": "8.3.2"
   },
   "devDependencies": {
+    "@babel/core": "7.15.5",
+    "@babel/node": "7.15.4",
     "@tailwindcss/forms": "0.3.4",
     "@tailwindcss/typography": "0.4.1",
     "autoprefixer": "10.3.6",
