@@ -23,7 +23,7 @@
     "has-values": "2.0.1",
     "minimist": "1.2.5",
     "mongoose": "5.13.9",
-    "next": "11.1.2",
+    "next": "11.1.3",
     "next-auth": "3.29.0",
     "pick-random": "4.0.0",
     "pluralize": "8.0.0",
